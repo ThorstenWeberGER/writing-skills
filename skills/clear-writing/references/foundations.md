@@ -1,6 +1,6 @@
 # Foundations: structure, wording, and formatting
 
-These rules apply to every piece of writing, before picking a style guide (see `style-management-summary.md` or `style-general-writing.md`) or checking for violations (`DONTS.md`, `examples.md`).
+These rules apply to every piece of writing, before choosing a format (`formats.md`), adjusting for audience (`audiences.md`), or checking for violations (`DONTS.md`, `examples.md`).
 
 ## Structure: lead with the point
 
@@ -62,7 +62,12 @@ Different target groups can produce different pain points from the same fact —
 5. **Cut words that don't change the meaning.** "In order to" → "to." "Due to the fact that" → "because." "At this point in time" → "now."
 6. **Common words over jargon.** Use the everyday word unless the audience specifically needs the technical term.
 
-**Quick self-check:** read the sentence aloud. If you wouldn't say it that way to a colleague across a table, rewrite it.
+**Quick self-check:** read the sentence aloud. If you wouldn't say it that way to a colleague across a table, rewrite it. This is also the anti-stuffiness test — write the way you'd speak, not the way a policy document or press release would.
+
+### Two rules that go beyond word choice
+
+1. **Anchor the abstract in something specific, then generalize.** Don't describe an issue only in the abstract — show its effect on a real person, team, or number first, and widen from there. "Our support operation experienced high call volumes due to systemic outages" says less than "Over 400 clients waited 45 minutes on hold yesterday after our main server failed." A concrete opening detail earns attention before the broader point does. (This is the journalistic narrative-lede/nut-graf move, applied at sentence scale.)
+2. **On technical topics, be precise *and* accessible.** Explain the technical term once, plainly, then use it freely. Don't avoid precision to seem approachable, and don't assume the reader already has the term. When jargon *is* the precise word, keeping it is correct — see `audiences.md` on when the plain-word rule should not apply.
 
 ## Headings and lists
 
@@ -74,4 +79,4 @@ Different target groups can produce different pain points from the same fact —
 
 ## Sources
 
-Plain wording and structure: generalized from [plainlanguage.gov](https://www.plainlanguage.gov/)'s federal plain-language guidelines and The Economist's "never use a long word where a short one will do" principle (see `style-general-writing.md` for the full citation). Headings and lists: generalized from standard business-writing guidance on heading/bullet usage (headings should signal section content; keep bullet lists to 3-6 parallel items; prefer prose for sensitive or nuanced content) — original synthesis, not reproduced text. "Finding the point before you lead with it": generalized from Barbara Minto's Pyramid Principle (the "so what?"/"why?" test and its MECE — Mutually Exclusive, Collectively Exhaustive — grouping requirement, which is the basis for "cluster before you rank") and its SCQA framework (Situation-Complication-Question-Answer, where identifying the strongest complication is the key step before drafting), plus journalism's inverted-pyramid and "nut graf" convention for ranking competing points by newsworthiness/reader impact — original synthesis, not reproduced text. "Identifying why the point matters to the target group": generalized from the Toyota "5 Whys" root-cause technique (adapted here to three rounds, aimed at audience relevance rather than root cause) and the Jobs-to-be-Done framing of a pain point as an unmet goal plus the obstacle blocking it — original synthesis, not reproduced text.
+Plain wording and structure: generalized from [plainlanguage.gov](https://www.plainlanguage.gov/)'s federal plain-language guidelines and The Economist's style-guide principle of preferring the short word over the long one. The two rules under "beyond word choice" absorb what was previously a separate `style-general-writing.md`: the concrete-anchor rule generalizes the Wall Street Journal's narrative-lede/nut-graf convention (open on a specific person, scene, or number before widening), and the technical-accessibility rule generalizes the Financial Times' approach of keeping technical topics precise without dumbing them down. Headings and lists: generalized from standard business-writing guidance on heading/bullet usage (headings should signal section content; keep bullet lists to 3-6 parallel items; prefer prose for sensitive or nuanced content) — original synthesis, not reproduced text. "Finding the point before you lead with it": generalized from Barbara Minto's Pyramid Principle (the "so what?"/"why?" test and its MECE — Mutually Exclusive, Collectively Exhaustive — grouping requirement, which is the basis for "cluster before you rank") and its SCQA framework (Situation-Complication-Question-Answer, where identifying the strongest complication is the key step before drafting), plus journalism's inverted-pyramid and "nut graf" convention for ranking competing points by newsworthiness/reader impact — original synthesis, not reproduced text. "Identifying why the point matters to the target group": generalized from the Toyota "5 Whys" root-cause technique (adapted here to three rounds, aimed at audience relevance rather than root cause) and the Jobs-to-be-Done framing of a pain point as an unmet goal plus the obstacle blocking it — original synthesis, not reproduced text.
