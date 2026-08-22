@@ -9,6 +9,9 @@ For status updates, recommendations, proposals, and anything read by a decision-
 3. **Visual signposting.** Use bold lead-ins or short bullets so a skimming reader can scan the shape of the argument without reading every word. Don't overuse — one bold lead-in per list item, not per sentence (see `humanizer.md` §15-16 for the failure mode of overdoing this).
 4. **One ask per summary.** If there are multiple asks, number them. Don't bury a second ask in a supporting paragraph.
 5. **Numbers, not adjectives.** "Reallocate $100k from print to digital" not "significantly increase digital investment."
+6. **Target length holds regardless of source length.** The full version should land around 150-250 words (roughly a half page), whether the source was a paragraph or a 10-page analysis. A longer source means cutting harder to reach that target, not writing a longer summary — if the compressed version is still growing with the source, supporting detail belongs in an attachment or appendix, not the summary itself.
+7. **When resources can't cover every valid ask, triage — don't flatten.** If the source itself says not everything is affordable this cycle, say explicitly which ask(s) are for now and which are deferred, and why — a numbered list of asks with no stated priority forces the reader to do the triage you already did. ("Fund X and Y this quarter; defer Z to Q4 given budget.")
+8. **Don't silently cut genuine uncertainty.** If the source leaves something materially unresolved — a correlation that might not be causal, a risk that isn't fully assessed — compressing it away can make the recommendation look more certain than the evidence supports. Keep it, in one clause, rather than dropping it for brevity: "...though this may reflect existing dissatisfaction rather than an independent cause." Cut restatement and detail; don't cut open questions that would change the reader's confidence in the recommendation.
 
 ## Example
 
@@ -40,6 +43,8 @@ The email variant follows every rule above, plus tighter limits specific to the 
 ## Sources
 
 Patterns drawn from Harvard Business Review's coverage of BLUF-style executive communication (the "military email" framing: lead with the point so a reader knows what's needed within the first 30 seconds) and Bloomberg/wire-style inverted-pyramid convention (most important fact first, supporting detail after, in descending order of importance). Rules here are original synthesis, not reproduced text.
+
+Rules 6-8 (length target independent of source length, triage over flattening for constrained-resource asks, preserving genuine uncertainty) came from dry-running this skill against a multi-page source analysis with competing findings and no documented rule for any of the three — added after the gap was found, not from an external source.
 
 Email-specific guidance ("When the medium is email") drawn from BLUF-for-email writeups covering word-count caps (~125-150 words), category-tagged subject line formulas (e.g. DECISION/REQUEST/ACTION/INFO), and mobile-first skimming assumptions, plus the "three-sentence email" convention (constrain the body to three to five sentences and move supporting detail to an attachment). Rules here are original synthesis, not reproduced text.
 
