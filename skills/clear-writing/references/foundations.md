@@ -55,12 +55,15 @@ Different target groups can produce different pain points from the same fact —
 
 ## Plain wording
 
-1. **Short words over long ones.** "Use" not "utilize." "Help" not "facilitate." "Start" not "commence."
-2. **Short sentences.** One idea per sentence. More than one "and" joining independent clauses — consider splitting.
-3. **Active voice, named actor.** "The team shipped the fix," not "the fix was shipped."
-4. **Concrete over abstract.** A number, name, or date beats a qualitative claim. "Costs rose 18%," not "costs rose significantly."
-5. **Cut words that don't change the meaning.** "In order to" → "to." "Due to the fact that" → "because." "At this point in time" → "now."
-6. **Common words over jargon.** Use the everyday word unless the audience specifically needs the technical term.
+1. **Familiar words over unfamiliar ones.** The real rule is familiarity, not length — "utilize" is bad because it's unusual, not because it's long, and a long familiar word beats a short obscure one. Federal guidance puts it as picking the commonly used word over the unusual or obscure. Worst repeat offenders: *utilize, commence, implement, assist, promulgate, in accordance with, in order that, in the event of, in the amount of*.
+2. **One idea per sentence.** This is the actual primary rule, not a word count — a long, complicated sentence usually means you aren't sure yet what you want to say. As a comprehension guide: readers get about 90% of a sentence under 14 words, and comprehension drops sharply past 25, so treat anything over ~25 words as needing a second look. Don't make every sentence short, though — see rule 7.
+3. **Active voice, actor named as the subject.** "The team shipped the fix," not "the fix was shipped." Federal guidance calls this the single highest-impact change available: not "it must be done" but "you must do it." **Two legitimate exceptions:** when one action follows another as a matter of law and the law itself is the actor, and when it genuinely doesn't matter who acted. Also don't confuse passive voice with past tense — "the team shipped it" is past tense and active.
+4. **Kill hidden verbs (nominalizations).** Use the strongest, most direct verb form available. Watch endings *-ment, -tion, -sion, -ance* paired with a light verb (*make, take, achieve, effect, give, have, reach, conduct*): "we manage the program," not "we are responsible for management of the program"; "we analyze the data," not "we conduct an analysis of the data."
+5. **Concrete over abstract.** A number, name, or date beats a qualitative claim. "Costs rose 18%," not "costs rose significantly."
+6. **Cut words that don't change the meaning.** "In order to" → "to." "Due to the fact that" → "because." "At this point in time" → "now."
+7. **Short paragraphs, but varied.** One topic per paragraph, opening with a topic sentence that captures its essence. Keep paragraphs under ~150 words and 3-8 sentences; never past 250. **Deliberately vary paragraph and sentence length** — if everything is the same size the writing turns choppy. An occasional one-sentence paragraph is fine.
+8. **Jargon means complexity used to impress, not technical terms.** Federal guidance is explicit that this rule is not a ban on technical vocabulary: a necessary domain term is not jargon. Explain the term on first reference, then use it. Writing for your audience does not mean dumbing content down. See `audiences.md` for when a technical term is the *correct* choice.
+9. **Address the reader as "you."** Direct address beats third-person abstraction about "users" or "the team" where the reader is the one who has to act.
 
 **Quick self-check:** read the sentence aloud. If you wouldn't say it that way to a colleague across a table, rewrite it. This is also the anti-stuffiness test — write the way you'd speak, not the way a policy document or press release would.
 
@@ -71,12 +74,35 @@ Different target groups can produce different pain points from the same fact —
 
 ## Headings and lists
 
-1. **Headings tell the reader what's coming.** A heading should let someone decide whether to read the section at all, before they read it.
-2. **Bullets are for scannable, parallel items — not narrative.** Use them for steps, features, or short parallel facts. Keep every bullet in a list grammatically parallel (all start with a verb, or all are noun phrases — don't mix).
-3. **Keep lists short.** Three to six bullets. More than that stops being scannable and should probably be prose or split into subsections.
-4. **Use prose, not bullets, for anything nuanced, sensitive, or narrative.** Bullets read as efficient, not warm — a list is the wrong tool for building rapport or walking through a sensitive topic.
-5. **Don't over-format.** A bold lead-in on every bullet, or bolding every other phrase, reads as AI-generated filler rather than genuine emphasis — see `humanizer.md` ("Formatting tells").
+1. **Headings tell the reader what's coming.** A heading should let someone decide whether to read the section at all, before they read it. Clear beats clever.
+2. **Every list needs a lead-in sentence.** Don't drop a list in cold — introduce what it contains.
+3. **Every item must be parallel** — grammatically consistent with each other *and* with the lead-in, so each item reads correctly when joined to it. All verbs, or all noun phrases; don't mix.
+4. **Numbers for sequence or priority, bullets for everything else.** If order doesn't matter, don't imply it with numbers.
+5. **Nest at most two or three levels.** Deeper than that, restructure instead.
+6. **Convert comma-separated series into lists.** A sentence carrying four or more parallel items is usually a list trying to escape — the eye naturally gravitates to list items.
+7. **Keep lists short: 3-6 items.** *House convention, not sourced practice* — the federal guidance caps nesting depth, not item count. It holds up in practice for scannability, but treat it as a default to override when a list genuinely has eight things in it.
+8. **Use prose, not bullets, for anything nuanced, sensitive, or narrative.** Bullets read as efficient, not warm — the wrong tool for building rapport or walking through a sensitive topic.
+9. **Don't over-format.** A bold lead-in on every bullet, or bolding every other phrase, reads as AI-generated filler rather than genuine emphasis — see `humanizer.md` ("Formatting tells").
+10. **Avoid FAQ sections.** They usually signal that content which belongs in the body got exiled to a list of questions nobody asked.
 
 ## Sources
 
-Plain wording and structure: generalized from [plainlanguage.gov](https://www.plainlanguage.gov/)'s federal plain-language guidelines and The Economist's style-guide principle of preferring the short word over the long one. The two rules under "beyond word choice" absorb what was previously a separate `style-general-writing.md`: the concrete-anchor rule generalizes the Wall Street Journal's narrative-lede/nut-graf convention (open on a specific person, scene, or number before widening), and the technical-accessibility rule generalizes the Financial Times' approach of keeping technical topics precise without dumbing them down. Headings and lists: generalized from standard business-writing guidance on heading/bullet usage (headings should signal section content; keep bullet lists to 3-6 parallel items; prefer prose for sensitive or nuanced content) — original synthesis, not reproduced text. "Finding the point before you lead with it": generalized from Barbara Minto's Pyramid Principle (the "so what?"/"why?" test and its MECE — Mutually Exclusive, Collectively Exhaustive — grouping requirement, which is the basis for "cluster before you rank") and its SCQA framework (Situation-Complication-Question-Answer, where identifying the strongest complication is the key step before drafting), plus journalism's inverted-pyramid and "nut graf" convention for ranking competing points by newsworthiness/reader impact — original synthesis, not reproduced text. "Identifying why the point matters to the target group": generalized from the Toyota "5 Whys" root-cause technique (adapted here to three rounds, aimed at audience relevance rather than root cause) and the Jobs-to-be-Done framing of a pain point as an unmet goal plus the obstacle blocking it — original synthesis, not reproduced text.
+### Primary sources
+
+The plain-wording and heading/list rules are derived from primary text, retrieved from the publishers' own open-source repositories (both archived, so they reflect the guidance as last published):
+
+- **U.S. federal plain-language guidelines**, published by GSA at [`GSA/plainlanguage.gov`](https://github.com/GSA/plainlanguage.gov) — sourced the lead-with-the-point rule (`guidelines/organize/`), main-idea-before-exceptions, one-idea-per-sentence (`concise/write-short-sentences`), the paragraph limits and anti-uniformity rule (`concise/write-short-paragraphs`, itself citing Garner's *Legal Writing in Plain English* and Murawski's *Writing Readable Regulations*), active voice with its two exceptions (`conversational/use-active-voice`), hidden verbs (`words/avoid-hidden-verbs`), familiar-over-obscure wording and the "dirty dozen" (`words/use-simple-words-phrases`), the jargon-is-not-technical-terms distinction (`words/avoid-jargon`), and the list mechanics (`organize/use-lists`).
+- **18F Content Guide**, published by GSA at [`18F/content-guide`](https://github.com/18F/content-guide) — sourced the sentence-comprehension figures (~90% comprehension under 14 words; sharp drop past 25), descending-importance/"little inverted pyramids" paragraph structure, clear-not-clever headings, converting comma series into lists, the anti-FAQ rule, and "you" as the primary form of address.
+
+The two rules under "beyond word choice" absorb what was previously a separate `style-general-writing.md`: the concrete-anchor rule generalizes the Wall Street Journal's narrative-lede/nut-graf convention, and the technical-accessibility rule generalizes the Financial Times' approach to technical topics.
+
+Method rules: "Finding the point before you lead with it" generalizes Barbara Minto's Pyramid Principle (the "so what?"/"why?" test, plus its MECE grouping requirement, which is the basis for "cluster before you rank") and its SCQA framework, together with journalism's inverted-pyramid and nut-graf convention for ranking competing points. "Identifying why the point matters to the target group" generalizes the Toyota "5 Whys" technique (cut to three rounds and aimed at audience relevance rather than root cause) and the Jobs-to-be-Done framing of a pain point as an unmet goal plus its blocking obstacle.
+
+All rules are original synthesis. Quoted fragments are under 15 words and attributed.
+
+### Known sourcing gaps
+
+- **The 3-6 bullet range is house convention**, labeled as such in the rule itself. No primary source gives an item count.
+- **No active-voice percentage target exists** in any primary source; don't invent one.
+- **BLUF's military provenance (Army Regulation 25-50) is unverified** — the regulation was unreachable. The *behavior* is fully primary-sourced above; only the acronym's origin story is secondhand.
+- **The Economist, WSJ, HBR, Bloomberg, Reuters, Guardian, and BBC remain secondary.** All are paywalled or block automated fetching. Rules attributed to them come from write-ups describing their conventions. Widely-circulated figures for Reuters (300-800 words per story) and AR 25-50 (15-word average sentence) could not be verified against either document and are deliberately not used here.
