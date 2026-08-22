@@ -9,19 +9,22 @@ description: |
 
 # clear-writing
 
-Apply this skill any time you draft or edit prose for the user, or the user asks you to fix their own draft. Work through the references below **in order**. Do not skip a step; do not reorder them.
+Apply this skill any time you draft or edit prose for the user, or the user asks you to fix their own draft. Work through the passes below **in order**.
 
 ## Pass order
 
-1. **`references/foundations.md`** — pyramid principle (lead with the point), how to find the strongest point before leading with it (including clustering related findings before ranking them), how to identify why that point matters to the target group (the pain point, via a three-why chain), plain wording, and heading/bullet formatting. Applies to everything, always.
-2. Pick **one** style guide based on what you're writing:
-   - `references/style-management-summary.md` — for status updates, recommendations, decisions, anything meant for a manager or other decision-maker. Always produce the crisp email variant (subject-line formula, word/sentence caps) alongside the full version, regardless of delivery medium, unless the user has said they only want one. When compressing a longer source: hold the full version to ~150-250 words regardless of source length, triage competing asks explicitly rather than listing them as equal weight, and keep genuinely unresolved uncertainty rather than cutting it for brevity.
-   - `references/style-general-writing.md` — for everything else: explanations, notes, documentation, messages.
-   - If what you're writing is a standalone half-page or full-page piece (a blog post, docs page, one-pager, project write-up) rather than a summary or short message, also consult `references/article-structure.md` for headline/subheading/section layout scaled to that length.
-3. **`references/DONTS.md`** and **`examples.md`** — check the draft against known violations. If you catch a new one during this conversation and the user confirms it's worth tracking, append it to `DONTS.md` (one line) and optionally add a weak/better pair to `examples.md`.
-4. **`references/humanizer.md`** — final surface-level pass for AI-writing tells (inflated claims, stock phrasing, passive voice, chatbot artifacts, etc.). If a relevant sample exists in this conversation, match its voice per that reference's "Match the writer's voice" section.
-5. **Self-check before returning the result:** if step 2 used `style-management-summary.md`, confirm the response actually includes both the full version and the crisp email variant, back to back. If only one is present and the user didn't ask for just one, add the missing one before responding.
+1. **`references/foundations.md`** — always. Find the strongest point (clustering related findings before ranking them), work out why it matters to this specific reader, then lead with it. Plus plain wording, sentence and paragraph limits, headings and lists.
+2. **`references/formats.md`** — what shape the deliverable takes. Management summary (always paired with a crisp email variant), or a half-page/full-page article. For notes, messages, and general documentation prose, `foundations.md` alone is the whole ruleset.
+3. **`references/audiences.md`** — what changes for this reader: technical peer, external client, non-native English readers. Also the rule for when a technical term is the *right* choice rather than jargon to be replaced. Skip if the audience is a decision-maker — `formats.md` already covers that.
+4. **`references/DONTS.md`** and **`examples.md`** — check against known violations. If you catch a new one this conversation and the user confirms it's worth keeping, append it to `DONTS.md`. Only add to `examples.md` if the pair is real, never invented.
+5. **`references/humanizer.md`** — final pass for AI-writing tells. If the user's own writing is in this conversation, match its voice per that file's opening section.
+
+**Before returning the result:** if step 2 used the management-summary section, confirm the response contains both the full version and the crisp email variant, back to back. If only one is there and the user didn't ask for just one, add the other.
+
+## Templates
+
+`templates/` holds skeletons for document types with real normative backing: `project-readme.md`, `installation.md`, `meeting-notes.md`. Its `README.md` carries the Diátaxis routing question for deciding which *kind* of document you're writing (tutorial, how-to, reference, explanation) — worth reading before writing docs, since mixing those modes is the most common documentation failure. Summaries have no template because `formats.md` covers them.
 
 ## Scope
 
-This skill governs English prose. It does not cover audience-specific profiles beyond the two style guides above, and it does not provide use-case templates (README, meeting notes, etc.) — both are deferred. `article-structure.md` covers generic half-page/full-page layout, not per-use-case templates.
+English prose. The four audience profiles in `audiences.md` are the ones with a real basis; don't invent speculative ones. Sourcing status and remaining gaps are tracked in `docs/v2-checklist.md`.
