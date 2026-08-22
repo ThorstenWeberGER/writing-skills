@@ -18,9 +18,11 @@ For status updates, recommendations, proposals, and anything read by a decision-
 **Better (BLUF + concrete):**
 > We recommend reallocating $100k from print to digital ads next quarter. Digital converts at 3x the rate of print in this segment, and the shift can happen within existing budget.
 
-## When the medium is email: going even shorter
+## Always also produce the crisp email variant
 
-An email to a decision-maker follows every rule above, plus tighter limits specific to the medium:
+Whenever this skill produces a management summary, generate the crisp email variant below in addition to the full version — regardless of whether the output is actually going out as an email. The full version and the email variant should both be shown to the user, back to back, unless the user has explicitly said they only want one. This gives the reader a ready-to-forward, decision-maker-safe version even when the primary deliverable is a doc, a Slack message, or a report.
+
+The email variant follows every rule above, plus tighter limits specific to the medium:
 
 1. **Subject line does half the work.** Lead with a category tag and the ask, not a vague topic. Formula: `CATEGORY: specific ask + deadline`. Example: "DECISION: Approve $100k print→digital shift by Friday" beats "Marketing budget question." Categories worth standardizing on: DECISION, REQUEST, ACTION, INFO, UPDATE.
 2. **Cap it at 3-5 sentences, ~125 words.** If the honest version needs more than that, the email is the wrong container — write the BLUF sentence plus one supporting sentence, then attach or link the detail (a doc, a deck, a longer memo) rather than inlining it.
