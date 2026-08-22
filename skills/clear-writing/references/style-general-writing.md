@@ -21,3 +21,5 @@ For explanations, documentation, notes, and messages that aren't a management as
 ## Sources
 
 Patterns drawn from The Economist's public style guide (favor short, plain words; avoid jargon; "do not be stuffy — use the language of everyday speech"), the Wall Street Journal's narrative-lede convention (open on a specific person, scene, or detail before widening to the general point — the "nut graph" technique), and the Financial Times' approach of keeping technical/global topics accessible without dumbing them down. Rules here are original synthesis, not reproduced text; no source article text is copied.
+
+**Status: derived from secondary sources, not verified against primary articles.** economist.com and wsj.com blocked automated fetching outright and ft.com is paywalled, so these rules come from write-ups *describing* each publication's conventions rather than from analyzing real published sentences directly. The Economist's style guide itself is a documented, citable rulebook (lower risk), but the WSJ and FT rules here are secondhand. Re-derive this guide once real articles are available — see the v2 checklist.

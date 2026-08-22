@@ -21,3 +21,5 @@ For status updates, recommendations, proposals, and anything read by a decision-
 ## Sources
 
 Patterns drawn from Harvard Business Review's coverage of BLUF-style executive communication (the "military email" framing: lead with the point so a reader knows what's needed within the first 30 seconds) and Bloomberg/wire-style inverted-pyramid convention (most important fact first, supporting detail after, in descending order of importance). Rules here are original synthesis, not reproduced text.
+
+**Status: derived from secondary sources, not verified against primary articles.** HBR, Bloomberg, and the Economist/WSJ/FT sources behind `style-general-writing.md` are paywalled or block fetching, so these rules come from write-ups *describing* each publication's conventions, not from analyzing real published sentences directly. Re-derive this guide once real articles are available — see the v2 checklist.
