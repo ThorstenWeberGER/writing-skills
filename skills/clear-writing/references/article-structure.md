@@ -9,7 +9,9 @@ This governs layout — how many headings, how long each section, when to use bu
 | Length | Headline | Subheadings | Bullets |
 |---|---|---|---|
 | Half page (~150-300 words) | One, functions as the point in miniature | None — a subhead below this length adds clutter without aiding navigation | At most one list, only if there's a genuine 3+ item parallel set |
-| Full page (~400-700 words) | One | 2-4, roughly one per 100-200 words | Any section with 3-6 parallel items; majority of the piece stays prose |
+| Full page (~400-700 words) | One | 2-4 (see note below) | Any section with 3-6 parallel items; majority of the piece stays prose |
+
+**Subhead count and section length trade off against each other.** Divide the total length by the number of subheads you actually need — don't force every section to hit some fixed word count independently. At 450 words, four sections run ~110 words each; at 700 words with two sections, they run ~350. Both are fine. If a section comes out thin, cut the subheading and fold it into its neighbour — never pad a thin section to reach a target length.
 
 Don't add a subheading just because the piece is long — add it when a real topic shift happens. A full-page piece on one continuous idea can still run with zero subheadings; a half-page piece that genuinely covers three distinct topics can still earn two.
 
@@ -21,7 +23,7 @@ Don't add a subheading just because the piece is long — add it when a real top
 
 ## Subheadings (full-page pieces only)
 
-1. **One per section, roughly every 100-200 words.** Below that cadence, the piece feels choppy; above it, sections run long enough that a skimmer loses the thread between headings.
+1. **One per genuine topic shift, not per word count.** Total length divided by subhead count sets your section length — see the note under the table. A section under ~40 words usually means the subheading isn't earning its place; fold it into the neighbouring section rather than padding it.
 2. **Each previews its section** — same rule as `foundations.md`'s heading rule, just applied at sub-page scale: a reader should be able to decide whether to read the section from the subhead alone.
 3. **Cap it at one heading level.** A second level (sub-subheadings) is almost never justified under a page — it signals the piece should be split or the sections are too finely sliced.
 

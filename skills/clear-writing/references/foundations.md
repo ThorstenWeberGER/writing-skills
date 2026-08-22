@@ -70,7 +70,7 @@ Different target groups can produce different pain points from the same fact —
 2. **Bullets are for scannable, parallel items — not narrative.** Use them for steps, features, or short parallel facts. Keep every bullet in a list grammatically parallel (all start with a verb, or all are noun phrases — don't mix).
 3. **Keep lists short.** Three to six bullets. More than that stops being scannable and should probably be prose or split into subsections.
 4. **Use prose, not bullets, for anything nuanced, sensitive, or narrative.** Bullets read as efficient, not warm — a list is the wrong tool for building rapport or walking through a sensitive topic.
-5. **Don't over-format.** A bold lead-in on every bullet, or bolding every other phrase, reads as AI-generated filler rather than genuine emphasis — see `humanizer.md` §15-16.
+5. **Don't over-format.** A bold lead-in on every bullet, or bolding every other phrase, reads as AI-generated filler rather than genuine emphasis — see `humanizer.md` ("Formatting tells").
 
 ## Sources
 

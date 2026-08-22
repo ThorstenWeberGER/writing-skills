@@ -6,7 +6,7 @@ For status updates, recommendations, proposals, and anything read by a decision-
 
 1. **BLUF — Bottom Line Up Front.** The first sentence is the conclusion, recommendation, or ask. A reader who stops after sentence one should still know what you want from them.
 2. **Situation → Complication → Solution.** After the BLUF sentence, give just enough of: what's the situation, what's the problem/complication, what's the proposed solution — in that order, each in one or two sentences.
-3. **Visual signposting.** Use bold lead-ins or short bullets so a skimming reader can scan the shape of the argument without reading every word. Don't overuse — one bold lead-in per list item, not per sentence (see `humanizer.md` §15-16 for the failure mode of overdoing this).
+3. **Visual signposting.** Use bold lead-ins or short bullets so a skimming reader can scan the shape of the argument without reading every word. Don't overuse — one bold lead-in per list item, not per sentence (see `humanizer.md` under "Formatting tells" for the failure mode of overdoing this).
 4. **One ask per summary.** If there are multiple asks, number them. Don't bury a second ask in a supporting paragraph.
 5. **Numbers, not adjectives.** "Reallocate $100k from print to digital" not "significantly increase digital investment."
 6. **Target length holds regardless of source length.** The full version should land around 150-250 words (roughly a half page), whether the source was a paragraph or a 10-page analysis. A longer source means cutting harder to reach that target, not writing a longer summary — if the compressed version is still growing with the source, supporting detail belongs in an attachment or appendix, not the summary itself.
