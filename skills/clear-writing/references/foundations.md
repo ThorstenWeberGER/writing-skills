@@ -33,6 +33,25 @@ Once you've found the point this way, feed it into the pyramid: that point goes 
 
 **Signal this rule catches:** a strong-sounding opening that's actually still describing the situation ("Our team has been monitoring X for months..."); a "key finding" that produces no reaction when you ask "so what?"; a report leading with the most-researched section instead of the most decision-relevant one.
 
+### Identifying why the point matters to the target group (the pain point)
+
+A correctly identified point can still fall flat if it's stated as a fact rather than as something the reader has a stake in. Before leading with the point, translate it into the target group's pain point:
+
+1. State the point in one sentence, naming the specific target group (not "people" or "the team" — the actual audience: finance leadership, the on-call engineer, a specific customer segment).
+2. Ask "why does this matter to [that group]?" and answer in one sentence.
+3. Ask "why does *that* matter to them?" of your own answer.
+4. Ask a third time. Three rounds is usually enough to move past a restated fact and land on the actual pain point — the goal they have and the obstacle stopping them, which together explain why they'd act.
+
+**Worked example:**
+- Point: "Vendor B costs 18% less than the incumbent."
+- Why does that matter to finance leadership? → "It frees up budget this quarter."
+- Why does that matter to them? → "They're already over budget on tooling and need to make cuts somewhere."
+- Why does that matter to them? → "Without a cut, they have to choose between cutting tooling or cutting headcount." → *That's* the pain point: switching vendors isn't about the discount, it's the alternative to a headcount cut.
+
+Different target groups can produce different pain points from the same fact — run the three-why chain separately for each audience the same point is going to, rather than assuming one chain covers everyone.
+
+**Signal this rule catches:** a point stated as a bare fact with no stake attached ("Latency increased by 200ms"); the same pitch sent to two different audiences with no change in what's emphasized; an argument that's technically true but that the specific reader has no reason to act on.
+
 ## Plain wording
 
 1. **Short words over long ones.** "Use" not "utilize." "Help" not "facilitate." "Start" not "commence."
@@ -54,4 +73,4 @@ Once you've found the point this way, feed it into the pyramid: that point goes 
 
 ## Sources
 
-Plain wording and structure: generalized from [plainlanguage.gov](https://www.plainlanguage.gov/)'s federal plain-language guidelines and The Economist's "never use a long word where a short one will do" principle (see `style-general-writing.md` for the full citation). Headings and lists: generalized from standard business-writing guidance on heading/bullet usage (headings should signal section content; keep bullet lists to 3-6 parallel items; prefer prose for sensitive or nuanced content) — original synthesis, not reproduced text. "Finding the point before you lead with it": generalized from Barbara Minto's Pyramid Principle (the "so what?"/"why?" test) and its SCQA framework (Situation-Complication-Question-Answer, where identifying the strongest complication is the key step before drafting), plus journalism's inverted-pyramid and "nut graf" convention for ranking competing points by newsworthiness/reader impact — original synthesis, not reproduced text.
+Plain wording and structure: generalized from [plainlanguage.gov](https://www.plainlanguage.gov/)'s federal plain-language guidelines and The Economist's "never use a long word where a short one will do" principle (see `style-general-writing.md` for the full citation). Headings and lists: generalized from standard business-writing guidance on heading/bullet usage (headings should signal section content; keep bullet lists to 3-6 parallel items; prefer prose for sensitive or nuanced content) — original synthesis, not reproduced text. "Finding the point before you lead with it": generalized from Barbara Minto's Pyramid Principle (the "so what?"/"why?" test) and its SCQA framework (Situation-Complication-Question-Answer, where identifying the strongest complication is the key step before drafting), plus journalism's inverted-pyramid and "nut graf" convention for ranking competing points by newsworthiness/reader impact — original synthesis, not reproduced text. "Identifying why the point matters to the target group": generalized from the Toyota "5 Whys" root-cause technique (adapted here to three rounds, aimed at audience relevance rather than root cause) and the Jobs-to-be-Done framing of a pain point as an unmet goal plus the obstacle blocking it — original synthesis, not reproduced text.
