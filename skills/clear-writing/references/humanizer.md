@@ -25,7 +25,7 @@ Use personality in essays, blog posts, and opinion pieces where it fits the writ
 > The palette resonates with the region's beauty, symbolizing local landscapes, reflecting a deep connection to the land.
 > → The building is painted blue and gold, colors meant to evoke local bluebonnets.
 
-**Sales language.** *boasts, vibrant, rich (figurative), profound, enhancing, showcasing, exemplifies, commitment to, nestled, in the heart of, groundbreaking, renowned, breathtaking, seamless, robust.* Prose that reads like an ad — most common on products, teams, and organizations.
+**Sales language.** *boasts, vibrant, rich (figurative), profound, enhancing, showcasing, exemplifies, commitment to, nestled, in the heart of, groundbreaking, cutting-edge, state-of-the-art, best-in-class, world-class, renowned, breathtaking, seamless, robust.* Prose that reads like an ad — most common on products, teams, and organizations.
 
 **Vague sources.** *industry reports, experts argue, observers have noted, some critics say, several sources.* A claim assigned to unnamed authorities. Name the real source if the material provides one; otherwise cut the claim. Never invent a source.
 

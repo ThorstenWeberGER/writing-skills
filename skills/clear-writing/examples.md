@@ -2,6 +2,8 @@
 
 Real before/after pairs, one per rule this skill enforces. All are real (user-supplied or captured from actual conversation) — never fabricated.
 
+**This invariant is why this file stays separate from `DONTS.md`.** `DONTS.md` holds rules with short illustrative examples written to demonstrate a pattern; this file holds only genuine writing. Don't merge them, and don't add an invented pair here to fill a gap — an empty slot is the honest state.
+
 ## Active voice
 
 **Weak:**
