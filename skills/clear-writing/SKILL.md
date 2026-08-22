@@ -13,13 +13,12 @@ Apply this skill any time you draft or edit prose for the user, or the user asks
 
 ## Pass order
 
-1. **`references/structure.md`** — pyramid principle. Does the text lead with the point? Reorder if it buries the lede.
-2. **`references/plain-wording.md`** — plain wording and short sentences.
-3. Pick **one** style guide based on what you're writing:
+1. **`references/foundations.md`** — pyramid principle (lead with the point), plain wording, and heading/bullet formatting. Applies to everything, always.
+2. Pick **one** style guide based on what you're writing:
    - `references/style-management-summary.md` — for status updates, recommendations, decisions, anything meant for a manager or other decision-maker.
    - `references/style-general-writing.md` — for everything else: explanations, notes, documentation, messages.
-4. **`references/DONTS.md`** and **`examples/bad/`** — check the draft against known violations. If you catch a new one during this conversation and the user confirms it's worth tracking, append it to `DONTS.md` (one line) and optionally save a `before`/`after` pair to `examples/bad/` and `examples/good/`.
-5. **`references/humanizer.md`** — final surface-level pass for AI-writing tells (inflated claims, stock phrasing, passive voice, chatbot artifacts, etc.). If a file in `examples/good/` is relevant to the current context, match its voice per that reference's "Match the writer's voice" section.
+3. **`references/DONTS.md`** and **`examples.md`** — check the draft against known violations. If you catch a new one during this conversation and the user confirms it's worth tracking, append it to `DONTS.md` (one line) and optionally add a weak/better pair to `examples.md`.
+4. **`references/humanizer.md`** — final surface-level pass for AI-writing tells (inflated claims, stock phrasing, passive voice, chatbot artifacts, etc.). If a relevant sample exists in this conversation, match its voice per that reference's "Match the writer's voice" section.
 
 ## Scope
 
