@@ -17,10 +17,11 @@ Apply this skill any time you draft or edit prose for the user, or the user asks
 2. Pick **one** style guide based on what you're writing:
    - `references/style-management-summary.md` — for status updates, recommendations, decisions, anything meant for a manager or other decision-maker. Always produce the crisp email variant (subject-line formula, word/sentence caps) alongside the full version, regardless of delivery medium, unless the user has said they only want one. When compressing a longer source: hold the full version to ~150-250 words regardless of source length, triage competing asks explicitly rather than listing them as equal weight, and keep genuinely unresolved uncertainty rather than cutting it for brevity.
    - `references/style-general-writing.md` — for everything else: explanations, notes, documentation, messages.
+   - If what you're writing is a standalone half-page or full-page piece (a blog post, docs page, one-pager, project write-up) rather than a summary or short message, also consult `references/article-structure.md` for headline/subheading/section layout scaled to that length.
 3. **`references/DONTS.md`** and **`examples.md`** — check the draft against known violations. If you catch a new one during this conversation and the user confirms it's worth tracking, append it to `DONTS.md` (one line) and optionally add a weak/better pair to `examples.md`.
 4. **`references/humanizer.md`** — final surface-level pass for AI-writing tells (inflated claims, stock phrasing, passive voice, chatbot artifacts, etc.). If a relevant sample exists in this conversation, match its voice per that reference's "Match the writer's voice" section.
 5. **Self-check before returning the result:** if step 2 used `style-management-summary.md`, confirm the response actually includes both the full version and the crisp email variant, back to back. If only one is present and the user didn't ask for just one, add the missing one before responding.
 
 ## Scope
 
-This skill governs English prose. It does not cover audience-specific profiles beyond the two style guides above, and it does not provide document templates — both are deferred.
+This skill governs English prose. It does not cover audience-specific profiles beyond the two style guides above, and it does not provide use-case templates (README, meeting notes, etc.) — both are deferred. `article-structure.md` covers generic half-page/full-page layout, not per-use-case templates.
