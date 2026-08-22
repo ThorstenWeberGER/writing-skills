@@ -21,6 +21,18 @@ A reader — or a manager skimming for five seconds — should get the main poin
 
 **Signal this rule catches:** a summary that opens with background before the finding; a message where the actual request is in the last paragraph; "Based on the above, we therefore..." as a paragraph opener.
 
+### Finding the point before you lead with it
+
+Leading with the point only works if you've correctly identified which point is strongest. Three checks, in order:
+
+1. **Find the complication, not the situation.** Background (what's normally true) isn't the point — the change, gap, or problem that forces a decision now is. If a draft opens with context that hasn't changed, that's the situation talking, not the complication. Ask: *what's different, wrong, or at risk here that wasn't before?* That's the candidate point.
+2. **Run the "so what?" test.** State the candidate point, then ask "so what?" and answer it. Ask "so what?" again of that answer. Stop when the answer is something the reader would act on or change their mind about — that final answer is the real point. A point that survives zero rounds of "so what?" (the reader shrugs) isn't strong enough to lead with.
+3. **When several points compete, rank by reader impact, not writer effort.** The point that took the most work to produce isn't automatically the strongest one to lead with. Rank candidates by what's most consequential, most urgent, or most likely to change what the reader does next — not by how much analysis went into it.
+
+Once you've found the point this way, feed it into the pyramid: that point goes first, and the situation/complication reasoning that got you there becomes the supporting structure underneath it, not the opening.
+
+**Signal this rule catches:** a strong-sounding opening that's actually still describing the situation ("Our team has been monitoring X for months..."); a "key finding" that produces no reaction when you ask "so what?"; a report leading with the most-researched section instead of the most decision-relevant one.
+
 ## Plain wording
 
 1. **Short words over long ones.** "Use" not "utilize." "Help" not "facilitate." "Start" not "commence."
@@ -42,4 +54,4 @@ A reader — or a manager skimming for five seconds — should get the main poin
 
 ## Sources
 
-Plain wording and structure: generalized from [plainlanguage.gov](https://www.plainlanguage.gov/)'s federal plain-language guidelines and The Economist's "never use a long word where a short one will do" principle (see `style-general-writing.md` for the full citation). Headings and lists: generalized from standard business-writing guidance on heading/bullet usage (headings should signal section content; keep bullet lists to 3-6 parallel items; prefer prose for sensitive or nuanced content) — original synthesis, not reproduced text.
+Plain wording and structure: generalized from [plainlanguage.gov](https://www.plainlanguage.gov/)'s federal plain-language guidelines and The Economist's "never use a long word where a short one will do" principle (see `style-general-writing.md` for the full citation). Headings and lists: generalized from standard business-writing guidance on heading/bullet usage (headings should signal section content; keep bullet lists to 3-6 parallel items; prefer prose for sensitive or nuanced content) — original synthesis, not reproduced text. "Finding the point before you lead with it": generalized from Barbara Minto's Pyramid Principle (the "so what?"/"why?" test) and its SCQA framework (Situation-Complication-Question-Answer, where identifying the strongest complication is the key step before drafting), plus journalism's inverted-pyramid and "nut graf" convention for ranking competing points by newsworthiness/reader impact — original synthesis, not reproduced text.
