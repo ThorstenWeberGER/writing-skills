@@ -31,13 +31,18 @@ Original backlog wishlist included templates for README.md, installation.md, sum
 - [ ] Add a `templates/` directory to the skill with one file per use case.
 - [ ] Update `SKILL.md` to reference templates when the user's request matches a known use case.
 
-## 4. Trim humanizer.md to patterns that actually recur
+## 4. Trim humanizer.md to patterns that actually recur — DONE
 
 `references/humanizer.md` was ported in full (all 35 patterns) from blader/humanizer, on the assumption it'd be trimmed once real usage shows which patterns fire often versus never.
 
-**To do:**
-- [ ] After a few weeks of real use, review which pattern numbers (§1-35) actually got invoked in practice.
-- [ ] Trim the file down to the recurring ones, or leave as-is if trimming doesn't turn out to matter.
+- [x] Trimmed from ~4,700 words to ~1,750 (63% reduction), which had been 48% of the skill's total size.
+- [x] Dropped patterns specific to encyclopedia articles: name-dropping publications to prove notability, curly-quote normalization, hyphenated-pair pedantry.
+- [x] Cross-referenced rather than duplicated the four patterns already covered by `foundations.md`/`DONTS.md` (passive voice, filler phrases, stacked hedging).
+- [x] Removed vestigial standalone-skill scaffolding (the "how to return the result" three-mode system), which didn't apply to a pass running inside this skill.
+- [x] Switched numbered sections (§1-35) to named ones and updated the two inbound references.
+- [x] Validated by testing against a slop-heavy paragraph: 13 of 14 tells caught; the one gap ("cutting-edge" missing from the sales-language list) was fixed.
+
+Basis for trimming was fitness for this skill's actual output types (summaries, emails, docs, notes, PR descriptions, short articles) rather than logged usage frequency — the file predates any usage log. Revisit if a dropped pattern turns out to fire in practice.
 
 ## 5. Grow DON'Ts and examples through real use
 
