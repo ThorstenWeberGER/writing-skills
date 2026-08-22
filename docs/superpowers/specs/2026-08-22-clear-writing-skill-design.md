@@ -27,7 +27,8 @@ clear-writing/
   references/
     structure.md           # pyramid principle / first-things-first
     plain-wording.md       # plainlanguage.gov rules, short sentences
-    style-models.md         # wire/news (AP/Reuters) + business-explainer (Economist/Bloomberg) notes
+    style-management-summary.md  # merged style guide for management summaries (BLUF-weighted)
+    style-general-writing.md      # merged style guide for general writing (clarity/narrative-weighted)
     humanizer.md             # full pattern list ported from github.com/blader/humanizer SKILL.md
     DONTS.md                  # flat, growing list of user-specific don'ts
   examples/
@@ -41,7 +42,7 @@ When drafting or editing prose, Claude works through the references in this orde
 
 1. **structure.md** — does the text lead with the point? Reorder if it buries the lede.
 2. **plain-wording.md** — plain wording, short sentences (plainlanguage.gov basis).
-3. **style-models.md** — sanity-check against wire/news and business-explainer conventions.
+3. **style-management-summary.md** or **style-general-writing.md** — whichever fits the text being written (SKILL.md gives Claude a one-line rule for picking: recommendations/status/decisions for a manager → management-summary; anything else → general-writing).
 4. **DONTS.md** and `examples/bad/` — check for known violations.
 5. **humanizer.md** — final surface-level pass for AI-writing tells (inflated claims, stock phrasing, passive voice, chatbot artifacts, etc.), matching voice against a file in `examples/good/` when one is relevant to the context.
 
@@ -61,17 +62,16 @@ This is a single skill (not a chain of separate skills) so the whole ruleset loa
 
 Ported in full from `github.com/blader/humanizer`'s `SKILL.md` (MIT-licensed), covering all 35 documented AI-writing patterns across four categories: content patterns, language patterns, chatbot patterns, and filler/hedging patterns. Kept in full for now; trimmed later once the user sees which patterns actually fire often versus never.
 
-### Style-models.md content
+### style-management-summary.md and style-general-writing.md content
 
-Sourced from the user's own research into business/journalistic writing standards. Five reference publications, each contributing a specific principle rather than being treated as one undifferentiated "news style":
+Sourced from the user's own research into five reference publications — The Economist, The Wall Street Journal, Harvard Business Review, Financial Times, Bloomberg News — plus a direct research pass reading actual (non-paywalled where possible) articles from each to verify the patterns hold up in practice, not just as claimed conventions.
 
-- **The Economist** — plain English, brevity, active voice, short/simple words over corporate jargon.
-- **The Wall Street Journal** — narrative structure, concrete data over adjectives, human-centric framing (ground abstract issues in real impact on real people).
-- **Harvard Business Review** — BLUF (Bottom Line Up Front), Situation-Complication-Solution structure, visual signposting (bold lead-ins, bullets) for scannability.
-- **Financial Times** — authoritative tone while keeping technical material globally accessible.
-- **Bloomberg News** — BLUF for rapid scanning.
+Rather than keeping five separate publication write-ups (the initial design pass), the patterns are merged down into **two** style guides, because the underlying rules split cleanly along that line:
 
-This supersedes the earlier generic "wire/news + business-explainer" framing from the initial design pass — it's more specific and directly actionable (named sources, a concrete rule checklist, worked examples), so it becomes the primary content of `style-models.md`.
+- **`style-management-summary.md`** — weighted toward HBR and Bloomberg's contribution: BLUF, Situation-Complication-Solution structure, visual signposting (bold lead-ins, bullets), recommendation-first framing. For status updates, proposals, and anything meant for a decision-maker.
+- **`style-general-writing.md`** — weighted toward The Economist, WSJ, and FT's contribution: plain English and active voice, narrative structure and concrete data over adjectives, human-centric framing, authoritative-but-accessible tone for technical topics. For everything else — explanations, notes, documentation.
+
+Research method: read a sample of real articles per publication (not just about the publication's style), extract observable patterns (sentence length, structure, vocabulary choices — not the text itself, to respect copyright), and write original rules distilled from what's actually observed. At most short quotes (under 15 words, attributed) may illustrate a point; no bulk reproduction of source articles.
 
 ### DONTS.md seed content
 
