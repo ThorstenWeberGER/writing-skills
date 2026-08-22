@@ -19,6 +19,7 @@ Apply this skill any time you draft or edit prose for the user, or the user asks
    - `references/style-general-writing.md` — for everything else: explanations, notes, documentation, messages.
 3. **`references/DONTS.md`** and **`examples.md`** — check the draft against known violations. If you catch a new one during this conversation and the user confirms it's worth tracking, append it to `DONTS.md` (one line) and optionally add a weak/better pair to `examples.md`.
 4. **`references/humanizer.md`** — final surface-level pass for AI-writing tells (inflated claims, stock phrasing, passive voice, chatbot artifacts, etc.). If a relevant sample exists in this conversation, match its voice per that reference's "Match the writer's voice" section.
+5. **Self-check before returning the result:** if step 2 used `style-management-summary.md`, confirm the response actually includes both the full version and the crisp email variant, back to back. If only one is present and the user didn't ask for just one, add the missing one before responding.
 
 ## Scope
 
