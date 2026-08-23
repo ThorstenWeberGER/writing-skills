@@ -1,4 +1,4 @@
-# clear-writing skill — status and open items
+# clear-writing skill: status and open items
 
 Last updated 2026-08-23. The skill lives in this repo at `skills/clear-writing/`. Start with the repo-root `README.md`, which is the user-facing manual; this file tracks status and open work.
 
@@ -12,8 +12,8 @@ Run `./skills/clear-writing/tests/test.sh` to verify the whole thing. Currently 
 
 The original blocker stands: economist.com, wsj.com, bloomberg.com and hbr.org all refuse automated fetching or serve teasers only. Rather than wait, the rules were re-derived from primary authorities that publish their own guidance as open-source repositories.
 
-- [x] **GSA/plainlanguage.gov** — the federal plain-language guidelines, from the publisher's own repo. Real primary text.
-- [x] **18F/content-guide** — GSA's content guide, source of the only numeric sentence-length guidance found.
+- [x] **GSA/plainlanguage.gov**: the federal plain-language guidelines, from the publisher's own repo. Real primary text.
+- [x] **18F/content-guide**: GSA's content guide, source of the only numeric sentence-length guidance found.
 - [x] `foundations.md`'s plain-wording and heading/list rules re-derived with per-rule attribution and URLs.
 - [x] **Three rules corrected** where the primary text contradicted them: "short words over long" is really about *familiarity*; active voice has two legitimate exceptions; the "3-6 bullets" range has no primary support and is now labeled house convention.
 - [x] Sourced rules added that were missing entirely: hidden verbs, noun strings, abbreviations, list lead-in sentences, parallelism with the lead-in, nesting caps, paragraph limits with the anti-uniformity rule, "address the reader as you."
@@ -23,13 +23,13 @@ The original blocker stands: economist.com, wsj.com, bloomberg.com and hbr.org a
 - [x] `references/audiences.md`, on a separate axis from format so profiles don't multiply per format.
 - [x] Technical peer (Google eng-practices, Nygard ADRs), external client (incident-communication practice), non-native English readers (Google global-audience, Kohl's *Global English Style Guide*). Decision-maker routes to `formats.md`.
 - [x] The conflict between the technical-peer and non-native profiles documented and resolved: keep domain nouns precise, simplify everything around them.
-- [x] "When jargon is the right choice" — four tests. The highest-value single addition, since plainlanguage.gov's own carve-out shows the plain-word rule was never aimed at domain nouns.
+- [x] "When jargon is the right choice", four tests. The highest-value single addition, since plainlanguage.gov's own carve-out shows the plain-word rule was never aimed at domain nouns.
 
 ### 3. Templates
 
 - [x] `project-readme.md` (standard-readme spec), `installation.md` (Good Docs Project, trimmed), `meeting-notes.md` (Robert's Rules + GitLab + ADR shape).
 - [x] `templates/README.md` carries the Diátaxis routing compass.
-- [x] `summary.md` deliberately **not** built — `formats.md` already covers summaries. Heeded Diátaxis's own warning against creating empty template scaffolding.
+- [x] `summary.md` deliberately **not** built, because `formats.md` already covers summaries. Heeded Diátaxis's own warning against creating empty template scaffolding.
 
 ### 4. humanizer.md trim
 
@@ -38,7 +38,7 @@ The original blocker stands: economist.com, wsj.com, bloomberg.com and hbr.org a
 
 ### 5. Structural consolidation
 
-- [x] `style-general-writing.md` deleted — 3 of 5 rules duplicated `foundations.md`, and its only example was already in `inputs/examples.md` verbatim.
+- [x] `style-general-writing.md` deleted: 3 of 5 rules duplicated `foundations.md`, and its only example was already in `inputs/examples.md` verbatim.
 - [x] `style-management-summary.md` + `article-structure.md` merged into `formats.md`.
 - [x] `DONTS.md` and `inputs/examples.md` kept separate on purpose, with the reason recorded in both.
 
@@ -46,16 +46,16 @@ The original blocker stands: economist.com, wsj.com, bloomberg.com and hbr.org a
 
 This was the largest piece of work and wasn't in the original checklist. It exists because the skill kept shipping drafts where a pass was *reported* as applied while its rules were violated in the same text.
 
-- [x] **`check.py`** — 22+ mechanical checks, stdlib only, exit 1 on any FAIL. Conditional flags for `--summary`, `--email`, `--article-half/full`, `--client`, `--nonnative`, `--dashes-ok`, `--compare`.
-- [x] **`CHECKLIST.md`** — the judgment half, step by step. Requires reporting what was run, not "applied the skill".
-- [x] **`tests/test_drift.py`** — fails when `check.py`'s wordlists drift from the reference files, in three directions (MISSING, ORPHAN, BROKEN RULE ANCHOR). Verified it can actually fail by injecting each direction.
-- [x] **`tests/test.sh`** — drift test plus 7 fixtures.
+- [x] **`check.py`**: 22+ mechanical checks, stdlib only, exit 1 on any FAIL. Conditional flags for `--summary`, `--email`, `--article-half/full`, `--client`, `--nonnative`, `--dashes-ok`, `--compare`.
+- [x] **`CHECKLIST.md`**: the judgment half, step by step. Requires reporting what was run, not "applied the skill".
+- [x] **`tests/test_drift.py`**: fails when `check.py`'s wordlists drift from the reference files, in three directions (MISSING, ORPHAN, BROKEN RULE ANCHOR). Verified it can actually fail by injecting each direction.
+- [x] **`tests/test.sh`**: drift test plus 7 fixtures.
 - [x] Every reference file ends by stating it is not self-enforcing.
 
 ### 7. Style-only mode
 
 - [x] `SKILL.md` picks a mode before anything else. Style-only (the default) runs plain wording + DONTS + humanizer and explicitly does not restructure, compress, reorder, or impose a format.
-- [x] `--compare ORIGINAL` enforces the mode's characteristic failure: fails past 15% word loss, flags changed paragraph count. Verified — a real style edit passes at +4%, a compressed rewrite of the same text fails at −59%.
+- [x] `--compare ORIGINAL` enforces the mode's characteristic failure: fails past 15% word loss, flags changed paragraph count. Verified: a real style edit passes at +4%, a compressed rewrite of the same text fails at −59%.
 
 ### 8. Defects found and fixed by testing
 
@@ -112,15 +112,23 @@ The pattern is stable and worth stating on its own: **purpose-built fixtures kep
 - [x] `backlog.md` moved to `docs/`, leaving the repo root at four files.
 - [x] Verified after the move: `tests/test.sh` all green, `install.sh --status` links intact, and `inputs/` plus `tests/` reachable through the installed symlink.
 
+### 13. The dash rule now applies to the skill's own files (DONE)
+
+- [x] Cleared every em and en dash out of the nine prose files, the four templates, the two input files, the fixture README, `docs/v2-checklist.md` and `CLAUDE.md`. 257 of the repo's 287 dash characters removed, each replacement chosen per instance: a period, comma, colon, semicolon or parentheses depending on what the sentence was doing.
+- [x] Also cleared them from `check.py`, `tests/test_drift.py` and `tests/test.sh`, whose comments and printed output carried them.
+- [x] The remaining 30 characters, across 17 lines, are all deliberate: the two regexes `check.py` scans with, `test_drift.py`'s rule anchor and `strip()` char class, the code-span mentions in `humanizer.md`, `inputs/voice-sample.md`, `CLAUDE.md`, `README.md` and this file, and the four fixtures that exist to be caught (`bad.md`, `naming-vs-using.md`, `deslop-orig.md`, `style-orig.md`). Those name the mark or test for it rather than using it.
+- [x] `CLAUDE.md` rule 6 held a real violation, in the always-on file that states the rule. Fixed.
+- [x] **Enforced, not just done.** `tests/test.sh` now runs the dash check over every prose file in the skill plus `README.md`, `CLAUDE.md` and this file, and locks the script literal counts at 2/2/1 so a new one fails. Verified by injecting a violation in each direction: both guards fail, exit code 1.
+
 ## Open
 
-### A. `inputs/examples.md` has only its 5 launch pairs — the one real content gap
+### A. `inputs/examples.md` has only its 5 launch pairs: the one real content gap
 
 Can't be fixed by research. The file admits only real user-supplied or conversation-captured pairs, never invented ones, and that invariant is deliberate. It grows only through use.
 
 **Blocked on:** actual use of the skill on real drafts.
 
-### B. Voice sample exists but covers only short-form writing — PARTLY DONE
+### B. Voice sample exists but covers only short-form writing (PARTLY DONE)
 
 - [x] `inputs/voice-sample.md` created from real material: `backlog.md` plus the user's session instructions, quoted verbatim.
 - [x] Patterns extracted and **measured** rather than estimated: 27 sentences, median 6 words, max 16, none longer. Imperative mood dominant, sparse punctuation, "as well" as a habitual closer.
@@ -128,11 +136,11 @@ Can't be fixed by research. The file admits only real user-supplied or conversat
 - [x] Records the distinction that matters: match rhythm and word choice, never reproduce typos or missing punctuation from a sample.
 - [x] Wired into `humanizer.md`, `SKILL.md`, and `CHECKLIST.md`, with a drift-test rule anchor so the wiring can't silently rot.
 
-**Still open:** both sources are short-form and functional — a planning list and a set of instructions. Neither is connected prose written for a reader. So the sample supports word choice, sentence length, punctuation, and the dash decision, but says nothing about how this writer opens a document, builds a paragraph, or handles a transition.
+**Still open:** both sources are short-form and functional: a planning list and a set of instructions. Neither is connected prose written for a reader. So the sample supports word choice, sentence length, punctuation, and the dash decision, but says nothing about how this writer opens a document, builds a paragraph, or handles a transition.
 
-**Needs:** two or three paragraphs of real connected prose the user wrote for someone else — an email to a colleague, a section of a doc, a Slack post. Appended as Source 3, same verbatim treatment. Until then paragraph-level voice matching is explicitly marked unsupported.
+**Needs:** two or three paragraphs of real connected prose the user wrote for someone else: an email to a colleague, a section of a doc, a Slack post. Appended as Source 3, same verbatim treatment. Until then paragraph-level voice matching is explicitly marked unsupported.
 
-### C. CI — DONE
+### C. CI (DONE)
 
 - [x] `.github/workflows/clear-writing-tests.yml` runs `tests/test.sh` on any push or PR touching the skill, plus manual dispatch. Verified the suite passes when invoked from the repo root the way CI does.
 
@@ -150,7 +158,7 @@ Passive voice and noun-string detection are pattern matches, not parsing. That's
 
 **Possible fix:** a real POS tagger would make both precise, at the cost of adding a dependency to a currently stdlib-only script. Probably not worth it.
 
-### F2. Ground rules and multi-device install — DONE
+### F2. Ground rules and multi-device install (DONE)
 
 - [x] `CLAUDE.md` at the repo root holds **six always-on rules**, chosen by one test: did this fail in practice, and did it fail silently? No em dashes; jargon tests apply to chat replies; never generalise from one or two samples; report what you ran; invent no specifics; do not infer traits about people from their writing. Each has a named incident behind it.
 - [x] Three-layer split documented in `CLAUDE.md` and `README.md`: always-on rules, project conventions, on-demand skill. The always-on layer is deliberately capped at six because it costs context every turn.
@@ -183,14 +191,6 @@ Passive voice and noun-string detection are pattern matches, not parsing. That's
 - [ ] 18F quotations were captured via a summarizing fetch, not character-for-character. High confidence, not pinned.
 - [ ] Reachable-but-unharvested primary pages in `GSA/plainlanguage.gov`: `guidelines/design/`, `guidelines/test/`, plus the SEC Plain English Handbook it cites.
 
-### J. The skill's own files fail the skill's own dash check
-
-`check.py` counts 200+ em and en dashes across `SKILL.md`, `CHECKLIST.md` and the six `references/` files, most of them used as a definition separator in prose and table cells. Measured per file: foundations 41, audiences 35, formats 28, humanizer 23, v2-checklist 20, SKILL 18, CHECKLIST 15, house-styles 9, DONTS 6. `README.md` and `CLAUDE.md` are clean; their only hits are inside code spans, where the rule is being named.
-
-The ban is settled for this writer, so this is a real inconsistency and not a style debate. It was not fixed with the restructure because each instance needs a judgment call between a period, a comma, a colon and parentheses, and a blind substitution would flatten meaning and break table cells.
-
-**Needs:** a pass per file, verified with `check.py` afterwards.
-
 ---
 
 ## Next steps, in priority order
@@ -198,8 +198,7 @@ The ban is settled for this writer, so this is a real inconsistency and not a st
 1. **Use the skill on real drafts and grow `inputs/examples.md`** (A). Still the only gap that research cannot close.
 2. **Add a connected-prose voice sample** (B). Two or three paragraphs you wrote for someone else. Highest value per effort of anything left, because it is the one input that would let paragraph-level voice matching switch from *unsupported* to working.
 3. **Run `./install.sh` on each machine you use** (F). It is verified working in this container; whether it is live on your own machines is still unconfirmed from here.
-4. **Clear the em dashes out of the skill's own files** (J). 200+ hits across nine files. Mechanical to find, judgment to fix.
-5. **Re-audit the drift allowlists** (D) once they stop growing.
+4. **Re-audit the drift allowlists** (D) once they stop growing.
 5. **Use a template for a real document** (H), which would test the three that have never produced one.
 6. **Pin the 18F quotations** with one literal re-fetch (I).
 

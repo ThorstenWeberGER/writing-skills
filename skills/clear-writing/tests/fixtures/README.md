@@ -10,7 +10,7 @@ Regression fixtures. Expected results:
 | `art.md` | `--article-full` | 1 FAIL, exit 1 |
 
 `bad.md` is the real draft that shipped with two em dashes while the humanizer
-pass was reported as applied. `good.md` is its corrected form. Keep both — the
+pass was reported as applied. `good.md` is its corrected form. Keep both, because the
 pair is the regression test for the defect that motivated `check.py`.
 
 Run all four:
@@ -23,7 +23,7 @@ for f in bad good em art; do
 done
 ```
 
-## `naming-vs-using.md` — the false-positive regression
+## `naming-vs-using.md`: the false-positive regression
 
 The most important fixture. Twelve separate false positives were found during
 development, all from one blind spot: **text that names a pattern looks

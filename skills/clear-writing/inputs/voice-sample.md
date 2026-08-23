@@ -6,7 +6,7 @@ Real writing by the user, quoted verbatim. `humanizer.md`'s "Match the writer's 
 
 ---
 
-## Source 1 — `docs/backlog.md` in this repo (planning register)
+## Source 1: `docs/backlog.md` in this repo (planning register)
 
 Verbatim:
 
@@ -22,7 +22,7 @@ Verbatim:
 > * optional: have templates for specific use cases (readme.md, installation.md, summary.md, meeting_notes.md)
 > * optional: has specific target groups profiles designed (e.g. boss, management)
 
-## Source 2 — session messages, 2026-08-23 (instruction register)
+## Source 2: session messages, 2026-08-23 (instruction register)
 
 Verbatim, in order:
 
@@ -48,7 +48,7 @@ Verbatim, in order:
 
 Drawn only from the quotes above.
 
-**Report what the sample shows, not what it suggests about the person.** A voice sample supports claims about *writing*: sentence length, punctuation, word choice, mood. It does not support claims about the writer's background, nationality, first language, seniority, or state of mind. This file previously said one German abbreviation "confirmed German as a first language" — a conclusion one token cannot carry, about a fact the user never stated. Frequency counts are safe; inferences about the author are not. If a pattern appears once, say "once."
+**Report what the sample shows, not what it suggests about the person.** A voice sample supports claims about *writing*: sentence length, punctuation, word choice, mood. It does not support claims about the writer's background, nationality, first language, seniority, or state of mind. This file previously said one German abbreviation "confirmed German as a first language", a conclusion one token cannot carry, about a fact the user never stated. Frequency counts are safe; inferences about the author are not. If a pattern appears once, say "once."
 
 **Sentence length and shape.** Short, and measurably so. Across the 27 sentences in the quoted material: **median 6 words, minimum 1, maximum 16.** Not one exceeds 16. Fragments are used as complete instructions ("Enforce." / "Test it. Review it." / "Why."). Short sentences stack with periods rather than joining with conjunctions or subordinate clauses.
 
@@ -64,7 +64,7 @@ For comparison, `foundations.md` treats anything past 25 words as needing a seco
 
 **Register markers.** Lowercase "i" in `backlog.md`. `->` rather than an arrow glyph or the word. "e.g." rather than "for example". One German abbreviation, "Evtl" (*eventuell*, roughly "possibly"), used mid-sentence in English.
 
-On that last one: it is a single token in a single message. It says the writer reaches for a German shortcut when writing quickly, and nothing more. **Don't infer a language background from it** — the actionable rule is just "don't reproduce the shorthand," which needs no theory about the writer. Whether to apply the non-native-readers profile in `audiences.md` depends on who is *reading*, not on who is writing.
+On that last one: it is a single token in a single message. It says the writer reaches for a German shortcut when writing quickly, and nothing more. **Don't infer a language background from it.** The actionable rule is just "don't reproduce the shorthand," which needs no theory about the writer. Whether to apply the non-native-readers profile in `audiences.md` depends on who is *reading*, not on who is writing.
 
 **Directness.** No hedging, no preamble, no apology. Concerns arrive as plain questions: "Why? Did humanizer fire?"
 
@@ -72,7 +72,7 @@ On that last one: it is a single token in a single message. It says the writer r
 
 ---
 
-## How to use this — and what not to copy
+## How to use this, and what not to copy
 
 **Match:** short sentences, fragments where they carry the instruction, imperative mood, sparse punctuation, no em dashes, plain vocabulary, no hedging, no preamble.
 
@@ -88,8 +88,8 @@ The distinction that matters: reproduce the **rhythm, directness, and word choic
 
 ## Known limitation, and it is significant
 
-Both sources are **short-form and functional** — a planning list and a set of instructions. Neither is connected prose written for a reader: no paragraph, no argument developed over several sentences, no writing aimed at a colleague or a client.
+Both sources are **short-form and functional**: a planning list and a set of instructions. Neither is connected prose written for a reader: no paragraph, no argument developed over several sentences, no writing aimed at a colleague or a client.
 
 So this sample supports word choice, sentence length, punctuation habits, and the dash decision. It does **not** yet tell you how this writer builds a paragraph, opens a document, handles a transition, or adjusts tone for an audience.
 
-**To close that gap:** add two or three paragraphs of real connected prose the user has written for someone else — an email to a colleague, a section of a doc, a Slack post of any length. Append it as Source 3 with the same verbatim treatment. Until then, treat paragraph-level voice matching as unsupported and fall back to `humanizer.md`'s defaults for it.
+**To close that gap:** add two or three paragraphs of real connected prose the user has written for someone else: an email to a colleague, a section of a doc, a Slack post of any length. Append it as Source 3 with the same verbatim treatment. Until then, treat paragraph-level voice matching as unsupported and fall back to `humanizer.md`'s defaults for it.

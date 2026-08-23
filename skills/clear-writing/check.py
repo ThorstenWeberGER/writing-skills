@@ -63,7 +63,7 @@ AI_WORDS = [
     "what i did here was", "i took care to", "i was deliberate",
 ]
 
-# audiences.md, "referential vs evaluative" — buzzwords that grade, not name
+# audiences.md, "referential vs evaluative": buzzwords that grade, not name
 BUZZWORDS = [
     "synergy", "synergies", "synergize", "holistic", "strategic alignment",
     "move the needle", "circle back", "touch base", "bandwidth",
@@ -126,7 +126,7 @@ STOPWORDS = {
 # appearing as ordinary register. HBR sits at 1 per 644-787; slop is far denser.
 AI_TELL_WORDS_PER_HIT = 200
 
-# references/house-styles.md — measured conventions per publication.
+# references/house-styles.md holds the measured conventions per publication.
 # (sentence-median low, high, dash words-per-hit or None, subheads, bullets)
 HOUSE = {
     "economist": dict(med=(13, 26), dash=348, subheads=False, bullets=False,
@@ -331,7 +331,7 @@ def run(raw, opts):
         r.ok("naming contexts excluded",
              ", ".join(f"{n} {k}" for k, n in removals) + "  (--strict to scan all)")
 
-    # 1. dashes (humanizer.md — the rule that was violated while reported clean)
+    # 1. dashes (humanizer.md, the rule that was violated while reported clean)
     dash_hits = [(m.group(), line_of(judged, m.start()))
                  for m in re.finditer(r"[—–]", judged)]
     # require a non-space char before the space, so a line-initial markdown
@@ -349,7 +349,7 @@ def run(raw, opts):
     else:
         r.ok("em/en dash", "none")
 
-    # 2. emoji (humanizer.md — formatting tells)
+    # 2. emoji (humanizer.md, formatting tells)
     # Unicode category "So" also contains legitimate symbols (degree sign,
     # currency marks, arrows), so match the actual emoji blocks instead. An
     # HBR article was flagged for 7 "emoji" that were all degree signs.
@@ -604,14 +604,14 @@ def run(raw, opts):
 
             if o and upct > 15:
                 r.fail("length preserved",
-                       detail + f" — {unexplained} words unexplained by the "
+                       detail + f". {unexplained} words unexplained by the "
                        f"{removed} slop phrase(s) removed; content was cut")
             elif o and pct < -15:
                 r.review("length preserved",
-                         detail + f" — but {removed} slop phrase(s) removed "
+                         detail + f", but {removed} slop phrase(s) removed "
                          f"accounts for most of it; confirm no claim was lost")
             elif abs(pct) > 40:
-                r.review("length preserved", detail + " — large change")
+                r.review("length preserved", detail + ", large change")
             else:
                 r.ok("length preserved", detail)
             # paragraph count is the other structural tell
@@ -619,7 +619,7 @@ def run(raw, opts):
             (r.ok if po == pn else r.review)(
                 "structure preserved",
                 f"{po} -> {pn} paragraphs" +
-                ("" if po == pn else " — style-only edits should not merge or split"))
+                ("" if po == pn else ". Style-only edits should not merge or split"))
 
     # --- conditional: management summary (formats.md rule 6) --------------
     if opts.summary:
@@ -781,11 +781,11 @@ def main():
         return 2
 
     rep = run(raw, opts)
-    print(f"\nclear-writing checks — {opts.file}\n")
+    print(f"\nclear-writing checks: {opts.file}\n")
     print(rep.render())
     fails = sum(1 for s, _, _ in rep.rows if s == "FAIL")
     print("\n  FAIL = fix before returning. REVIEW = look at it and decide.")
-    print("  Judgment checks are not here — run CHECKLIST.md too.\n")
+    print("  Judgment checks are not here. Run CHECKLIST.md too.\n")
     return 1 if fails else 0
 
 

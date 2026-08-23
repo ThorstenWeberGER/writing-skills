@@ -224,6 +224,8 @@ That last one has caught a genuine error three times, including a vague source r
 
 `tests/test_drift.py` fails in three directions: a rule documented but not enforced, a term enforced but not documented, or a **broken rule anchor**: a rule `check.py` depends on that its reference file no longer states. Verified capable of failing by injecting each direction.
 
+The suite also **runs the dash check over the skill's own prose**, plus this file and `CLAUDE.md`, and locks the number of dash characters the three scripts are allowed to contain. The rule was described across 20,000 words while 257 dashes sat in the files describing it, so it is now enforced rather than intended. Verified by injecting a violation of each guard.
+
 CI runs this on any push touching the skill.
 
 ---

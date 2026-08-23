@@ -1,8 +1,8 @@
 # Examples: weak vs. better
 
-Real before/after pairs, one per rule this skill enforces. All are real (user-supplied or captured from actual conversation) — never fabricated.
+Real before/after pairs, one per rule this skill enforces. All are real (user-supplied or captured from actual conversation). None is fabricated.
 
-**This invariant is why this file stays separate from `DONTS.md`.** `DONTS.md` holds rules with short illustrative examples written to demonstrate a pattern; this file holds only genuine writing. Don't merge them, and don't add an invented pair here to fill a gap — an empty slot is the honest state.
+**This invariant is why this file stays separate from `DONTS.md`.** `DONTS.md` holds rules with short illustrative examples written to demonstrate a pattern; this file holds only genuine writing. Don't merge them, and don't add an invented pair here to fill a gap. An empty slot is the honest state.
 
 ## Active voice
 
@@ -21,7 +21,7 @@ Why it works: names the actor (management), the action (cut), and the concrete r
 **Weak:**
 > In spite of the fact that sales were slow in Q1, we are currently of the opinion that Q2 will see growth.
 
-Problem: "in spite of the fact that" and "we are currently of the opinion that" are filler — the sentence says the same thing without them.
+Problem: "in spite of the fact that" and "we are currently of the opinion that" are filler; the sentence says the same thing without them.
 
 **Better:**
 > Although Q1 sales lagged, we expect Q2 growth.

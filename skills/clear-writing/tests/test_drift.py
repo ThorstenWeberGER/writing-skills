@@ -8,9 +8,9 @@ break loudly instead.
 
 It checks both directions:
 
-  MISSING  — documented in a reference file but absent from check.py.
+  MISSING  = documented in a reference file but absent from check.py.
              The dangerous direction: a rule exists and nothing enforces it.
-  ORPHAN   — enforced by check.py but not documented anywhere.
+  ORPHAN   = enforced by check.py but not documented anywhere.
              The checker would flag something no reference file justifies.
 
 Terms that are patterns rather than literal strings ("X is the Y of Z") cannot
@@ -27,7 +27,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent.parent   # the skill root, one level up
 sys.path.insert(0, str(HERE))                   # so "import check" finds check.py
 
-import check  # noqa: E402  — must follow the sys.path insert above
+import check  # noqa: E402 (must follow the sys.path insert above)
 
 REFS = HERE / "references"
 
@@ -114,7 +114,7 @@ NON_LITERAL = {
 # audiences.md states the external-client rules as prose with quoted bad
 # examples, not as an italic term list, so check.py's CLIENT_* lists are
 # variant expansions rather than transcriptions. The extractor cannot read
-# them. Instead, RULE_ANCHORS below asserts the underlying rules still exist —
+# them. Instead, RULE_ANCHORS below asserts the underlying rules still exist,
 # delete a rule from audiences.md and this test fails.
 RULE_ANCHORS = {
     "audiences.md": [
@@ -293,12 +293,12 @@ def main():
 
     if missing:
         print(f"\n  MISSING from check.py ({len(missing)}) "
-              f"— documented but not enforced:")
+              f"= documented but not enforced:")
         for t, src in missing:
             print(f"    - {t!r}  ({src})")
     if orphans:
         print(f"\n  ORPHAN in check.py ({len(orphans)}) "
-              f"— enforced but not documented:")
+              f"= enforced but not documented:")
         for t in orphans:
             print(f"    - {t!r}")
 
@@ -308,7 +308,7 @@ def main():
 
     if anchor_fails:
         print(f"\n  BROKEN RULE ANCHOR ({len(anchor_fails)}) "
-              f"— check.py enforces a rule its reference file no longer states:")
+              f"= check.py enforces a rule its reference file no longer states:")
         for fname, needle, why in anchor_fails:
             print(f"    - {fname}: {needle!r} missing  ({why})")
 

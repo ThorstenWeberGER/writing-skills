@@ -25,7 +25,7 @@ So use these to answer "how should this be shaped?" and not "make me sound like 
 | Em dashes | 1 per 348 words; absent from 6 of 9 excerpts |
 | Semicolons | about 1 per excerpt |
 | Subheads / bullets | **none, in any excerpt** |
-| Headline | **4-10 words, median 8.5. Allusive** — poses a puzzle or names an oddity |
+| Headline | **4-10 words, median 8.5. Allusive.** Poses a puzzle or names an oddity |
 | Standfirst | 8-13 words, median 11. **Carries the "so what"** the headline withholds |
 
 **Structure.** No subheads even at 619 words. Ordinal signposting in the prose does the navigating: "There are three reasons… One is… The second reason… The third reason…" Enumeration stays in prose rather than becoming a list.
@@ -46,7 +46,7 @@ So use these to answer "how should this be shaped?" and not "make me sound like 
 | Over 25 words | ~50% (upper bound; see caveat) |
 | Em dashes | 1 per 214 words |
 | Subheads / bullets | none detected |
-| Headline | **7-14 words, median 10.5. Informational** — tells the whole story, works with no standfirst |
+| Headline | **7-14 words, median 10.5. Informational.** Tells the whole story, works with no standfirst |
 
 **Caveat:** these came from print-to-PDF files with no text layer, recovered by decompressing content streams. Captions interleave with body prose, so the sentence figures are upper bounds, not clean measurements.
 
@@ -60,12 +60,12 @@ So use these to answer "how should this be shaped?" and not "make me sound like 
 
 | | |
 |---|---|
-| Sentence median | **30** — the longest measured; mean 29.4 |
+| Sentence median | **30**, the longest measured; mean 29.4 |
 | Over 25 words | 57% |
 | Em dashes | **0** |
 | Semicolons | **0** |
 | Subheads | **yes**, all-caps, 5-6 words |
-| Bullets | **yes** — a summary block above every article, 3-4 bullets, 6-17 words, median 11 |
+| Bullets | **yes**: a summary block above every article, 3-4 bullets, 6-17 words, median 11 |
 
 **The summary block** carries the news, the mechanism, the consequence. Each bullet stands alone as an actionable fact; none restates the body.
 
@@ -83,9 +83,9 @@ So use these to answer "how should this be shaped?" and not "make me sound like 
 
 | | |
 |---|---|
-| Sentence median | **12-22** — 12 in the tips list, 19-22 in features |
+| Sentence median | **12-22**: 12 in the tips list, 19-22 in features |
 | Over 25 words | 29% |
-| Em dashes | **1 per 157 words — the heaviest of the four** |
+| Em dashes | **1 per 157 words, the heaviest of the four** |
 | Semicolons | up to 12 in one article |
 | Subheads | **yes**, title case, full phrases ("Common Causes of False Alignment") |
 | Headline | 4-10 words, allusive like the Economist |
@@ -130,7 +130,7 @@ Our own email fixtures run a median of 10-12 words. That is the register, and on
 | Take | From | Why |
 |---|---|---|
 | **Informational subject line, 7-14 words, carrying the whole point** | FT / Reuters | A subject line always travels alone. This is the highest-value transfer of the four. |
-| **Summary bullets when there are 3+ facts** — 3-4 items, 6-17 words, each standing alone | Reuters | Already how `formats.md` structures a scanned summary |
+| **Summary bullets when there are 3+ facts**: 3-4 items, 6-17 words, each standing alone | Reuters | Already how `formats.md` structures a scanned summary |
 | **No em dashes, no semicolons** | Reuters | The only profile matching the user's own punctuation |
 | **Short imperative micro-headings (3-9 words)** for a multi-item update | HBR tips list | Turns a wall of asks into scannable items |
 | **Explicit sourcing for a contested claim** ("per the Q3 close", "two of three vendors") | Reuters | Wire practice: name the basis, or say you cannot |
@@ -141,11 +141,11 @@ Our own email fixtures run a median of 10-12 words. That is the register, and on
 - **The Economist's allusive headline.** "Why everybody hates Palantir" works because a standfirst rescues it. A subject line has no standfirst.
 - **HBR's subheads and dash rate.** Sections are wrong under 125 words, and it is the heaviest dash user of the four.
 
-**The short version: Reuters for the subject line and the bullets, HBR's tips register for sentence length, and `formats.md`'s email variant for everything else.** The email variant is already tighter than any masthead here, which is the correct relationship — it was tuned for a reader who did not ask for the message.
+**The short version: Reuters for the subject line and the bullets, HBR's tips register for sentence length, and `formats.md`'s email variant for everything else.** The email variant is already tighter than any masthead here, which is the correct relationship: it was tuned for a reader who did not ask for the message.
 
 ### When a house style conflicts with the user's voice
 
-It will, immediately, on em dashes. Three of the four profiles use them; the user's own writing contains none, so `humanizer.md` bans them. Targeting HBR will produce `REVIEW  hbr: dash rate ~1 per 157w — none used; house style uses them`.
+It will, immediately, on em dashes. Three of the four profiles use them; the user's own writing contains none, so `humanizer.md` bans them. Targeting HBR will produce `REVIEW  hbr: dash rate ~1 per 157w, none used; house style uses them`.
 
 **The voice preference wins.** A house style governs shape, not punctuation habits the writer has already settled. The same applies to sentence length: if a profile's median pulls far from the writer's own, follow the profile only for outward-facing work where the house convention is the point, and say so.
 
