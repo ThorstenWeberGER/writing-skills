@@ -100,7 +100,7 @@ Validated against the source: the three new checks reproduce the hand counts exa
 
 ## Financial Times
 
-*Five articles on clean text: four news pieces (2,355 words, 94 sentences) and one long read (1,717 words, 72 sentences).*
+*Six articles on clean text: four news pieces (2,355 words, 94 sentences) and two features (2,852 words, 127 sentences).*
 
 **This was the thinnest profile of the four, and only because of extraction.** The earlier figures came from print-to-PDF files with no text layer, so captions interleaved with body prose and every number was an upper bound. Pasted text settles them.
 
@@ -115,7 +115,7 @@ The over-25 figure surviving matters: after the first article came in at 39% I s
 
 ### The devices, counted
 
-**Attribution is the signature, at 1 per 38-62 words. (measured, 5 of 5)** Every second sentence names who said it: *said, according to, told, claimed, argued, the review said*. This is the tightest habit in any of the four profiles, roughly four times HBR's hedging rate, and it is what makes FT copy feel reported rather than argued. A claim without a source attached is the thing this voice does not do.
+**Attribution is the signature, at 1 per 38-61 words. (measured, 6 of 6)** Every second sentence names who said it: *said, according to, told, claimed, argued, the review said*. This is the tightest habit in any of the four profiles, roughly four times HBR's hedging rate, and it is what makes FT copy feel reported rather than argued. A claim without a source attached is the thing this voice does not do.
 
 **Direct speech carries the story.** Fourteen quoted passages in one 731-word news piece. The reporter supplies connective tissue between quotations rather than narrating over them.
 
@@ -123,21 +123,21 @@ The over-25 figure surviving matters: after the first article came in at 39% I s
 
 **This conflicts with our own anti-slop rule, and the publication wins on the facts.** `humanizer.md` flags synonym cycling (*the protagonist / the main character / the central figure*) as an AI tell. The FT does it deliberately and constantly. The distinction is what the substitute carries: an epithet adds information the reader needs (*the iPhone maker* tells you which Apple matters here), while synonym cycling adds nothing and exists to avoid repetition. So the rule stands, narrowed: **cycle only when each substitute earns its place by naming a different relevant fact.**
 
-**Two hard style markers.** *Per cent* is always spelled out, never `%`: 12 instances, zero symbols across five articles. And an omission inside a quotation is a spaced ellipsis, *. . .*, four instances.
+**Two hard style markers.** *Per cent* is always spelled out, never `%`: 12 instances, zero symbols across six articles. And an omission inside a quotation is a spaced ellipsis, *. . .*, four instances.
 
-### The register split, which corrects a claim made about both publications
+### The register split, which corrects a claim made about both publications, twice
 
-Four news pieces and one long read divide on every structural choice:
+Four news pieces and two features divide on every structural choice:
 
-| | FT news (4) | FT long read (1) |
+| | FT news (4) | FT features (2) |
 |---|---|---|
-| Headline | informational, tells the whole story | **allusive**: *Why more young workers are leaving the UK behind* |
-| Standfirst | states the next fact. **0 of 4 turn** | **turns**: *…has grown every year since 2022, but claims of a brain drain overstate the problem* |
-| Sentence median | 25 | 20 |
-| Questions in the body | **0 of 4** | **6** |
-| Opening | the news, in sentence one | a named person and a specific number, nut graf by paragraph 5 |
+| Headline | informational, **4 of 4** | **varies**: one allusive (*Why more young workers are leaving the UK behind*), one stating (*School shootings reveal simmering discontent of Turkish youth*) |
+| Standfirst | states the next fact. **0 of 4 turn** | **turns, 2 of 2**: *…has grown every year since 2022, but claims of a brain drain overstate the problem* |
+| Sentence median | 25 | **20, exactly, for both** |
+| Questions in the body | **0 of 4** | varies: 6 in one, 1 in the other |
+| Opening | the news, in sentence one | a named person and a specific detail, nut graf within the first few paragraphs |
 
-**An earlier version of this file contrasted "the FT standfirst adds a fact" against "the Economist standfirst turns" as a difference between the two publications. That was wrong.** It is a difference between registers. FT news does not turn and the FT long read does, with an allusive headline exactly like the Economist's. The rule that survives is broader and more useful: **headline type and standfirst behaviour are set by register, not masthead.** News gets an informational headline and a stating standfirst; a feature gets an allusive headline and a turning standfirst.
+**Two corrections live in this table, one of them to the first correction.** An earlier version of this file contrasted "the FT standfirst adds a fact" against "the Economist standfirst turns" as a difference between the two *publications*. That was wrong: it is a difference between **registers**. FT news never turns (0 of 4), FT features always do (2 of 2), and that half is now confirmed at 6 of 6 across the whole sample. The next version of this file then claimed the *headline* was register-bound too, that a feature takes an allusive headline. **A second feature arrived with a stating headline and broke that claim on its first test.** The headline is not register-bound: informational in every FT news piece, but an FT feature can go either way. Two claims, two different lifespans, because the first was tested against four confirming instances before being written down and the second was written from one.
 
 **Questions in the body: a feature device, but not a feature rule. (recorded, 6 in one feature and 1 in the other, 0 in all four news pieces)** *So why are people leaving? Who are they?* ... *So how big a problem is this?* The register permits it and news never does it, but one feature leans on it heavily and the other barely at all. Imitate the move where the piece needs signposting; do not treat the rate as a target.
 
@@ -157,7 +157,7 @@ Four news pieces and one long read divide on every structural choice:
 
 ### What is enforced
 
-`--house ft` checks the attribution rate, the standfirst stating rather than turning, *per cent* spelled out, the dash rate, the sentence median, headline length and type, UK spelling and the bullet ban. The profile carries the news register, because that is four of the five articles; `CHECKLIST.md` step 4 carries the feature flip.
+`--house ft` checks the attribution rate, the standfirst stating rather than turning, *per cent* spelled out, the dash rate, the sentence median, headline length and type, UK spelling and the bullet ban. The profile carries the news register, because that is four of the six articles; `CHECKLIST.md` step 4 carries the feature flip.
 
 Validated against the source: the checks reproduce the hand counts on all five, and correctly flag the long read as the one standfirst that turns. Applying G1 to our own FT draft took it from **zero attributions to 1 per 57 words**, inside the house band.
 

@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&family=Work+Sans:wght@400;600&family=JetBrains+Mono:wght@500&display=swap');
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html,body{ width:1080px; height:1350px; overflow:hidden; }
+  body{
+    font-family:'Work Sans', sans-serif;
+    background:#f7f4ee;
+  }
+  .slide{
+    position:relative;
+    width:1080px;
+    height:1350px;
+    overflow:hidden;
+  }
+  canvas{
+    position:absolute;
+    inset:0;
+    width:1080px;
+    height:1350px;
+    display:block;
+  }
+  .content{
+    position:absolute;
+    inset:0;
+    padding:80px 72px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+  }
+  .kicker{
+    font-family:'Work Sans', sans-serif;
+    font-weight:600;
+    font-size:26px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:#8a5a44;
+  }
+  .headline{
+    font-family:'Fraunces', Georgia, serif;
+    font-weight:700;
+    color:#232019;
+    margin-top:34px;
+  }
+  .caption-block{ display:flex; flex-direction:column; gap:30px; }
+  .caption{
+    font-size:38px;
+    line-height:1.5;
+    color:#4d473d;
+    max-width:15ch;
+  }
+  .foot{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:26px;
+    color:#8a8377;
+  }
+  .num{ font-variant-numeric:tabular-nums; font-weight:500; }
+</style>
+</head>
+<body>
+  <div class="slide">
+    <canvas id="wash" width="1080" height="1350"></canvas>
+    <div class="content">
+      __CONTENT__
+    </div>
+  </div>
+<script>
+function wash(ctx,cx,cy,rx,ry,rgb,alpha,seed){
+  ctx.save();
+  ctx.filter='blur('+(Math.max(rx,ry)*0.32)+'px)';
+  ctx.beginPath();
+  const pts=10;
+  for(let i=0;i<=pts;i++){
+    const a=(i/pts)*Math.PI*2;
+    const wob=0.82+0.18*Math.sin(a*3.1+seed);
+    const x=cx+Math.cos(a)*rx*wob;
+    const y=cy+Math.sin(a)*ry*wob;
+    if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+  }
+  ctx.closePath();
+  ctx.fillStyle='rgba('+rgb+','+alpha+')';
+  ctx.fill();
+  ctx.restore();
+}
+const c=document.getElementById('wash');
+const ctx=c.getContext('2d');
+ctx.fillStyle='#f7f4ee';
+ctx.fillRect(0,0,1080,1350);
+const w=1080,h=1350;
+__WASH__
+window.__done = true;
+</script>
+</body>
+</html>

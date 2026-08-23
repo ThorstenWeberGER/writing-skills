@@ -64,7 +64,7 @@ Use personality in essays, blog posts, and opinion pieces where it fits the writ
 
 **Synonym cycling and repeated openings.** Renaming the same subject every sentence (*the protagonist / the main character / the central figure / the hero*), or several sentences opening on the same subject. Use one name consistently; merge or restructure repeated openings. Don't ban the repeated word. Fix the repeated *pattern*.
 
-**Narrowed against the FT.** Measured FT copy substitutes constantly and deliberately: *the ChatGPT maker*, *the iPhone maker*, *the prime minister*, 2 to 9 times per article across five articles. The test is whether the substitute earns its place. An epithet that carries information the reader needs at that point (*the iPhone maker* tells you which Apple matters here) is good reporting. A synonym that carries nothing and exists only to avoid repeating a word is the tell. So: cycle only when each substitute names a different relevant fact.
+**Narrowed against the FT.** Measured FT copy substitutes constantly and deliberately: *the ChatGPT maker*, *the iPhone maker*, *the prime minister*, 2 to 9 times per article across six articles. The test is whether the substitute earns its place. An epithet that carries information the reader needs at that point (*the iPhone maker* tells you which Apple matters here) is good reporting. A synonym that carries nothing and exists only to avoid repeating a word is the tell. So: cycle only when each substitute names a different relevant fact.
 
 **False "from X to Y" ranges.** *from the Big Bang to the cosmic web, from birth to dark matter*, where X and Y aren't endpoints of any real range.
 
@@ -137,6 +137,8 @@ Three faults stack in that example. "I made sure" claims credit for doing the jo
 > Let me run it rather than judge by eye. → (just run it)
 
 Both examples come from this project, and the second appeared in the same message that diagnosed the first, which is how persistent the reflex is. **Test it by deleting everything from "rather than" onward.** If you lose a real alternative the reader might have expected, keep it. If you only lose the implication that you were thoughtful, cut it.
+
+The order reverses too: *Rather than doing nothing, we chose to act.* Same invented contrast, contrast clause first. `check.py`'s check missed this order until a test case surfaced it; it now checks both orders.
 
 Note the related but milder redundancy: *Let me run it, Let me check, Let me look at* announce an action whose command and output the reader can already see. Harmless alone, and not worth hunting; the tell is the contrast clause attached to it.
 
