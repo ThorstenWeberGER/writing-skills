@@ -1,0 +1,25 @@
+name: clear-writing tests
+
+on:
+  push:
+    paths:
+      - 'skills/clear-writing/**'
+      - '.github/workflows/clear-writing-tests.yml'
+  pull_request:
+    paths:
+      - 'skills/clear-writing/**'
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      # Verifies that check.py's wordlists still match the reference files,
+      # that the documented rules those lists depend on still exist, and that
+      # every fixture produces its expected FAIL count.
+      - name: Run skill test suite
+        run: ./skills/clear-writing/test.sh

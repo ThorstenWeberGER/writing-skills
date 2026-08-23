@@ -1,73 +1,139 @@
-# clear-writing skill — v2 checklist
+# clear-writing skill — status and open items
 
-Status as of 2026-08-22. v1 shipped and is live at `~/.claude/skills/clear-writing/` (mirrored in this repo under `skills/clear-writing/`).
+Last updated 2026-08-23. The skill lives in this repo at `skills/clear-writing/`.
 
-## 1. Verify the style guides against real sources — LARGELY DONE, by a different route
+Run `./skills/clear-writing/test.sh` to verify the whole thing. Currently all green: drift test in sync, 13/13 rule anchors present, 7/7 fixtures behaving as expected.
 
-**Original blocker:** economist.com, wsj.com, bloomberg.com and hbr.org all refuse automated fetching or serve only teasers. The style guides were written from secondary write-ups *describing* those publications' conventions.
+---
 
-**What changed:** rather than keep waiting on paywalled publications, the rules were re-derived from *primary* plain-language authorities that publish their own guidance as open-source repositories:
+## Done
 
-- [x] **GSA/plainlanguage.gov** — the U.S. federal plain-language guidelines, from the publisher's own repo. Real primary text retrieved.
-- [x] **18F/content-guide** — GSA's content guide. Source of the only numeric sentence-length guidance found.
-- [x] Re-derived `foundations.md`'s plain-wording and heading/list rules from that text, with per-rule attribution and URLs.
-- [x] Corrected three rules that the primary text contradicted or refined (see the file's "Known sourcing gaps"): "short words over long" is really about *familiarity*; active voice has two legitimate exceptions; the "3-6 bullets" range has no primary support and is now labeled house convention.
-- [x] Added sourced rules that were missing entirely: hidden verbs, noun strings, abbreviations, list lead-in sentences, list parallelism with the lead-in, nesting caps, paragraph limits with the anti-uniformity rule, "address the reader as you."
+### 1. Primary sourcing for the plain-language rules
 
-**Still open, and probably permanently:**
-- [ ] The Economist, WSJ, HBR, Bloomberg, Reuters, Guardian and BBC remain on secondary sourcing. All were unreachable. The affected claims are narrow and flagged in-file.
-- [ ] BLUF's military provenance (Army Regulation 25-50) is unverified — the regulation itself was unreachable. The *behavior* is fully primary-sourced; only the origin story is secondhand.
-- [ ] Two widely-circulated figures could not be confirmed against their claimed documents (Reuters' "300-800 words per story," AR 25-50's "15-word average sentence"). Deliberately not used.
-- [ ] Original plan of bringing print Economist articles back from the library would still improve this. Lower priority now that the load-bearing rules have primary sourcing.
+The original blocker stands: economist.com, wsj.com, bloomberg.com and hbr.org all refuse automated fetching or serve teasers only. Rather than wait, the rules were re-derived from primary authorities that publish their own guidance as open-source repositories.
 
-## 2. Audience-specific profiles — DONE
+- [x] **GSA/plainlanguage.gov** — the federal plain-language guidelines, from the publisher's own repo. Real primary text.
+- [x] **18F/content-guide** — GSA's content guide, source of the only numeric sentence-length guidance found.
+- [x] `foundations.md`'s plain-wording and heading/list rules re-derived with per-rule attribution and URLs.
+- [x] **Three rules corrected** where the primary text contradicted them: "short words over long" is really about *familiarity*; active voice has two legitimate exceptions; the "3-6 bullets" range has no primary support and is now labeled house convention.
+- [x] Sourced rules added that were missing entirely: hidden verbs, noun strings, abbreviations, list lead-in sentences, parallelism with the lead-in, nesting caps, paragraph limits with the anti-uniformity rule, "address the reader as you."
 
-- [x] `references/audiences.md` written, on a deliberately separate axis from format (a summary can go to a CTO *or* a client, so profiles don't multiply per format).
-- [x] Three profiles with a real basis: technical peer (Google eng-practices, Nygard ADRs), external client (incident-communication practice), non-native English readers (Google's global-audience guidance, Kohl's *Global English Style Guide*). Decision-maker routes to `formats.md`, which already covers it.
-- [x] Documented and resolved the genuine conflict between the technical-peer and non-native profiles: keep domain nouns precise, simplify everything around them.
-- [x] Added a cross-cutting "when jargon is the right choice" section with four tests, resolving the tension with `foundations.md`'s plain-word rule. This turned out to be the highest-value single addition — plainlanguage.gov's own carve-out says the plain-word rule was never aimed at domain nouns.
-- [x] `SKILL.md` routes to it as pass 3.
+### 2. Audience profiles
 
-Deliberately **not** built: speculative profiles with no real case behind them.
+- [x] `references/audiences.md`, on a separate axis from format so profiles don't multiply per format.
+- [x] Technical peer (Google eng-practices, Nygard ADRs), external client (incident-communication practice), non-native English readers (Google global-audience, Kohl's *Global English Style Guide*). Decision-maker routes to `formats.md`.
+- [x] The conflict between the technical-peer and non-native profiles documented and resolved: keep domain nouns precise, simplify everything around them.
+- [x] "When jargon is the right choice" — four tests. The highest-value single addition, since plainlanguage.gov's own carve-out shows the plain-word rule was never aimed at domain nouns.
 
-## 3. Use-case templates — DONE (three of four, one deliberately declined)
+### 3. Templates
 
-- [x] `templates/project-readme.md` — from the standard-readme spec, which is a real spec with real numbers.
-- [x] `templates/installation.md` — from The Good Docs Project, trimmed hard (its original is calibrated for enterprise/hardware products), plus the classification of install docs as a how-to guide rather than a tutorial.
-- [x] `templates/meeting-notes.md` — Robert's Rules' "what was done, not what was said," GitLab's live-document practice and 24-48h async window, and the ADR shape for decision entries.
-- [x] `templates/README.md` carries the Diátaxis compass as a routing question.
-- [x] **`summary.md` deliberately not built** — `references/formats.md` already covers management and executive summaries with length targets, structure, and the paired email variant. A template would have duplicated it.
-- [x] Heeded Diátaxis's explicit warning against exactly this kind of work: "It certainly does not mean that you should create empty structures … Don't do that. It's horrible." No empty scaffolding was created.
+- [x] `project-readme.md` (standard-readme spec), `installation.md` (Good Docs Project, trimmed), `meeting-notes.md` (Robert's Rules + GitLab + ADR shape).
+- [x] `templates/README.md` carries the Diátaxis routing compass.
+- [x] `summary.md` deliberately **not** built — `formats.md` already covers summaries. Heeded Diátaxis's own warning against creating empty template scaffolding.
 
-## 4. Trim humanizer.md — DONE
+### 4. humanizer.md trim
 
-- [x] Trimmed from ~4,700 words to ~1,750 (63% reduction). It had been 48% of the skill's total size.
-- [x] Dropped patterns specific to encyclopedia articles: name-dropping publications for notability, curly-quote normalization, hyphenated-pair pedantry.
-- [x] Cross-referenced rather than duplicated the four patterns already covered by `foundations.md`/`DONTS.md`.
-- [x] Removed vestigial standalone-skill scaffolding (the three-mode "how to return the result" system), which never applied to a pass running inside this skill.
-- [x] Renamed numbered sections (§1-35) to named ones; updated both inbound references.
-- [x] Validated against a slop-heavy paragraph: 13 of 14 tells caught, and the one gap was fixed.
+- [x] 4,700 → ~1,750 words. It had been 48% of the skill.
+- [x] Dropped encyclopedia-specific patterns; cross-referenced rather than duplicated what `foundations.md`/`DONTS.md` already cover; removed vestigial standalone-skill scaffolding; renamed §1-35 to named sections.
 
-Basis was fitness for this skill's real output types, not a usage log — the file predates any logging. Revisit if a dropped pattern turns out to fire.
+### 5. Structural consolidation
 
-## 5. Structural consolidation — DONE (not in the original checklist)
+- [x] `style-general-writing.md` deleted — 3 of 5 rules duplicated `foundations.md`, and its only example was already in `examples.md` verbatim.
+- [x] `style-management-summary.md` + `article-structure.md` merged into `formats.md`.
+- [x] `DONTS.md` and `examples.md` kept separate on purpose, with the reason recorded in both.
 
-- [x] Deleted `style-general-writing.md`: three of its five rules duplicated `foundations.md`'s plain-wording list, and its only example was already in `examples.md` verbatim. Its two unique rules moved into `foundations.md`.
-- [x] Merged `style-management-summary.md` + `article-structure.md` into `formats.md`, organized by deliverable shape. This also fixed article-structure having been a easily-missed sub-bullet in the pass order.
-- [x] Kept `DONTS.md` and `examples.md` separate on purpose, and documented why in both: `examples.md` holds only real material, `DONTS.md` holds rules with illustrative examples. Merging would have eroded that invariant.
-- [x] `SKILL.md` rewritten: 5 passes over 5 reference files, plus templates.
+### 6. Enforcement layer
 
-Net: 8 reference files → 6, with the largest redundancy eliminated. Total skill size is roughly flat (~11.5k words) despite adding an audiences file and four template files, because the humanizer trim and the deduplication paid for them.
+This was the largest piece of work and wasn't in the original checklist. It exists because the skill kept shipping drafts where a pass was *reported* as applied while its rules were violated in the same text.
 
-## 6. Grow DON'Ts and examples through real use — ONGOING
+- [x] **`check.py`** — 22+ mechanical checks, stdlib only, exit 1 on any FAIL. Conditional flags for `--summary`, `--email`, `--article-half/full`, `--client`, `--nonnative`, `--dashes-ok`, `--compare`.
+- [x] **`CHECKLIST.md`** — the judgment half, step by step. Requires reporting what was run, not "applied the skill".
+- [x] **`test_drift.py`** — fails when `check.py`'s wordlists drift from the reference files, in three directions (MISSING, ORPHAN, BROKEN RULE ANCHOR). Verified it can actually fail by injecting each direction.
+- [x] **`test.sh`** — drift test plus 7 fixtures.
+- [x] Every reference file ends by stating it is not self-enforcing.
 
-- [x] `DONTS.md`'s "Other DON'Ts" section seeded with ten general rules, each with a bad/better pair.
-- [ ] Keep appending as patterns get flagged in conversation.
-- [ ] **`examples.md` still has only the 5 pairs seeded at launch.** This is the one genuinely thin area, and it can't be fixed by research — the file admits only real user-supplied or conversation-captured pairs, never invented ones. It grows only through use.
+### 7. Style-only mode
+
+- [x] `SKILL.md` picks a mode before anything else. Style-only (the default) runs plain wording + DONTS + humanizer and explicitly does not restructure, compress, reorder, or impose a format.
+- [x] `--compare ORIGINAL` enforces the mode's characteristic failure: fails past 15% word loss, flags changed paragraph count. Verified — a real style edit passes at +4%, a compressed rewrite of the same text fails at −59%.
+
+### 8. Defects found and fixed by testing
+
+Worth recording because of the pattern: **purpose-built fixtures kept passing while real documents exposed the bugs.**
+
+- [x] Two em dashes and an agentless passive shipped while passes 1 and 5 were reported as run. Cause of the whole enforcement layer.
+- [x] A vague source reference ("approximately last Tuesday") silently rewritten as a specific date. Caught by the facts-audit step, after surviving two earlier review passes.
+- [x] Duplicated and misnumbered rules in `foundations.md`, self-inflicted during the primary-source rewrite.
+- [x] Markdown bullet markers counted as spaced dashes — three of four "dashes" in a real draft were bullets.
+- [x] Wordlist scans flagging terms that were being *discussed*, not used, in violation of `humanizer.md`'s own false-positive rule. Seven of nine FAILs on the design doc were this.
+- [x] Four wordlist gaps found by the drift test; noun-string heuristic flagging verb phrases.
+
+---
+
+## Open
+
+### A. `examples.md` has only its 5 launch pairs — the one real content gap
+
+Can't be fixed by research. The file admits only real user-supplied or conversation-captured pairs, never invented ones, and that invariant is deliberate. It grows only through use.
+
+**Blocked on:** actual use of the skill on real drafts.
+
+### B. No voice sample worth the name
+
+`backlog.md` is the only user prose in the repo, and it's a bullet list — it constrains word choice but says nothing about sentence rhythm. `humanizer.md`'s voice-matching is therefore running mostly on defaults.
+
+**Needs:** two or three paragraphs of the user's actual prose, committed somewhere the skill can find it. Would measurably improve style-only mode, including whether the em-dash ban should apply at all.
+
+### C. Nothing runs `test.sh` automatically
+
+No CI. The suite only runs when someone remembers, which is the same failure mode the enforcement layer was built to fix — one level up.
+
+**Fix:** a GitHub Actions workflow running `test.sh` on push. Small and worth doing.
+
+### D. The drift test's allowlists are large enough to hide drift
+
+`NON_LITERAL` has 53 entries and `ORPHAN_OK` has 114. Each entry is individually justified, but the escape hatch is now big enough that adding to it is easier than fixing the coupling. Nothing distinguishes "genuinely can't be grepped" from "someone didn't want to deal with it."
+
+**Fix:** periodically re-audit the allowlists, or make additions require a reason string that the test prints (NON_LITERAL already does; ORPHAN_OK does not).
+
+### E. `check.py`'s heuristics are approximations
+
+Passive voice and noun-string detection are pattern matches, not parsing. That's why they emit REVIEW rather than FAIL. Acceptable, but it means those two rules are advisory in practice.
+
+**Possible fix:** a real POS tagger would make both precise, at the cost of adding a dependency to a currently stdlib-only script. Probably not worth it.
+
+### F. Installation and distribution unverified
+
+The previous version of this file claimed the skill was "live at `~/.claude/skills/clear-writing/`". In this container it is **not** — the synced skills mirror doesn't contain it, so the skill exists only in this repo. Whether it's installed on the user's own machine can't be verified from here.
+
+**Needs:** confirm where it should actually live, and how it gets there.
+
+### G. Mode selection isn't enforced, only documented
+
+`SKILL.md` says to pick style-only or full mode first, but nothing checks that the right one was used. `--compare` catches unwanted compression only if someone remembers to pass it.
+
+**Inherent limit,** same class as `CHECKLIST.md`'s judgment steps: the enforcement layer can verify outputs, not intentions.
+
+### H. Templates are untested against real use
+
+`project-readme.md`, `installation.md` and `meeting-notes.md` were derived from good sources but have never been used to produce an actual document. The Diátaxis routing in `templates/README.md` isn't referenced by `CHECKLIST.md` or `check.py`.
+
+### I. Sourcing gaps that remain, and probably always will
+
+- [ ] The Economist, WSJ, HBR, Bloomberg, Reuters, Guardian, BBC stay on secondary sourcing. All unreachable. Affected claims are narrow and flagged in-file.
+- [ ] BLUF's military provenance (Army Regulation 25-50) unverified. The *behavior* is fully primary-sourced; only the origin story is secondhand.
+- [ ] Two widely-circulated figures could not be confirmed against their claimed documents (Reuters' "300-800 words per story", AR 25-50's "15-word average sentence"). Deliberately unused.
+- [ ] 18F quotations were captured via a summarizing fetch, not character-for-character. High confidence, not pinned.
+- [ ] Reachable-but-unharvested primary pages in `GSA/plainlanguage.gov`: `guidelines/design/`, `guidelines/test/`, plus the SEC Plain English Handbook it cites.
+
+---
 
 ## Next steps, in priority order
 
-1. **Use the skill and grow `examples.md`.** It's the only remaining structural gap, and only real writing can fill it.
-2. **Re-verify the 18F quotations** with one literal re-fetch. They were captured via a summarizing fetch rather than character-for-character, so they're high-confidence but not pinned.
-3. **Harvest the remaining reachable primary pages** in `GSA/plainlanguage.gov` — `guidelines/design/`, `guidelines/test/`, `words/avoid-noun-strings` (already used), and the SEC Plain English Handbook it cites.
-4. **Revisit the paywalled publications** only if print copies become available. Low value now.
+1. **Use the skill on real drafts and grow `examples.md`** (A). The only gap research can't close.
+2. **Commit a real prose voice sample** (B). Cheap, and improves every style-only run.
+3. **Add CI running `test.sh`** (C). Small; removes the "only runs when remembered" problem.
+4. **Re-audit the drift allowlists** (D) once they stop growing.
+5. **Confirm where the skill is installed** (F).
+6. **Pin the 18F quotes** with one literal re-fetch (I).
+7. **Everything else** is low value or inherently bounded. The paywalled publications in particular: leave them unless print copies turn up.
