@@ -132,6 +132,7 @@ RULE_ANCHORS = {
     ],
     "humanizer.md": [
         ("no `—` or `–`", "dash rule -> em/en dash check"),
+        ("voice-sample.md", "voice matching reads the sample file"),
     ],
 }
 

@@ -2,7 +2,7 @@
 
 Last updated 2026-08-23. The skill lives in this repo at `skills/clear-writing/`.
 
-Run `./skills/clear-writing/test.sh` to verify the whole thing. Currently all green: drift test in sync, 13/13 rule anchors present, 7/7 fixtures behaving as expected.
+Run `./skills/clear-writing/test.sh` to verify the whole thing. Currently all green: drift test in sync, 14/14 rule anchors present, 7/7 fixtures behaving as expected.
 
 ---
 
@@ -78,17 +78,23 @@ Can't be fixed by research. The file admits only real user-supplied or conversat
 
 **Blocked on:** actual use of the skill on real drafts.
 
-### B. No voice sample worth the name
+### B. Voice sample exists but covers only short-form writing — PARTLY DONE
 
-`backlog.md` is the only user prose in the repo, and it's a bullet list — it constrains word choice but says nothing about sentence rhythm. `humanizer.md`'s voice-matching is therefore running mostly on defaults.
+- [x] `voice-sample.md` created from real material: `backlog.md` plus the user's session instructions, quoted verbatim.
+- [x] Patterns extracted and **measured** rather than estimated: 27 sentences, median 6 words, max 16, none longer. Imperative mood dominant, sparse punctuation, "as well" as a habitual closer, German L1 markers.
+- [x] **The em-dash question is settled empirically:** character scan finds zero `—`/`–` across every quote and across `backlog.md`. The ban applies; `--dashes-ok` should not be passed. `CHECKLIST.md`'s flag table now says so.
+- [x] Records the distinction that matters: match rhythm and word choice, never reproduce typos or missing punctuation from a sample.
+- [x] Wired into `humanizer.md`, `SKILL.md`, and `CHECKLIST.md`, with a drift-test rule anchor so the wiring can't silently rot.
 
-**Needs:** two or three paragraphs of the user's actual prose, committed somewhere the skill can find it. Would measurably improve style-only mode, including whether the em-dash ban should apply at all.
+**Still open:** both sources are short-form and functional — a planning list and a set of instructions. Neither is connected prose written for a reader. So the sample supports word choice, sentence length, punctuation, and the dash decision, but says nothing about how this writer opens a document, builds a paragraph, or handles a transition.
 
-### C. Nothing runs `test.sh` automatically
+**Needs:** two or three paragraphs of real connected prose the user wrote for someone else — an email to a colleague, a section of a doc, a Slack post. Appended as Source 3, same verbatim treatment. Until then paragraph-level voice matching is explicitly marked unsupported.
 
-No CI. The suite only runs when someone remembers, which is the same failure mode the enforcement layer was built to fix — one level up.
+### C. CI — DONE
 
-**Fix:** a GitHub Actions workflow running `test.sh` on push. Small and worth doing.
+- [x] `.github/workflows/clear-writing-tests.yml` runs `test.sh` on any push or PR touching the skill, plus manual dispatch. Verified the suite passes when invoked from the repo root the way CI does.
+
+Closed because "only runs when someone remembers" was the same failure mode the enforcement layer exists to fix, one level up.
 
 ### D. The drift test's allowlists are large enough to hide drift
 
@@ -131,8 +137,8 @@ The previous version of this file claimed the skill was "live at `~/.claude/skil
 ## Next steps, in priority order
 
 1. **Use the skill on real drafts and grow `examples.md`** (A). The only gap research can't close.
-2. **Commit a real prose voice sample** (B). Cheap, and improves every style-only run.
-3. **Add CI running `test.sh`** (C). Small; removes the "only runs when remembered" problem.
+2. **Add a connected-prose voice sample** (B). The short-form sample is in place; a real paragraph or two is what is missing.
+3. ~~Add CI~~ — done.
 4. **Re-audit the drift allowlists** (D) once they stop growing.
 5. **Confirm where the skill is installed** (F).
 6. **Pin the 18F quotes** with one literal re-fetch (I).

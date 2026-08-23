@@ -17,7 +17,7 @@ Apply this skill any time you draft or edit prose for the user, or the user asks
 
 - `references/foundations.md` → **the plain-wording section only** (words, sentences, paragraphs). Not the point-finding, pain-point, or pyramid sections.
 - `references/DONTS.md`
-- `references/humanizer.md`
+- `references/humanizer.md`, which reads `voice-sample.md` for the user's own voice
 
 **Do not restructure in this mode.** Don't reorder to lead with the point, don't compress, don't cut content, don't merge or split paragraphs, don't impose a format, don't add a summary or an email variant. Change wording; remove slop; leave the shape alone. If the structure genuinely hurts the text, say so in one sentence and let the user decide — don't act on it.
 
