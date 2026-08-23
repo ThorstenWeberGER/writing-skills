@@ -25,14 +25,21 @@ A reader — or a manager skimming for five seconds — should get the main poin
 
 The pyramid is for writing someone reads to **decide or act**: summaries, recommendations, status updates, bug reports, most documentation. It is not a universal law of prose.
 
-A narrative piece legitimately opens on a specific scene and reaches its general point a few sentences later. Measured against a real Economist feature: the first four sentences are one named bar in one London district, and the general claim — that it belongs to a worldwide wave inspired by Japan's *ongaku kissa* — arrives only in **sentence 5**. That is the journalistic nut graf, and delaying it is deliberate: the concrete scene earns the attention that the general claim then spends.
+Measured across four Economist samples in three registers, the opening move is not one convention but three:
 
-The distinction that matters is **how long the delay lasts**. A nut graf lands within a few sentences, in the first paragraph. Burying the point on page two is not a narrative lede, it is a buried lede. So:
+| Register | Opening move | Evidence |
+|---|---|---|
+| **News** | **Pure BLUF.** Point in sentence one, every time. | 7 of 7 news briefs open on the actor and the action: "Mark Carney… said his country would retaliate…", "Gunmen killed more than 40 people…" |
+| **Leader / argument** | **Flat thesis, then the turn.** A short plain claim, then the complication that makes it interesting. | Opens "Most people believe humans are different." (5 words), builds the consensus over two paragraphs, then breaks it: "Pontifical clarity is blurring with alarming speed." |
+| **Feature / report** | **Scene first, general point within a paragraph or two.** | One piece spends four sentences on a single named bar before the general claim lands in sentence 5. Another opens on a paradox ("conservatives cavort with Marxists") and reaches its point — an election that could put the far right in office — in paragraph 2. |
 
-- **Decision or reference writing** → point in sentence one. No exceptions.
-- **Narrative writing** → concrete opening allowed, general point by the end of the first paragraph.
+So the rule is register-dependent, and the thing that stays constant is **how long the delay may last**:
 
-Both are versions of the same underlying rule from "Anchor the abstract in something specific" below: get the reader somewhere real fast. They differ only in whether the abstraction comes first or second.
+- **Decision, reference, or news writing** → point in sentence one. No exceptions.
+- **Argument** → thesis in sentence one, but it may be the *conventional* view you then overturn.
+- **Narrative** → concrete opening allowed; the general point by the end of the first paragraph or two.
+
+A nut graf lands early and on purpose. Burying the point on page two is not a narrative lede, it is a buried lede. All three are versions of the same underlying instruction from "Anchor the abstract in something specific" below: get the reader somewhere real, fast. They differ only in whether the abstraction comes first, second, or after a turn.
 
 ### Finding the point before you lead with it
 
@@ -73,7 +80,7 @@ Different target groups can produce different pain points from the same fact —
 1. **Familiar words over unfamiliar ones.** The real rule is familiarity, not length — "utilize" is bad because it's unusual, not because it's long, and a long familiar word beats a short obscure one. Federal guidance puts it as picking the commonly used word over the unusual or obscure. Worst repeat offenders: *utilize, commence, implement, assist, promulgate, in accordance with, in order that, in the event of, in the amount of*.
 2. **Concrete over abstract.** A number, name, or date beats a qualitative claim. "Costs rose 18%," not "costs rose significantly."
 3. **Break up noun strings.** Three nouns stacked in a row is the limit; past that it becomes unreadable, because the reader keeps mistaking an adjective for the noun. "Customer data platform migration project plan" → "the plan for migrating the customer data platform." Cut inessential describing words first; if you can't, open the construction up with prepositions and articles.
-4. **Minimize abbreviations — prefer a nickname.** A wall of acronyms forces the reader back up the page to decode. Rather than defining "Resource Advisory Council (RAC)" and using RAC throughout, just call it "the Council." Don't define abbreviations everyone already knows (API, SQL, CIA, PhD) — defining them wastes the reader's time.
+4. **Gloss abbreviations on first use; prefer a nickname where one reads better.** A wall of acronyms forces the reader back up the page to decode. Rather than defining "Resource Advisory Council (RAC)" and using RAC throughout, just call it "the Council." Don't define abbreviations everyone already knows (API, SQL, CIA, PhD) — defining them wastes the reader's time. **Measured caveat:** four Economist samples use acronyms freely rather than minimising them, but gloss every non-obvious one on first mention ("Alternative for Germany (afd)", "large language models (llms)") and then use it bare. Gloss-then-use is the working convention; wholesale avoidance is not.
 5. **Kill hidden verbs (nominalizations).** Use the strongest, most direct verb form available. Watch endings *-ment, -tion, -sion, -ance* paired with a light verb (*make, take, achieve, effect, give, have, reach, conduct*): "we manage the program," not "we are responsible for management of the program"; "we analyze the data," not "we conduct an analysis of the data."
 6. **Jargon means complexity used to impress, not technical terms.** Federal guidance is explicit that this rule is not a ban on technical vocabulary: a necessary domain term is not jargon. Explain the term on first reference, then use it. Writing for your audience does not mean dumbing content down. See `audiences.md` for when a technical term is the *correct* choice.
 7. **Cut words that don't change the meaning.** "In order to" → "to." "Due to the fact that" → "because." "At this point in time" → "now."
@@ -125,22 +132,26 @@ All rules are original synthesis. Quoted fragments are under 15 words and attrib
 - **The 3-6 bullet range is house convention**, labeled as such in the rule itself. No primary source gives an item count.
 - **No active-voice percentage target exists** in any primary source; don't invent one.
 - **BLUF's military provenance (Army Regulation 25-50) is unverified** — the regulation was unreachable. The *behavior* is fully primary-sourced above; only the acronym's origin story is secondhand.
-- **The Economist is now partly primary.** A full feature (~619 words, listening bars / *ongaku kissa*, 2026) was supplied by the user and measured directly. What that text established, with numbers:
+- **The Economist is now primary.** Four samples in three registers were supplied by the user and measured directly: a culture feature, a news section (7 briefs), a Leader, and the opening of a politics report. Text not reproduced here; measurements only.
 
-  | Measure | Value |
-  |---|---|
-  | Sentence length | median 18 words, mean 18.8, range 3-39 |
-  | Sentences over 25 words | 7 of 33 (21%) |
-  | Paragraph length | 46-101 words, 8 paragraphs |
-  | Em/en dashes | 4 (about one per 155 words) |
-  | Subheadings | 0 |
-  | Bullet lists | 0 |
-  | Semicolons | 1 |
-  | Parentheticals | 5 |
+  | Register | Words | Sents | Median | Mean | Max | Over 25w | Em dashes | Subheads | Bullets |
+  |---|---|---|---|---|---|---|---|---|---|
+  | News briefs | 401 | 24 | 16 | 16.7 | 29 | 4 (17%) | 1 | **0** | **0** |
+  | Leader | 473 | 28 | 13 | 16.9 | 43 | 5 (18%) | 4 | **0** | **0** |
+  | Feature (politics) | 191 | 9 | 22 | 21.2 | 49 | 1 (11%) | 0 | **0** | **0** |
+  | Feature (culture) | 619 | 33 | 18 | 18.8 | 39 | 7 (21%) | 4 | **0** | **0** |
 
-  Three of this skill's rules had to be corrected against it: the subhead-count table in `formats.md` (genre now overrides it), the convert-series-to-lists rule above, and the pyramid rule's scope (see "Where this rule does not apply"). Two rules were *confirmed*: the concrete-anchor opening, and glossing a foreign or technical term on first use then using it bare — "ongaku kissa (music cafés)" and thereafter just *kissa*.
+  **What generalises across all four:**
 
-  Note the sentence-length finding directly qualifies rule 8 below: a benchmark publication exceeds the 25-word review threshold in a fifth of its sentences. The threshold is a prompt to look, not a limit.
+  - **Zero subheadings and zero bullets, in every sample.** Four independent pieces, 191-619 words. This is not one writer's quirk. It is why the subhead-count table in `formats.md` is now scoped to scanned writing only.
+  - **11-21% of sentences exceed 25 words**, in every register. Rule 8's threshold is a prompt to look, not a limit.
+  - **Median sentence length varies by register** (13 in the Leader, 22 in a feature opening) but the mean sits between 16.7 and 21.2 throughout. Sentence length is not a fixed target.
+  - **Em dashes appear in three of four samples**, densest in the Leader at one per 118 words.
+  - **Abbreviations are glossed, not avoided**: "Christian Democrats (cdu)", "large language models (llms)", "Alternative for Germany (afd)" — then used bare. This qualifies rule 4: the working convention is gloss-on-first-use, not minimise.
+  - **Numeric density is genre-calibrated**: 3.0 figures per 100 words in news, 0.4 in the Leader. "Concrete over abstract" does not mean uniform numeric density.
+  - **A single sentence fragment for comic timing is legitimate** ("Which is in Munich."). Consistent with `humanizer.md`'s existing caveat: one short sentence for emphasis is fine, a row of them is the tell.
+
+  Three rules were corrected against this material — the subhead table, the convert-series-to-lists rule, and the pyramid rule's scope. Two were confirmed: the concrete-anchor opening, and glossing a foreign or technical term on first use ("ongaku kissa (music cafés)", thereafter *kissa*).
 
 - **WSJ, HBR, Bloomberg, Reuters, Guardian, and BBC remain secondary.** All are paywalled or block automated fetching. Rules attributed to them come from write-ups describing their conventions. Widely-circulated figures for Reuters (300-800 words per story) and AR 25-50 (15-word average sentence) could not be verified against either document and are deliberately not used here.
 
