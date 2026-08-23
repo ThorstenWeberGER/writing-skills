@@ -88,14 +88,14 @@ Everything the skill needs at runtime lives under `skills/clear-writing/`, becau
 skills/clear-writing/
 ├── SKILL.md              entry point: mode choice, then the pass order
 ├── CHECKLIST.md          the exit gate. Judgment checks a script cannot make
-├── check.py              25+ mechanical checks. stdlib only. exit 1 on any FAIL
+├── check.py              26 checks plain, up to 40 with flags. stdlib only
 ├── evals/                six baseline cases in the documented eval format
 ├── references/           the ruleset, loaded on demand
 │   ├── foundations.md    always applies: find the point, why it matters, plain wording
 │   ├── formats.md        deliverable shape: management summary, email, short article
 │   ├── audiences.md      deltas per reader + when jargon is correct
-│   ├── house-styles.md   four measured publications: the shape
-│   ├── house-voices.md   the same four: opening move, register, refusals
+│   ├── house-styles.md   which profile to pick, and what one cannot give you
+│   ├── house-voices.md   the four profiles: every measured number, plus generators
 │   ├── DONTS.md          growing list of specific things to avoid
 │   └── humanizer.md      final anti-AI-slop pass
 ├── inputs/               material you supply. The only part that grows with use

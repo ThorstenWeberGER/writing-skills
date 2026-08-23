@@ -49,7 +49,7 @@ Every FAIL and REVIEW prints the file and section its rule is written in, so a
 finding leads back to the guidance. `python3 check.py --rules` prints the whole
 check-to-rule map plus the judgment-only rules no check covers.
 
-- **`check.py` decides everything mechanical:** 22+ checks including the literal em-dash scan, sentence and paragraph limits, passive constructions, noun strings, hidden verbs, the AI-tell and buzzword lists, plus conditional checks for summary word counts, email variant limits, article layout, client-facing promises, and non-native readability. Run it with the flags for what you're writing. Every FAIL gets fixed; every REVIEW gets a recorded decision.
+- **`check.py` decides everything mechanical:** 26 checks on a plain draft and up to 40 with flags, including the literal em-dash scan, sentence and paragraph limits, passive constructions, noun strings, hidden verbs, the AI-tell and buzzword lists, plus conditional checks for summary word counts, email variant limits, article layout, client-facing promises, and non-native readability. Run it with the flags for what you're writing. Every FAIL gets fixed; every REVIEW gets a recorded decision.
 - **`CHECKLIST.md`'s steps 1-6 cover the judgment calls** no script can make: is this the strongest point, did the three-why chain run, is the triage stated, was uncertainty preserved, do the four jargon tests pass for this reader, and, the item most likely to catch something real, was any fact, number, or date added or dropped.
 
 **When you report back, say what you ran and what it returned.** Not "applied the clear-writing skill", which is exactly the phrasing that let unenforced passes go unnoticed.

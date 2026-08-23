@@ -171,6 +171,30 @@ n = sum(len(e["expected_behavior"]) for e in d)
 print(f"  pass    evals.json: {len(d)} cases, {n} assertions, all input files present")
 EOF
 
+echo "=== measured numbers live in exactly one reference file ==="
+# house-styles.md used to restate house-voices.md's measurements. A review found
+# it stale on three figures check.py had already moved, and the drift test could
+# not see it: its anchors point at the file that was being kept current. So the
+# guard is structural. Only house-voices.md may carry a measurement table row.
+dup=0
+for f in references/house-styles.md references/formats.md references/foundations.md; do
+  n=$(grep -cE '^\| (Sentence median|Em dashes|Over 25 words|Semicolons) \|' "$f")
+  if [ "$n" != "0" ]; then
+    echo "  FAIL    $f carries $n measurement row(s); house-voices.md owns those"
+    dup=1
+  fi
+done
+own=$(grep -cE '^\| (Sentence median|Em dashes|Over 25 words)' references/house-voices.md)
+if [ "$own" = "0" ]; then
+  echo "  FAIL    house-voices.md carries no measurement rows; the owner moved"
+  dup=1
+fi
+if [ $dup -eq 0 ]; then
+  echo "  pass    measurements only in house-voices.md ($own rows)"
+else
+  rc=1
+fi
+
 echo "=== the skill's own files pass every check ==="
 # This started as a dash-only guard, because the rule was described across
 # 20,000 words while 200+ dashes sat in the files describing it. It is now the

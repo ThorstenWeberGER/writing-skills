@@ -370,6 +370,28 @@ Two more held-out articles, a sports report and a trade story, bringing the held
 
 36 anchors, suite green.
 
+### 27. Review of the skill, and one duplication removed (DONE)
+
+A review pass over the whole skill rather than a new measurement.
+
+**The finding worth having: `house-styles.md` and `house-voices.md` both carried the four publications' measurement tables, and I had been updating both.** Two files owning the same numbers is a guaranteed divergence, and it had already happened. `house-styles.md` was stale on three figures `check.py` and `house-voices.md` had moved:
+
+| | `house-styles.md` said | Actual |
+|---|---|---|
+| Economist sentence median | 13-26 | 16-23 |
+| HBR sentence median | 12-22 | 11-21 |
+| HBR dash rate | 1 per 157 | 1 per 174 |
+
+**The drift test could not have caught this**, because its 36 anchors all point at `house-voices.md`, the file that was being kept current. The coupling was sound and its coverage was not.
+
+Fixed at the cause. `house-voices.md` now owns every measured number; `house-styles.md` keeps only what you decide with them: which profile to pick, what a profile cannot give you, the management-email transfer table and the two conflict resolutions. It drops from 1,882 to 1,488 words.
+
+**And a structural guard, since the anchor mechanism structurally could not see this.** `tests/test.sh` now fails if any reference file other than `house-voices.md` carries a `Sentence median`, `Em dashes`, `Over 25 words` or `Semicolons` table row, and also fails if `house-voices.md` stops carrying them. Verified in both directions.
+
+Also corrected: `SKILL.md` claimed "22+ checks" and `README.md` claimed "25+"; the real figure is 26 on a plain draft and up to 40 with flags.
+
+**Next steps rewritten.** The list had duplicate numbering, pointed at a closed item, and carried a judgment the evidence has since refuted, which is recorded at the end of this file rather than quietly deleted.
+
 ## Open
 
 ### A. `inputs/examples.md` has only its 5 launch pairs: the one real content gap
@@ -452,14 +474,28 @@ Two items from the authoring checklist are open, and both need conditions this s
 
 ## Next steps, in priority order
 
-1. **Use the skill on real drafts and grow `inputs/examples.md`** (A). Still the only gap that research cannot close.
-2. **Add a connected-prose voice sample** (B). Two or three paragraphs you wrote for someone else. Highest value per effort of anything left, because it is the one input that would let paragraph-level voice matching switch from *unsupported* to working.
-3. **Run `./install.sh` on each machine you use** (F). It is verified working in this container; whether it is live on your own machines is still unconfirmed from here.
-4. **Run the evals against a baseline in a fresh session** (L). Until that happens, no claim about this skill's effect is measured, only its internal consistency.
-5. **Supply five same-register texts per publication** to turn the five `recorded, n=1` devices and three `not captured` attribution rows into measured habits.
-5. **Fix the two proxy defects in K** and widen the self-check to 0 FAIL. This is the one that keeps finding real problems.
-6. **Re-audit the drift allowlists** (D) once they stop growing.
-5. **Use a template for a real document** (H), which would test the three that have never produced one.
-6. **Pin the 18F quotations** with one literal re-fetch (I).
+1. **Run the evals against a baseline in a fresh session** (L). Until that happens, nothing about this skill's *effect* is measured, only its internal consistency. This is the largest unknown in the project.
+2. **Add a connected-prose voice sample** (B). Two or three paragraphs written for someone else. Highest value per effort of anything left, and the one input that would move paragraph-level voice matching from *unsupported* to working.
+3. **Use the skill on real drafts and grow `inputs/examples.md`** (A). The only gap research cannot close.
+4. **Run `./install.sh` on each machine** (F). Verified in this container, unconfirmed elsewhere.
+5. **Test on Haiku and Sonnet** (L). Everything here has run on one model.
+6. **Use a template for a real document** (H). Three templates have never produced one.
+7. **Re-audit the drift allowlists** (D) once they stop growing.
+8. **Pin the 18F quotations** with one literal re-fetch (I).
 
-**Deliberately stopping:** more published prose. Four publications and ~25,000 words settled which rules are house convention and which are real practice. The last three batches found checker bugs rather than changed guidance, which is the signal that this input is exhausted.
+### A claim this file made and the evidence refuted
+
+An earlier version of this list said, under **Deliberately stopping**, that more published prose was exhausted: *"The last three batches found checker bugs rather than changed guidance, which is the signal that this input is exhausted."*
+
+Four further batches then produced the largest corrections in the project:
+
+| Batch | What it changed |
+|---|---|
+| HBR, re-extracted | four measured figures, and demoted the antithetical dek from house signature to 1 of 5 |
+| Economist, 6 full articles | **corrected the claim this file called its most consistent result**: zero subheads was an artefact of measuring excerpts |
+| FT, 6 articles | halved the dash rate, and turned a publication contrast into a register rule |
+| Reuters, 6 held out | widened two ranges, promoted a device, and exposed a check that under-counted by half |
+
+So the judgment was wrong, and wrong in a specific way worth keeping: **"we stopped finding new things" was measured on batches that arrived through a lossy pipeline.** Once extraction improved and full articles replaced excerpts, the same input source produced five corrections. Exhaustion of a source and exhaustion of a *method for reading* that source are different things, and this file conflated them.
+
+**Where that leaves the sampling question.** More prose is no longer the top priority, because the four profiles now rest on 10 to 15 items each and the last batch's findings were about our checks rather than the publications. But that is a claim about the current evidence, not a standing conclusion, and the last one of these was wrong.

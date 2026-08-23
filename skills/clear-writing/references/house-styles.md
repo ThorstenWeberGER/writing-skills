@@ -5,12 +5,11 @@ Four publications, measured from material the user supplied. Roughly 25,000 word
 ## Contents
 
 - What this can and cannot give you
-- Economist
-- Financial Times
-- Reuters
-- HBR
+- The four profiles
 - Choosing between them
 - For a management email, no single house style fits
+- When a house style conflicts with a general rule
+- When a house style conflicts with the user's voice
 - Sources
 
 *Listed so a partial read still shows the whole scope of this file.*
@@ -27,91 +26,24 @@ So use these to answer "how should this be shaped?" and not "make me sound like 
 
 ---
 
-## Economist
+## The four profiles
 
-*9 excerpts, 3,131 words. News briefs, a Leader, features, reports.*
+**The measured numbers live in one place: `house-voices.md`.** They used to be restated here as well, and the duplication did exactly what this project exists to prevent. A review found this file stale on three figures that `check.py` and `house-voices.md` had already moved: the Economist sentence median, the HBR sentence median and the HBR dash rate. The drift test did not catch it, because its anchors point at the file that was being kept current.
 
-| | |
-|---|---|
-| Sentence median | **13-26**, varying by register; mean 16.7-23.9 |
-| Over 25 words | 20% |
-| Em dashes | 1 per 348 words; absent from 6 of 9 excerpts |
-| Semicolons | about 1 per excerpt |
-| Subheads | **crossheads in 2 of 5 full articles**, 3-4 words, allusive. None in any excerpt |
-| Bullets | **none**, in six full articles or nine excerpts |
-| Headline | **4-10 words, median 8.5. Allusive.** Poses a puzzle or names an oddity |
-| Standfirst | 8-13 words, median 11. **Carries the "so what"** the headline withholds |
+So this file no longer carries measurements. It carries the decisions you make with them.
 
-**Structure.** No subheads in any excerpt, and none at 619 words, but full articles do carry two or three allusive crossheads. The excerpt sample could not show this. Ordinal signposting in the prose does the navigating: "There are three reasons… One is… The second reason… The third reason…" Enumeration stays in prose rather than becoming a list.
+| Publication | Pick it for | Sample behind it |
+|---|---|---|
+| **Economist** | continuous prose read end to end; a short intriguing title with a subtitle doing the explaining | 9 excerpts plus 6 full articles |
+| **Financial Times** | a headline that must survive being forwarded alone; reported copy where every claim carries a source | 6 articles, 4 news and 2 features |
+| **Reuters** | anything skimmed, forwarded or re-cut by someone else | 4 wire articles plus 6 held out |
+| **HBR** | a sectioned management argument for a practitioner deciding whether to change something | 5 articles, re-extracted |
 
-**Opening depends on the register:** news is pure BLUF; a Leader states a flat conventional thesis then turns against it; a feature opens on a scene and lands the general point by sentence 5 or paragraph 2.
+**What a profile can give you.** Sentence length, dash and semicolon rates, subhead and bullet policy, how a headline pairs with a standfirst, where the point goes. All measured, all enforceable with `check.py --house NAME`.
 
-**Pick this for** a piece someone reads start to finish, where you want a short intriguing title and a subtitle doing the explaining.
+**What it cannot.** Voice, as `house-voices.md` sets out at length: wit, the quality of a concrete anchor, whether an antithesis names two real diagnoses. Matching a median sentence length of 30 words will not make a memo read like a wire report; it will make it a memo with long sentences.
 
----
-
-## Financial Times
-
-*4 articles, ~3,400 words. Two news, one report, one long read.*
-
-| | |
-|---|---|
-| Sentence median | **25 news, 20 features** |
-| Over 25 words | **47% news, 38% features** |
-| Em dashes | **about 1 per 430 words**, and zero in one of five |
-| Subheads / bullets | none detected |
-| Headline | **7-14 words, median 10.5. Informational.** Tells the whole story, works with no standfirst |
-
-**Caveat:** these came from print-to-PDF files with no text layer, recovered by decompressing content streams. Captions interleave with body prose, so the sentence figures are upper bounds, not clean measurements.
-
-**Pick this for** a headline that may travel alone: a subject line, a Slack post, a link stripped of its subtitle. FT-style headlines survive separation; Economist-style ones do not.
-
----
-
-## Reuters
-
-*4 wire articles plus the Trust Principles pages.*
-
-| | |
-|---|---|
-| Sentence median | **21-32 by register**, pooled 26 over four held-out articles; the interview runs shortest |
-| Over 25 words | 57% |
-| Em dashes | **0** |
-| Semicolons | **0** |
-| Subheads | **yes**, all-caps, **2-9 words** (eight articles) |
-| Bullets | **yes**: a summary block above every article, 3-4 bullets, 6-17 words, median 11 |
-
-**The summary block** carries the news, the mechanism, the consequence. Each bullet stands alone as a fact the reader can act on; none restates the body.
-
-**Long leads are deliberate.** A wire lead packs actor, action, time and cause into sentence one, which is why the median is 30 words.
-
-**Spelling is American** ("neighbors", "mobilizing"), unlike the FT and Economist. Sourcing is explicit about anonymity and its reason: "two people familiar with the deal… could not be named because the information was not public."
-
-**Pick this for** anything that will be skimmed, forwarded, or re-cut by someone else. Do not copy the all-caps crossheads; that is wire styling and reads as shouting elsewhere.
-
----
-
-## HBR
-
-*5 articles, 14,557 words. Three features, a digital article, a curated-tips list.*
-
-| | |
-|---|---|
-| Sentence median | **12-22**: 12 in the tips list, 19-22 in features |
-| Over 25 words | 29% |
-| Em dashes | **1 per 157 words, the heaviest of the four** |
-| Semicolons | up to 12 in one article |
-| Subheads | **yes**, title case, full phrases ("Common Causes of False Alignment") |
-| Headline | 4-10 words, allusive like the Economist |
-| Dek | **12-24 words, often two sentences**, frequently antithetical |
-
-**The dek does real argumentative work.** "It isn't a failure of the technology. It's a failure of management." Two sentences, two competing diagnoses, the second correcting the first.
-
-**Format changes the shape more than the masthead does.** The tips list runs a 12-word median against 19-22 in features, and structures itself as headed micro-sections with 3-9 word imperative headings ("Trust your preparation.", "Accept mistakes quickly.") rather than bullets.
-
-**Pick this for** a management argument that needs sections, where the reader is a practitioner deciding whether to change something.
-
----
+**And note the purpose behind each convention**, because copying a convention without its purpose is how writing goes wrong. Reuters bullets its summaries because editors buy the copy and re-cut it. The Economist runs 600 words with no subheads because people read it end to end on a Sunday. Neither reason may apply to you.
 
 ## Choosing between them
 
