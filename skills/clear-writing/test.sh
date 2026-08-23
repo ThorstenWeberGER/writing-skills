@@ -45,9 +45,9 @@ else
 fi
 
 echo "=== style-only compression guard ==="
-for pair in "styled:0" "overcompressed:1" "style-edited:0"; do
+for pair in "styled:0" "overcompressed:1" "style-edited:0" "deslop-styled:0"; do
   f=${pair%%:*}; want=${pair##*:}
-  case $f in style-edited) base=style-orig;; *) base=orig;; esac
+  case $f in style-edited) base=style-orig;; deslop-styled) base=deslop-orig;; *) base=orig;; esac
   got=$(python3 check.py "test-fixtures/$f.md" --compare "test-fixtures/$base.md" 2>&1 \
         | grep -oE '^  [0-9]+ FAIL' | grep -oE '[0-9]+')
   if [ "$got" = "$want" ]; then

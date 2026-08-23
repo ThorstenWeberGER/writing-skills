@@ -246,6 +246,11 @@ def paragraphs(text):
 
 
 def sentences(text):
+    """Prose sentences. Table rows are content but not sentences, so they are
+    dropped here while still counting toward word and paragraph totals: a
+    four-column row was otherwise reported as a 35-word sentence."""
+    text = "\n".join(l for l in text.splitlines()
+                     if not re.match(r"^[ \t]*\|", l))
     text = re.sub(r"\b([A-Z])\.", r"\1", text)  # initials
     text = re.sub(r"\b(e\.g|i\.e|etc|vs|Mr|Ms|Dr|No)\.", r"\1", text)
     parts = re.split(r"(?<=[.!?])[\s\n]+", text)
@@ -581,9 +586,30 @@ def run(raw, opts):
             o, n = len(words(orig)), len(all_words)
             pct = (n - o) / o * 100 if o else 0.0
             detail = f"{o} -> {n} words ({pct:+.0f}%)"
-            if o and pct < -15:
+
+            # Removing slop legitimately shortens text, so raw word loss is a
+            # poor proxy for content loss when the original was padded. Count
+            # the slop that disappeared and treat roughly two words per removed
+            # phrase as explained loss. Without this, a clean de-slopping edit
+            # fails a check the checklist says must always be fixed.
+            def slop_hits(text):
+                lo = under_judgment(text)[0].lower()
+                return sum(len(find_terms(lo, L))
+                           for L in (AI_WORDS, UNFAMILIAR, BUZZWORDS))
+            removed = max(0, slop_hits(open(opts.compare, encoding="utf-8").read())
+                          - slop_hits(raw))
+            explained = removed * 2
+            unexplained = max(0, (o - n) - explained)
+            upct = unexplained / o * 100 if o else 0.0
+
+            if o and upct > 15:
                 r.fail("length preserved",
-                       detail + " — content was cut, not just reworded")
+                       detail + f" — {unexplained} words unexplained by the "
+                       f"{removed} slop phrase(s) removed; content was cut")
+            elif o and pct < -15:
+                r.review("length preserved",
+                         detail + f" — but {removed} slop phrase(s) removed "
+                         f"accounts for most of it; confirm no claim was lost")
             elif abs(pct) > 40:
                 r.review("length preserved", detail + " — large change")
             else:
