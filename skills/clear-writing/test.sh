@@ -28,9 +28,10 @@ for f in bad good em art; do
 done
 
 echo "=== style-only compression guard ==="
-for pair in "styled:0" "overcompressed:1"; do
+for pair in "styled:0" "overcompressed:1" "style-edited:0"; do
   f=${pair%%:*}; want=${pair##*:}
-  got=$(python3 check.py "test-fixtures/$f.md" --compare test-fixtures/orig.md 2>&1 \
+  case $f in style-edited) base=style-orig;; *) base=orig;; esac
+  got=$(python3 check.py "test-fixtures/$f.md" --compare "test-fixtures/$base.md" 2>&1 \
         | grep -oE '^  [0-9]+ FAIL' | grep -oE '[0-9]+')
   if [ "$got" = "$want" ]; then
     echo "  pass    $f.md — $got FAIL as expected"

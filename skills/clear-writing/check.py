@@ -136,6 +136,27 @@ def strip_markup(text):
     return re.sub(r"\*\*|__|\*|_", "", text)
 
 
+def scan_text(raw):
+    """Prose eligible for wordlist scanning.
+
+    humanizer.md's false-positive rules exclude "watched phrases inside
+    quotations, titles, or examples where the phrase is being discussed
+    rather than used". Markdown tables and before/after demonstration lines
+    are exactly that: a jargon table documenting "utilize -> use" is not a
+    draft that uses "utilize". Without this, the checker flags the skill's
+    own reference files, and any draft that quotes a term to reject it.
+    """
+    kept = []
+    for line in strip_markup(raw).splitlines():
+        s = line.strip()
+        if s.startswith("|"):                 # markdown table row
+            continue
+        if "→" in s or "->" in s:             # weak -> better demonstration
+            continue
+        kept.append(line)
+    return "\n".join(kept)
+
+
 def paragraphs(text):
     return [p.strip() for p in re.split(r"\n\s*\n", text) if p.strip()]
 
@@ -209,8 +230,8 @@ class Report:
 def run(raw, opts):
     r = Report()
     prose = strip_markup(raw)
-    low = prose.lower()
-    raw_low = raw.lower()
+    low = scan_text(raw).lower()      # wordlist scans: examples excluded
+    raw_low = scan_text(raw).lower()
     sents = sentences(prose)
     paras = paragraphs(prose)
     all_words = words(prose)
@@ -219,8 +240,10 @@ def run(raw, opts):
     # 1. dashes (humanizer.md — the rule that was violated while reported clean)
     dash_hits = [(m.group(), line_of(raw, m.start()))
                  for m in re.finditer(r"[—–]", raw)]
-    spaced = [(m.group().strip(), line_of(raw, m.start()))
-              for m in re.finditer(r"\s(--?)\s", raw)]
+    # require a non-space char before the space, so a line-initial markdown
+    # bullet ("\n- item") is not mistaken for a spaced dash
+    spaced = [(m.group(1), line_of(raw, m.start()))
+              for m in re.finditer(r"(?<=\S)[ \t](--?)[ \t]", raw)]
     if opts.dashes_ok:
         r.ok("em/en dash", "skipped: --dashes-ok (user sample uses them)")
     elif dash_hits or spaced:
