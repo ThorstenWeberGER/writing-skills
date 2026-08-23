@@ -128,7 +128,12 @@ def strip_markup(text):
     text = re.sub(r"`[^`]*`", " ", text)
     out = []
     for line in text.splitlines():
-        line = re.sub(r"^\s{0,3}#{1,6}\s+", "", line)
+        # A heading is its own unit. Without terminal punctuation it would
+        # merge into the following sentence and inflate that sentence's length.
+        m = re.match(r"^\s{0,3}#{1,6}\s+(.*)$", line)
+        if m:
+            h = m.group(1).rstrip()
+            line = h if h.endswith((".", "!", "?", ":")) else h + "."
         line = re.sub(r"^\s*([-*+]|\d+\.)\s+", "", line)
         line = re.sub(r"^\s*>\s?", "", line)
         out.append(line)
