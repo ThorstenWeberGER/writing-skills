@@ -1166,7 +1166,8 @@ def run(raw, opts):
     # --- conditional: style-only, must not have compressed ----------------
     if opts.compare:
         try:
-            orig = strip_markup(open(opts.compare, encoding="utf-8").read())
+            orig_raw = open(opts.compare, encoding="utf-8").read()
+            orig = strip_markup(orig_raw)
         except OSError as e:
             r.fail("length preserved", f"cannot read original: {e}")
         else:
@@ -1201,8 +1202,13 @@ def run(raw, opts):
                 r.review("length preserved", detail + ", large change")
             else:
                 r.ok("length preserved", detail)
-            # paragraph count is the other structural tell
-            po, pn = len(paragraphs(orig)), len(paras)
+            # paragraph count is the other structural tell. orig must be
+            # measured against its own raw text: strip_markup already removed
+            # the "- "/"1. " list markers paragraphs() needs to tell a list
+            # block from a paragraph, so passing the stripped text as the raw
+            # fallback undercounted lists as paragraphs and inflated the
+            # original side of every list-bearing document's count.
+            po, pn = len(paragraphs(orig, orig_raw)), len(paras)
             (r.ok if po == pn else r.review)(
                 "structure preserved",
                 f"{po} -> {pn} paragraphs" +
