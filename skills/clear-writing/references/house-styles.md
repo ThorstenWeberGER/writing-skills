@@ -56,9 +56,9 @@ So use these to answer "how should this be shaped?" and not "make me sound like 
 
 | | |
 |---|---|
-| Sentence median | **22-27** |
-| Over 25 words | ~50% (upper bound; see caveat) |
-| Em dashes | 1 per 214 words |
+| Sentence median | **25 news, 20 long read** |
+| Over 25 words | **47% news, 43% long read** |
+| Em dashes | **about 1 per 430 words**, and zero in one of five |
 | Subheads / bullets | none detected |
 | Headline | **7-14 words, median 10.5. Informational.** Tells the whole story, works with no standfirst |
 

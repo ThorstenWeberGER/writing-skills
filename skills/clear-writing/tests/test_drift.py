@@ -129,6 +129,10 @@ RULE_ANCHORS = {
          "next-update check -> NEXT_UPDATE_COMMIT + NEXT_UPDATE_TIME"),
     ],
     "house-voices.md": [
+        ("1 per 38-62 words", "FT attribution rate -> attribution=(30, 70)"),
+        ("always spelled out, never", "per cent -> percent_spelled=True"),
+        ("set by register, not masthead",
+         "headline and standfirst -> headline / stand_turn per profile"),
         ("The standfirst turns against the headline",
          "standfirst turn -> stand_turn=True"),
         ("A short flat sentence lands early",

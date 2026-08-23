@@ -64,6 +64,8 @@ Use personality in essays, blog posts, and opinion pieces where it fits the writ
 
 **Synonym cycling and repeated openings.** Renaming the same subject every sentence (*the protagonist / the main character / the central figure / the hero*), or several sentences opening on the same subject. Use one name consistently; merge or restructure repeated openings. Don't ban the repeated word. Fix the repeated *pattern*.
 
+**Narrowed against the FT.** Measured FT copy substitutes constantly and deliberately: *the ChatGPT maker*, *the iPhone maker*, *the prime minister*, 2 to 9 times per article across five articles. The test is whether the substitute earns its place. An epithet that carries information the reader needs at that point (*the iPhone maker* tells you which Apple matters here) is good reporting. A synonym that carries nothing and exists only to avoid repeating a word is the tell. So: cycle only when each substitute names a different relevant fact.
+
 **False "from X to Y" ranges.** *from the Big Bang to the cosmic web, from birth to dark matter*, where X and Y aren't endpoints of any real range.
 
 ## Formatting tells

@@ -176,10 +176,15 @@ HOUSE = {
                       head=(4, 10), stand=(8, 13),
                       semis=400, spelling="uk", headline="allusive",
                       lc_acronyms=True,
-                      crosshead=(2, 5), stand_turn=True, short_opener=True),
-    "ft":        dict(med=(22, 27), dash=214, subheads=False, bullets=False,
+                      crosshead=(2, 5), stand_turn="turn", short_opener=True),
+    # Re-measured on clean text: four news pieces (2,355 words) and one long
+    # read (1,717). The dash rate was badly inflated by the old PDF extraction;
+    # the ~50% over-25-words figure survived. Values here are the news register.
+    "ft":        dict(med=(23, 28), dash=430, subheads=False, bullets=False,
                       head=(7, 14), stand=None,
-                      semis=1700, spelling="uk", headline="informational"),
+                      semis=1700, spelling="uk", headline="informational",
+                      stand_turn="state", attribution=(30, 70),
+                      percent_spelled=True),
     "reuters":   dict(med=(24, 32), dash=None, subheads=True, bullets=True,
                       head=None, stand=None,
                       semis=None, spelling="us", attribution=True),
@@ -297,6 +302,10 @@ SOURCES = {
     "subheads optional":            "house-voices.md: Economist, Refusals",
     "crossheads":                   "house-voices.md: Economist, The signature move",
     "standfirst turns":             "house-voices.md: Economist, The opening move",
+    "standfirst states":            "house-voices.md: FT, The opening move",
+    "standfirst":                   "house-voices.md: FT, The opening move",
+    "attribution":                  "house-voices.md: FT, Attribution",
+    "per cent spelled out":         "house-voices.md: FT, Register",
     "short flat sentence early":    "house-voices.md: Economist, Register",
 }
 
@@ -895,7 +904,9 @@ def run(raw, opts):
                 else f"{len(wrong)} other-side form(s): " + ", ".join(sorted(wrong)[:4]))
 
         # Reuters: a claim carries its basis, or says it cannot.
-        if h.get("attribution"):
+        # Reuters: presence of a basis. FT uses the same key for a rate, so
+        # this is guarded on the boolean rather than on truthiness.
+        if h.get("attribution") is True:
             hits = ATTRIBUTION.findall(judged)
             (r.ok if hits else r.fail)(
                 f"{name}: claims attributed",
@@ -1026,23 +1037,36 @@ def run(raw, opts):
         # 4 of 5: two open on "But", one adds ", too", one runs a "just as"
         # symmetry. The one that does not is the data-journalism piece, whose
         # standfirst is a bare number.
-        if h.get("stand_turn"):
+        want_sf = h.get("stand_turn")
+        if want_sf:
             sf = ""
             if top:
                 after = raw.split(top[0], 1)[-1].strip().splitlines()
                 sf = next((l.strip() for l in after
                            if l.strip() and not l.startswith("#")), "")
             sf_plain = sf.strip("*_ ")
-            turn = bool(re.match(r"^(But|Yet|Though|Still|And yet)\b", sf_plain, re.I)
-                        or re.search(r", too\b|\bjust as\b|\brather than\b",
-                                     sf_plain, re.I))
+            # A turn can sit mid-standfirst as easily as at the front: the FT
+            # long read runs "...has grown every year since 2022 - but claims
+            # of a brain drain overstate the problem". Anchoring to the start
+            # missed it and reported the piece as stating a fact.
+            turn = bool(re.search(
+                r"^(?:But|Yet|Though|Still|And yet)\b"
+                r"|\bbut\b|\byet\b|\balthough\b|\bthough\b"
+                r"|, too\b|\bjust as\b|\brather than\b", sf_plain, re.I))
             if not sf:
-                r.review(f"{name}: standfirst turns", "no standfirst found")
-            else:
+                r.review(f"{name}: standfirst", "no standfirst found")
+            elif want_sf == "turn":
                 (r.ok if turn else r.review)(
                     f"{name}: standfirst turns",
                     "adds a turn" if turn
                     else "restates the headline; house adds the qualification here")
+            else:
+                # FT news: the standfirst states the next fact and does not
+                # argue. 0 of 4 news standfirsts turn. The long read does turn,
+                # so this is a register rule and CHECKLIST.md carries that.
+                (r.ok if not turn else r.review)(
+                    f"{name}: standfirst states", "adds a fact" if not turn
+                    else "turns; house news states the next fact instead")
 
         # A short flat sentence early. 4 of 6 put one of six words or fewer in
         # the opening paragraph: "The market shrugged.", "Which is in Munich."
@@ -1056,6 +1080,40 @@ def run(raw, opts):
                 f"{name}: short flat sentence early",
                 f'"{shorts[0][:40]}"' if shorts
                 else "none in the opening paragraph")
+
+        # FT: every claim names who said it. 1 per 38-58 words across five
+        # articles, which is the tightest single habit in any of the four
+        # profiles and roughly four times HBR's hedging rate.
+        ar = h.get("attribution")
+        if isinstance(ar, tuple):
+            na = len(re.findall(
+                r"\b(said|says|according to|claimed|added|told|reported|revealed"
+                r"|argued|alleged|asserted|accused|acknowledged|cautioned"
+                r"|complained|emphasised|insisted|estimates|describes)\b",
+                judged, re.I))
+            lo, hi = ar
+            rate = n / na if na else 0
+            if na and lo <= rate <= hi:
+                r.ok(f"{name}: attribution 1 per {lo}-{hi}w", f"1 per {round(rate)}w")
+            elif na:
+                r.review(f"{name}: attribution 1 per {lo}-{hi}w",
+                         f"1 per {round(rate)}w; house names a source about "
+                         "every second sentence")
+            else:
+                r.review(f"{name}: attribution 1 per {lo}-{hi}w",
+                         "none; house attributes constantly")
+
+        # "per cent" spelled out, never the symbol. 12 instances, 0 symbols.
+        if h.get("percent_spelled"):
+            sym = judged.count("%")
+            spelled = len(re.findall(r"\bper cent\b", judged, re.I))
+            if not sym and not spelled:
+                r.ok(f"{name}: per cent spelled out", "no percentages")
+            else:
+                (r.ok if not sym else r.review)(
+                    f"{name}: per cent spelled out",
+                    f"{spelled} spelled, {sym} as %"
+                    + ("" if not sym else "; house spells it out"))
 
         # Headline type: allusive poses a puzzle, informational tells the story.
         if h.get("headline") and top:

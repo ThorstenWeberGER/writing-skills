@@ -257,6 +257,34 @@ Plus a device that needed no check: **the institutional "we" is gated to data jo
 
 **Still open on this profile:** our Economist draft runs a 13-word median against the measured 16-23, so our imitation is terser than the house. That is the user's own 6-word median showing through, and it is a REVIEW rather than something to paper over. 30 rule anchors, up from 26.
 
+### 22. FT measured on clean text, and a register rule that corrects both profiles (DONE)
+
+Five FT articles pasted as text: four news pieces (2,355 words, 94 sentences) and one long read (1,717 words, 72 sentences). This was the thinnest of the four profiles, and only because its numbers came from print-to-PDF files with no text layer.
+
+| Measure | Old, upper bound | Measured |
+|---|---|---|
+| Sentence median | 22-27 | 25 news, 20 long read |
+| Over 25 words | ~50% | **47% news. The old figure held** |
+| Em dashes | 1 per 214 | about 1 per 430, zero in one piece |
+
+**Discipline paying off:** after the first article came in at 39% over-25-words I suspected the whole row was caption contamination. Two of the next three exceeded 50%. Holding the correction until n=4 is what stopped a sound row being overwritten from one sample.
+
+**The devices, counted across five:**
+
+- **Attribution at 1 per 38-62 words, 5 of 5.** The tightest habit in any profile, about four times HBR's hedging rate. Enforced.
+- **The epithet replaces the name**, 2-9 per piece. *The ChatGPT maker*, *the prime minister*.
+- **Two hard style markers:** *per cent* always spelled out (12 instances, 0 symbols), and a spaced ellipsis inside quotations. The first is enforced.
+
+**The correction that matters most is not about the FT.** An earlier version of `house-voices.md` contrasted "the FT standfirst adds a fact" against "the Economist standfirst turns" as a difference between publications. **It is a difference between registers.** FT news never turns (0 of 4); the FT long read turns and carries an allusive *Why…* headline, exactly like the Economist's. The surviving rule is broader: **headline type and standfirst behaviour are set by register, not masthead.** Now a `CHECKLIST.md` step, an anchor, and the reason the FT profile carries news values with the feature flip documented.
+
+**A register-gated device, long read only:** the piece is structured by posed questions, six against zero in all four news pieces. Same shape as the Economist's institutional *we* appearing only in data journalism.
+
+**And an anti-slop rule narrowed by evidence.** `humanizer.md` flags synonym cycling as an AI tell, and the FT does it deliberately in every article. The rule now turns on whether the substitute earns its place: an epithet carrying information the reader needs is reporting, a synonym carrying nothing is the tell.
+
+Two bugs found in my own new checks: the standfirst turn detection was anchored to the start of the string and missed a mid-sentence *but*, and an `attribution` key used as a tuple for the FT made the Reuters boolean check fire on truthiness. Both fixed and verified.
+
+Applying G1 to our own FT draft took it from **zero attributions to 1 per 57 words**. Six generators written. 33 rule anchors, up from 30.
+
 ## Open
 
 ### A. `inputs/examples.md` has only its 5 launch pairs: the one real content gap
