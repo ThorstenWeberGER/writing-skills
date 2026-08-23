@@ -129,11 +129,13 @@ When unsure, look for several tells together. One em dash proves nothing.
 
 ## Before returning the draft
 
-1. Ask: **what still sounds AI-generated?** Fix by restating the point naturally, not by patching one flagged phrase.
-2. Ask: **did the rewrite add or drop any fact, number, name, date, quote, or citation?** Either is an error.
-3. Search for `—` and `–` and apply the dash rule.
+1. **Run a literal character search for `—` and `–`.** Not a mental check — an actual scan of the text. Every hit goes unless a user writing sample in this conversation uses them; verify that sample exists rather than assuming it. This rule is the one most often reported as applied while being violated in the same draft, because dashes read as good punctuation on reread.
+2. Ask: **what still sounds AI-generated?** Fix by restating the point naturally, not by patching one flagged phrase.
+3. Ask: **did the rewrite add or drop any fact, number, name, date, quote, or citation?** Either is an error.
 
 If a sentence stays awkward after two attempts, rewrite the whole paragraph around its main point.
+
+These three feed the exit checklist in `SKILL.md`, which is what actually gates the response. Reading this file is not the same as having applied it.
 
 ## Source
 

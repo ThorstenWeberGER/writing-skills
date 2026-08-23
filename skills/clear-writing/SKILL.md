@@ -19,7 +19,18 @@ Apply this skill any time you draft or edit prose for the user, or the user asks
 4. **`references/DONTS.md`** and **`examples.md`** — check against known violations. If you catch a new one this conversation and the user confirms it's worth keeping, append it to `DONTS.md`. Only add to `examples.md` if the pair is real, never invented.
 5. **`references/humanizer.md`** — final pass for AI-writing tells. If the user's own writing is in this conversation, match its voice per that file's opening section.
 
-**Before returning the result:** if step 2 used the management-summary section, confirm the response contains both the full version and the crisp email variant, back to back. If only one is there and the user didn't ask for just one, add the other.
+## Exit checklist — run every item before returning the draft
+
+Reading a pass is not the same as applying it. Each item below is mechanically checkable; do not report the draft as finished until every one is confirmed. Skipping this is the skill's known failure mode: in testing, passes 1 and 5 were described as run while two em dashes and a passive construction went out in the same draft.
+
+1. **Scan the literal characters `—` and `–`.** Every hit must go, replaced by a period, comma, colon, or parentheses. The only exemption is a writing sample from the user in this conversation that uses them — check for one; don't assume it exists. Also check spaced ` - ` and ` -- ` used as dashes.
+2. **Read every sentence for a hidden actor.** For each passive construction, either name the actor or confirm one of the two exceptions in `foundations.md` rule 9 applies. Client-facing drafts fail this twice over, because an agentless passive also dodges ownership (`audiences.md`, external client rule 5).
+3. **Check the first sentence carries the point**, not background. If a reader stopping there wouldn't know the point, it's misordered.
+4. **If pass 2 used the management-summary section:** confirm both the full version and the crisp email variant are present, back to back, unless the user asked for just one.
+5. **Scan for the tells you claim to have removed.** Pick the three most likely from `humanizer.md` for this text type and search for them explicitly rather than trusting the earlier read.
+6. **Confirm no fact, number, name, date, or citation was added or dropped** relative to the source.
+
+If you cannot confirm an item, say so in the response instead of asserting the draft is clean.
 
 ## Templates
 
