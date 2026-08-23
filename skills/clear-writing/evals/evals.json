@@ -1,0 +1,90 @@
+[
+  {
+    "id": "style-only-does-not-compress",
+    "skills": ["clear-writing"],
+    "query": "Clean this up for me.",
+    "files": ["test-files/team-message.md"],
+    "gap": "Asked to clean up a message, a model rewrites it shorter. The user asked for wording, not length. Observed in development: a first attempt cut 180 words to 141.",
+    "expected_behavior": [
+      "Returns an edited version of the same message, not a summary of it",
+      "Keeps all three paragraphs and all of the original's points, including the runbook request, the October window, the vendor dependency and the end-of-next-week timing",
+      "Loses no more than 15 percent of the original word count",
+      "Does not add a management summary, an email variant, a subject line, bullets or headings that the original did not have",
+      "Removes the filler and the buzzword: circle back, basically, a bit of a, genuinely",
+      "Reports the check it ran and what it returned, rather than saying it applied a skill"
+    ]
+  },
+  {
+    "id": "full-mode-preserves-uncertainty-and-triage",
+    "skills": ["clear-writing"],
+    "query": "Summarise this for my boss and tell me what to recommend.",
+    "files": ["test-files/q3-analysis.md"],
+    "gap": "Compressing an analysis silently drops the caveat that weakens the recommendation, and flattens a capacity constraint into an undifferentiated list of asks.",
+    "expected_behavior": [
+      "First sentence is the recommendation or the ask, not background or method",
+      "Treats the three findings that share the routing root cause as one point rather than ranking them flat",
+      "Still states that the satisfaction drop cannot be separated from the pricing change in the same window",
+      "States the capacity triage explicitly: six weeks available, two committed to on-call, so the eight-week rewrite does not fit this quarter",
+      "Produces both the full summary and a short email variant, back to back, without being asked for the email",
+      "Contains zero em dashes and zero en dashes",
+      "Carries the source's hedges rather than hardening them: roughly 18 percent, about four minutes, roughly 60k, perhaps four weeks"
+    ]
+  },
+  {
+    "id": "no-invented-specifics",
+    "skills": ["clear-writing"],
+    "query": "Write the client note about this.",
+    "files": ["test-files/vague-date-source.md"],
+    "gap": "The recorded founding failure of this skill. A source saying 'toward the end of last month' came back as a specific date in a client-facing draft, and survived two review passes.",
+    "expected_behavior": [
+      "Does not convert 'toward the end of last month' into any specific date",
+      "Does not state a fix or restoration estimate, because the source gives none",
+      "Commits to a next-update time, or explicitly flags the time as a placeholder for the user to fill",
+      "Keeps the open question about which records are authoritative rather than resolving it",
+      "Uses a placeholder and flags it wherever a specific the source lacks would be needed",
+      "Contains zero em dashes and zero en dashes",
+      "Does not apologise for inconvenience or name a third-party provider as the cause"
+    ]
+  },
+  {
+    "id": "em-dash-ban-holds-under-a-house-style",
+    "skills": ["clear-writing"],
+    "query": "Write this up as a short HBR-style piece about what we learned.",
+    "files": ["test-files/q3-analysis.md"],
+    "gap": "The HBR profile is the heaviest em dash user of the four measured publications, at one per 157 words, so a house style instruction pulls directly against the user's settled ban. The ban must win and the conflict must be stated.",
+    "expected_behavior": [
+      "Contains zero em dashes and zero en dashes despite the house style using them",
+      "Says explicitly that the dash convention was overridden by the user's own preference",
+      "Uses title-case section headings, which are the HBR convention, rather than sentence case",
+      "Opens with a two-sentence dek where the second sentence corrects the first",
+      "Uses no bullet lists",
+      "Does not reproduce any quoted fragment from house-voices.md verbatim"
+    ]
+  },
+  {
+    "id": "client-note-never-promises-a-fix-time",
+    "skills": ["clear-writing"],
+    "query": "Draft the customer-facing note for the duplicate records problem.",
+    "files": ["test-files/vague-date-source.md"],
+    "gap": "The strongest rule in incident communication inverts normal advice, so it is the one a model is most likely to get backwards: give a next-update time, never a fix estimate.",
+    "expected_behavior": [
+      "Gives no fix, resolution or restoration estimate",
+      "Gives a next-update time, or a clearly marked placeholder for one",
+      "States the known impact and the hold-invoicing instruction",
+      "Says what is not yet known as a bounded factual statement rather than reassurance",
+      "Contains no empty apology for inconvenience and no vendor blaming"
+    ]
+  },
+  {
+    "id": "should-not-trigger-on-a-code-question",
+    "skills": ["clear-writing"],
+    "query": "Why is this Python list comprehension slower than the equivalent for loop?",
+    "files": [],
+    "gap": "Trigger accuracy is measured separately from output quality. A writing skill that loads on every request costs context for nothing, and the description is what decides this.",
+    "expected_behavior": [
+      "Answers the performance question directly",
+      "Does not invoke the clear-writing skill",
+      "Does not run check.py, produce a management summary, or offer an email variant"
+    ]
+  }
+]

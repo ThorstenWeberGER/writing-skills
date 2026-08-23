@@ -1,11 +1,13 @@
-# clear-writing manual
+# clear-writing
 
 A Claude Code skill that applies a fixed ruleset whenever prose gets written or edited, then **verifies mechanically that the rules were actually applied**. That second half is the point. An earlier version reported its passes as run while shipping em dashes and an agentless passive in the same draft. That is why roughly a third of this skill is now enforcement rather than guidance.
 
 - **Install:** `./install.sh` from the repo root. Symlinks the skill and the ground rules into `~/.claude/`, so a `git pull` updates every machine. `--status` shows what is linked, `--force` replaces an existing `CLAUDE.md` after backing it up, `--uninstall` removes the links.
-- **Invoke:** the skill triggers on any request to write, draft, summarise, or edit English prose. `SKILL.md` is the entry point.
-- **Verify:** `python3 check.py DRAFT.md [flags]`. Exit 0 means no FAILs.
-- **Test the skill itself:** `./test.sh`. Drift test plus 11 fixtures.
+- **Invoke:** the skill triggers on any request to write, draft, summarise, or edit English prose. `skills/clear-writing/SKILL.md` is the entry point.
+- **Verify:** `python3 skills/clear-writing/check.py DRAFT.md [flags]`. Exit 0 means no FAILs.
+- **Test the skill itself:** `./skills/clear-writing/tests/test.sh`. Drift test plus 12 fixture assertions.
+
+Paths in this file are relative to the repo root. Paths inside the skill's own files are relative to `skills/clear-writing/`, which is what gets symlinked into `~/.claude/skills/`.
 
 ---
 
@@ -18,7 +20,7 @@ This is the single most important operational fact, and getting it wrong is the 
 | Trigger | "write X", "clean this up", "does this read well", "make it sound like me" | "summarise", "recommend", "write the update for my boss", "turn this into a one-pager" |
 | Runs | plain wording + `DONTS.md` + `humanizer.md` | the whole pass order |
 | Restructures? | **No.** No reordering, no compressing, no cutting, no merging paragraphs, no imposed format | Yes, that is the job |
-| Verify with | `check.py draft.md --compare original.md` | flags matching the format |
+| Verify with | `check.py DRAFT.md --compare ORIGINAL.md` | flags matching the format |
 
 **Style-only is the default because compression is the failure mode people don't ask for.** If the structure genuinely hurts the text, the skill says so in one sentence and leaves the decision to you rather than acting on it. The `--compare` guard fails a draft that lost more than 15% of the original's words: a real style edit measures +4%, a compressed rewrite of the same text measures −59%.
 
@@ -65,27 +67,50 @@ Everything in `CLAUDE.md` costs context on every single turn, whether or not the
 
 ## 2. Architecture
 
+The repo has three layers, and the split matters: only the middle one gets installed.
+
+```
+.
+├── README.md             this manual
+├── CLAUDE.md             the six always-on ground rules (section 1b)
+├── install.sh            symlinks the skill + CLAUDE.md into ~/.claude/
+├── docs/
+│   ├── how-to-derive-a-style-guide.md   the transferable method
+│   ├── research-styleguide-design.md    what the research found
+│   ├── v2-checklist.md   build status and open work
+│   └── backlog.md        the original wishlist. Also voice-sample Source 1
+└── skills/clear-writing/ the skill itself. This whole directory is what installs
+```
+
+Everything the skill needs at runtime lives under `skills/clear-writing/`, because `install.sh` symlinks that one directory. A file moved above it stops being visible to the installed skill, which is why `docs/` holds only material the skill never reads.
+
 ```
 skills/clear-writing/
 ├── SKILL.md              entry point: mode choice, then the pass order
 ├── CHECKLIST.md          the exit gate. Judgment checks a script cannot make
-├── check.py              25+ mechanical checks. stdlib only. exit 1 on any FAIL
-├── test.sh               runs test_drift.py + all fixtures
-├── test_drift.py         fails when check.py's wordlists drift from the docs
-├── voice-sample.md       the user's own writing, verbatim, plus measured patterns
-├── examples.md           real before/after pairs only. Never invented
-├── references/
+├── check.py              26 checks plain, up to 40 with flags. stdlib only
+├── evals/                six baseline cases in the documented eval format
+├── references/           the ruleset, loaded on demand
 │   ├── foundations.md    always applies: find the point, why it matters, plain wording
 │   ├── formats.md        deliverable shape: management summary, email, short article
 │   ├── audiences.md      deltas per reader + when jargon is correct
-│   ├── house-styles.md   four measured publications you can target
+│   ├── house-styles.md   which profile to pick, and what one cannot give you
+│   ├── house-voices.md   the four profiles: every measured number, plus generators
 │   ├── DONTS.md          growing list of specific things to avoid
 │   └── humanizer.md      final anti-AI-slop pass
+├── inputs/               material you supply. The only part that grows with use
+│   ├── voice-sample.md   your own writing, verbatim, plus measured patterns
+│   └── examples.md       real before/after pairs only. Never invented
 ├── templates/            README, installation, meeting notes + Diátaxis routing
-└── test-fixtures/        drafts with known-correct FAIL counts
+└── tests/                maintenance only. The skill never reads these
+    ├── test.sh           runs test_drift.py + all fixtures
+    ├── test_drift.py     fails when check.py's wordlists drift from the docs
+    └── fixtures/         drafts with known-correct FAIL counts
 ```
 
-About 21,000 words. `foundations.md` is the largest file because it carries the measured evidence for every rule, including which rules real publications contradicted.
+Three files sit at the skill's top level and the rest are grouped. `SKILL.md` has to be there (Claude Code loads it by name), `CHECKLIST.md` is read on every single draft, and `check.py` is the command you type most often. Everything read occasionally, supplied by you, or used only for maintenance went into a folder.
+
+About 20,000 words of rules across `SKILL.md`, `CHECKLIST.md` and `references/`. `foundations.md` is the largest file because it carries the measured evidence for every rule, including which rules real publications contradicted.
 
 ### Full-mode pass order
 
@@ -93,8 +118,8 @@ About 21,000 words. `foundations.md` is the largest file because it carries the 
 2. **`formats.md`**. The deliverable's shape. Management summary (always paired with an email variant), or a short article. For notes and general prose, `foundations.md` alone is the whole ruleset.
 3. **`house-styles.md`**. Only if you asked for a specific outlet's conventions. Skip otherwise.
 4. **`audiences.md`**. What changes for a technical peer, an external client, non-native readers.
-5. **`DONTS.md`** + **`examples.md`**. Known violations.
-6. **`humanizer.md`**. The anti-slop pass, reading `voice-sample.md` for voice.
+5. **`DONTS.md`** + **`inputs/examples.md`**. Known violations.
+6. **`humanizer.md`**. The anti-slop pass, reading `inputs/voice-sample.md` for voice.
 7. **`CHECKLIST.md`**. The gate. Not optional; it is what makes 1-6 real.
 
 ---
@@ -103,7 +128,7 @@ About 21,000 words. `foundations.md` is the largest file because it carries the 
 
 Four inputs, three of which you control.
 
-### `voice-sample.md`: your own writing
+### `inputs/voice-sample.md`: your own writing
 
 Verbatim quotes plus measured patterns. Currently: **median sentence 6 words, max 16, zero em dashes** across every sample, imperative mood dominant.
 
@@ -117,11 +142,11 @@ To extend: append as Source 3, verbatim. The file records the rule that matters.
 
 A jargon table plus ten general don'ts. Grows when you flag something mid-conversation. Illustrative examples are fine here.
 
-### `examples.md`: real pairs only
+### `inputs/examples.md`: real pairs only
 
 Holds only genuine before/after pairs from your writing or captured conversation. **Never invented ones**, which is why it stays separate from `DONTS.md`. Still at its 5 launch pairs; an empty slot is the honest state.
 
-### `house-styles.md`: measured publications
+### `house-styles.md` and `house-voices.md`: measured publications
 
 ~25,000 words from The Economist, FT, Reuters and HBR, all supplied by you. This is where publication measurements live as *selectable targets*; `foundations.md` holds the same data as *evidence for or against our rules*.
 
@@ -145,10 +170,10 @@ Flags combine: `--email --client`, `--article-full --nonnative`.
 ### Worked example: a management email
 
 ```bash
-python3 check.py draft.md --email
+python3 skills/clear-writing/check.py draft.md --email
 ```
 
-Passing output looks like this fixture (`test-fixtures/mgmt-email.md`, 101 words):
+Passing output looks like this fixture (`tests/fixtures/mgmt-email.md`, 101 words):
 
 > **UPDATE: Warehouse migration slips two weeks, no decision needed yet**
 >
@@ -180,7 +205,7 @@ Conditional on the flags above.
 
 **Naming versus using.** Every pattern check runs on `under_judgment()`, one function that blanks contexts where a pattern is being *named* rather than *asserted*: code spans and fences, markdown table rows, weak/better demonstration lines, and quoted terms of six words or fewer. Length and structure metrics deliberately do not use it, because a table still occupies the page.
 
-This single blind spot caused twelve false positives during development, each patched separately until the checks were consolidated. The exclusions are **reported, not silent** (`naming contexts excluded: 3 code span, 6 table row...`), because an invisible exclusion could hide a real violation, and `--strict` disables them. `test-fixtures/naming-vs-using.md` locks both directions.
+This single blind spot caused twelve false positives during development, each patched separately until the checks were consolidated. The exclusions are **reported, not silent** (`naming contexts excluded: 3 code span, 6 table row...`), because an invisible exclusion could hide a real violation, and `--strict` disables them. `tests/fixtures/naming-vs-using.md` locks both directions.
 
 **FAIL must be fixed. REVIEW needs a recorded decision, not necessarily a change.** A flagged passive may be one of the two legitimate exceptions, a long list may genuinely have eight items.
 
@@ -195,15 +220,21 @@ Six steps no script can decide: is this the strongest point, did the three-why c
 
 That last one has caught a genuine error three times, including a vague source reference ("approximately last Tuesday") silently rewritten as a specific date, which had survived two earlier review passes.
 
-### `test.sh`
+### `tests/test.sh`
 
 ```bash
-./test.sh          # drift test + 11 fixtures. Currently all green
+./skills/clear-writing/tests/test.sh    # drift test + fixtures. Currently all green
 ```
 
-`test_drift.py` fails in three directions: a rule documented but not enforced, a term enforced but not documented, or a **broken rule anchor**: a rule `check.py` depends on that its reference file no longer states. Verified capable of failing by injecting each direction.
+`tests/test_drift.py` fails in three directions: a rule documented but not enforced, a term enforced but not documented, or a **broken rule anchor**: a rule `check.py` depends on that its reference file no longer states. Verified capable of failing by injecting each direction.
+
+The suite also **runs the dash check over the skill's own prose**, plus this file and `CLAUDE.md`, and locks the number of dash characters the three scripts are allowed to contain. The rule was described across 20,000 words while 257 dashes sat in the files describing it, so it is now enforced rather than intended. Verified by injecting a violation of each guard.
 
 CI runs this on any push touching the skill.
+
+### `evals/`: the part `tests/` cannot measure
+
+Every test in `tests/` runs inside the session that wrote the skill, which the Anthropic authoring docs name as the condition that masks gaps. `evals/evals.json` holds six cases in the documented format, each tied to a failure that actually happened in development, and each needing a fresh session with the skill disabled for the baseline arm. The number that matters is with-skill against without-skill, not the with-skill pass rate. `evals/README.md` has both ways to run them. They have not been run yet, and `docs/research-styleguide-design.md` records why.
 
 ---
 
@@ -212,8 +243,8 @@ CI runs this on any push touching the skill.
 | To add | Where | Constraint |
 |---|---|---|
 | A thing to avoid | `DONTS.md`, then the matching list in `check.py` | The drift test fails if you do only one |
-| A real before/after pair | `examples.md` | Must be genuine. Never invented |
-| Voice material | `voice-sample.md` as a new Source | Verbatim. Report what it shows, not what it suggests about the writer |
+| A real before/after pair | `inputs/examples.md` | Must be genuine. Never invented |
+| Voice material | `inputs/voice-sample.md` as a new Source | Verbatim. Report what it shows, not what it suggests about the writer |
 | A house style | `house-styles.md` + the `HOUSE` dict in `check.py` | Needs measurements, not impressions |
 | A new rule | the relevant `references/` file + a `check.py` check + a `RULE_ANCHORS` entry | Otherwise it is documentation nobody enforces |
 
@@ -235,10 +266,10 @@ CI runs this on any push touching the skill.
 
 ## 8. Known limits
 
-- **`examples.md` is thin.** Only 5 pairs. Only real use fills it.
+- **`inputs/examples.md` is thin.** Only 5 pairs. Only real use fills it.
 - **No connected-prose voice sample.** Paragraph-level voice matching is explicitly unsupported.
 - **Passive and noun-string checks are heuristics**, not parsing. Hence REVIEW rather than FAIL.
-- **The drift test's allowlists are large** (53 non-literal, 114 orphan-OK). Each is justified, but the escape hatch is big enough that adding to it is easier than fixing the coupling.
+- **The drift test's allowlists are large** (55 non-literal, 114 orphan-OK). Each is justified, but the escape hatch is big enough that adding to it is easier than fixing the coupling.
 - **Mode selection is not enforced**, only documented. `--compare` catches unwanted compression only if someone passes it.
 - **FT measurements are upper bounds.** Recovered from PDFs with no text layer, so captions interleave with body prose.
 - **Templates are untested against real use.**

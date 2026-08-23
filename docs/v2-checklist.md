@@ -1,8 +1,8 @@
-# clear-writing skill — status and open items
+# clear-writing skill: status and open items
 
-Last updated 2026-08-23. The skill lives in this repo at `skills/clear-writing/`. Start with its `README.md`, which is the user-facing manual; this file tracks status and open work.
+Last updated 2026-08-23. The skill lives in this repo at `skills/clear-writing/`. Start with the repo-root `README.md`, which is the user-facing manual; this file tracks status and open work.
 
-Run `./skills/clear-writing/test.sh` to verify the whole thing. Currently all green: drift test in sync, 14/14 rule anchors present, 9 fixtures behaving as expected. About 23,300 words across the skill; 66 checks in `check.py`.
+Run `./skills/clear-writing/tests/test.sh` to verify the whole thing. Currently all green: drift test in sync, 23/23 rule anchors present, 16 fixtures behaving as expected. About 20,000 words of rules (28,900 counting fixtures and scripts); 66 checks in `check.py`.
 
 ---
 
@@ -12,8 +12,8 @@ Run `./skills/clear-writing/test.sh` to verify the whole thing. Currently all gr
 
 The original blocker stands: economist.com, wsj.com, bloomberg.com and hbr.org all refuse automated fetching or serve teasers only. Rather than wait, the rules were re-derived from primary authorities that publish their own guidance as open-source repositories.
 
-- [x] **GSA/plainlanguage.gov** — the federal plain-language guidelines, from the publisher's own repo. Real primary text.
-- [x] **18F/content-guide** — GSA's content guide, source of the only numeric sentence-length guidance found.
+- [x] **GSA/plainlanguage.gov**: the federal plain-language guidelines, from the publisher's own repo. Real primary text.
+- [x] **18F/content-guide**: GSA's content guide, source of the only numeric sentence-length guidance found.
 - [x] `foundations.md`'s plain-wording and heading/list rules re-derived with per-rule attribution and URLs.
 - [x] **Three rules corrected** where the primary text contradicted them: "short words over long" is really about *familiarity*; active voice has two legitimate exceptions; the "3-6 bullets" range has no primary support and is now labeled house convention.
 - [x] Sourced rules added that were missing entirely: hidden verbs, noun strings, abbreviations, list lead-in sentences, parallelism with the lead-in, nesting caps, paragraph limits with the anti-uniformity rule, "address the reader as you."
@@ -23,13 +23,13 @@ The original blocker stands: economist.com, wsj.com, bloomberg.com and hbr.org a
 - [x] `references/audiences.md`, on a separate axis from format so profiles don't multiply per format.
 - [x] Technical peer (Google eng-practices, Nygard ADRs), external client (incident-communication practice), non-native English readers (Google global-audience, Kohl's *Global English Style Guide*). Decision-maker routes to `formats.md`.
 - [x] The conflict between the technical-peer and non-native profiles documented and resolved: keep domain nouns precise, simplify everything around them.
-- [x] "When jargon is the right choice" — four tests. The highest-value single addition, since plainlanguage.gov's own carve-out shows the plain-word rule was never aimed at domain nouns.
+- [x] "When jargon is the right choice", four tests. The highest-value single addition, since plainlanguage.gov's own carve-out shows the plain-word rule was never aimed at domain nouns.
 
 ### 3. Templates
 
 - [x] `project-readme.md` (standard-readme spec), `installation.md` (Good Docs Project, trimmed), `meeting-notes.md` (Robert's Rules + GitLab + ADR shape).
 - [x] `templates/README.md` carries the Diátaxis routing compass.
-- [x] `summary.md` deliberately **not** built — `formats.md` already covers summaries. Heeded Diátaxis's own warning against creating empty template scaffolding.
+- [x] `summary.md` deliberately **not** built, because `formats.md` already covers summaries. Heeded Diátaxis's own warning against creating empty template scaffolding.
 
 ### 4. humanizer.md trim
 
@@ -38,24 +38,24 @@ The original blocker stands: economist.com, wsj.com, bloomberg.com and hbr.org a
 
 ### 5. Structural consolidation
 
-- [x] `style-general-writing.md` deleted — 3 of 5 rules duplicated `foundations.md`, and its only example was already in `examples.md` verbatim.
+- [x] `style-general-writing.md` deleted: 3 of 5 rules duplicated `foundations.md`, and its only example was already in `inputs/examples.md` verbatim.
 - [x] `style-management-summary.md` + `article-structure.md` merged into `formats.md`.
-- [x] `DONTS.md` and `examples.md` kept separate on purpose, with the reason recorded in both.
+- [x] `DONTS.md` and `inputs/examples.md` kept separate on purpose, with the reason recorded in both.
 
 ### 6. Enforcement layer
 
 This was the largest piece of work and wasn't in the original checklist. It exists because the skill kept shipping drafts where a pass was *reported* as applied while its rules were violated in the same text.
 
-- [x] **`check.py`** — 22+ mechanical checks, stdlib only, exit 1 on any FAIL. Conditional flags for `--summary`, `--email`, `--article-half/full`, `--client`, `--nonnative`, `--dashes-ok`, `--compare`.
-- [x] **`CHECKLIST.md`** — the judgment half, step by step. Requires reporting what was run, not "applied the skill".
-- [x] **`test_drift.py`** — fails when `check.py`'s wordlists drift from the reference files, in three directions (MISSING, ORPHAN, BROKEN RULE ANCHOR). Verified it can actually fail by injecting each direction.
-- [x] **`test.sh`** — drift test plus 7 fixtures.
+- [x] **`check.py`**: 22+ mechanical checks, stdlib only, exit 1 on any FAIL. Conditional flags for `--summary`, `--email`, `--article-half/full`, `--client`, `--nonnative`, `--dashes-ok`, `--compare`.
+- [x] **`CHECKLIST.md`**: the judgment half, step by step. Requires reporting what was run, not "applied the skill".
+- [x] **`tests/test_drift.py`**: fails when `check.py`'s wordlists drift from the reference files, in three directions (MISSING, ORPHAN, BROKEN RULE ANCHOR). Verified it can actually fail by injecting each direction.
+- [x] **`tests/test.sh`**: drift test plus 7 fixtures.
 - [x] Every reference file ends by stating it is not self-enforcing.
 
 ### 7. Style-only mode
 
 - [x] `SKILL.md` picks a mode before anything else. Style-only (the default) runs plain wording + DONTS + humanizer and explicitly does not restructure, compress, reorder, or impose a format.
-- [x] `--compare ORIGINAL` enforces the mode's characteristic failure: fails past 15% word loss, flags changed paragraph count. Verified — a real style edit passes at +4%, a compressed rewrite of the same text fails at −59%.
+- [x] `--compare ORIGINAL` enforces the mode's characteristic failure: fails past 15% word loss, flags changed paragraph count. Verified: a real style edit passes at +4%, a compressed rewrite of the same text fails at −59%.
 
 ### 8. Defects found and fixed by testing
 
@@ -99,34 +99,322 @@ The pattern is stable and worth stating on its own: **purpose-built fixtures kep
 
 ### 11. The manual
 
-- [x] `skills/clear-writing/README.md`. Nine sections: mode choice, architecture, the four inputs and how to extend each, a task-to-recipe table with a worked email example, the two halves of enforcement, extension points, design decisions, known limits, provenance.
+- [x] the repo-root `README.md`. Nine sections: mode choice, architecture, the four inputs and how to extend each, a task-to-recipe table with a worked email example, the two halves of enforcement, extension points, design decisions, known limits, provenance.
 - [x] Written through the skill and checked with `check.py`, which is what surfaced the last two false positives.
 
 ---
 
+### 12. File layout
+
+- [x] The manual moved from inside the skill to the repo root as `README.md`, so it is the first thing the repo shows rather than a file three levels down.
+- [x] Grouped into subfolders by how often each file is read: `references/` (on demand), `inputs/` (supplied by you), `templates/`, `tests/`. Only `SKILL.md`, `CHECKLIST.md` and `check.py` stay at the skill's top level.
+- [x] `test-fixtures/` became `tests/fixtures/`; `test.sh` and `test_drift.py` moved under `tests/` with the import and fixture paths rewired.
+- [x] `backlog.md` moved to `docs/`, leaving the repo root at four files.
+- [x] Verified after the move: `tests/test.sh` all green, `install.sh --status` links intact, and `inputs/` plus `tests/` reachable through the installed symlink.
+
+### 13. The dash rule now applies to the skill's own files (DONE)
+
+- [x] Cleared every em and en dash out of the nine prose files, the four templates, the two input files, the fixture README, `docs/v2-checklist.md` and `CLAUDE.md`. 257 of the repo's 287 dash characters removed, each replacement chosen per instance: a period, comma, colon, semicolon or parentheses depending on what the sentence was doing.
+- [x] Also cleared them from `check.py`, `tests/test_drift.py` and `tests/test.sh`, whose comments and printed output carried them.
+- [x] The remaining 30 characters, across 17 lines, are all deliberate: the two regexes `check.py` scans with, `test_drift.py`'s rule anchor and `strip()` char class, the code-span mentions in `humanizer.md`, `inputs/voice-sample.md`, `CLAUDE.md`, `README.md` and this file, and the four fixtures that exist to be caught (`bad.md`, `naming-vs-using.md`, `deslop-orig.md`, `style-orig.md`). Those name the mark or test for it rather than using it.
+- [x] `CLAUDE.md` rule 6 held a real violation, in the always-on file that states the rule. Fixed.
+- [x] **Enforced, not just done.** `tests/test.sh` now runs the dash check over every prose file in the skill plus `README.md`, `CLAUDE.md` and this file, and locks the script literal counts at 2/2/1 so a new one fails. Verified by injecting a violation in each direction: both guards fail, exit code 1.
+
+### 14. End-to-end test, 2026-08-23
+
+Ran the skill on fresh material rather than on its own fixtures: a 561-word Q3 analysis into a management summary plus email variant (full mode), a 180-word team message reworded (style-only), and a client note.
+
+- [x] Full mode: summary 220 words, 0 FAIL 2 REVIEW; email 113 words, 4 sentences, 0 FAIL 0 REVIEW. The clustering rule worked as intended: three of the source's four findings shared one root cause and were led with as one point, not ranked flat.
+- [x] **The facts audit caught five real defects** the mechanical half could not see: three hedges silently dropped from estimates (*roughly* 18%, *roughly* $60k, *perhaps* four weeks), one claim added that the source never made ("we do not recommend it"), and a timing softened to "recent" where the source said "toward the end of last month". Fixed in the draft. The vague date was **not** converted into a specific one, which is the failure rule 5 exists for.
+- [x] **The style-only compression guard caught a real 22% cut** on the first attempt at a wording-only pass. Second attempt: 180 to 159 words, 12%, 3 to 3 paragraphs, pass.
+- [x] `--house` on all four profiles behaves as documented: our summary reviews against Reuters for missing subheads and bullets and passes its no-dash target.
+
+**One defect found and fixed:** the `--client` next-update check required the literal words "next update", so a note ending "I will write again by Friday 5 September" failed it. Same shape as the defects in section 8: the check measured a phrase as a proxy for a promise. It now looks for a commitment verb and a time expression in the same sentence, and distinguishes *no follow-up promised* from *a follow-up promised with no time on it*. Two fixtures lock both branches, and a 15th rule anchor ties it to `audiences.md`.
+
+### 15. House-style demo, and two conflicts resolved
+
+Rendered one set of facts as a Reuters wire piece and as an HBR argument, then checked each against its own profile and against a profile it was not written for. The HBR-shaped draft passes as HBR and fails as Economist on subheads, so the profiles do discriminate rather than just print numbers.
+
+**Two conflicts between a house profile and a general rule, both now resolved in `check.py`:**
+
+- **Reuters' bullets against Reuters' sentence median.** The profile prescribes a 3-4 bullet summary block, and its 30-word median was measured on body prose. Measuring the median across a document that follows the bullet convention mixed 8-word bullets with 40-word leads: the same draft measured 14 whole-document and 41 body-only. `prose_sentences()` now excludes list items, headings and subject lines, and the email 5-sentence check reuses it instead of its own duplicate. Both figures now agree.
+- **HBR's title-case subheads against the Title Case rule.** Writing correct HBR guaranteed a FAIL the profile itself asked for. A named title-case profile downgrades that check to REVIEW and says which profile did it; with no profile, or a sentence-case one, it still fails.
+
+Locked with `tests/fixtures/house-hbr.md` (0 FAIL as hbr, 1 FAIL bare) and `house-reuters.md` (median inside 24-32 with bullets excluded), plus two rule anchors in `house-styles.md`, bringing the anchor count to 17.
+
+Also fixed two genuine uses of "actionable" in our own files, in `house-styles.md` and `inputs/voice-sample.md`.
+
+### 16. House voices, not just house shapes
+
+`house-styles.md` gave conventions and said so, disclaiming voice. That disclaimer was stronger than the evidence warranted: the recorded observations already held opening moves per register, signature rhetorical devices, register bands, punctuation signatures, attribution formulas and refusals.
+
+- [x] `references/house-voices.md`, 1,940 words. Six components per publication: opening move, signature move, register, punctuation signature, attribution, refusals. Plus a same-fact-four-voices table and an explicit list of what is not enforceable by counting.
+- [x] **Every rule carries an evidence grade**, because voice rules invite invention in a way shape rules do not: **measured** (counted across the sample), **recorded** (a verbatim fragment, n=1, imitate the move never the wording), **inferred** (reasoned from a measured fact). Where nothing was captured the row says **not captured** instead of guessing. FT is labelled the thinnest profile of the four.
+- [x] Six new voice checks in `check.py`, all driven off the profile dict: semicolon rate, spelling signature, Reuters attribution, Economist lowercase acronyms, HBR register band, HBR antithetical dek, plus allusive-versus-informational headline.
+- [x] Wired into `SKILL.md` pass 3, and `CHECKLIST.md` step 4 carries the judgment half: right opening move, signature device earning its place, nothing quoted from the guide reused, no `inferred` row written as if measured.
+- [x] 23 rule anchors, up from 17.
+
+**The test that makes it real.** Four fixtures, one per voice, each scored against all four profiles. Every fixture must rank its own profile strictly first on (FAIL, REVIEW). All four do, at 0 FAIL and one REVIEW against their own profile. Verified capable of failing: adding two bullets to the Economist fixture breaks it. A voice guide whose four voices a checker cannot tell apart is decoration, and this is the assertion that would catch that.
+
+**Three defects found by writing the fixtures:**
+
+- **A generic `-ised` suffix is not a UK spelling test.** It caught *raised, praised, advised, revised, promised, surprised*, none of which have a `-ized` form. Replaced with the 24 stems that actually alternate. Verified zero hits on a bait sentence of six false positives and ten hits each on real UK and US lists.
+- **A standfirst merged into the first body sentence**, giving the FT fixture a phantom 64-word sentence. Whole-line italics are now terminated as their own unit, like headings and list items.
+- **And then excluded from the median**, because display copy is not body prose. Counting it pulled the Economist fixture to 12.5, below its own 13-26 band. All four fixtures now sit inside their own band: 13, 25, 25.5, 17.
+
+### 17. Audited against published guidance on building style guides
+
+Researched how working prose style guides get built, and what the platform running this skill says about authoring one. Full record with sourcing and reachability caveats in `docs/research-styleguide-design.md`.
+
+- [x] **Tables of contents** added to all seven reference files over 100 lines. The authoring docs are explicit: a file over 100 lines needs one, so a partial read still shows the file's scope.
+- [x] **The three tolerance divisors documented**, per Ousterhout's law as the docs cite it. The HBR register floor turned out to sit at exactly `AI_TELL_WORDS_PER_HIT`, so the register check and the slop check now agree by construction rather than by accident.
+- [x] **`SOURCES`, Vale's `link:` field against local files.** 62 checks mapped to the file and section stating their rule, printed as a `rules behind the flags` footer under every FAIL and REVIEW. A check with no entry prints `NO SOURCE RECORDED`, and `tests/test.sh` fails on it across nine fixtures and every flag combination. Verified by deleting an entry.
+- [x] **`check.py --rules`, a coverage manifest**, after Microsoft's Vale package, which publishes its own coverage as 37/64 guidelines and 106/849 word-list items. Ours prints the 62 mapped checks by file, then names the judgment-only rules no check covers.
+- [x] **Description rewritten in third person** with the deliverable types and the trigger verbs a user would say.
+- [x] Confirmed already compliant: SKILL.md at 56 lines against a 500-line ceiling, references one level deep, the validator-fix-repeat loop, concrete examples, consistent terminology.
+
+**Two independent confirmations worth recording.** Vale advertises excluding code from prose rules as a design goal, so our twelve naming-versus-using false positives were the normal shape of this mistake rather than an unusual one. And Google's own Vale rule ships passive voice at `level: suggestion`, the weakest of three, matching our REVIEW.
+
+### 18. Evals exist, and have not been run
+
+`evals/evals.json`, six cases and 34 assertions, in the format the authoring docs specify. Each carries a `gap` field naming the development failure it targets, because the docs say to build evals against real gaps and this skill was built before its evals existed. Two are the founding failures: the em dash shipped while its pass was reported as run, and "toward the end of last month" returned as a specific date. A test keeps the file valid and its inputs present.
+
+**Why they are not run, and why that matters.** The docs say a baseline comparison needs a fresh session per case, with the skill disabled for one arm, because leftover context from authoring masks gaps in the written instructions. **Every test this project has ever run has run inside the authoring session**, which is precisely that condition. So `tests/test.sh` and `evals/` measure different things and neither substitutes for the other. One case, `should-not-trigger-on-a-code-question`, measures trigger accuracy, which had never been tested at all.
+
+### 19. proselint audit, and the self-check widened to every rule (DONE)
+
+Cloned proselint (BSD) and compared term by term: **148 of ours against 837 of theirs in the overlapping categories, 6 shared.** Not a failure of either list. proselint encodes print-era usage authorities, 30 of its 76 files sourced to Garner, with 2014 dates and no concept of an LLM tell. Ours targets AI prose, buzzwords and structure.
+
+- [x] **The one category that genuinely overlaps is corporate and bureaucratic language, and we held 3 of 55.** 30 terms adopted, each judged rather than bulk-imported: 13 into `UNFAMILIAR` (Garner-sourced commercialese and verbed nouns), 8 into `BUZZWORDS`, 9 into `PHRASAL_IDIOM`.
+- [x] **The split is the finding.** proselint puts all 25 corporate-speak terms in one bucket with one verdict. Our four jargon tests split them: `win-win` grades, so it is banned; `elephant in the room` names a real thing, so it gets substituted for this audience. Different lists, different fix. The architecture held on data it was not built from.
+- [x] The adoption forced the drift test to learn three new documentation locations. Documented literal terms went 104 to 134, all matched.
+
+**Item K closed, and the self-check widened.** Three proxy defects fixed:
+
+- **Italic term runs are now a naming context.** Two commas is the discriminator, wrapped lines allowed, blank lines not, and lookarounds keep it off `**bold**`. `humanizer.md` went from 104 AI-tell hits to zero, because it lists the tells rather than committing them.
+- **Tables are not paragraphs.** A table block has no sentences in it; counting it as one reported 250-word paragraphs in four files.
+- **Nor are list blocks.** Consecutive items carry no blank line, so a nine-rule numbered list read as one paragraph. `paragraphs()` now reads block structure from the raw source, because `strip_markup` has already removed the markers it needs.
+
+Three genuine one-line fixes fell out: a quotation trimmed to fit the short-quote context, an example emoji moved into a code span, and one ordinary "actually" removed.
+
+`tests/test.sh` now asserts **0 FAIL on every guidance file and repo doc**, not just no dashes. That was blocked until the three defects above were fixed, and it is the check that would have caught the two hand-found "actionable" uses automatically. Verified by injecting a violation.
+
+### 20. HBR devices counted, and the metrics corrected (DONE)
+
+Five HBR PDFs supplied. **All five are the same five already in the sample**, identified by fragments already recorded from each: the antithetical dek, the False Alignment subheads, the tips-list headings, and the "circle back with all stakeholders" sentence. Sample size stays at 5, so nothing here is a new-data claim.
+
+**What did change is extraction quality.** These files are RC4-128 encrypted, and `pypdf` cannot be imported in this container because its crypt provider pulls in rust bindings that panic. Implementing the standard security handler plus per-font ToUnicode decoding recovers **20,588 body words against 14,557** on the first pass, and fixes the shifted-encoding runs that made some text unreadable.
+
+**Four measured figures corrected, one confirmed:**
+
+| Measure | Was | Now |
+|---|---|---|
+| Sentence median | 12-22 | 11 tips, 17-18 features, 21 digital |
+| Over 25 words | 29% | 24% |
+| Register words | 1 per 644-787 | 1 per 849-2,616 |
+| Semicolons | up to 12 | up to 19 |
+| Em dashes | 1 per 157 | 1 per 174, range 156-193. Held |
+
+**And the device analysis was finally done, which is what the samples were for.**
+
+- **One recorded rule did not survive counting.** The antithetical dek was called the house opening move on one instance. At five it is **1 of 5**. What 2 of 5 share is a reversal, in two different syntaxes. The check now reviews for it instead of requiring it.
+- **The real shared opening is stronger: 4 of 4 substantive articles put the reader or their situation in sentence one**, never the thesis and never the author. Four distinct vehicles.
+- **New and the strongest finding: 3 of 3 articles that coin a term carry it through most of their subheads, inflected, and negate it at the turn.** *False Alignment* to *True Agreement* to *True Disagreement*. This is now an enforced check.
+- **Hedging is distributed at 1 per 138-175 words, 5 of 5, and never stacked.** Our stacked-hedging check found zero stacked hedges in four of five and one in the fifth, so the distributed rate and the stacking ban measure different things and both hold. That is a design decision validated against the source it was built to describe.
+- **Attribution filled a `not captured` row.** Sparse and specific rather than statistical: a percentage is rare enough to be an event at 1 per 1,583 words.
+
+**Six generators** written as procedures rather than constraints, in `house-voices.md`. Two are enforced: `--house hbr` now checks the coined term's share of subheads and the hedge rate.
+
+**They found a real gap in our own output.** Our two HBR-voice drafts hedged at 1 per 237-282 against the house 138-175, under-hedging by about half, and one carried its coined term through only 1 of 4 subheads. Applying G3 and G4 to `docs/example-hbr-voice.md` moved it to 4 of 4 subheads and 1 per 144 words, both inside band. That is a metric failing to show something a generator showed.
+
+Two of my own errors were caught in the analysis and are worth recording: a percentage regex that required a word character after `%` reported zero percentages in 20,588 words, and the extraction returns object order rather than reading order, so positional devices beyond the opening cannot be measured from it. 26 rule anchors, up from 23.
+
+### 21. Economist measured on full articles, and the strongest claim corrected (DONE)
+
+Six full Economist articles supplied, 5,286 words, 269 sentences: two political reports, a business analysis, a business news piece, a data-journalism explainer and a news-brief roundup. Two were already in the sample as excerpts and one confirms the pipeline: the brief roundup measures 401 words, 24 sentences, median 16, **exactly** the row recorded from the excerpt sample.
+
+**The correction is to the claim this project called its most consistent result.** "Zero subheadings and zero bullets in all nine" was measured on excerpts. Full articles carry crossheads, in 2 of 5. The word "excerpt" was carrying the claim. The bullet half survived: zero bullets across all fifteen items. **Fourth time a finding held on one sampling method and broke on a better one.**
+
+| Measure | From excerpts | From six full articles |
+|---|---|---|
+| Sentence median | 13-26 | 16-23, pooled 19 |
+| Over 25 words | 20% | 23% |
+| Em dashes | 1 per 348 | **zero in all six** |
+| Headline words | 4, 8, 9, 10 | 7, 8, 9, 10, 10, median 9. Confirmed |
+| Subheads | none | crossheads in 2 of 5 |
+
+**Three devices counted and now enforced:**
+
+- **The standfirst turns against the headline, 4 of 5.** Two open on *But*, one appends *, too*, one runs a *just as* symmetry. The exception is the data-journalism piece, whose standfirst is a bare number.
+- **A short flat sentence lands early, 4 of 6.** Three to six words in the opening paragraph: *The market shrugged.* *Which is in Munich.* *And so he swiftly sidestepped it.* The clearest single marker of this voice.
+- **Crossheads are 3-4 words and allusive, 2 of 2 articles that use them.** *How to spend it* (an FT title), *Can't touch this* (MC Hammer), *Stoppable force, movable object* (an inverted cliché). Three of three are jokes. The data piece's one crosshead is *Methodology*, which is the exception proving the split.
+
+Plus a device that needed no check: **the institutional "we" is gated to data journalism**, 14 hits in that article against 0-4 in the other five, with a Methodology section naming its source paper. Elsewhere the publication is invisible.
+
+**Six generators** written in `house-voices.md`. The subhead policy is now `optional` rather than banned, so a crosshead reports instead of failing.
+
+**Validated against the source:** the three new checks reproduce the hand counts exactly, including flagging the one standfirst that does not turn. Then applying G1, G2 and G3 to `voice-economist.md` moved it from tying with the FT profile back to strictly best. One check bug found on the way: the turn detection was case-sensitive, so a capitalised *Just as* was missed.
+
+**Still open on this profile:** our Economist draft runs a 13-word median against the measured 16-23, so our imitation is terser than the house. That is the user's own 6-word median showing through, and it is a REVIEW rather than something to paper over. 30 rule anchors, up from 26.
+
+### 22. FT measured on clean text, and a register rule that corrects both profiles (DONE)
+
+Five FT articles pasted as text: four news pieces (2,355 words, 94 sentences) and one long read (1,717 words, 72 sentences). This was the thinnest of the four profiles, and only because its numbers came from print-to-PDF files with no text layer.
+
+| Measure | Old, upper bound | Measured |
+|---|---|---|
+| Sentence median | 22-27 | 25 news, 20 long read |
+| Over 25 words | ~50% | **47% news. The old figure held** |
+| Em dashes | 1 per 214 | about 1 per 430, zero in one piece |
+
+**Discipline paying off:** after the first article came in at 39% over-25-words I suspected the whole row was caption contamination. Two of the next three exceeded 50%. Holding the correction until n=4 is what stopped a sound row being overwritten from one sample.
+
+**The devices, counted across five:**
+
+- **Attribution at 1 per 38-62 words, 5 of 5.** The tightest habit in any profile, about four times HBR's hedging rate. Enforced.
+- **The epithet replaces the name**, 2-9 per piece. *The ChatGPT maker*, *the prime minister*.
+- **Two hard style markers:** *per cent* always spelled out (12 instances, 0 symbols), and a spaced ellipsis inside quotations. The first is enforced.
+
+**The correction that matters most is not about the FT.** An earlier version of `house-voices.md` contrasted "the FT standfirst adds a fact" against "the Economist standfirst turns" as a difference between publications. **It is a difference between registers.** FT news never turns (0 of 4); the FT long read turns and carries an allusive *Why…* headline, exactly like the Economist's. The surviving rule is broader: **headline type and standfirst behaviour are set by register, not masthead.** Now a `CHECKLIST.md` step, an anchor, and the reason the FT profile carries news values with the feature flip documented.
+
+**A register-gated device, long read only:** the piece is structured by posed questions, six against zero in all four news pieces. Same shape as the Economist's institutional *we* appearing only in data journalism.
+
+**And an anti-slop rule narrowed by evidence.** `humanizer.md` flags synonym cycling as an AI tell, and the FT does it deliberately in every article. The rule now turns on whether the substitute earns its place: an epithet carrying information the reader needs is reporting, a synonym carrying nothing is the tell.
+
+Two bugs found in my own new checks: the standfirst turn detection was anchored to the start of the string and missed a mid-sentence *but*, and an `attribution` key used as a tuple for the FT made the Reuters boolean check fire on truthiness. Both fixed and verified.
+
+Applying G1 to our own FT draft took it from **zero attributions to 1 per 57 words**. Six generators written. 33 rule anchors, up from 30.
+
+### 23. A sixth FT article breaks half the rule I wrote in section 22 (DONE)
+
+A second FT feature arrived, so the register split no longer rests on one. Two halves confirmed, one broken.
+
+| | FT news (4) | FT features (2) |
+|---|---|---|
+| Standfirst | states. **0 of 4 turn** | **turns. 2 of 2** |
+| Sentence median | **25** | **20**, both features exactly |
+| Narrative lede on a named person | no | **2 of 2** |
+| Headline | informational, **4 of 4** | **varies: 1 allusive, 1 stating** |
+| Questions in the body | 0 of 4 | **varies: 6 and 1** |
+
+**The standfirst half holds at 6 of 6 and stays enforced.** News states the next fact, features turn against the headline.
+
+**The headline half is wrong and was written one turn ago.** Section 22 claimed a feature takes "an allusive headline and a turning standfirst". The second feature has a stating headline. Corrected in `house-voices.md`, `CHECKLIST.md` and the drift anchor: the headline is not register-bound, so pick it on whether it must survive travelling alone.
+
+**"Structured by posed questions" is downgraded from a register rule to a recorded device.** Six in one feature, one in the other.
+
+**Worth recording plainly:** section 22 congratulated the project for holding a different correction back until n=4, and in the same breath wrote a fresh over-claim from n=1. The lesson does not transfer by being learned once. It has to be applied to each claim separately, including a claim that is itself a correction.
+
+Attribution now holds at 1 per 38-61 words across 6 of 6, which makes it the best-evidenced device in any of the four profiles.
+
+### 24. Reuters held out, and it passed unchanged (DONE)
+
+One Reuters consumer-markets round-up, used as a held-out test of the profile built from four earlier wire articles. **All seven `--house reuters` checks passed on unseen material, and nothing needed correcting.** Every other profile in this project moved when new material arrived.
+
+| Recorded | Held-out article |
+|---|---|
+| Summary block, 3-4 bullets, median 11 words | 4 bullets, 10-12 words, **median 11 exactly** |
+| All-caps crossheads, 5-6 words | 2 crossheads, 5 words each |
+| Zero em dashes, zero semicolons | zero and zero |
+| Sentence median 30 | **24.5**, the floor of the 24-32 band |
+
+**One thing flagged rather than changed.** The median is 24.5 against a recorded 30. The article is a markets round-up rather than breaking news, so it may be register, and it sits inside the band. Nothing moves on one article, but the profile now says that if further samples cluster near 24 the band's centre is wrong.
+
+**And one device found, countable, and deliberately left unenforced.** Every attribution runs quote first, then *said* plus name plus full job title plus institution. Five of five, zero in the reverse order. Unanimous inside one article, which is stronger than a single instance and weaker than a habit across articles. Enforcing it would repeat the mistake made twice here already, so it is recorded and waits for a second article.
+
+That decision is the point of this entry. The measurement was easy; **choosing not to promote a clean unanimous count from one article is the part that took the previous five corrections to learn.**
+
+All four profiles now have held-out or expanded evidence. 35 rule anchors.
+
+### 25. Three more Reuters articles resolve both held-back questions (DONE)
+
+Four held-out Reuters articles in total now: a brief, two news stories and an interview, none used to build the profile.
+
+**The restraint was vindicated.** Section 24 recorded a held-out median of 24.5 against a recorded 30, and deliberately did not move the band, noting only that clustering near 24 would mean the centre was wrong. **Two of the next three came in at 32.** Moving the centre down on one article would have been the fifth over-claim in this project. The floor did need lowering from 24 to 21, because the interview runs shortest: question-driven sentences are short.
+
+**And the device was promoted, on evidence.** Section 24 found the quote-before-attribution order unanimous at 5 of 5 inside one article and refused to enforce it. Across four articles it now stands at **7 against 1 in 3 of 4**, so it is enforced.
+
+So both halves of the previous decision came out right, and for opposite reasons: the number stayed because more data contradicted the single sample, the device shipped because more data confirmed it. **That is what holding one turn buys, and it cost nothing.**
+
+| Recorded | Four held-out |
+|---|---|
+| Summary bullets, median 11 words | **median 11 again**, 11 bullets across 3 of 4 |
+| Summary block above every article | 3 of 4; the exception is a 193-word brief |
+| All-caps crossheads, 5-6 words | **2-9 words.** Recorded range too narrow |
+| Zero em dashes, zero semicolons | zero and zero, **eight articles running** |
+| Sentence median 30 | 32, 32, 24.5, 21. Pooled 26 |
+
+The bullet median landing on 11 for a second independent time is the strongest single confirmation in the whole dataset.
+
+**One process failure worth recording.** A scripted block replacement in `house-voices.md` used a terminator that never matched, so it deleted to end of file and destroyed seven anchored rules. The drift test caught it immediately (`29/36 anchors`), `git checkout` restored the file, and the edit was redone against explicit line bounds. The coupling that exists to catch documentation rot caught a destructive edit instead, which is a use it was not designed for.
+
+36 rule anchors. All four profiles now rest on expanded or held-out evidence.
+
+### 26. Six held-out Reuters articles, and a bug in the check shipped last turn (DONE)
+
+Two more held-out articles, a sports report and a trade story, bringing the held-out set to six: a brief, three news stories, a sports report and an interview. Ten Reuters articles measured in total.
+
+| Recorded | Six held-out |
+|---|---|
+| Summary bullets, median 11 words | **median 11.5** across 18 bullets in 5 of 6. **Third independent confirmation** |
+| Summary block above every article | 5 of 6; the exception remains the 193-word brief |
+| All-caps crossheads | 3 of 6 carry them, 2-9 words |
+| Zero em dashes, zero semicolons | zero and zero, **ten articles running** |
+| Sentence median 30 | 32, 32, 27, 25, 24.5, 21. Pooled 26 across 108 sentences. The widened 21-33 band holds all six |
+
+**The bug matters more than the numbers.** The quote-before-attribution check shipped last turn matched only one of the two forms Reuters uses. It caught `"...", said Brian Jacobsen, chief economic strategist at ...` and missed `"...", Carney said`. So it scored the habit at **7 against 1 when it is 14 against 1**, and reported an article carrying three instances as having none. Fixed and re-verified on all six.
+
+**A device can be stronger than the check that found it.** The under-count did not weaken the rule, it hid half the evidence for it. Every previous measurement bug in this project inflated a finding or invented one; this is the first that understated a real habit.
+
+**One qualification added to the dash finding.** Reuters uses no em dashes in ten articles, but it does use a spaced hyphen as a parenthetical, twice in one article. So the house is em-dash-free rather than dash-free. Our general dash check flags those spaced hyphens; it is prescriptive and stays, but the profile now claims only what it measured. Writing that qualification tripped the check on this repo's own file, which backticks fixed.
+
+36 anchors, suite green.
+
+### 27. Review of the skill, and one duplication removed (DONE)
+
+A review pass over the whole skill rather than a new measurement.
+
+**The finding worth having: `house-styles.md` and `house-voices.md` both carried the four publications' measurement tables, and I had been updating both.** Two files owning the same numbers is a guaranteed divergence, and it had already happened. `house-styles.md` was stale on three figures `check.py` and `house-voices.md` had moved:
+
+| | `house-styles.md` said | Actual |
+|---|---|---|
+| Economist sentence median | 13-26 | 16-23 |
+| HBR sentence median | 12-22 | 11-21 |
+| HBR dash rate | 1 per 157 | 1 per 174 |
+
+**The drift test could not have caught this**, because its 36 anchors all point at `house-voices.md`, the file that was being kept current. The coupling was sound and its coverage was not.
+
+Fixed at the cause. `house-voices.md` now owns every measured number; `house-styles.md` keeps only what you decide with them: which profile to pick, what a profile cannot give you, the management-email transfer table and the two conflict resolutions. It drops from 1,882 to 1,488 words.
+
+**And a structural guard, since the anchor mechanism structurally could not see this.** `tests/test.sh` now fails if any reference file other than `house-voices.md` carries a `Sentence median`, `Em dashes`, `Over 25 words` or `Semicolons` table row, and also fails if `house-voices.md` stops carrying them. Verified in both directions.
+
+Also corrected: `SKILL.md` claimed "22+ checks" and `README.md` claimed "25+"; the real figure is 26 on a plain draft and up to 40 with flags.
+
+**Next steps rewritten.** The list had duplicate numbering, pointed at a closed item, and carried a judgment the evidence has since refuted, which is recorded at the end of this file rather than quietly deleted.
+
 ## Open
 
-### A. `examples.md` has only its 5 launch pairs — the one real content gap
+### A. `inputs/examples.md` has only its 5 launch pairs: the one real content gap
 
 Can't be fixed by research. The file admits only real user-supplied or conversation-captured pairs, never invented ones, and that invariant is deliberate. It grows only through use.
 
 **Blocked on:** actual use of the skill on real drafts.
 
-### B. Voice sample exists but covers only short-form writing — PARTLY DONE
+### B. Voice sample exists but covers only short-form writing (PARTLY DONE)
 
-- [x] `voice-sample.md` created from real material: `backlog.md` plus the user's session instructions, quoted verbatim.
+- [x] `inputs/voice-sample.md` created from real material: `backlog.md` plus the user's session instructions, quoted verbatim.
 - [x] Patterns extracted and **measured** rather than estimated: 27 sentences, median 6 words, max 16, none longer. Imperative mood dominant, sparse punctuation, "as well" as a habitual closer.
 - [x] **The em-dash question is settled empirically:** character scan finds zero `—`/`–` across every quote and across `backlog.md`. The ban applies; `--dashes-ok` should not be passed. `CHECKLIST.md`'s flag table now says so.
 - [x] Records the distinction that matters: match rhythm and word choice, never reproduce typos or missing punctuation from a sample.
 - [x] Wired into `humanizer.md`, `SKILL.md`, and `CHECKLIST.md`, with a drift-test rule anchor so the wiring can't silently rot.
 
-**Still open:** both sources are short-form and functional — a planning list and a set of instructions. Neither is connected prose written for a reader. So the sample supports word choice, sentence length, punctuation, and the dash decision, but says nothing about how this writer opens a document, builds a paragraph, or handles a transition.
+**Still open:** both sources are short-form and functional: a planning list and a set of instructions. Neither is connected prose written for a reader. So the sample supports word choice, sentence length, punctuation, and the dash decision, but says nothing about how this writer opens a document, builds a paragraph, or handles a transition.
 
-**Needs:** two or three paragraphs of real connected prose the user wrote for someone else — an email to a colleague, a section of a doc, a Slack post. Appended as Source 3, same verbatim treatment. Until then paragraph-level voice matching is explicitly marked unsupported.
+**Needs:** two or three paragraphs of real connected prose the user wrote for someone else: an email to a colleague, a section of a doc, a Slack post. Appended as Source 3, same verbatim treatment. Until then paragraph-level voice matching is explicitly marked unsupported.
 
-### C. CI — DONE
+### C. CI (DONE)
 
-- [x] `.github/workflows/clear-writing-tests.yml` runs `test.sh` on any push or PR touching the skill, plus manual dispatch. Verified the suite passes when invoked from the repo root the way CI does.
+- [x] `.github/workflows/clear-writing-tests.yml` runs `tests/test.sh` on any push or PR touching the skill, plus manual dispatch. Verified the suite passes when invoked from the repo root the way CI does.
 
 Closed because "only runs when someone remembers" was the same failure mode the enforcement layer exists to fix, one level up.
 
@@ -142,7 +430,7 @@ Passive voice and noun-string detection are pattern matches, not parsing. That's
 
 **Possible fix:** a real POS tagger would make both precise, at the cost of adding a dependency to a currently stdlib-only script. Probably not worth it.
 
-### F2. Ground rules and multi-device install — DONE
+### F2. Ground rules and multi-device install (DONE)
 
 - [x] `CLAUDE.md` at the repo root holds **six always-on rules**, chosen by one test: did this fail in practice, and did it fail silently? No em dashes; jargon tests apply to chat replies; never generalise from one or two samples; report what you ran; invent no specifics; do not infer traits about people from their writing. Each has a named incident behind it.
 - [x] Three-layer split documented in `CLAUDE.md` and `README.md`: always-on rules, project conventions, on-demand skill. The always-on layer is deliberately capped at six because it costs context every turn.
@@ -152,9 +440,9 @@ Passive voice and noun-string detection are pattern matches, not parsing. That's
 
 ### F. Installation location still unverified on your own machines
 
-The previous version of this file claimed the skill was "live at `~/.claude/skills/clear-writing/`". In this container it is **not** — the synced skills mirror doesn't contain it, so the skill exists only in this repo. Whether it's installed on the user's own machine can't be verified from here.
+`./install.sh` has been run in this container: `--status` reports both the skill and `CLAUDE.md` linked, and the links survive the folder restructure. Whether it is installed on the user's own machines can't be verified from here.
 
-**Needs:** confirm where it should actually live, and how it gets there.
+**Needs:** run `./install.sh` once per machine, then `--status` to confirm.
 
 ### G. Mode selection isn't enforced, only documented
 
@@ -175,15 +463,39 @@ The previous version of this file claimed the skill was "live at `~/.claude/skil
 - [ ] 18F quotations were captured via a summarizing fetch, not character-for-character. High confidence, not pinned.
 - [ ] Reachable-but-unharvested primary pages in `GSA/plainlanguage.gov`: `guidelines/design/`, `guidelines/test/`, plus the SEC Plain English Handbook it cites.
 
+### L. Nothing has been measured against a baseline, or on more than one model
+
+Two items from the authoring checklist are open, and both need conditions this session cannot create:
+
+- **Run `evals/` in fresh sessions**, with-skill against without-skill. A case both arms pass is telling you the skill is not what fixed it, and we currently cannot distinguish those cases from real wins. `evals/README.md` gives two ways to run it.
+- **Test on Haiku, Sonnet and Opus.** The checklist asks for all three. Everything here has run on one model, and the docs note a skill that suits one may under-instruct a smaller one.
+
 ---
 
 ## Next steps, in priority order
 
-1. **Use the skill on real drafts and grow `examples.md`** (A). Still the only gap that research cannot close.
-2. **Add a connected-prose voice sample** (B). Two or three paragraphs you wrote for someone else. Highest value per effort of anything left, because it is the one input that would let paragraph-level voice matching switch from *unsupported* to working.
-3. **Run `./install.sh` on each machine you use** (F). It is verified working in this container; whether it is live on your own machines is still unconfirmed from here.
-4. **Re-audit the drift allowlists** (D) once they stop growing.
-5. **Use a template for a real document** (H), which would test the three that have never produced one.
-6. **Pin the 18F quotations** with one literal re-fetch (I).
+1. **Run the evals against a baseline in a fresh session** (L). Until that happens, nothing about this skill's *effect* is measured, only its internal consistency. This is the largest unknown in the project.
+2. **Add a connected-prose voice sample** (B). Two or three paragraphs written for someone else. Highest value per effort of anything left, and the one input that would move paragraph-level voice matching from *unsupported* to working.
+3. **Use the skill on real drafts and grow `inputs/examples.md`** (A). The only gap research cannot close.
+4. **Run `./install.sh` on each machine** (F). Verified in this container, unconfirmed elsewhere.
+5. **Test on Haiku and Sonnet** (L). Everything here has run on one model.
+6. **Use a template for a real document** (H). Three templates have never produced one.
+7. **Re-audit the drift allowlists** (D) once they stop growing.
+8. **Pin the 18F quotations** with one literal re-fetch (I).
 
-**Deliberately stopping:** more published prose. Four publications and ~25,000 words settled which rules are house convention and which are real practice. The last three batches found checker bugs rather than changed guidance, which is the signal that this input is exhausted.
+### A claim this file made and the evidence refuted
+
+An earlier version of this list said, under **Deliberately stopping**, that more published prose was exhausted: *"The last three batches found checker bugs rather than changed guidance, which is the signal that this input is exhausted."*
+
+Four further batches then produced the largest corrections in the project:
+
+| Batch | What it changed |
+|---|---|
+| HBR, re-extracted | four measured figures, and demoted the antithetical dek from house signature to 1 of 5 |
+| Economist, 6 full articles | **corrected the claim this file called its most consistent result**: zero subheads was an artefact of measuring excerpts |
+| FT, 6 articles | halved the dash rate, and turned a publication contrast into a register rule |
+| Reuters, 6 held out | widened two ranges, promoted a device, and exposed a check that under-counted by half |
+
+So the judgment was wrong, and wrong in a specific way worth keeping: **"we stopped finding new things" was measured on batches that arrived through a lossy pipeline.** Once extraction improved and full articles replaced excerpts, the same input source produced five corrections. Exhaustion of a source and exhaustion of a *method for reading* that source are different things, and this file conflated them.
+
+**Where that leaves the sampling question.** More prose is no longer the top priority, because the four profiles now rest on 10 to 15 items each and the last batch's findings were about our checks rather than the publications. But that is a claim about the current evidence, not a standing conclusion, and the last one of these was wrong.

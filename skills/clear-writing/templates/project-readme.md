@@ -1,6 +1,6 @@
 # Template: project README
 
-Only five items appear in every source surveyed: **name, one-line description, install, usage, license.** Everything else is project-dependent — delete what doesn't apply. The ordering below is stable across sources: identity → what and why → who for → prerequisites → install → use → help → contribute → legal.
+Only five items appear in every source surveyed: **name, one-line description, install, usage, license.** Everything else is project-dependent, so delete what doesn't apply. The ordering below is stable across sources: identity → what and why → who for → prerequisites → install → use → help → contribute → legal.
 
 ## Skeleton
 
@@ -26,7 +26,7 @@ Versions, OS constraints, dependencies. Only if constrained.
 
 ## Installation
 Numbered, explicit steps. Assume the reader is a novice in this ecosystem.
-If this outgrows a section, split it out — see `installation.md`.
+If this outgrows a section, split it out: see `installation.md`.
 
 ## Usage
 Examples liberally, and show expected output. An example with no output
@@ -56,12 +56,12 @@ Always last. Full name or SPDX identifier, plus the copyright owner.
 
 ## The main failure mode
 
-**A README is not a substitute for documentation.** GitHub's guidance is that a README carries only what's needed to get started and contribute, with longer material in a wiki or docs site. Google's internal convention goes further: a package README can legitimately be little more than a signpost — purpose, contact, status, usage, links.
+**A README is not a substitute for documentation.** GitHub's guidance is that a README carries only what's needed to get started and contribute, with longer material in a wiki or docs site. Google's internal convention goes further: a package README can legitimately be little more than a signpost: purpose, contact, status, usage, links.
 
-That said, the makeareadme.com guidance takes the opposite side on length and is worth knowing: *too long is better than too short* — if a README feels too long, move material into other documentation rather than deleting it.
+That said, the makeareadme.com guidance takes the opposite side on length and is worth knowing: *too long is better than too short*. If a README feels too long, move material into other documentation rather than deleting it.
 
 Other warned-against failures: title or description drifting out of sync with the package registry; an install section that assumes ecosystem fluency; no statement of whether contributions are accepted; usage examples with no expected output.
 
 ## Sources
 
-[standard-readme spec](https://github.com/RichardLitt/standard-readme/blob/main/spec.md) — the only actual spec, and the source of every hard number above. [Make a README](https://www.makeareadme.com/) ([repo](https://github.com/dguo/make-a-readme)) — the most-cited informal convention, and the source of the length counter-argument. [The Good Docs Project README template](https://gitlab.com/tgdp/templates) — source of the "who this is for" section and the fill-in-the-blank description patterns. [Google's engineering doc guide](https://google.github.io/styleguide/docguide/READMEs.html) — the internal-monorepo signpost convention. GitHub's own README guidance was reachable only via search snippets; its five questions (what, why, how to start, where to get help, who maintains) and the 500 KiB limit are reported from those.
+[standard-readme spec](https://github.com/RichardLitt/standard-readme/blob/main/spec.md), the only actual spec, and the source of every hard number above. [Make a README](https://www.makeareadme.com/) ([repo](https://github.com/dguo/make-a-readme)), the most-cited informal convention, and the source of the length counter-argument. [The Good Docs Project README template](https://gitlab.com/tgdp/templates), source of the "who this is for" section and the fill-in-the-blank description patterns. [Google's engineering doc guide](https://google.github.io/styleguide/docguide/READMEs.html), the internal-monorepo signpost convention. GitHub's own README guidance was reachable only via search snippets; its five questions (what, why, how to start, where to get help, who maintains) and the 500 KiB limit are reported from those.

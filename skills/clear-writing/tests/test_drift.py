@@ -8,25 +8,27 @@ break loudly instead.
 
 It checks both directions:
 
-  MISSING  — documented in a reference file but absent from check.py.
+  MISSING  = documented in a reference file but absent from check.py.
              The dangerous direction: a rule exists and nothing enforces it.
-  ORPHAN   — enforced by check.py but not documented anywhere.
+  ORPHAN   = enforced by check.py but not documented anywhere.
              The checker would flag something no reference file justifies.
 
 Terms that are patterns rather than literal strings ("X is the Y of Z") cannot
 be grepped, so they are listed in NON_LITERAL below with a reason. That list is
 the honest record of what this test does not cover.
 
-    python3 test_drift.py        # exit 0 = in sync
+    python3 tests/test_drift.py   # exit 0 = in sync (run from the skill root)
 """
 
 import re
 import sys
 from pathlib import Path
 
-import check
+HERE = Path(__file__).resolve().parent.parent   # the skill root, one level up
+sys.path.insert(0, str(HERE))                   # so "import check" finds check.py
 
-HERE = Path(__file__).parent
+import check  # noqa: E402 (must follow the sys.path insert above)
+
 REFS = HERE / "references"
 
 # Bold labels in humanizer.md whose italic term runs feed check.AI_WORDS.
@@ -112,7 +114,7 @@ NON_LITERAL = {
 # audiences.md states the external-client rules as prose with quoted bad
 # examples, not as an italic term list, so check.py's CLIENT_* lists are
 # variant expansions rather than transcriptions. The extractor cannot read
-# them. Instead, RULE_ANCHORS below asserts the underlying rules still exist —
+# them. Instead, RULE_ANCHORS below asserts the underlying rules still exist,
 # delete a rule from audiences.md and this test fails.
 RULE_ANCHORS = {
     "audiences.md": [
@@ -123,6 +125,42 @@ RULE_ANCHORS = {
         ("phrasal verbs with single-word verbs",
          "non-native rule 1 -> PHRASAL_IDIOM"),
         ("Referential, not evaluative", "jargon test 4 -> BUZZWORDS"),
+        ("Always give a next-update time",
+         "next-update check -> NEXT_UPDATE_COMMIT + NEXT_UPDATE_TIME"),
+    ],
+    "house-voices.md": [
+        ("median 11", "Reuters summary bullets -> bullets=True"),
+        ("Pooled 26", "Reuters median -> med=(21, 33)"),
+        ("14 against 1, across 4 of 6",
+         "quote before attribution -> quote_first=True"),
+        ("1 per 38-62 words", "FT attribution rate -> attribution=(30, 70)"),
+        ("always spelled out, never", "per cent -> percent_spelled=True"),
+        ("set by register, not masthead",
+         "headline and standfirst -> headline / stand_turn per profile"),
+        ("The standfirst turns against the headline",
+         "standfirst turn -> stand_turn=True"),
+        ("A short flat sentence lands early",
+         "short opener -> short_opener=True"),
+        ("3-4 words and allusive", "crosshead shape -> crosshead=(2, 5)"),
+        ("register-dependent, not absent", "subheads -> subheads=\"optional\""),
+        ("The opening move", "opening-move rules -> CHECKLIST.md step 4"),
+        ("1 per 849-2,616", "HBR register band -> HBR_REGISTER + register=1200"),
+        ("1 per 138-175 words", "HBR hedge rate -> hedge=(130, 200)"),
+        ("at least half your subheads",
+         "coined term across subheads -> subhead_term=0.5"),
+        ("name the belief, then reverse it",
+         "correction dek -> dek=\"correction\""),
+        ("could not be named because the information was not public",
+         "Reuters attribution -> ATTRIBUTION"),
+        ("neighbors", "Reuters US spelling -> US_SPELLING"),
+        ("lowercase", "Economist lowercase acronyms -> GLOSSED_ACRONYM"),
+        ("It isn't a failure of the technology.", "HBR dek -> dek=antithetical"),
+    ],
+    "house-styles.md": [
+        ("Title-case subheads",
+         "title-case downgrade -> HOUSE[...]['titlecase']"),
+        ("Sentence median measured over bullets",
+         "house median -> prose_sentences()"),
     ],
     "formats.md": [
         ("150-250 words", "summary length -> --summary"),
@@ -241,11 +279,30 @@ def documented():
                     for t in split_terms(cell):
                         found.setdefault(t, "DONTS.md")
 
+    # foundations.md rule 1 also documents two Garner-sourced families,
+    # adopted from proselint. Each is its own italic run, so each needs its
+    # own extraction point: the run after "repeat offenders" stops at the
+    # first closing asterisk.
+    for label in (r"dead business-letter formulas,", r"nouns turned into verbs,"):
+        m = re.search(label + r"\s*\*([^*]+)\*", f, re.S)
+        if m:
+            for t in split_terms(m.group(1)):
+                found.setdefault(t, "foundations.md")
+
     # audiences.md: the evaluative-buzzword italic run
     a = (REFS / "audiences.md").read_text(encoding="utf-8")
     for m in re.finditer(r"\*(leverage synergies[^*]+)\*", a, re.I):
         for t in split_terms(m.group(1)):
             found.setdefault(t, "audiences.md")
+
+    # audiences.md: the two proselint-sourced runs, one per verdict. The
+    # corporate-speak terms grade and are banned; the idioms name real things
+    # and get substituted, so they live in different check.py lists.
+    for label in (r"running test 4 on each one:", r"substituted rather than banned:"):
+        m = re.search(label + r"\s*\*([^*]+)\*", a, re.S)
+        if m:
+            for t in split_terms(m.group(1)):
+                found.setdefault(t, "audiences.md")
 
     return found
 
@@ -291,12 +348,12 @@ def main():
 
     if missing:
         print(f"\n  MISSING from check.py ({len(missing)}) "
-              f"— documented but not enforced:")
+              f"= documented but not enforced:")
         for t, src in missing:
             print(f"    - {t!r}  ({src})")
     if orphans:
         print(f"\n  ORPHAN in check.py ({len(orphans)}) "
-              f"— enforced but not documented:")
+              f"= enforced but not documented:")
         for t in orphans:
             print(f"    - {t!r}")
 
@@ -306,7 +363,7 @@ def main():
 
     if anchor_fails:
         print(f"\n  BROKEN RULE ANCHOR ({len(anchor_fails)}) "
-              f"— check.py enforces a rule its reference file no longer states:")
+              f"= check.py enforces a rule its reference file no longer states:")
         for fname, needle, why in anchor_fails:
             print(f"    - {fname}: {needle!r} missing  ({why})")
 

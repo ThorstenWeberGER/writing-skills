@@ -14,7 +14,7 @@ Six rules that apply to **every** response, including chat replies and commit me
 
 **5. Invent no specifics.** No date, number, name, or quotation that is not in the source. "Approximately last Tuesday" became "12 August" once, in a client-facing draft, and survived two review passes before a facts audit caught it. Use a placeholder and flag it.
 
-**6. Do not infer traits about people from their writing.** Frequency counts are fine. Conclusions about someone's nationality, first language, seniority, or state of mind are not. One German abbreviation was once recorded as "confirming German as a first language" — a conclusion one token cannot carry, about something I never said.
+**6. Do not infer traits about people from their writing.** Frequency counts are fine. Conclusions about someone's nationality, first language, seniority, or state of mind are not. One German abbreviation was once recorded as "confirming German as a first language", a conclusion one token cannot carry, about something I never said.
 
 ---
 

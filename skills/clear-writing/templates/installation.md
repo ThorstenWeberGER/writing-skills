@@ -6,12 +6,12 @@ Related distinction worth keeping straight: an install guide covers installing t
 
 ## Standalone or a README section?
 
-- **Integrated** (a section inside the README) — few dependencies, one or two platforms, under roughly ten steps.
-- **Standalone** (its own page, self-contained, carrying its own system requirements) — multiple platforms or editions, real prerequisites, or a troubleshooting section that's outgrowing its slot.
+- **Integrated** (a section inside the README): few dependencies, one or two platforms, under roughly ten steps.
+- **Standalone** (its own page, self-contained, carrying its own system requirements): multiple platforms or editions, real prerequisites, or a troubleshooting section that's outgrowing its slot.
 
 ## Skeleton
 
-Full version below; delete aggressively. This is a maximalist enterprise shape — a Python library needs maybe five of these sections.
+Full version below; delete aggressively. This is a maximalist enterprise shape; a Python library needs maybe five of these sections.
 
 ```markdown
 # Installing {product}
@@ -32,7 +32,7 @@ Prerequisites, credentials, access. A table works well:
 | Type | Prerequisite | Notes |
 
 ## Installation steps
-### Step 1 — {one-sentence description of the step}
+### Step 1: {one-sentence description of the step}
 1.1. …
 1.2. …
 {Optional: the command, and what its output should look like.}
@@ -49,7 +49,7 @@ Per problem: symptom → cause → solution → who to contact.
 Flag anything with security implications explicitly.
 
 ## Next steps
-Where to go now — usually the tutorial or the how-to index.
+Where to go now, usually the tutorial or the how-to index.
 
 ## Version history                    ← if versions matter to the reader
 ```
@@ -64,10 +64,10 @@ Either **system requirements → per-platform install sections**, or **per-platf
 - **No verification step.** Without "run this, expect that," the reader can't tell success from silent failure. This is the most commonly missing section.
 - **Platform variants flattened into one procedure**, with parenthetical asides for each OS. Use the installation-types table and separate sections instead.
 - **No uninstall or downgrade path.** People need to back out.
-- **Version ambiguity** — instructions that don't say which version they apply to.
+- **Version ambiguity.** Instructions that don't say which version they apply to.
 - **Security-relevant steps not flagged** (disabling verification, broad permissions, exposing a port).
 - **Troubleshooting interleaved with the happy path.** It goes after, never woven through. Once it outgrows a section, it becomes its own document.
 
 ## Sources
 
-Skeleton adapted (and substantially trimmed) from [The Good Docs Project installation-guide template](https://gitlab.com/tgdp/templates), a volunteer tech-writing community — its section *ordering* is the reusable part, its completeness is calibrated for enterprise and hardware products. The how-to-guide classification, the platform forking ("if this, then that"), and the "practical usability over completeness" principle come from [Diátaxis](https://diataxis.fr/how-to-guides/). Note: Diátaxis never mentions installation directly — that classification is an inference from its compass (installation informs action and serves work, so: how-to guide), not a citation.
+Skeleton adapted (and substantially trimmed) from [The Good Docs Project installation-guide template](https://gitlab.com/tgdp/templates), a volunteer tech-writing community. Its section *ordering* is the reusable part, its completeness is calibrated for enterprise and hardware products. The how-to-guide classification, the platform forking ("if this, then that"), and the "practical usability over completeness" principle come from [Diátaxis](https://diataxis.fr/how-to-guides/). Note: Diátaxis never mentions installation directly, so that classification is an inference from its compass (installation informs action and serves work, so: how-to guide), not a citation.

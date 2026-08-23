@@ -22,4 +22,4 @@ jobs:
       # that the documented rules those lists depend on still exist, and that
       # every fixture produces its expected FAIL count.
       - name: Run skill test suite
-        run: ./skills/clear-writing/test.sh
+        run: ./skills/clear-writing/tests/test.sh
