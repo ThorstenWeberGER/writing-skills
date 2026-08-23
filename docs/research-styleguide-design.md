@@ -10,6 +10,7 @@ Research done 2026-08-23. Two questions: how do working prose style guides get b
 - Primary: Microsoft's Vale package, and the coverage manifest
 - Primary: Anthropic skill-authoring guidance
 - Secondary: agent instruction files
+- Text bases and published guides: what exists, what we can reach
 - Audit against the official checklist
 - What we changed
 - What we did not change, and why
@@ -114,9 +115,57 @@ Ten of the checklist's items already held. Six did not:
 
 **Multi-model testing has not been done.** The checklist asks for Haiku, Sonnet and Opus. Everything here has run on one model.
 
+## Text bases and published guides: what exists, what we can reach
+
+A second pass, on where else rules and samples could come from. The useful split is that these answer two different questions, and this project has already proved the answers differ:
+
+- **A published style guide says what a publication intends.**
+- **A corpus of its writing says what it does.**
+
+We corrected five of our own rules by measuring samples against them. Holding both kinds of source for one publication would let us compare its stated rule against its measured practice, which we have never been able to do.
+
+### States the method explicitly, which is what our weakest rules need
+
+Five of our voice rules are graded `recorded, n=1`, and three attribution rows say `not captured`. A publication's own handbook states those moves outright, so for those specific rules it beats another five samples.
+
+| Source | Why it matters | Reachable here |
+|---|---|---|
+| Reuters Handbook of Journalism | Publishes the method: lead construction, sourcing, attribution, anonymous-source rules. Our Reuters attribution rule is n=1; this would make it primary | No |
+| GOV.UK content design guide | Open Government Licence, and about how to write rather than which spelling to use | No |
+| BBC News Style Guide | Free PDF | No |
+| Guardian and Observer style guide | Full A-Z, free. Usage decisions more than method, but good for the stated-versus-measured comparison | No |
+| Economist Style Guide | Borrow-only on archive.org and in copyright | Not usable |
+
+### Reachable and immediately useful
+
+**[proselint](https://github.com/amperser/proselint)**, BSD licensed, about 80 checks in a dotted hierarchy. Confirmed reachable and read from source. Each check carries a `source` field naming a real authority: Garner, Strunk, Pinker, Orwell, Butterick, Wallace, Norris and others. Its `hedging` check reads `source: Pinker`, `message: "Hedging. Just say it."`
+
+Its categories overlap ours heavily: hedging, jargon, clichés, corporate speak, bureaucratese, redundancy, pretension. Auditing our wordlists against it needs no new input and would either corroborate our lists or show what they miss.
+
+**Vale style packages** beyond the two already used: Red Hat, Elastic, PostHog, GitLab. All open, all reachable.
+
+### Corpora, and why they mostly do not help
+
+| Corpus | Licence | Verdict |
+|---|---|---|
+| Wikinews | CC BY 2.5 | Free *because* volunteer-written. Usable as a contrast corpus, not as a model |
+| Reuters-21578 | Research use only | 1987 wire copy. Wrong era, awkward licence |
+| Standard Ebooks, Gutenberg | Public domain | Professionally proofed prose, but literary register, not management |
+| open-license aggregations, MOT | Mixed CC | Volume, which is not our shortage |
+
+**The structural problem: open corpora solve volume, and volume is not what we lack.** Our metrics stabilised at about five same-register samples per publication. What would help is contemporary high-quality business and news prose, and that material is in copyright precisely because it is professionally produced. Wikinews is free because it is not. So no open corpus substitutes for supplied samples.
+
+### What follows
+
+- For the `recorded, n=1` and `not captured` rows, a publication's own handbook beats more samples, because it states the move instead of leaving it to be inferred from one instance.
+- Most of those handbooks are blocked from this container but readable in a browser, so the same supply route as the articles works.
+- The one action needing no new input: audit our term lists against proselint.
+
 ## Sources
 
 - [Vale](https://github.com/errata-ai/vale), [Google's Vale package](https://github.com/errata-ai/Google), [Microsoft's Vale package](https://github.com/errata-ai/Microsoft), all read from repository source
 - [Skill authoring best practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices) and [Skills in Claude Code](https://code.claude.com/docs/en/skills)
 - [AGENTS.md](https://github.com/openai/agents.md), read from repository source
+- [proselint](https://github.com/amperser/proselint) (BSD), read from repository source
+- Named but unreachable from this container: [Reuters Handbook of Journalism](https://handbook.reuters.com/), [GOV.UK content design](https://www.gov.uk/guidance/content-design/writing-for-gov-uk), [Guardian and Observer style guide](https://www.theguardian.com/guardian-observer-style-guide-a), [BBC News Style Guide](https://www.bbc.co.uk/newsstyleguide/), [Wikinews](https://en.wikinews.org/), [Standard Ebooks](https://standardebooks.org/), [Reuters-21578](https://kdd.ics.uci.edu/databases/reuters21578/reuters21578.html)
 - Secondary, pages unreachable: [Vale docs](https://vale.sh/), [GitHub's agents.md study](https://github.blog/ai-and-ml/github-copilot/how-to-write-a-great-agents-md-lessons-from-over-2500-repositories/), [Content Design London](https://contentdesign.london/blog/create-a-great-style-guide-that-people-use)
