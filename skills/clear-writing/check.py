@@ -281,8 +281,13 @@ def run(raw, opts):
     hs = headings(raw)
 
     # 1. dashes (humanizer.md — the rule that was violated while reported clean)
-    dash_hits = [(m.group(), line_of(raw, m.start()))
-                 for m in re.finditer(r"[—–]", raw)]
+    # Code spans and fences name characters rather than using them: a rule that
+    # reads "not `—`, not `–`" is documentation, not a violation. Blank them out
+    # but keep line offsets intact so reported line numbers stay correct.
+    _nocode = re.sub(r"```.*?```|`[^`\n]*`",
+                     lambda m: re.sub(r"[^\n]", " ", m.group()), raw, flags=re.S)
+    dash_hits = [(m.group(), line_of(_nocode, m.start()))
+                 for m in re.finditer(r"[—–]", _nocode)]
     # require a non-space char before the space, so a line-initial markdown
     # bullet ("\n- item") is not mistaken for a spaced dash
     # Run on markup-stripped text: a blockquoted list item ("> - thing")

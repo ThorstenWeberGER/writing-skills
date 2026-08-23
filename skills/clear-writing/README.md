@@ -26,17 +26,42 @@ When in doubt it picks style-only. Full mode needs an explicit signal.
 
 ---
 
-## 1b. Three layers
+## 1b. Making these rules apply to every conversation
 
-A skill only loads when it triggers. Some rules cannot wait for that, so they live one layer up.
+A skill only loads when it triggers. Some rules must hold in every reply, including ones where no writing task was requested, so they live one layer up in `CLAUDE.md`.
 
 | Layer | Location | Holds | Cost |
 |---|---|---|---|
-| **Always on** | `~/.claude/CLAUDE.md` | Six ground rules | Context on every turn, so it stays at six |
+| **Always on** | `~/.claude/CLAUDE.md` | The six ground rules below | Context on every turn, which is why it stays at six |
 | **Project** | `<repo>/CLAUDE.md` | Repo conventions, pointer to the skill | Per-project only |
 | **On demand** | `~/.claude/skills/clear-writing/` | The full ~23,000 words | Loaded when writing starts |
 
-The six were chosen by one test: **did this fail in practice, and did it fail silently?** No em dashes; jargon tests apply to chat replies; never generalise from one or two samples; report what you ran rather than what you applied; invent no specifics; do not infer traits about people from their writing. Every one has a named incident behind it in `docs/v2-checklist.md`.
+### To turn it on
+
+```bash
+git clone <this repo> && cd writing-skills
+./install.sh              # symlinks the skill and CLAUDE.md into ~/.claude/
+./install.sh --status     # shows what is linked and whether you are behind upstream
+```
+
+Symlinks, not copies, so `git pull` updates every machine at once. If you already have a `~/.claude/CLAUDE.md`, the installer **refuses to touch it** and tells you to merge by hand, because overwriting it would silently drop rules you rely on. `--force` backs it up with a timestamp first.
+
+### The six rules
+
+Each was selected by one test: **did this fail in practice, and did it fail silently?** Every one has a named incident behind it in `docs/v2-checklist.md`.
+
+1. **No em dashes.** Not `—`, not `–`, not a spaced hyphen used as one. Run a literal character scan; this rule has been reported as applied while being violated in the same message.
+2. **Jargon tests apply to chat replies, not just to drafts.** Shared, non-substitutable, canonical, referential. "Dogfooding" failed three of four and shipped repeatedly.
+3. **Never generalise from one or two samples.** Say "one sample" when it is one. A finding held across two sources and broke on the third three times in this project.
+4. **Report what you ran, not that you applied something, and never narrate your own care.** A command and its output are facts; diligence is not. Includes the sharpest form, **virtue by invented contrast**: "X rather than Y" where nobody proposed Y. Delete from "rather than" onward; if only the implication of thoughtfulness is lost, cut it.
+5. **Invent no specifics.** No date, number, name, or quotation absent from the source. Use a placeholder and flag it.
+6. **Do not infer traits about people from their writing.** Frequency counts are fine; conclusions about nationality, first language, seniority or state of mind are not.
+
+Rules 1, 4 and 5 have mechanical backing in `check.py`. Rules 2, 3 and 6 are judgment, checked in `CHECKLIST.md`.
+
+### Why six and not sixteen
+
+Everything in `CLAUDE.md` costs context on every single turn, whether or not the turn involves writing. That is the whole reason the detailed guidance stays in the skill and only rules that fail *silently* are promoted. If a rule can wait until writing begins, it belongs in `references/`.
 
 ## 2. Architecture
 
