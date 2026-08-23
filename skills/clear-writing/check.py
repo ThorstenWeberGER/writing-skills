@@ -179,11 +179,15 @@ HOUSE = {
     "reuters":   dict(med=(24, 32), dash=None, subheads=True, bullets=True,
                       head=None, stand=None,
                       semis=None, spelling="us", attribution=True),
-    "hbr":       dict(med=(12, 22), dash=157, subheads=True, bullets=False,
+    # Re-measured over the same five articles with per-font ToUnicode decoding,
+    # which recovers 20,588 body words against 14,557 on the first pass. Four
+    # figures moved; the dash rate held.
+    "hbr":       dict(med=(11, 21), dash=174, subheads=True, bullets=False,
                       titlecase=True,
                       head=(4, 10), stand=(12, 24),
-                      semis=120, spelling="us", headline="allusive",
-                      register=700, dek="antithetical"),
+                      semis=288, spelling="us", headline="allusive",
+                      register=1200, dek="correction",
+                      hedge=(130, 200), subhead_term=0.5),
 }
 
 # house-voices.md, Economist: acronyms glossed once then used bare and lowercase.
@@ -281,7 +285,9 @@ SOURCES = {
     "lowercase acronyms":           "house-voices.md: Economist, Register",
     "management register":          "house-voices.md: HBR, Register",
     "register":                     "house-voices.md: HBR, Register",
-    "antithetical dek":             "house-voices.md: HBR, The opening move",
+    "correction dek":               "house-voices.md: HBR, The opening move",
+    "coined term across subheads":  "house-voices.md: HBR, The signature move",
+    "hedge":                        "house-voices.md: HBR, Attribution",
     "allusive headline":            "house-voices.md: Economist, Refusals",
     "informational headline":       "house-voices.md: FT, The opening move",
 }
@@ -917,8 +923,12 @@ def run(raw, opts):
                     f"{name}: register ~1 per {target}w",
                     f"1 per {round(rate)}w ({', '.join(rh[:4])})")
 
-        # HBR: the dek names the wrong diagnosis, then corrects it.
-        if h.get("dek") == "antithetical":
+        # The dek. Counting all five articles rather than admiring one, the
+        # "It isn't X. It's Y." shape is 1 of 5, not the house move. What 2 of 5
+        # share is a correction: name the belief the reader holds, then reverse
+        # it. The other shape puts the reversal inside sentence one and the
+        # consequence in sentence two. So this reviews rather than requires.
+        if h.get("dek") == "correction":
             dek = ""
             if top:
                 after = raw.split(top[0], 1)[-1].strip().splitlines()
@@ -926,17 +936,64 @@ def run(raw, opts):
                             if l.strip() and not l.startswith("#")), "")
             ds = sentences(dek)
             neg = re.search(r"\b(is ?n[o']t|was ?n[o']t|did ?n[o']t|does ?n[o']t"
-                            r"|no longer|not a|not the)\b", dek, re.I)
-            if len(ds) >= 2 and neg:
-                r.ok(f"{name}: antithetical dek",
-                     f"{len(ds)} sentences, {len(words(dek))} words")
+                            r"|no longer|not a|not the|when they (?:actually )?"
+                            r"do ?n[o']t|rather than)\b", dek, re.I)
+            dw = len(words(dek))
+            lo, hi = h.get("stand", (12, 24))
+            if dek and neg and lo <= dw <= hi:
+                r.ok(f"{name}: correction dek", f"{len(ds)} sentence(s), {dw} words")
             elif dek:
-                r.review(f"{name}: antithetical dek",
-                         f"{len(ds)} sentence(s), negation "
-                         f"{'present' if neg else 'absent'}; house names the "
-                         "wrong diagnosis then corrects it")
+                r.review(f"{name}: correction dek",
+                         f"{dw} words, negation {'present' if neg else 'absent'}; "
+                         f"2 of 5 name the belief then reverse it, in {lo}-{hi} words")
             else:
-                r.review(f"{name}: antithetical dek", "no dek found under the headline")
+                r.review(f"{name}: correction dek", "no dek found under the headline")
+
+        # The coined term, carried through the subheads. This was the strongest
+        # new finding: 3 of the 3 articles that coin a term put it in most of
+        # their subheads, inflected, and negated where the argument turns
+        # (False Alignment -> True Agreement -> True Disagreement).
+        frac = h.get("subhead_term")
+        if frac and nsub >= 2:
+            subs = [t for lvl, t in hs if lvl >= 2]
+            stop = set(STOPWORDS) | {"your", "our", "their", "what", "how", "why",
+                                     "ways", "find", "five", "the", "and", "isnt"}
+            counts = {}
+            for w in re.findall(r"[a-z]{5,}", " ".join(subs).lower()):
+                if w not in stop:
+                    counts[w] = counts.get(w, 0) + 1
+            best, hits = None, 0
+            for w, c in counts.items():
+                # not `n`: that name holds the document word count in this scope
+                k = sum(1 for x in subs if w[:5] in x.lower())
+                if k > hits:
+                    best, hits = w, k
+            share = hits / len(subs) if subs else 0
+            (r.ok if share >= frac else r.review)(
+                f"{name}: coined term across subheads",
+                f"{hits}/{len(subs)} carry {best!r} ({round(share*100)}%)"
+                if best else f"0/{len(subs)}; house repeats one coined term")
+
+        # Hedging, distributed rather than stacked. HBR hedges once every ~160
+        # words and never twice in a sentence, and that reads as authority. Our
+        # stacked-hedging check found 0 in 4 of 5 articles, so the two rules are
+        # measuring different things and both are right.
+        hb = h.get("hedge")
+        if hb:
+            nh = len(re.findall(
+                r"\b(may|might|can|often|tends? to|suggests?|appears? to|likely)\b",
+                judged, re.I))
+            rate = n / nh if nh else 0
+            lo, hi = hb
+            if nh and lo <= rate <= hi:
+                r.ok(f"{name}: hedge 1 per {lo}-{hi}w", f"1 per {round(rate)}w")
+            elif nh:
+                r.review(f"{name}: hedge 1 per {lo}-{hi}w",
+                         f"1 per {round(rate)}w; house qualifies about once "
+                         "every eight sentences")
+            else:
+                r.review(f"{name}: hedge 1 per {lo}-{hi}w",
+                         "none; house hedges steadily and never twice in a sentence")
 
         # Headline type: allusive poses a puzzle, informational tells the story.
         if h.get("headline") and top:

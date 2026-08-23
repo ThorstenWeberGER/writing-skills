@@ -2,7 +2,7 @@
 
 *It isn't a discipline problem. It's a measurement problem: nobody can see the violations, so nobody corrects them.*
 
-## The Standard That Everyone Agreed To
+## The Silent Rule Everyone Agreed To
 
 Recently I helped build a writing standard for a single reader. It ran
 to twenty thousand words, covering where the main point belongs and which words to
@@ -11,11 +11,11 @@ the standard's first and simplest rule, said the rule had been applied, and miss
 the contradiction until someone pointed it out.
 
 The rule banned em dashes, and the draft contained one in its subject line.
-Nothing about the standard was ambiguous, nobody disagreed with it, and it failed
-anyway, which makes this a different kind of failure from a compliance problem and
+Nothing about the standard was ambiguous, nobody disagreed with it, and it often
+fails anyway, which makes this a different kind of failure from a compliance problem and
 one with a different cause.
 
-## Why Violations Go Unseen
+## Why Silent Rules Stay Silent
 
 The instinct after a failure like this is to reach for discipline: people know the
 rule and are not applying it, so the fix is to remind them, add a review step, or
@@ -28,7 +28,7 @@ precisely the writer most confident that the punctuation is gone. Reading produc
 that confidence, checking would have tested it, and nothing separated the two. So
 the question worth asking is not why the rule broke but why nobody could tell.
 
-## What Enforcement Actually Costs
+## What Breaking the Silence Actually Costs
 
 We answered that by writing a script that scans a draft for whatever the standard
 bans and prints a verdict: how many failures, on which lines, and which checks
@@ -46,9 +46,9 @@ script could not initially tell a document that uses a banned pattern from one
 that merely names it. A table listing forbidden words was flagged for containing
 forbidden words. Twelve separate false positives traced back to that one
 confusion, and we patched each on its own before recognizing they were a single
-bug. A checker that cries wolf gets switched off, so this is not a detail.
+bug. A checker that cries wolf tends to get switched off, so this is not a detail.
 
-## The Test Worth Applying To Your Own Standards
+## Finding the Silent Rules in Your Own Organization
 
 There is a simple diagnostic here and it needs no script: for any standard your
 organization has written, ask what would happen if someone violated it today. Not

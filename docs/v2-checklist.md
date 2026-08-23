@@ -199,6 +199,36 @@ Three genuine one-line fixes fell out: a quotation trimmed to fit the short-quot
 
 `tests/test.sh` now asserts **0 FAIL on every guidance file and repo doc**, not just no dashes. That was blocked until the three defects above were fixed, and it is the check that would have caught the two hand-found "actionable" uses automatically. Verified by injecting a violation.
 
+### 20. HBR devices counted, and the metrics corrected (DONE)
+
+Five HBR PDFs supplied. **All five are the same five already in the sample**, identified by fragments already recorded from each: the antithetical dek, the False Alignment subheads, the tips-list headings, and the "circle back with all stakeholders" sentence. Sample size stays at 5, so nothing here is a new-data claim.
+
+**What did change is extraction quality.** These files are RC4-128 encrypted, and `pypdf` cannot be imported in this container because its crypt provider pulls in rust bindings that panic. Implementing the standard security handler plus per-font ToUnicode decoding recovers **20,588 body words against 14,557** on the first pass, and fixes the shifted-encoding runs that made some text unreadable.
+
+**Four measured figures corrected, one confirmed:**
+
+| Measure | Was | Now |
+|---|---|---|
+| Sentence median | 12-22 | 11 tips, 17-18 features, 21 digital |
+| Over 25 words | 29% | 24% |
+| Register words | 1 per 644-787 | 1 per 849-2,616 |
+| Semicolons | up to 12 | up to 19 |
+| Em dashes | 1 per 157 | 1 per 174, range 156-193. Held |
+
+**And the device analysis was finally done, which is what the samples were for.**
+
+- **One recorded rule did not survive counting.** The antithetical dek was called the house opening move on one instance. At five it is **1 of 5**. What 2 of 5 share is a reversal, in two different syntaxes. The check now reviews for it instead of requiring it.
+- **The real shared opening is stronger: 4 of 4 substantive articles put the reader or their situation in sentence one**, never the thesis and never the author. Four distinct vehicles.
+- **New and the strongest finding: 3 of 3 articles that coin a term carry it through most of their subheads, inflected, and negate it at the turn.** *False Alignment* to *True Agreement* to *True Disagreement*. This is now an enforced check.
+- **Hedging is distributed at 1 per 138-175 words, 5 of 5, and never stacked.** Our stacked-hedging check found zero stacked hedges in four of five and one in the fifth, so the distributed rate and the stacking ban measure different things and both hold. That is a design decision validated against the source it was built to describe.
+- **Attribution filled a `not captured` row.** Sparse and specific rather than statistical: a percentage is rare enough to be an event at 1 per 1,583 words.
+
+**Six generators** written as procedures rather than constraints, in `house-voices.md`. Two are enforced: `--house hbr` now checks the coined term's share of subheads and the hedge rate.
+
+**They found a real gap in our own output.** Our two HBR-voice drafts hedged at 1 per 237-282 against the house 138-175, under-hedging by about half, and one carried its coined term through only 1 of 4 subheads. Applying G3 and G4 to `docs/example-hbr-voice.md` moved it to 4 of 4 subheads and 1 per 144 words, both inside band. That is a metric failing to show something a generator showed.
+
+Two of my own errors were caught in the analysis and are worth recording: a percentage regex that required a word character after `%` reported zero percentages in 20,588 words, and the extraction returns object order rather than reading order, so positional devices beyond the opening cannot be measured from it. 26 rule anchors, up from 23.
+
 ## Open
 
 ### A. `inputs/examples.md` has only its 5 launch pairs: the one real content gap

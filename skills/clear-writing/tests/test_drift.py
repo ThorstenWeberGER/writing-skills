@@ -130,7 +130,12 @@ RULE_ANCHORS = {
     ],
     "house-voices.md": [
         ("The opening move", "opening-move rules -> CHECKLIST.md step 4"),
-        ("1 per 644-787 words", "HBR register band -> HBR_REGISTER + register=700"),
+        ("1 per 849-2,616", "HBR register band -> HBR_REGISTER + register=1200"),
+        ("1 per 138-175 words", "HBR hedge rate -> hedge=(130, 200)"),
+        ("at least half your subheads",
+         "coined term across subheads -> subhead_term=0.5"),
+        ("name the belief, then reverse it",
+         "correction dek -> dek=\"correction\""),
         ("could not be named because the information was not public",
          "Reuters attribution -> ATTRIBUTION"),
         ("neighbors", "Reuters US spelling -> US_SPELLING"),

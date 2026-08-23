@@ -36,7 +36,7 @@ Every rule below carries a grade, because voice rules are far more tempting to i
 | Grade | Meaning | How to use it |
 |---|---|---|
 | **measured** | counted across the whole sample | Follow it. Enforceable |
-| **recorded** | a verbatim fragment captured from the sample, n=1 | Imitate the *move*, never the wording. One instance does not prove a habit |
+| **recorded** | a verbatim fragment captured from the sample, n=1 | Imitate the *move*, never the wording. One instance does not prove a habit, and counting the HBR sample demoted one such rule from house signature to 1 of 5 |
 | **inferred** | reasoned from a measured fact, not observed directly | Weakest. Say so if a draft leans on it |
 
 Nothing here is graded higher than the evidence supports. Where a publication's voice feature was never captured, the row says **not captured** rather than guessing.
@@ -115,25 +115,89 @@ Nothing here is graded higher than the evidence supports. Where a publication's 
 
 ## HBR
 
-*5 articles, 14,557 words. Three features, a digital article, a curated-tips list.*
+*The same five articles as `house-styles.md`, re-extracted. 20,588 body words, 917 sentences: three magazine features, one digital article, one curated-tips list.*
 
-**The opening move: the antithetical dek.** (recorded, n=1, and the clearest single artefact in the whole dataset) "It isn't a failure of the technology. It's a failure of management." Two sentences, 12-24 words total. The first names the diagnosis the reader arrived with; the second replaces it. Nothing else in the four publications does this.
+**Sample size did not grow, extraction quality did.** The first pass recovered 14,557 words through a lossier route. Decoding each font's ToUnicode table recovers 20,588 and fixes the shifted-encoding runs, so these figures replace the earlier ones. Four moved, one held.
 
-The move generalises even though the wording is n=1: **name the wrong explanation, then correct it.** It only works when the two halves are genuinely different diagnoses. When both halves say the same thing, it is the empty "not merely X, it's Y" construction that `humanizer.md` flags, and the test there applies: delete the first half and see whether you lost a real alternative.
+| Measure | First pass | Re-measured | |
+|---|---|---|---|
+| Sentence median | 12-22 | **11 tips, 17-18 features, 21 digital** | features run shorter than thought |
+| Over 25 words | 29% | **24%** (6% tips to 34%) | |
+| Em dashes | 1 per 157 | **1 per 174**, range 156-193 | held |
+| Semicolons | up to 12 | **up to 19**, 1 per 623 overall | |
+| Register words | 1 per 644-787 | **1 per 849-2,616** | sparser than thought |
 
-**The signature move: sections that argue, titled as full phrases.** (measured) "Common Causes of False Alignment", "The Consequences of False Alignment", "Reaching True Agreement". Title case, complete noun phrases, and the sequence is the argument. Not "Background / Analysis / Conclusion".
+### The devices, counted across all five
 
-**Register, and this is the interesting one.** HBR uses the vocabulary our own anti-slop list flags: *actually, crucial, underscore, commitment to, fundamentally, landscape, valuable*, at **1 per 644-787 words**. (measured, validated on two further articles at 1 per 905 and 1 per 1,668) That density is ordinary management register, not slop. Slop is the same words at 1 per 24. So writing in this voice means **allowing those words at roughly one per 700, and not more**.
+The first pass recorded devices one instance at a time. Counting them is what changes their status, and one recorded rule did not survive it.
 
-**Punctuation signature.** Em dashes 1 per 157 words, the heaviest of the four. Semicolons up to 12 in one article. (measured) If you are told to sound like HBR and the user's dash ban is in force, that ban wins and the voice is correspondingly thinner. Say so.
+**The dek: name the belief, then reverse it. (measured, 2 of 5, in two shapes)**
 
-**Attribution.** not captured.
+The first pass called *"It isn't a failure of the technology. It's a failure of management."* the house opening move on the strength of one instance. **At five it is 1 of 5.** What 2 of 5 share is the reversal, in two different syntaxes: one splits it across two short sentences, the other puts the reversal inside sentence one (*behave as if they agree ... when they actually don't*) and the consequence in sentence two. The other three deks promise contents or state a benefit. So the correction dek is a strong option, not the house signature, and `check.py` reviews for it rather than requiring it.
 
-**Refusals.** No bullets, despite the subheads. (measured) The tips format uses headed micro-sections with 3-9 word imperative headings carrying a terminal period ("Trust your preparation.", "Accept mistakes quickly.", "Manage emotions before they manage you.") rather than a bulleted list.
+**The opening makes the problem the reader's, before any argument. (measured, 4 of 4 substantive)**
 
-**Format outranks masthead here.** The tips list runs a 12-word median against 19-22 in the features. Pick the format first, then the voice.
+This is the real shared move, and it is stronger evidence than the dek. Four vehicles, one per article:
 
----
+| Vehicle | How sentence one goes |
+|---|---|
+| Shared predicament | Leaders routinely decide under pressure, and here is who does it harder |
+| Second-person hypothetical | *Imagine you are sitting on the capital allocation committee* |
+| Name and define the phenomenon | The thing plaguing you, named and defined in one sentence |
+| Settled finding, then dated authority | Most change efforts fail, and in 1993 a named figure concluded as much |
+
+None opens on the thesis. None opens on the author. The reader or their situation is in sentence one every time.
+
+**The coined term runs through the subheads, inflected. (measured, 3 of 3 that coin one)**
+
+The strongest new finding. Each article that coins a term repeats it across most of its subheads, changing its grammatical form, and negates it where the argument turns: *False Alignment* becomes *Common Causes of*, then *The Consequences of*, then *Reaching True Agreement*, then *Facing True Disagreement*. Another runs *Centering, Center, Centers, Centered* through four of five. A third puts *Workslop* in all three. Subheads are title case and full noun phrases, as recorded, but that was the surface of this.
+
+**Hedging is distributed, never stacked. (measured, 1 per 138-175 words, 5 of 5)**
+
+HBR qualifies a claim roughly once every eight sentences: *may, might, often, tends to, suggests, appears to.* 128 instances in 20,588 words. It reads as authority rather than weakness because no sentence carries two. Our own stacked-hedging check found **zero stacked hedges in four of five articles** and one in the fifth, so the distributed rate and the stacking ban are measuring different things and both hold.
+
+**Attribution is sparse and specific, not statistical. (measured)** This fills a row that used to read *not captured*.
+
+| Move | Rate |
+|---|---|
+| Hedge a claim | 1 per 160 words |
+| First person research (*our research, we surveyed*) | 1 per 1,715 words, in 3 of 5 |
+| Percentage | 1 per 1,583 words, in 3 of 5 |
+| Dated citation (*In 1993 …*) | 1 per 2,573 words |
+
+So a percentage is rare enough to be an event. A named figure arrives with a relative clause saying what they did, not a job title. (recorded: one instance of that shape, so imitate the move and do not count on the rate.)
+
+### The generators
+
+A metric constrains. These produce. Each is a procedure, with the count behind it.
+
+**G1. Write the dek by reversal.** Write the sentence the reader already believes. Negate it. Name the real cause. Keep the pair inside 12-24 words. Then apply the deletion test from `humanizer.md`: cut the first half, and if you lose a real alternative the reader might have held, keep it. If you only lose drama, use a contents-promise dek instead, which is what 3 of 5 do.
+
+**G2. Put the reader in sentence one.** Pick one of the four vehicles above and write sentence one so it contains the reader or their situation. If sentence one contains your thesis, you have written the second sentence first.
+
+**G3. Coin one term, then conjugate it.** Name the thing your argument is about in two or three words. Use it in at least half your subheads, changing its form as the argument moves, and negate it at the turn. `check.py --house hbr` counts the share and reviews below half.
+
+**G4. Hedge on a metronome.** Draft without hedges, then add one qualifier roughly every 150 to 200 words, at the claims that need it. Never two in a sentence. Enforced both ways: the rate reviews outside 130-200, and stacking reviews on its own.
+
+**G5. Spend numbers like money.** One percentage per 1,500 words or so, on the claim carrying the argument. Attribute the rest by naming who found it and when.
+
+**G6. Define by exclusion at section level.** *What X Is, and Isn't* as a subhead. (recorded, 1 of 5.)
+
+### What is enforced
+
+`--house hbr` now checks the correction dek, the coined term across subheads, and the hedge rate, alongside sentence median, dash and semicolon rates, subhead and bullet policy, spelling, register band and headline type.
+
+Running it on our own HBR-voice drafts found both at **1 per 237-282 words against the house 138-175**, so our imitation under-hedges by about half. That is the kind of gap a metric cannot show and a generator can.
+
+### Punctuation signature
+
+Em dashes 1 per 174 words, the heaviest of the four publications. Semicolons up to 19 in one article. If the user's dash ban is in force, this voice comes out correspondingly thinner, and that should be said rather than hidden.
+
+### Refusals
+
+No bullets, despite the subheads (measured, 5 of 5). The tips format uses headed micro-sections with 3-9 word imperative headings carrying a terminal period, not a bulleted list.
+
+**Format outranks masthead.** The tips list runs an 11-word median against 17-18 in the features. Pick the format first, then the voice.
 
 ## The same fact in four voices
 
