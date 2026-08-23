@@ -610,6 +610,22 @@ def run(raw, opts):
 
     # --- conditional: client-facing (audiences.md external client) --------
     if opts.client:
+        # A client note has its own length budget. audiences.md requires eight
+        # things of one (impact, hold instruction, cause, ownership, unknown
+        # scope, evidence so far, next update, concrete apology), so it cannot
+        # fit the management-summary email caps of 125 words / 5 sentences.
+        # Combining --client with --email applies the wrong document's limits.
+        n = len(all_words)
+        body = [x for x in sents
+                if not any(x.upper().startswith(t) for t in CATEGORY_TAGS)]
+        (r.ok if n <= 200 else r.review)("client note <=200 words", f"{n} words")
+        (r.ok if len(body) <= 12 else r.review)(
+            "client note <=12 sentences", f"{len(body)} sentences")
+        if opts.email:
+            r.review("--client with --email",
+                     "email caps are for the management-summary variant, "
+                     "not a client note; drop --email")
+
         eta = find_terms(raw_low, CLIENT_ETA)
         (r.fail if eta else r.ok)(
             "no fix ETA promised",

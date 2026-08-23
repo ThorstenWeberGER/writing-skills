@@ -24,7 +24,7 @@ Flags, set by what you're writing:
 | `--summary` | management summary (enforces 150-250 words) |
 | `--email` | email variant (≤125 words, ≤5 sentences, CATEGORY subject tag) |
 | `--article-half` / `--article-full` | short article (headline length, subhead count, thin sections) |
-| `--client` | client-facing (fix-ETA, next-update time, empty apology, vendor-blaming) |
+| `--client` | client-facing note. Adds the fix-ETA, next-update, empty-apology and vendor-blaming checks, plus its own budget of ~200 words / 12 sentences. **Do not combine with `--email`** — those caps belong to the management-summary variant and a client note cannot meet them while satisfying `audiences.md`'s eight rules. |
 | `--nonnative` | non-native readership (phrasal verbs, idioms, tense stacks) |
 | `--house NAME` | the user asked for a specific outlet's conventions. Sets subhead/bullet policy, sentence-median and dash-rate targets from `house-styles.md`. Its dash target does **not** override the ban below. |
 | `--dashes-ok` | **do not use.** `voice-sample.md` shows zero em dashes across every sample, so the ban applies to this user. Only revisit if a future sample contradicts that. |
