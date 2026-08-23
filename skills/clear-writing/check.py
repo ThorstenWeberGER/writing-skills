@@ -152,8 +152,18 @@ def strip_markup(text):
         if m:
             h = m.group(1).rstrip()
             line = h if h.endswith((".", "!", "?", ":")) else h + "."
-        line = re.sub(r"^\s*([-*+]|\d+\.)\s+", "", line)
+        # A list item is its own unit. Without this it merges into the next
+        # line and inflates that sentence's length.
+        b = re.match(r"^\s*([-*+]|\d+\.)\s+(.*)$", line)
+        if b:
+            it = b.group(2).rstrip()
+            line = it if it.endswith((".", "!", "?", ":", ";")) else it + "."
         line = re.sub(r"^\s*>\s?", "", line)
+        # A subject line is its own unit too, or it merges into the first
+        # body sentence and drags that sentence out of the count.
+        if re.match(r"^\s*subject\s*:", line, re.I) and not line.rstrip().endswith(
+                (".", "!", "?")):
+            line = line.rstrip() + "."
         out.append(line)
     text = "\n".join(out)
     return re.sub(r"\*\*|__|\*|_", "", text)
@@ -524,11 +534,25 @@ def run(raw, opts):
     if opts.email:
         n = len(all_words)
         (r.ok if n <= 125 else r.fail)("email <=125 words", f"{n} words")
-        body = [s for s in sents if not s.lower().startswith("subject")]
+        # formats.md's 5-sentence cap governs prose. Its own summary-block
+        # guidance encourages bullets, so counting bullet items as sentences
+        # would make the two rules contradict each other.
+        bullet_items = {
+            re.sub(r"^\s*([-*+]|\d+\.)\s+", "", l).rstrip(" .!?:;").lower()
+            for l in raw.splitlines() if re.match(r"^\s*([-*+]|\d+\.)\s+", l)
+        }
+        def is_subject(x):
+            return (x.lower().startswith("subject")
+                    or any(x.upper().startswith(t) for t in CATEGORY_TAGS))
+        body = [s for s in sents
+                if not is_subject(s)
+                and s.rstrip(" .!?:;").lower() not in bullet_items]
         (r.ok if len(body) <= 5 else r.fail)("email <=5 sentences",
                                              f"{len(body)} sentences")
         subj = next((l for l in raw.splitlines()
-                     if re.search(r"subject\s*:", l, re.I)), None)
+                     if re.search(r"subject\s*:", l, re.I)
+                     or (re.match(r"^\s{0,3}#\s+", l)
+                         and any(t in l.upper() for t in CATEGORY_TAGS))), None)
         if subj is None:
             r.fail("email subject line", "missing")
         elif any(t in subj.upper() for t in CATEGORY_TAGS):

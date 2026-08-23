@@ -109,6 +109,40 @@ So use these to answer "how should this be shaped?" and not "make me sound like 
 | A sectioned argument for practitioners | **HBR** |
 | Continuous prose read end to end | **Economist** |
 
+## For a management email, no single house style fits
+
+Asked which of the four to use for a management email, the honest answer is none of them whole, and the reason is structural: **all four are written for readers who chose to read. An email interrupts someone.**
+
+The arithmetic settles it. `formats.md` caps the email variant at 125 words and 5 sentences, so the ceiling is 25 words per sentence. Measured against that:
+
+| House | Median | Fits a 5-sentence email? |
+|---|---|---|
+| Reuters | 30 | **No.** Two sentences would eat the whole budget |
+| FT | 22-27 | Barely |
+| Economist | 13-26 | At the lower end only |
+| HBR features | 19-22 | Barely |
+| **HBR tips list** | **12** | **Yes** |
+
+Our own email fixtures run a median of 10-12 words. That is the register, and only HBR's tips-list format comes close.
+
+**So take elements, not a whole style:**
+
+| Take | From | Why |
+|---|---|---|
+| **Informational subject line, 7-14 words, carrying the whole point** | FT / Reuters | A subject line always travels alone. This is the highest-value transfer of the four. |
+| **Summary bullets when there are 3+ facts** — 3-4 items, 6-17 words, each standing alone | Reuters | Already how `formats.md` structures a scanned summary |
+| **No em dashes, no semicolons** | Reuters | The only profile matching the user's own punctuation |
+| **Short imperative micro-headings (3-9 words)** for a multi-item update | HBR tips list | Turns a wall of asks into scannable items |
+| **Explicit sourcing for a contested claim** ("per the Q3 close", "two of three vendors") | Reuters | Wire practice: name the basis, or say you cannot |
+
+**And explicitly reject:**
+
+- **Every publication's sentence length.** All four medians are too long. Write 10-20 word sentences.
+- **The Economist's allusive headline.** "Why everybody hates Palantir" works because a standfirst rescues it. A subject line has no standfirst.
+- **HBR's subheads and dash rate.** Sections are wrong under 125 words, and it is the heaviest dash user of the four.
+
+**The short version: Reuters for the subject line and the bullets, HBR's tips register for sentence length, and `formats.md`'s email variant for everything else.** The email variant is already tighter than any masthead here, which is the correct relationship — it was tuned for a reader who did not ask for the message.
+
 ### When a house style conflicts with the user's voice
 
 It will, immediately, on em dashes. Three of the four profiles use them; the user's own writing contains none, so `humanizer.md` bans them. Targeting HBR will produce `REVIEW  hbr: dash rate ~1 per 157w — none used; house style uses them`.

@@ -47,7 +47,7 @@ Whenever you produce a management summary, also produce the email variant below 
 
 The email variant follows every rule above, plus:
 
-1. **The subject line does half the work.** Formula: `CATEGORY: specific ask + deadline`. "DECISION: Approve $100k print→digital shift by Friday" beats "Marketing budget question." Categories worth standardizing on: DECISION, REQUEST, ACTION, INFO, UPDATE.
+1. **The subject line does half the work, and it must survive travelling alone.** Formula: `CATEGORY: specific ask + deadline`. "DECISION: Approve $100k print→digital shift by Friday" beats "Marketing budget question." Categories worth standardizing on: DECISION, REQUEST, ACTION, INFO, UPDATE. Keep it **informational and 7-14 words**, which is wire and FT practice: an allusive title fails here because a subject line has no standfirst to rescue it. `house-styles.md` covers what else transfers from a publication to an email, and what to reject.
 2. **Cap it at 3-5 sentences, ~125 words.** If the honest version needs more, email is the wrong container: write the BLUF sentence plus one supporting sentence and attach the detail.
 3. **Assume the reader is on a phone between meetings.** No large unbroken blocks. More than two items becomes a real bulleted list, not a comma run-on.
 4. **Bold the one thing you need from them.** In an email specifically — unlike a report — bold the ask itself, not just a lead-in word, so a phone-scanning reader spots the decision without reading around it.
