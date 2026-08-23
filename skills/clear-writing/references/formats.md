@@ -21,6 +21,20 @@ For anything read by a decision-maker who needs the point before the detail.
 7. **When resources can't cover every valid ask, triage — don't flatten.** If not everything is affordable this cycle, say which asks are for now and which are deferred, and why. A numbered list with no stated priority makes the reader redo the triage you already did.
 8. **Don't silently cut genuine uncertainty.** If something is materially unresolved — a correlation that might not be causal, an unassessed risk — compressing it away makes the recommendation look better-supported than it is. Keep it in one clause: "…though this may reflect existing dissatisfaction rather than an independent cause." Cut restatement and detail; never cut an open question that would change the reader's confidence.
 
+### The summary block, borrowed from wire copy
+
+Reuters puts a bulleted summary above every article, and it is a well-tuned BLUF device worth stealing for any summary a reader will skim. Measured across four articles: **3-4 bullets, 6-17 words each, median 11.**
+
+What the bullets carry, in order: the news, the mechanism, the consequence.
+
+> - Retaliatory tariffs start September 8 and match US duties dollar for dollar
+> - Measures target steel, dairy, appliances, agricultural equipment, pulp and paper and electronics
+> - New US tariffs cover about $20 billion of Canadian exports, affecting sectors from wine to hockey equipment
+
+Note what they are not: they are not section headings, not a table of contents, and not a restatement of the prose that follows. Each is a standalone fact a reader could act on without reading further. If a bullet only makes sense once you have read the body, it belongs in the body.
+
+Use this when the summary is genuinely scanned (a status report, a decision memo someone reads in a meeting). Skip it for a short summary that is already three sentences long, where a bullet list above it would just repeat itself.
+
 **Weak (buries the ask):**
 > We have conducted an exhaustive analysis of market trends and evaluated multiple operational strategies going forward, considering budget constraints and team capacity across both channels.
 
@@ -61,14 +75,21 @@ For a standalone piece read on its own terms. Governs layout on top of `foundati
 
 Add a subheading when a real topic shift happens, not because the piece got long. A full-page piece on one continuous idea can run with zero subheadings; a half-page piece genuinely covering three topics can earn two.
 
-**Genre overrides the subhead count, and the table above is written for the scanning case.** A measured Economist feature runs **619 words across 8 paragraphs with zero subheadings and zero bullets** — and it works, because paragraph breaks and ordinal signposting in the prose ("There are three reasons… One is… The second reason… The third reason…") carry the structure instead. That is the narrative convention: continuous prose, transitions doing the navigation.
+**Genre overrides the subhead count, and the table above is written for the scanning case.** Measured across three publications, the split is sharp:
+
+| | Subheads | Bullets | Why |
+|---|---|---|---|
+| **Economist, FT** (features, leaders, news) | none | none | Read start to finish. Paragraph breaks and ordinal signposting carry the structure: "There are three reasons… One is… The second reason…" |
+| **Reuters** (wire copy) | yes, 5-6 words | yes, a summary block | Written to be scanned and re-cut by subscribing editors |
 
 So decide by how the piece will be read:
 
-- **Scanned** — docs page, internal write-up, anything a reader will skim for the part they need: use the subhead counts above.
+- **Scanned** — docs page, internal write-up, status report, anything a reader will skim for the part they need: use the subhead counts above, and consider a summary block.
 - **Read start to finish** — a narrative piece, an essay, a story-shaped update: subheads are optional and often wrong. Signpost inside the prose instead.
 
 Getting this backwards produces the two familiar failures: a narrative chopped into administrative sections, or a reference page written as an undifferentiated wall.
+
+**Crossheads run short: 5-6 words**, measured across four Reuters examples. Do not copy the all-caps styling, which is a wire-service convention and reads as shouting anywhere else.
 
 **Headline:**
 1. **5-10 words** — specific enough to be informative, short enough to scan at a glance.

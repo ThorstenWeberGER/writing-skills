@@ -181,6 +181,28 @@ All rules are original synthesis. Quoted fragments are under 15 words and attrib
   - **Em dashes are more common in the FT** than the Economist, at roughly one per 214 words. Across both publications the mark is unremarkable in professional prose. This is now two independent sources confirming that `humanizer.md`'s dash ban is a voice preference for this user, not a quality standard.
   - **Headline conventions differ by publication, and the difference is instructive.** FT headlines are longer and fully informational — "Russian 'double-tap' attack on Ukrainian shopping mall kills at least 16" tells you the whole story. Economist headlines are shorter and allusive — "Why everybody hates Palantir" — and lean on the standfirst to deliver the point. Both pair a headline with a standfirst; they divide the labour differently. See `formats.md`.
 
+- **Reuters is now primary, and it overturned this file's strongest claim.** Four wire articles plus the Thomson Reuters Trust Principles pages, measured directly.
+
+  Earlier versions of this section said "zero subheadings and zero bullets" was the dataset's most consistent result, across nine Economist excerpts and four FT articles. **That was a publication pattern, not a fact about professional prose.** Reuters uses both:
+
+  - **A bulleted summary block above every article.** 3-4 bullets, 6-17 words each, median 11. It is a BLUF summary: the news, the mechanism, the consequence.
+  - **All-caps crossheads in longer pieces**, 5-6 words each ("LARGER VEHICLES, OTHER STICKING POINTS").
+
+  This is the third time in this project that a finding held across two sources and then broke on the third. The correct generalisation is narrower: **magazine and broadsheet features, leaders and news avoid subheads and bullets; wire copy uses both**, because it is written to be scanned and re-cut by subscribing editors. That is exactly the split `formats.md` routes on, so the genre rule is confirmed even as the universal claim fails.
+
+  | Measure | Economist (9 excerpts) | FT (4 articles) | Reuters (4 articles) |
+  |---|---|---|---|
+  | Median sentence | 13-26 by register | 22-27 | **30** |
+  | Over 25 words | 20% | ~50% | **57%** |
+  | Em dashes | 1 per 348 words | 1 per 214 words | **0** |
+  | Semicolons | ~1 per excerpt | 0-2 | **0** |
+  | Subheadings | 0 of 9 | none detected | **yes, all-caps** |
+  | Bullets | 0 of 9 | none detected | **yes, summary block** |
+
+  **The 25-word threshold is now settled across three publications.** They exceed it in 20%, ~50% and 57% of sentences, and wire copy's *median* sentence is 30 words, because a wire lead packs actor, action, time and cause into sentence one. Rule 8 is a prompt to look at a sentence. It is not a limit, and treating it as one would make our writing less like every professional outlet measured.
+
+  **A useful calibration.** Running `check.py` over Reuters news returns **0 FAIL**. Running it over Reuters' own Trust Principles pages returns **1 FAIL** and roughly ten times the passive-voice rate (7 passives in 292 words against 2 in 618). The checker separates good journalism from institutional boilerplate, which is the behaviour these rules are for.
+
 - **WSJ, HBR, Bloomberg, Reuters, Guardian, and BBC remain secondary.** All are paywalled or block automated fetching. Rules attributed to them come from write-ups describing their conventions. Widely-circulated figures for Reuters (300-800 words per story) and AR 25-50 (15-word average sentence) could not be verified against either document and are deliberately not used here.
 
 ---
