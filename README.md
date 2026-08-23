@@ -4,6 +4,8 @@
 
 It reported the draft clean. An em dash was still sitting inside a client's inbox.
 
+*The LinkedIn carousel system this banner comes from lives in [collaterals-creator](https://github.com/ThorstenWeberGER/collaterals-creator/tree/main/linkedin-carousel), a separate repo.*
+
 A Claude Code skill that applies a fixed ruleset whenever prose gets written or edited, then **verifies mechanically that the rules were actually applied**. That second half is the point. An earlier version reported its passes as run while shipping em dashes and an agentless passive in the same draft. That is why roughly a third of this skill is now enforcement rather than guidance.
 
 - **Install:** `./install.sh` from the repo root. Symlinks the skill and the ground rules into `~/.claude/`, so a `git pull` updates every machine. `--status` shows what is linked, `--force` replaces an existing `CLAUDE.md` after backing it up, `--uninstall` removes the links.
