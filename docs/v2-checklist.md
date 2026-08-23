@@ -124,9 +124,10 @@ The previous version of this file claimed the skill was "live at `~/.claude/skil
 
 `project-readme.md`, `installation.md` and `meeting-notes.md` were derived from good sources but have never been used to produce an actual document. The Diátaxis routing in `templates/README.md` isn't referenced by `CHECKLIST.md` or `check.py`.
 
-### I. Sourcing gaps that remain, and probably always will
+### I. Sourcing status
 
-- [ ] The Economist, WSJ, HBR, Bloomberg, Reuters, Guardian, BBC stay on secondary sourcing. All unreachable. Affected claims are narrow and flagged in-file.
+- [x] **Four publications are now primary**, all supplied by the user rather than fetched: The Economist (9 excerpts, 3,131w), the Financial Times (4 articles, ~3,400w), Reuters (4 articles plus the Trust Principles pages), and HBR (3 articles, 10,174w). Roughly 20,000 words of measured professional prose.
+- [ ] WSJ, Bloomberg, Guardian and BBC remain secondary. All block automated fetching. The affected claims are narrow and flagged in-file, and after four publications the marginal value of a fifth is low.
 - [ ] BLUF's military provenance (Army Regulation 25-50) unverified. The *behavior* is fully primary-sourced; only the origin story is secondhand.
 - [ ] Two widely-circulated figures could not be confirmed against their claimed documents (Reuters' "300-800 words per story", AR 25-50's "15-word average sentence"). Deliberately unused.
 - [ ] 18F quotations were captured via a summarizing fetch, not character-for-character. High confidence, not pinned.
