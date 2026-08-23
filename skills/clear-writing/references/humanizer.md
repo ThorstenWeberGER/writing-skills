@@ -109,6 +109,22 @@ These are the subtlest and the most worth catching, because each one *looks* lik
 
 **Stale version-talk in docs.** Documentation should describe current behavior. Keep "this replaced the old approach" to changelogs, release notes, and migration guides.
 
+**Self-praising process narration.** *I made sure to…, I was careful to…, I deliberately…, I was deliberate…, I took care to…, Note that I checked…, What I did here was…* Narrating your own diligence instead of stating the finding. It is unfalsifiable by construction: the reader cannot check that you were careful, only what you produced.
+
+> Two things I made sure the description states plainly rather than burying: … → Two things worth flagging: …
+
+Three faults stack in that example. "I made sure" claims credit for doing the job; "rather than burying" invents a contrast nobody proposed (see "Answering objections nobody raised"); and the frame carries no information, so deleting it loses nothing.
+
+**This is not the same as reporting what you ran, which is required.** The test is whether the reader can verify it:
+
+| Auditable, keep it | Self-praise, cut it |
+|---|---|
+| "Ran `check.py --client`: 0 FAIL, 3 REVIEW" | "I checked it carefully" |
+| "Compressed to 118 words; the sentence cap still failed" | "I made sure not to over-compress" |
+| "Kept the passive under the actor-irrelevant exception" | "I was deliberate about the passives" |
+
+A command and its output are facts. Your carefulness is not. **Note for this codebase:** this pattern is absent from Wikipedia's *Signs of AI writing*, which this file is condensed from, because encyclopedia articles never narrate their author's care. An assistant writing back to a user does it constantly, so it was added here from observed failure rather than ported.
+
 **Empty upbeat endings.** *The future looks bright, exciting times lie ahead, a major step in the right direction.* End on the last concrete fact instead.
 
 ## Don't over-correct

@@ -40,6 +40,7 @@ HUMANIZER_LABELS_TO_AI_WORDS = {
     "Announcing instead of stating",
     "Fake-candid openings",
     "Empty upbeat endings",
+    "Self-praising process narration",
     "Answering objections nobody raised",
     "Rejecting fake alternatives",
     "Over-agreeable openings",
@@ -101,6 +102,7 @@ NON_LITERAL = {
     "enduring": ("adjective sense only. A real Economist feature uses it as a "
                  "verb (\"enduring punishing opening hours\") and our checker "
                  "flagged it; grep cannot tell the two apart"),
+    "rather than simply": ("fragment; matches innocent comparative prose. The tell\n                           is the self-praising frame around it, not these two words"),
     "here is a": "too generic to grep; 'here is a list' is legitimate",
     "some might say but": "varies too much in form to grep",
     "implement": ("on the federal dirty-dozen list, but unavoidable and "

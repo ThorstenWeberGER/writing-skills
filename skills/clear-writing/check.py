@@ -57,6 +57,10 @@ AI_WORDS = [
     "maintains a low profile", "here's the thing", "let's be honest",
     "real talk", "don't get me wrong", "to be clear,",
     "a tempting approach", "one might be tempted", "it would be easy to just",
+    # self-praising process narration: unfalsifiable claims about one's own
+    # diligence, as opposed to a reportable action and its result
+    "i made sure", "i was careful", "i deliberately", "note that i checked",
+    "what i did here was", "i took care to", "i was deliberate",
 ]
 
 # audiences.md, "referential vs evaluative" — buzzwords that grade, not name
