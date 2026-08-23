@@ -181,6 +181,24 @@ Researched how working prose style guides get built, and what the platform runni
 
 **Why they are not run, and why that matters.** The docs say a baseline comparison needs a fresh session per case, with the skill disabled for one arm, because leftover context from authoring masks gaps in the written instructions. **Every test this project has ever run has run inside the authoring session**, which is precisely that condition. So `tests/test.sh` and `evals/` measure different things and neither substitutes for the other. One case, `should-not-trigger-on-a-code-question`, measures trigger accuracy, which had never been tested at all.
 
+### 19. proselint audit, and the self-check widened to every rule (DONE)
+
+Cloned proselint (BSD) and compared term by term: **148 of ours against 837 of theirs in the overlapping categories, 6 shared.** Not a failure of either list. proselint encodes print-era usage authorities, 30 of its 76 files sourced to Garner, with 2014 dates and no concept of an LLM tell. Ours targets AI prose, buzzwords and structure.
+
+- [x] **The one category that genuinely overlaps is corporate and bureaucratic language, and we held 3 of 55.** 30 terms adopted, each judged rather than bulk-imported: 13 into `UNFAMILIAR` (Garner-sourced commercialese and verbed nouns), 8 into `BUZZWORDS`, 9 into `PHRASAL_IDIOM`.
+- [x] **The split is the finding.** proselint puts all 25 corporate-speak terms in one bucket with one verdict. Our four jargon tests split them: `win-win` grades, so it is banned; `elephant in the room` names a real thing, so it gets substituted for this audience. Different lists, different fix. The architecture held on data it was not built from.
+- [x] The adoption forced the drift test to learn three new documentation locations. Documented literal terms went 104 to 134, all matched.
+
+**Item K closed, and the self-check widened.** Three proxy defects fixed:
+
+- **Italic term runs are now a naming context.** Two commas is the discriminator, wrapped lines allowed, blank lines not, and lookarounds keep it off `**bold**`. `humanizer.md` went from 104 AI-tell hits to zero, because it lists the tells rather than committing them.
+- **Tables are not paragraphs.** A table block has no sentences in it; counting it as one reported 250-word paragraphs in four files.
+- **Nor are list blocks.** Consecutive items carry no blank line, so a nine-rule numbered list read as one paragraph. `paragraphs()` now reads block structure from the raw source, because `strip_markup` has already removed the markers it needs.
+
+Three genuine one-line fixes fell out: a quotation trimmed to fit the short-quote context, an example emoji moved into a code span, and one ordinary "actually" removed.
+
+`tests/test.sh` now asserts **0 FAIL on every guidance file and repo doc**, not just no dashes. That was blocked until the three defects above were fixed, and it is the check that would have caught the two hand-found "actionable" uses automatically. Verified by injecting a violation.
+
 ## Open
 
 ### A. `inputs/examples.md` has only its 5 launch pairs: the one real content gap
@@ -252,17 +270,6 @@ Passive voice and noun-string detection are pattern matches, not parsing. That's
 - [ ] 18F quotations were captured via a summarizing fetch, not character-for-character. High confidence, not pinned.
 - [ ] Reachable-but-unharvested primary pages in `GSA/plainlanguage.gov`: `guidelines/design/`, `guidelines/test/`, plus the SEC Plain English Handbook it cites.
 
-### K. The skill's own reference files cannot pass their own checks
-
-Running `check.py` over the skill's prose leaves FAILs in six files. Two were real and are fixed. The rest are two tool defects of the same class as the ones in section 8, both cases of a check measuring a proxy:
-
-- **Italic term runs are not a naming context.** `under_judgment()` blanks code spans, tables, weak/better lines and short quotes, but not the italic lists the reference files use to enumerate banned terms. So `humanizer.md`, the file that lists the AI tells, reports **104 AI-tell phrases at 1 per 24 words**, and `foundations.md`'s "worst repeat offenders" run reports 8 filler words. Every one is the file naming a term, not using it.
-- **Markdown tables are counted as paragraphs.** A table block reports as one paragraph over 250 words in `DONTS.md`, `audiences.md`, `formats.md` and `foundations.md`. Sentence counting already drops table rows; paragraph counting does not.
-
-**Why this matters beyond tidiness:** until both are fixed, the dash guard in `tests/test.sh` cannot be widened from "no dash FAILs" to "no FAILs at all" on the skill's own files, which is the check that would have caught the two real "actionable" uses automatically instead of by hand.
-
-**Needs:** add italic term runs to `NAMING_CONTEXTS`, exclude table blocks from `paragraphs()`, then widen the guard and hold it at 0 FAIL.
-
 ### L. Nothing has been measured against a baseline, or on more than one model
 
 Two items from the authoring checklist are open, and both need conditions this session cannot create:
@@ -278,6 +285,7 @@ Two items from the authoring checklist are open, and both need conditions this s
 2. **Add a connected-prose voice sample** (B). Two or three paragraphs you wrote for someone else. Highest value per effort of anything left, because it is the one input that would let paragraph-level voice matching switch from *unsupported* to working.
 3. **Run `./install.sh` on each machine you use** (F). It is verified working in this container; whether it is live on your own machines is still unconfirmed from here.
 4. **Run the evals against a baseline in a fresh session** (L). Until that happens, no claim about this skill's effect is measured, only its internal consistency.
+5. **Supply five same-register texts per publication** to turn the five `recorded, n=1` devices and three `not captured` attribution rows into measured habits.
 5. **Fix the two proxy defects in K** and widen the self-check to 0 FAIL. This is the one that keeps finding real problems.
 6. **Re-audit the drift allowlists** (D) once they stop growing.
 5. **Use a template for a real document** (H), which would test the three that have never produced one.

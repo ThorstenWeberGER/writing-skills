@@ -260,11 +260,30 @@ def documented():
                     for t in split_terms(cell):
                         found.setdefault(t, "DONTS.md")
 
+    # foundations.md rule 1 also documents two Garner-sourced families,
+    # adopted from proselint. Each is its own italic run, so each needs its
+    # own extraction point: the run after "repeat offenders" stops at the
+    # first closing asterisk.
+    for label in (r"dead business-letter formulas,", r"nouns turned into verbs,"):
+        m = re.search(label + r"\s*\*([^*]+)\*", f, re.S)
+        if m:
+            for t in split_terms(m.group(1)):
+                found.setdefault(t, "foundations.md")
+
     # audiences.md: the evaluative-buzzword italic run
     a = (REFS / "audiences.md").read_text(encoding="utf-8")
     for m in re.finditer(r"\*(leverage synergies[^*]+)\*", a, re.I):
         for t in split_terms(m.group(1)):
             found.setdefault(t, "audiences.md")
+
+    # audiences.md: the two proselint-sourced runs, one per verdict. The
+    # corporate-speak terms grade and are banned; the idioms name real things
+    # and get substituted, so they live in different check.py lists.
+    for label in (r"running test 4 on each one:", r"substituted rather than banned:"):
+        m = re.search(label + r"\s*\*([^*]+)\*", a, re.S)
+        if m:
+            for t in split_terms(m.group(1)):
+                found.setdefault(t, "audiences.md")
 
     return found
 

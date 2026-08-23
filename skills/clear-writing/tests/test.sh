@@ -171,16 +171,34 @@ n = sum(len(e["expected_behavior"]) for e in d)
 print(f"  pass    evals.json: {len(d)} cases, {n} assertions, all input files present")
 EOF
 
-echo "=== the skill's own files obey the dash rule ==="
-# The rule was described for 20,000 words while 200+ dashes sat in the files
-# describing it. Enforced here so it cannot drift back.
+echo "=== the skill's own files pass every check ==="
+# This started as a dash-only guard, because the rule was described across
+# 20,000 words while 200+ dashes sat in the files describing it. It is now the
+# full check: no FAIL of any kind in the guidance or the repo docs. Widening it
+# was blocked until italic term runs became a naming context and tables and
+# list blocks stopped counting as paragraphs.
+#
+# docs/example-hbr-voice.md is excluded on purpose: its title-case headings are
+# the HBR convention, so it fails bare and passes under --house hbr, which the
+# house-profile assertion above already checks.
+own=0
 for f in SKILL.md CHECKLIST.md references/*.md templates/*.md inputs/*.md \
-         ../../README.md ../../CLAUDE.md ../../docs/v2-checklist.md; do
-  if python3 check.py "$f" 2>&1 | grep -q '^  FAIL    em/en dash'; then
-    echo "  FAIL    $f carries an em or en dash outside a code span"; rc=1
+         evals/README.md tests/fixtures/README.md \
+         ../../README.md ../../CLAUDE.md ../../docs/v2-checklist.md \
+         ../../docs/how-to-derive-a-style-guide.md \
+         ../../docs/research-styleguide-design.md; do
+  n=$(python3 check.py "$f" 2>&1 | grep -oE '^  [0-9]+ FAIL' | grep -oE '[0-9]+')
+  if [ "${n:-0}" != "0" ]; then
+    echo "  FAIL    $f: $n FAIL"
+    python3 check.py "$f" 2>&1 | grep '^  FAIL ' | grep -v 'FAIL =' | sed 's/^/          /'
+    own=1
   fi
 done
-[ $rc -eq 0 ] && echo "  pass    all prose files clean"
+if [ $own -eq 0 ]; then
+  echo "  pass    all guidance and repo docs at 0 FAIL"
+else
+  rc=1
+fi
 
 echo "=== the scripts carry only their known dash literals ==="
 # Counted in lines. check.py needs the two regexes it scans with; test_drift.py

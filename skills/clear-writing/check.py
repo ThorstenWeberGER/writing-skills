@@ -29,6 +29,14 @@ UNFAMILIAR = [
     "in the amount of", "in the event of", "facilitate", "endeavor",
     "at this point in time", "due to the fact that", "prior to",
     "subsequent to", "with regard to", "it is important to note that",
+    # Commercialese and verbed-noun jargon, adopted from proselint's
+    # Garner-sourced lists (BSD). Dead business-letter formulas, and nouns
+    # made into verbs. "in regard to" is the variant we had missed.
+    "in regard to", "acknowledging yours of", "beg to advise",
+    "enclosed herewith", "enclosed please find", "further to your letter",
+    "further to yours of", "agendize", "disincentivize",
+    "in the affirmative", "in the negative", "per your order",
+    "per your request",
 ]
 
 # humanizer.md, "Overused AI words" + "Sales language" + "Inflated importance"
@@ -69,6 +77,12 @@ BUZZWORDS = [
     "move the needle", "circle back", "touch base", "bandwidth",
     "actionable", "value-add", "mission-critical", "paradigm shift",
     "core competencies", "operationalize", "best practice in class",
+    # From proselint's corporate-speak list (BSD). Its source is a business
+    # column rather than a usage authority, so each was judged against jargon
+    # test 4, does the term name a thing or grade one. These grade.
+    "at the end of the day", "no brainer", "win-win", "think outside the box",
+    "bang for your buck", "par for the course", "apples to apples",
+    "drill-down",
 ]
 
 # audiences.md, non-native readers rules 1-2
@@ -78,6 +92,11 @@ PHRASAL_IDIOM = [
     "circle back", "low-hanging fruit", "move the goalposts", "ballpark",
     "touch base", "deep dive", "on the same page", "hit the ground running",
     "boil the ocean", "don't hesitate", "feel free to",
+    # Same proselint list, opposite verdict: these name real things and fail
+    # only the shared-vocabulary test, so they belong here, not in BUZZWORDS.
+    "all hands on deck", "back to the drawing board", "get the ball rolling",
+    "take this offline", "thrown under the bus", "on my plate", "ping me",
+    "elephant in the room", "on my radar",
 ]
 
 # audiences.md, external client rules 2 and 6
@@ -367,6 +386,17 @@ NAMING_CONTEXTS = (
     ("table row", re.compile(r"^[ \t]*\|.*$", re.M)),
     ("weak/better line", re.compile(r"^.*(?:→|->).*$", re.M)),
     ("short quote", re.compile(r'"[^"\n]{1,60}"')),
+    # An italic run holding a comma-separated list is a term list being named,
+    # not prose using those terms. The reference files enumerate every banned
+    # word this way, so humanizer.md reported 104 AI-tell phrases for the file
+    # that lists them. Two commas is the discriminator: emphasis almost never
+    # contains two, and a two-item list is short enough to read as prose.
+    # Wrapped lines are allowed inside the run, a blank line is not, and the
+    # lookarounds keep the pattern off ** bold ** markers.
+    ("italic term run", re.compile(
+        r"(?<!\*)\*(?!\*)"
+        r"(?:[^*\n]|\n(?!\n))*?,(?:[^*\n]|\n(?!\n))*?,(?:[^*\n]|\n(?!\n))*?"
+        r"\*(?!\*)")),
 )
 
 
@@ -420,8 +450,35 @@ def scan_text(raw):
     return under_judgment(raw)[0]
 
 
-def paragraphs(text):
-    return [p.strip() for p in re.split(r"\n\s*\n", text) if p.strip()]
+def paragraphs(text, raw=None):
+    """Blank-line-separated blocks, minus markdown tables.
+
+    A table block has no sentences in it, so counting it as one paragraph
+    reported four reference files as carrying a 250-word paragraph. Sentence
+    counting already drops table rows; this is the other half of that fix.
+    """
+    # List markers are gone from `text` once strip_markup has run, so when the
+    # raw source is available the block structure is read from that instead.
+    src = raw if raw is not None else text
+    out = []
+    for blk in re.split(r"\n\s*\n", src):
+        lines = [l for l in blk.splitlines() if l.strip()]
+        if not lines:
+            continue
+        table = sum(1 for l in lines if l.lstrip().startswith("|"))
+        if table and table >= len(lines) - 1:   # allow one lead-in line
+            continue
+        # A run of list items is a list, not a paragraph. Consecutive items
+        # carry no blank line between them, so a nine-rule numbered list read
+        # as one 250-word paragraph in three reference files.
+        items = sum(1 for l in lines
+                    if re.match(r"^\s*([-*+]|\d+\.)\s+", l))
+        if items >= 2:
+            continue
+        kept = [l for l in lines if not l.lstrip().startswith("|")]
+        if kept and " ".join(kept).strip():
+            out.append("\n".join(kept).strip())
+    return out
 
 
 def sentences(text):
@@ -520,7 +577,7 @@ def run(raw, opts):
     low = judged.lower()          # every pattern/wordlist check uses this
     raw_low = low
     sents = sentences(prose)
-    paras = paragraphs(prose)
+    paras = paragraphs(prose, raw)
     all_words = words(prose)
     hs = headings(raw)
 

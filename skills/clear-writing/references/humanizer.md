@@ -82,7 +82,7 @@ Use personality in essays, blog posts, and opinion pieces where it fits the writ
 
 **Title Case In Headings.** Use sentence case: "Strategic negotiations and global partnerships."
 
-**Decorative emojis** on headings or list items (🚀 **Launch Phase:**). Cut them.
+**Decorative emojis** on headings or list items, as in `🚀 **Launch Phase:**`. Cut them.
 
 ## Chatbot tells
 

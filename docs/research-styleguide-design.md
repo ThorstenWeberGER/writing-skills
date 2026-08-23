@@ -11,6 +11,7 @@ Research done 2026-08-23. Two questions: how do working prose style guides get b
 - Primary: Anthropic skill-authoring guidance
 - Secondary: agent instruction files
 - Text bases and published guides: what exists, what we can reach
+- The proselint audit, run
 - Audit against the official checklist
 - What we changed
 - What we did not change, and why
@@ -136,6 +137,20 @@ Five of our voice rules are graded `recorded, n=1`, and three attribution rows s
 | Guardian and Observer style guide | Full A-Z, free. Usage decisions more than method, but good for the stated-versus-measured comparison | No |
 | Economist Style Guide | Borrow-only on archive.org and in copyright | Not usable |
 
+### Reachability, tested rather than assumed
+
+Five routes to the handbooks, all blocked from this container:
+
+| Route | Result |
+|---|---|
+| `handbook.reuters.com` direct | Blocked |
+| `gov.uk` content design guide direct | Blocked |
+| Wayback Machine (`web.archive.org`) | Blocked |
+| `alphagov/styleguides` on GitHub | Reachable, but it is coding standards, not content |
+| `developers.google.com/style` | Blocked |
+
+What does work from here: `raw.githubusercontent.com`, the Claude docs domains, and search-result summaries. So publisher-hosted style guides are out, and repository-hosted ones are in. The handbooks stay readable in a browser, which is the same supply route the articles took.
+
 ### Reachable and immediately useful
 
 **[proselint](https://github.com/amperser/proselint)**, BSD licensed, about 80 checks in a dotted hierarchy. Confirmed reachable and read from source. Each check carries a `source` field naming a real authority: Garner, Strunk, Pinker, Orwell, Butterick, Wallace, Norris and others. Its `hedging` check reads `source: Pinker`, `message: "Hedging. Just say it."`
@@ -143,6 +158,29 @@ Five of our voice rules are graded `recorded, n=1`, and three attribution rows s
 Its categories overlap ours heavily: hedging, jargon, clichés, corporate speak, bureaucratese, redundancy, pretension. Auditing our wordlists against it needs no new input and would either corroborate our lists or show what they miss.
 
 **Vale style packages** beyond the two already used: Red Hat, Elastic, PostHog, GitLab. All open, all reachable.
+
+### The proselint audit, run
+
+Cloned and compared term by term. **148 terms of ours against 837 of theirs in the overlapping categories, and 6 shared.**
+
+That looks like a failure of one list or the other. It is neither. The two tools target different eras of error:
+
+- proselint encodes print-era usage authorities, mostly Garner, at 30 of its 76 check files. Its categories are archaism, nonwords, needless variants, malapropisms, mondegreens, redundancy, commercialese. Its files carry 2014 dates, so it has no concept of an LLM tell: nothing for *delve*, *tapestry*, *it is not just X, it is Y*, or *here is the thing*.
+- Ours targets AI-generated prose, corporate buzzwords and structure, and inherits its plain-wording half from federal guidance rather than from Garner.
+
+**The one category that genuinely overlaps is corporate and bureaucratic language, and there we held 3 of 55.** So the audit found a real gap and closed it: 30 terms adopted, each judged rather than bulk-imported, and sorted by our own architecture rather than theirs.
+
+| Adopted into | Count | Why there |
+|---|---|---|
+| `UNFAMILIAR` | 13 | Garner-sourced commercialese (*enclosed please find*, *beg to advise*, *in regard to*) and nouns verbed (*agendize*, *disincentivize*). Officialese, same family as our existing entries |
+| `BUZZWORDS` | 8 | *at the end of the day, no brainer, win-win, think outside the box, bang for your buck, par for the course, apples to apples, drill-down*. Each grades rather than names, so each fails jargon test 4 |
+| `PHRASAL_IDIOM` | 9 | *all hands on deck, back to the drawing board, get the ball rolling, take this offline, thrown under the bus, on my plate, ping me, elephant in the room, on my radar*. These name real things and fail only the shared-vocabulary test, so they get substituted, not banned |
+
+**The split is the interesting part.** proselint puts all 25 corporate-speak terms in one bucket with one verdict. Running them through our four jargon tests split them two ways: `win-win` grades, `elephant in the room` names a real thing. That distinction changes the fix from "delete" to "substitute for this audience", and it is the architecture earning its keep on data it was not built from.
+
+Rejected: `move the goal post` and `circle back around` as variants we already hold, `i dont have the bandwidth` because `bandwidth` is already listed, and `get my managers blessing` as too rare to be worth a check.
+
+The adoption forced the drift test to learn three new documentation locations, which is the coupling behaving as designed: documented literal terms went from 104 to 134, all matched.
 
 ### Corpora, and why they mostly do not help
 

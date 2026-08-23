@@ -31,7 +31,7 @@ Problem: "in spite of the fact that" and "we are currently of the opinion that" 
 **Weak:**
 > The recent launch of our new software feature resulted in a massive surge in overall user engagement.
 
-Problem: "massive surge" and "overall user engagement" give no way to judge how big the change actually was.
+Problem: "massive surge" and "overall user engagement" give no way to judge how big the change was.
 
 **Better:**
 > Daily active users rose 22% in the two weeks following the software release.
