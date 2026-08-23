@@ -17,16 +17,18 @@ Terms that are patterns rather than literal strings ("X is the Y of Z") cannot
 be grepped, so they are listed in NON_LITERAL below with a reason. That list is
 the honest record of what this test does not cover.
 
-    python3 test_drift.py        # exit 0 = in sync
+    python3 tests/test_drift.py   # exit 0 = in sync (run from the skill root)
 """
 
 import re
 import sys
 from pathlib import Path
 
-import check
+HERE = Path(__file__).resolve().parent.parent   # the skill root, one level up
+sys.path.insert(0, str(HERE))                   # so "import check" finds check.py
 
-HERE = Path(__file__).parent
+import check  # noqa: E402  — must follow the sys.path insert above
+
 REFS = HERE / "references"
 
 # Bold labels in humanizer.md whose italic term runs feed check.AI_WORDS.

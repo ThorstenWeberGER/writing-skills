@@ -19,7 +19,7 @@ Run all four:
 cd skills/clear-writing
 for f in bad good em art; do
   case $f in bad|good) fl="--client --nonnative";; em) fl="--email";; art) fl="--article-full";; esac
-  echo "== $f"; python3 check.py test-fixtures/$f.md $fl | grep -E "^  [0-9]+ FAIL"
+  echo "== $f"; python3 check.py tests/fixtures/$f.md $fl | grep -E "^  [0-9]+ FAIL"
 done
 ```
 
@@ -35,7 +35,7 @@ markdown table, weak/better line, short quote) and then uses the same patterns
 for real in a final section. Expected: **5 FAIL**, and every one from the
 use section.
 
-`test.sh` also asserts that `--strict` finds *more* hits than the default. If
+`tests/test.sh` also asserts that `--strict` finds *more* hits than the default. If
 the exclusions ever stop working, the counts converge and that check fails. A
 passing FAIL count alone would not catch it, because the fixture would still
 fail for the right total by the wrong route.

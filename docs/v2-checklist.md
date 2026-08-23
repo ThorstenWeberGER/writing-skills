@@ -1,8 +1,8 @@
 # clear-writing skill — status and open items
 
-Last updated 2026-08-23. The skill lives in this repo at `skills/clear-writing/`. Start with its `README.md`, which is the user-facing manual; this file tracks status and open work.
+Last updated 2026-08-23. The skill lives in this repo at `skills/clear-writing/`. Start with the repo-root `README.md`, which is the user-facing manual; this file tracks status and open work.
 
-Run `./skills/clear-writing/test.sh` to verify the whole thing. Currently all green: drift test in sync, 14/14 rule anchors present, 9 fixtures behaving as expected. About 23,300 words across the skill; 66 checks in `check.py`.
+Run `./skills/clear-writing/tests/test.sh` to verify the whole thing. Currently all green: drift test in sync, 14/14 rule anchors present, 9 fixtures behaving as expected. About 20,000 words of rules (28,900 counting fixtures and scripts); 66 checks in `check.py`.
 
 ---
 
@@ -38,9 +38,9 @@ The original blocker stands: economist.com, wsj.com, bloomberg.com and hbr.org a
 
 ### 5. Structural consolidation
 
-- [x] `style-general-writing.md` deleted — 3 of 5 rules duplicated `foundations.md`, and its only example was already in `examples.md` verbatim.
+- [x] `style-general-writing.md` deleted — 3 of 5 rules duplicated `foundations.md`, and its only example was already in `inputs/examples.md` verbatim.
 - [x] `style-management-summary.md` + `article-structure.md` merged into `formats.md`.
-- [x] `DONTS.md` and `examples.md` kept separate on purpose, with the reason recorded in both.
+- [x] `DONTS.md` and `inputs/examples.md` kept separate on purpose, with the reason recorded in both.
 
 ### 6. Enforcement layer
 
@@ -48,8 +48,8 @@ This was the largest piece of work and wasn't in the original checklist. It exis
 
 - [x] **`check.py`** — 22+ mechanical checks, stdlib only, exit 1 on any FAIL. Conditional flags for `--summary`, `--email`, `--article-half/full`, `--client`, `--nonnative`, `--dashes-ok`, `--compare`.
 - [x] **`CHECKLIST.md`** — the judgment half, step by step. Requires reporting what was run, not "applied the skill".
-- [x] **`test_drift.py`** — fails when `check.py`'s wordlists drift from the reference files, in three directions (MISSING, ORPHAN, BROKEN RULE ANCHOR). Verified it can actually fail by injecting each direction.
-- [x] **`test.sh`** — drift test plus 7 fixtures.
+- [x] **`tests/test_drift.py`** — fails when `check.py`'s wordlists drift from the reference files, in three directions (MISSING, ORPHAN, BROKEN RULE ANCHOR). Verified it can actually fail by injecting each direction.
+- [x] **`tests/test.sh`** — drift test plus 7 fixtures.
 - [x] Every reference file ends by stating it is not self-enforcing.
 
 ### 7. Style-only mode
@@ -99,14 +99,22 @@ The pattern is stable and worth stating on its own: **purpose-built fixtures kep
 
 ### 11. The manual
 
-- [x] `skills/clear-writing/README.md`. Nine sections: mode choice, architecture, the four inputs and how to extend each, a task-to-recipe table with a worked email example, the two halves of enforcement, extension points, design decisions, known limits, provenance.
+- [x] the repo-root `README.md`. Nine sections: mode choice, architecture, the four inputs and how to extend each, a task-to-recipe table with a worked email example, the two halves of enforcement, extension points, design decisions, known limits, provenance.
 - [x] Written through the skill and checked with `check.py`, which is what surfaced the last two false positives.
 
 ---
 
+### 12. File layout
+
+- [x] The manual moved from inside the skill to the repo root as `README.md`, so it is the first thing the repo shows rather than a file three levels down.
+- [x] Grouped into subfolders by how often each file is read: `references/` (on demand), `inputs/` (supplied by you), `templates/`, `tests/`. Only `SKILL.md`, `CHECKLIST.md` and `check.py` stay at the skill's top level.
+- [x] `test-fixtures/` became `tests/fixtures/`; `test.sh` and `test_drift.py` moved under `tests/` with the import and fixture paths rewired.
+- [x] `backlog.md` moved to `docs/`, leaving the repo root at four files.
+- [x] Verified after the move: `tests/test.sh` all green, `install.sh --status` links intact, and `inputs/` plus `tests/` reachable through the installed symlink.
+
 ## Open
 
-### A. `examples.md` has only its 5 launch pairs — the one real content gap
+### A. `inputs/examples.md` has only its 5 launch pairs — the one real content gap
 
 Can't be fixed by research. The file admits only real user-supplied or conversation-captured pairs, never invented ones, and that invariant is deliberate. It grows only through use.
 
@@ -114,7 +122,7 @@ Can't be fixed by research. The file admits only real user-supplied or conversat
 
 ### B. Voice sample exists but covers only short-form writing — PARTLY DONE
 
-- [x] `voice-sample.md` created from real material: `backlog.md` plus the user's session instructions, quoted verbatim.
+- [x] `inputs/voice-sample.md` created from real material: `backlog.md` plus the user's session instructions, quoted verbatim.
 - [x] Patterns extracted and **measured** rather than estimated: 27 sentences, median 6 words, max 16, none longer. Imperative mood dominant, sparse punctuation, "as well" as a habitual closer.
 - [x] **The em-dash question is settled empirically:** character scan finds zero `—`/`–` across every quote and across `backlog.md`. The ban applies; `--dashes-ok` should not be passed. `CHECKLIST.md`'s flag table now says so.
 - [x] Records the distinction that matters: match rhythm and word choice, never reproduce typos or missing punctuation from a sample.
@@ -126,7 +134,7 @@ Can't be fixed by research. The file admits only real user-supplied or conversat
 
 ### C. CI — DONE
 
-- [x] `.github/workflows/clear-writing-tests.yml` runs `test.sh` on any push or PR touching the skill, plus manual dispatch. Verified the suite passes when invoked from the repo root the way CI does.
+- [x] `.github/workflows/clear-writing-tests.yml` runs `tests/test.sh` on any push or PR touching the skill, plus manual dispatch. Verified the suite passes when invoked from the repo root the way CI does.
 
 Closed because "only runs when someone remembers" was the same failure mode the enforcement layer exists to fix, one level up.
 
@@ -152,9 +160,9 @@ Passive voice and noun-string detection are pattern matches, not parsing. That's
 
 ### F. Installation location still unverified on your own machines
 
-The previous version of this file claimed the skill was "live at `~/.claude/skills/clear-writing/`". In this container it is **not** — the synced skills mirror doesn't contain it, so the skill exists only in this repo. Whether it's installed on the user's own machine can't be verified from here.
+`./install.sh` has been run in this container: `--status` reports both the skill and `CLAUDE.md` linked, and the links survive the folder restructure. Whether it is installed on the user's own machines can't be verified from here.
 
-**Needs:** confirm where it should actually live, and how it gets there.
+**Needs:** run `./install.sh` once per machine, then `--status` to confirm.
 
 ### G. Mode selection isn't enforced, only documented
 
@@ -175,14 +183,23 @@ The previous version of this file claimed the skill was "live at `~/.claude/skil
 - [ ] 18F quotations were captured via a summarizing fetch, not character-for-character. High confidence, not pinned.
 - [ ] Reachable-but-unharvested primary pages in `GSA/plainlanguage.gov`: `guidelines/design/`, `guidelines/test/`, plus the SEC Plain English Handbook it cites.
 
+### J. The skill's own files fail the skill's own dash check
+
+`check.py` counts 200+ em and en dashes across `SKILL.md`, `CHECKLIST.md` and the six `references/` files, most of them used as a definition separator in prose and table cells. Measured per file: foundations 41, audiences 35, formats 28, humanizer 23, v2-checklist 20, SKILL 18, CHECKLIST 15, house-styles 9, DONTS 6. `README.md` and `CLAUDE.md` are clean; their only hits are inside code spans, where the rule is being named.
+
+The ban is settled for this writer, so this is a real inconsistency and not a style debate. It was not fixed with the restructure because each instance needs a judgment call between a period, a comma, a colon and parentheses, and a blind substitution would flatten meaning and break table cells.
+
+**Needs:** a pass per file, verified with `check.py` afterwards.
+
 ---
 
 ## Next steps, in priority order
 
-1. **Use the skill on real drafts and grow `examples.md`** (A). Still the only gap that research cannot close.
+1. **Use the skill on real drafts and grow `inputs/examples.md`** (A). Still the only gap that research cannot close.
 2. **Add a connected-prose voice sample** (B). Two or three paragraphs you wrote for someone else. Highest value per effort of anything left, because it is the one input that would let paragraph-level voice matching switch from *unsupported* to working.
 3. **Run `./install.sh` on each machine you use** (F). It is verified working in this container; whether it is live on your own machines is still unconfirmed from here.
-4. **Re-audit the drift allowlists** (D) once they stop growing.
+4. **Clear the em dashes out of the skill's own files** (J). 200+ hits across nine files. Mechanical to find, judgment to fix.
+5. **Re-audit the drift allowlists** (D) once they stop growing.
 5. **Use a template for a real document** (H), which would test the three that have never produced one.
 6. **Pin the 18F quotations** with one literal re-fetch (I).
 

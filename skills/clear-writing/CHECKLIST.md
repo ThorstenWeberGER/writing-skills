@@ -27,7 +27,7 @@ Flags, set by what you're writing:
 | `--client` | client-facing note. Adds the fix-ETA, next-update, empty-apology and vendor-blaming checks, plus its own budget of ~200 words / 12 sentences. **Do not combine with `--email`** — those caps belong to the management-summary variant and a client note cannot meet them while satisfying `audiences.md`'s eight rules. |
 | `--nonnative` | non-native readership (phrasal verbs, idioms, tense stacks) |
 | `--house NAME` | the user asked for a specific outlet's conventions. Sets subhead/bullet policy, sentence-median and dash-rate targets from `house-styles.md`. Its dash target does **not** override the ban below. |
-| `--dashes-ok` | **do not use.** `voice-sample.md` shows zero em dashes across every sample, so the ban applies to this user. Only revisit if a future sample contradicts that. |
+| `--dashes-ok` | **do not use.** `inputs/voice-sample.md` shows zero em dashes across every sample, so the ban applies to this user. Only revisit if a future sample contradicts that. |
 
 **Every FAIL must be fixed.** REVIEW items need a decision, not necessarily a change — a flagged passive may be one of the two legitimate exceptions, and a long list may genuinely have eight items. Record the decision; don't just move on.
 
@@ -78,18 +78,18 @@ If you have no file to check (the draft is going straight into chat), write it t
 - [ ] **Mixed audience?** Evaluate those tests against the *least-expert reader who has to act on the text*, not the average one.
 - [ ] **Technical + non-native at once?** Keep domain nouns at full precision; simplify everything around them. The failure mode is the inverse — plain nouns wrapped in native-speaker idiom.
 
-## Step 5 — known violations (from `DONTS.md` and `examples.md`)
+## Step 5 — known violations (from `DONTS.md` and `inputs/examples.md`)
 
 - [ ] Scanned against `DONTS.md` (the script covers the term lists; the ten general don'ts need a read).
 - [ ] **If a new violation surfaced this conversation and the user confirmed it: appended to `DONTS.md`.**
-- [ ] **Nothing invented was added to `examples.md`.** That file admits only real user-supplied or conversation-captured pairs. An empty slot is the honest state.
+- [ ] **Nothing invented was added to `inputs/examples.md`.** That file admits only real user-supplied or conversation-captured pairs. An empty slot is the honest state.
 
 ## Step 6 — final pass (from `humanizer.md`)
 
 - [ ] **Facts audit: was any fact, number, name, date, quote, or citation added or dropped?** Both are errors. **This is the item most likely to catch a real problem** — in testing it caught a vague source reference ("approximately last Tuesday") silently rewritten as a specific date, which had survived two earlier review passes. Check dates and figures against the source explicitly, one at a time.
 - [ ] **Dash scan actually run** (script step 0, or a literal character search). The user-sample exemption is *verified*, not assumed.
-- [ ] **Voice matched against `voice-sample.md`** (or a fresher sample in this conversation, which takes precedence) — sentence length, word choice, punctuation habits, em-dash rate. Match rhythm and word choice; never reproduce typos or missing punctuation from a sample.
-- [ ] **Paragraph-level voice:** `voice-sample.md` currently holds only short-form material, so paragraph openings and transitions fall back to `humanizer.md` defaults. Don't claim voice-matched paragraphs until a connected-prose sample exists.
+- [ ] **Voice matched against `inputs/voice-sample.md`** (or a fresher sample in this conversation, which takes precedence) — sentence length, word choice, punctuation habits, em-dash rate. Match rhythm and word choice; never reproduce typos or missing punctuation from a sample.
+- [ ] **Paragraph-level voice:** `inputs/voice-sample.md` currently holds only short-form material, so paragraph openings and transitions fall back to `humanizer.md` defaults. Don't claim voice-matched paragraphs until a connected-prose sample exists.
 - [ ] **No virtue by invented contrast.** Search for "rather than". For each, delete everything from it onward. If you only lose the implication that you were thoughtful, cut it. Both recorded cases came from chat replies, not documents.
 - [ ] **Read the whole thing once more and ask: what still sounds AI-generated?** Fix by restating naturally, not by patching the flagged phrase.
 - [ ] **Didn't over-correct.** Polished grammar, one *however*, curly quotes, a single short sentence for emphasis, real scope statements, and genuinely weighed alternatives are all fine. Several tells together are evidence; one is not.

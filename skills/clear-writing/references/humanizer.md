@@ -9,9 +9,9 @@ Two hard rules while rewriting:
 
 ## Match the writer's voice
 
-**Read `voice-sample.md` before rewriting.** It holds verbatim samples of the user's own writing plus the patterns extracted from them. If a fresher sample exists in this conversation, that takes precedence — note its sentence length, word choice, paragraph openings, punctuation, and recurring phrases. Match those habits, and don't formalize casual wording or strip deliberate quirks.
+**Read `inputs/voice-sample.md` before rewriting.** It holds verbatim samples of the user's own writing plus the patterns extracted from them. If a fresher sample exists in this conversation, that takes precedence — note its sentence length, word choice, paragraph openings, punctuation, and recurring phrases. Match those habits, and don't formalize casual wording or strip deliberate quirks.
 
-Match the rhythm and word choice; never reproduce typos, missing punctuation, or slips. `voice-sample.md` spells out that distinction.
+Match the rhythm and word choice; never reproduce typos, missing punctuation, or slips. `inputs/voice-sample.md` spells out that distinction.
 
 **A sample overrides the style rules below.** If the sample uses em dashes freely, keep them at roughly the sample's rate — the dash rule does not apply as a ban. **For this user the sample settles it the other way: zero em dashes across every quote, so the ban applies and `--dashes-ok` should not be passed.**
 

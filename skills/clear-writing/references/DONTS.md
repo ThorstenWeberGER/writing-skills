@@ -4,7 +4,7 @@ A flat, growing list. Add an entry any time a specific pattern should be avoided
 
 Edit this file directly at any time. Claude may also append an entry when you flag something mid-conversation (e.g., "don't do X") — ask for confirmation before adding unless the user has clearly already said to remember it.
 
-Examples here are short and illustrative — written to demonstrate the pattern. Genuine before/after pairs from real writing belong in `examples.md`, which holds only real material.
+Examples here are short and illustrative — written to demonstrate the pattern. Genuine before/after pairs from real writing belong in `inputs/examples.md`, which holds only real material.
 
 ## Jargon to avoid
 

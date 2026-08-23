@@ -104,7 +104,7 @@ The pattern to watch: it is easy to apply these tests carefully to a draft *for*
 
 **Jargon.** [plainlanguage.gov's avoid-jargon guidance](https://github.com/GSA/plainlanguage.gov/blob/main/_pages/guidelines/words/avoid-jargon.md) (primary text) — the definition and the technical-term carve-out. [Bullock et al. 2019, *Jargon as a barrier to effective science communication*](https://journals.sagepub.com/doi/abs/10.1177/0963662519865687) and [Shulman et al. 2020](https://journals.sagepub.com/doi/10.1177/0261927X20902177) — the processing-fluency finding; note the authors' own caveats (online experiment, non-representative sample, context-stripped messages). [NN/g, *Plain language is for everyone, even experts*](https://www.nngroup.com/articles/plain-language-experts/). The four-test framework is original synthesis over these sources.
 
-Examples throughout are illustrative constructions, not sourced quotations. Real before/after pairs belong in `examples.md`.
+Examples throughout are illustrative constructions, not sourced quotations. Real before/after pairs belong in `inputs/examples.md`.
 
 ---
 

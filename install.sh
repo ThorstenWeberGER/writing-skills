@@ -90,4 +90,4 @@ else
 fi
 
 echo
-say "verify the skill with: $SKILL_SRC/test.sh"
+say "verify the skill with: $SKILL_SRC/tests/test.sh"

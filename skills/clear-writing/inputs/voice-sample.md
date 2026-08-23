@@ -6,7 +6,7 @@ Real writing by the user, quoted verbatim. `humanizer.md`'s "Match the writer's 
 
 ---
 
-## Source 1 — `backlog.md` (planning register)
+## Source 1 — `docs/backlog.md` in this repo (planning register)
 
 Verbatim:
 

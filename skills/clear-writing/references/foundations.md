@@ -1,6 +1,6 @@
 # Foundations: structure, wording, and formatting
 
-These rules apply to every piece of writing, before choosing a format (`formats.md`), adjusting for audience (`audiences.md`), or checking for violations (`DONTS.md`, `examples.md`).
+These rules apply to every piece of writing, before choosing a format (`formats.md`), adjusting for audience (`audiences.md`), or checking for violations (`DONTS.md`, `inputs/examples.md`).
 
 ## Structure: lead with the point
 
