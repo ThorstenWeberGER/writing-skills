@@ -156,7 +156,7 @@ All rules are original synthesis. Quoted fragments are under 15 words and attrib
   | Report (Brazil) | 263 | 11 | **26** | 23.9 | 34 | **7 (64%)** | 0 |
   | **Total** | **3,131** | **168** | n/a | n/a | 49 | **34 (20%)** | **9** |
 
-  **Zero subheadings and zero bullets in all nine.** Eight articles, 191-619 words each. This is the dataset's strongest and most consistent result, and why the subhead-count table in `formats.md` is scoped to scanned writing only.
+  **Zero subheadings and zero bullets in all nine excerpts.** Eight articles, 191-619 words each. **Corrected later:** six full Economist articles were then measured, and two of five carry allusive crossheads of three to four words. The zero-subhead result was an artefact of measuring excerpts, and the word "excerpt" was carrying the claim. The bullet half survived: zero bullets across all fifteen items. This is the fourth time in this project that a finding held on one sampling method and broke on a better one.
 
   **What else generalises:**
 

@@ -45,35 +45,58 @@ Nothing here is graded higher than the evidence supports. Where a publication's 
 
 ## Economist
 
-*9 excerpts, 3,131 words. News briefs, a Leader, three features, four reports.*
+*Six full articles, 5,286 words, 269 sentences: two political reports, a business analysis, a business news piece, a data-journalism explainer and a news-brief roundup. Plus the nine excerpts behind `house-styles.md`.*
 
-**The opening move depends on the register, and getting this wrong is the single biggest tell.** (measured, across all nine)
+**Full articles, not excerpts, and that changes the strongest claim in this project.** The nine-excerpt sample produced "zero subheadings and zero bullets in all nine", labelled the dataset's most consistent result. It was measured on excerpts. Full articles carry crossheads.
 
-| Register | Sentence 1 does this |
-|---|---|
-| News brief | Pure BLUF. The fact, then its consequence |
-| Leader | States the flat conventional thesis, then turns against it |
-| Feature | Opens on a scene or a concrete particular. The general point lands by sentence 5 or paragraph 2 |
+| Measure | From excerpts | From six full articles |
+|---|---|---|
+| Sentence median | 13-26 by register | **16-23**, pooled 19 |
+| Over 25 words | 20% | **23%**, range 8-36% |
+| Em dashes | 1 per 348, absent from 6 of 9 | **zero in all six** |
+| Semicolons | about 1 per excerpt | 0-2 per article |
+| Headline words | 4, 8, 9, 10 | **7, 8, 9, 10, 10**, median 9. Confirmed |
+| Subheads | none, in any excerpt | **crossheads in 2 of 5 articles** |
 
-**The signature move: the concrete anchor at any distance, including centuries.** (recorded, n=1) One piece opens on the Ostrogoths destroying Rome's aqueducts in 537 before turning to present-day cyber-attacks on water utilities. The move is to earn a general claim with a specific, and the specific is allowed to be very far away.
+### The devices, counted
 
-**Second signature: enumeration stays in prose.** (measured) "There are three reasons… One is… The second reason… The third reason…" runs across three paragraphs with no list. If you are tempted to bullet three causes, signpost them ordinally instead.
+**The standfirst turns against the headline. (measured, 4 of 5)** The headline states; the standfirst adds the qualification that makes the piece worth reading. Two open on *But*. One appends *, too*. One runs a *just as* symmetry between two parties. The exception is the data-journalism piece, whose standfirst is a bare number. So this is where the argument's tension lives, not in the headline.
 
-**Third: a rhetorical question carries a structural pivot.** (recorded, n=1) "Has the policy worked?" turns description into assessment. One per piece, at the hinge, never decorative.
+**A short flat sentence lands early. (measured, 4 of 6)** Three to six words, inside the opening paragraph, doing the work a long sentence set up: *The market shrugged.* *And so he swiftly sidestepped it.* *Which is in Munich.* One article opens on one outright: *Mark Carney is governing through paradox.* The effect is deadpan rather than punchy, and it is the clearest single marker of this voice.
 
-**Register.**
+**Crossheads, where they appear, are 3-4 words and allusive. (measured, 2 of 2 articles that use them)** *How to spend it* borrows an FT magazine title. *Can't touch this* is an MC Hammer joke. *Stoppable force, movable object* inverts the immovable-object cliché. Three of three are a joke or a reference, none is a navigation label. The data-journalism piece is the exception that proves the split: its one crosshead is *Methodology*, purely functional.
 
-- Acronyms are glossed once, then used bare and **lowercase**: `irgc`, `afd`, `llms`. (measured, two forms: parenthetical "Islamic Revolutionary Guard Corps (irgc)" and appositive "a Brandmauer, or firewall", "known as Lula")
-- Numeric density is calibrated to genre: **3.0 figures per 100 words in news, 0.4 in the Leader.** (measured) Do not carry news density into an argument.
-- Wit is load-bearing but rationed. One sentence fragment for comic timing is legitimate: "Which is in Munich." (recorded, n=1) A row of them is the AI tell, not the style.
+So the honest rule is **register-dependent, not absent**: news briefs carry none, reports and analysis carry two or three allusive ones, data journalism carries functional labels.
 
-**Punctuation signature.** Em dashes 1 per 348 words and absent from 6 of 9 excerpts. Semicolons at most one per excerpt. (measured) So: mostly plain sentences, the dash as an occasional aside.
+**Enumeration stays in prose.** (measured, from the excerpt sample) *There are three reasons… One is… The second reason… The third reason…* across three paragraphs, with no list. Confirmed by the absence of a single bullet in any of the six full articles.
 
-**Attribution.** not captured. The sample did not preserve enough sourcing language to state a habit.
+**The institutional "we" is gated to data journalism. (measured, 14 hits in one article, 0-4 in the other five)** *The Economist has parsed all of these new rules, line by line.* *We find that…* *Our calculations are based on…* Plus a full Methodology section naming the paper the method comes from. In reports and analysis the publication is invisible; in data journalism it becomes the actor and shows its working.
 
-**Refusals.** (measured) No subheads at any length, including a 619-word feature. No bullets, in any of nine. No headline that tells the whole story: the headline poses the puzzle in 4-10 words and the standfirst delivers the so-what.
+**Register.** Acronyms glossed once then used bare and **lowercase**: `irgc`, `afd`, `llms`, `oecd`. (measured) Numeric density is genre-calibrated: 3.0 figures per 100 words in news against 0.4 in a Leader. (measured)
 
----
+**Attribution.** Named sources arrive with an institution and a one-clause gloss: an economist at a named university, the boss of a named polling firm. Claims are hedged with *may*, *might*, *reportedly*, *is expected to*. (recorded across the six; not counted per article, so treat the pattern and not a rate.)
+
+**Refusals.** No bullets, in any of six full articles or nine excerpts. No headline that tells the whole story: the headline poses the puzzle in 4-10 words and the standfirst delivers the point. No navigation-label crossheads outside data journalism.
+
+### The generators
+
+**G1. Write the standfirst against the headline.** State the fact in the headline. Then write the standfirst as the objection, the cost or the twist: start it with *But*, end it with *, too*, or run a *just as* symmetry. If the standfirst restates the headline, you have written the headline twice.
+
+**G2. Plant one short flat sentence in the first paragraph.** Three to six words, no adjectives, immediately after your longest sentence. It should state a consequence or a correction, not an opinion. *The market shrugged.* Not *This was remarkable.*
+
+**G3. Make every crosshead a joke.** If a piece needs crossheads, use two or three of three to four words, each a pun, a title, or an inverted cliché related to the section. If you cannot make it allusive, the section probably does not need a crosshead. Functional labels belong only in a methods section.
+
+**G4. Signpost in prose, never in bullets.** When you have three reasons, write *There are three reasons. One is… The second… The third…* across paragraphs.
+
+**G5. Gloss an acronym once, then lowercase it.** *Islamic Revolutionary Guard Corps (irgc)*, then `irgc`. Or appositive: *a Brandmauer, or firewall*.
+
+**G6. Show the method only when the method is the story.** In a data piece, use *we* and add a Methodology section naming the paper the technique comes from. Everywhere else, keep the publication out of the prose.
+
+### What is enforced
+
+`--house economist` now checks the standfirst turn, the short flat sentence in the opening paragraph, crosshead length where crossheads exist, plus sentence median, dash and semicolon rates, bullet ban, UK spelling, lowercase acronyms and headline type. Subheads are reported rather than failed, because presence is a genuine choice.
+
+Validated against the source: the three new checks reproduce the hand counts exactly, including flagging the data-journalism piece as the one standfirst that does not turn.
 
 ## Financial Times
 

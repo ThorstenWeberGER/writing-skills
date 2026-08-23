@@ -129,6 +129,12 @@ RULE_ANCHORS = {
          "next-update check -> NEXT_UPDATE_COMMIT + NEXT_UPDATE_TIME"),
     ],
     "house-voices.md": [
+        ("The standfirst turns against the headline",
+         "standfirst turn -> stand_turn=True"),
+        ("A short flat sentence lands early",
+         "short opener -> short_opener=True"),
+        ("3-4 words and allusive", "crosshead shape -> crosshead=(2, 5)"),
+        ("register-dependent, not absent", "subheads -> subheads=\"optional\""),
         ("The opening move", "opening-move rules -> CHECKLIST.md step 4"),
         ("1 per 849-2,616", "HBR register band -> HBR_REGISTER + register=1200"),
         ("1 per 138-175 words", "HBR hedge rate -> hedge=(130, 200)"),

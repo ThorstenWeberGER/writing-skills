@@ -37,11 +37,12 @@ So use these to answer "how should this be shaped?" and not "make me sound like 
 | Over 25 words | 20% |
 | Em dashes | 1 per 348 words; absent from 6 of 9 excerpts |
 | Semicolons | about 1 per excerpt |
-| Subheads / bullets | **none, in any excerpt** |
+| Subheads | **crossheads in 2 of 5 full articles**, 3-4 words, allusive. None in any excerpt |
+| Bullets | **none**, in six full articles or nine excerpts |
 | Headline | **4-10 words, median 8.5. Allusive.** Poses a puzzle or names an oddity |
 | Standfirst | 8-13 words, median 11. **Carries the "so what"** the headline withholds |
 
-**Structure.** No subheads even at 619 words. Ordinal signposting in the prose does the navigating: "There are three reasons… One is… The second reason… The third reason…" Enumeration stays in prose rather than becoming a list.
+**Structure.** No subheads in any excerpt, and none at 619 words, but full articles do carry two or three allusive crossheads. The excerpt sample could not show this. Ordinal signposting in the prose does the navigating: "There are three reasons… One is… The second reason… The third reason…" Enumeration stays in prose rather than becoming a list.
 
 **Opening depends on the register:** news is pure BLUF; a Leader states a flat conventional thesis then turns against it; a feature opens on a scene and lands the general point by sentence 5 or paragraph 2.
 

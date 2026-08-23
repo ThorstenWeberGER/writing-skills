@@ -229,6 +229,34 @@ Five HBR PDFs supplied. **All five are the same five already in the sample**, id
 
 Two of my own errors were caught in the analysis and are worth recording: a percentage regex that required a word character after `%` reported zero percentages in 20,588 words, and the extraction returns object order rather than reading order, so positional devices beyond the opening cannot be measured from it. 26 rule anchors, up from 23.
 
+### 21. Economist measured on full articles, and the strongest claim corrected (DONE)
+
+Six full Economist articles supplied, 5,286 words, 269 sentences: two political reports, a business analysis, a business news piece, a data-journalism explainer and a news-brief roundup. Two were already in the sample as excerpts and one confirms the pipeline: the brief roundup measures 401 words, 24 sentences, median 16, **exactly** the row recorded from the excerpt sample.
+
+**The correction is to the claim this project called its most consistent result.** "Zero subheadings and zero bullets in all nine" was measured on excerpts. Full articles carry crossheads, in 2 of 5. The word "excerpt" was carrying the claim. The bullet half survived: zero bullets across all fifteen items. **Fourth time a finding held on one sampling method and broke on a better one.**
+
+| Measure | From excerpts | From six full articles |
+|---|---|---|
+| Sentence median | 13-26 | 16-23, pooled 19 |
+| Over 25 words | 20% | 23% |
+| Em dashes | 1 per 348 | **zero in all six** |
+| Headline words | 4, 8, 9, 10 | 7, 8, 9, 10, 10, median 9. Confirmed |
+| Subheads | none | crossheads in 2 of 5 |
+
+**Three devices counted and now enforced:**
+
+- **The standfirst turns against the headline, 4 of 5.** Two open on *But*, one appends *, too*, one runs a *just as* symmetry. The exception is the data-journalism piece, whose standfirst is a bare number.
+- **A short flat sentence lands early, 4 of 6.** Three to six words in the opening paragraph: *The market shrugged.* *Which is in Munich.* *And so he swiftly sidestepped it.* The clearest single marker of this voice.
+- **Crossheads are 3-4 words and allusive, 2 of 2 articles that use them.** *How to spend it* (an FT title), *Can't touch this* (MC Hammer), *Stoppable force, movable object* (an inverted cliché). Three of three are jokes. The data piece's one crosshead is *Methodology*, which is the exception proving the split.
+
+Plus a device that needed no check: **the institutional "we" is gated to data journalism**, 14 hits in that article against 0-4 in the other five, with a Methodology section naming its source paper. Elsewhere the publication is invisible.
+
+**Six generators** written in `house-voices.md`. The subhead policy is now `optional` rather than banned, so a crosshead reports instead of failing.
+
+**Validated against the source:** the three new checks reproduce the hand counts exactly, including flagging the one standfirst that does not turn. Then applying G1, G2 and G3 to `voice-economist.md` moved it from tying with the FT profile back to strictly best. One check bug found on the way: the turn detection was case-sensitive, so a capitalised *Just as* was missed.
+
+**Still open on this profile:** our Economist draft runs a 13-word median against the measured 16-23, so our imitation is terser than the house. That is the user's own 6-word median showing through, and it is a REVIEW rather than something to paper over. 30 rule anchors, up from 26.
+
 ## Open
 
 ### A. `inputs/examples.md` has only its 5 launch pairs: the one real content gap

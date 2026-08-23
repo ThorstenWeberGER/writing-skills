@@ -169,10 +169,14 @@ AI_TELL_WORDS_PER_HIT = 200
 # references/house-styles.md holds the measured conventions per publication.
 # (sentence-median low, high, dash words-per-hit or None, subheads, bullets)
 HOUSE = {
-    "economist": dict(med=(13, 26), dash=348, subheads=False, bullets=False,
+    # Re-measured over six full articles, 5,286 words, 269 sentences. The
+    # subhead policy was wrong: it was derived from excerpts, and full articles
+    # carry allusive crossheads.
+    "economist": dict(med=(16, 23), dash=348, subheads="optional", bullets=False,
                       head=(4, 10), stand=(8, 13),
-                      semis=348, spelling="uk", headline="allusive",
-                      lc_acronyms=True),
+                      semis=400, spelling="uk", headline="allusive",
+                      lc_acronyms=True,
+                      crosshead=(2, 5), stand_turn=True, short_opener=True),
     "ft":        dict(med=(22, 27), dash=214, subheads=False, bullets=False,
                       head=(7, 14), stand=None,
                       semis=1700, spelling="uk", headline="informational"),
@@ -290,6 +294,10 @@ SOURCES = {
     "hedge":                        "house-voices.md: HBR, Attribution",
     "allusive headline":            "house-voices.md: Economist, Refusals",
     "informational headline":       "house-voices.md: FT, The opening move",
+    "subheads optional":            "house-voices.md: Economist, Refusals",
+    "crossheads":                   "house-voices.md: Economist, The signature move",
+    "standfirst turns":             "house-voices.md: Economist, The opening move",
+    "short flat sentence early":    "house-voices.md: Economist, Register",
 }
 
 
@@ -829,7 +837,11 @@ def run(raw, opts):
                      "none used; house style uses them")
 
         nsub = len([1 for lvl, _ in hs if lvl >= 2])
-        if h["subheads"]:
+        if h["subheads"] == "optional":
+            # Two of five full articles carry crossheads and three carry none,
+            # so presence is a choice. What is consistent is their shape.
+            r.ok(f"{name}: subheads optional", f"{nsub} found")
+        elif h["subheads"]:
             (r.ok if nsub else r.review)(f"{name}: uses subheads",
                                          f"{nsub} found")
         else:
@@ -994,6 +1006,56 @@ def run(raw, opts):
             else:
                 r.review(f"{name}: hedge 1 per {lo}-{hi}w",
                          "none; house hedges steadily and never twice in a sentence")
+
+        # Crosshead shape. Where the Economist uses them they are 3-4 words and
+        # allusive: "How to spend it", "Can't touch this", "Stoppable force,
+        # movable object". Two of two articles that use editorial crossheads
+        # make them a joke, so the count is what is checked and the wit is not.
+        cw = h.get("crosshead")
+        if cw and nsub:
+            subs = [t for lvl, t in hs if lvl >= 2]
+            lo, hi = cw
+            fit = [t for t in subs if lo <= len(words(t)) <= hi]
+            (r.ok if len(fit) == len(subs) else r.review)(
+                f"{name}: crossheads {lo}-{hi} words",
+                f"{len(fit)}/{len(subs)} in range"
+                + ("" if len(fit) == len(subs)
+                   else "; house crossheads are short and allusive"))
+
+        # The standfirst turns against the headline rather than restating it.
+        # 4 of 5: two open on "But", one adds ", too", one runs a "just as"
+        # symmetry. The one that does not is the data-journalism piece, whose
+        # standfirst is a bare number.
+        if h.get("stand_turn"):
+            sf = ""
+            if top:
+                after = raw.split(top[0], 1)[-1].strip().splitlines()
+                sf = next((l.strip() for l in after
+                           if l.strip() and not l.startswith("#")), "")
+            sf_plain = sf.strip("*_ ")
+            turn = bool(re.match(r"^(But|Yet|Though|Still|And yet)\b", sf_plain, re.I)
+                        or re.search(r", too\b|\bjust as\b|\brather than\b",
+                                     sf_plain, re.I))
+            if not sf:
+                r.review(f"{name}: standfirst turns", "no standfirst found")
+            else:
+                (r.ok if turn else r.review)(
+                    f"{name}: standfirst turns",
+                    "adds a turn" if turn
+                    else "restates the headline; house adds the qualification here")
+
+        # A short flat sentence early. 4 of 6 put one of six words or fewer in
+        # the opening paragraph: "The market shrugged.", "Which is in Munich."
+        if h.get("short_opener"):
+            paras = paragraphs(prose, raw)
+            first = next((p for p in paras
+                          if len(words(p)) > 25 and p.strip() not in
+                          (t for _, t in hs)), "")
+            shorts = [x for x in sentences(first) if 1 <= len(words(x)) <= 6]
+            (r.ok if shorts else r.review)(
+                f"{name}: short flat sentence early",
+                f'"{shorts[0][:40]}"' if shorts
+                else "none in the opening paragraph")
 
         # Headline type: allusive poses a puzzle, informational tells the story.
         if h.get("headline") and top:

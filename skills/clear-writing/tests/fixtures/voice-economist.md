@@ -1,14 +1,15 @@
 # Why nobody owns the rules
 
-*A contractor left, the code stayed, and the queue got longer*
+*Just as the code outlived its author, the fault outlived its owner*
 
 When the Ostrogoths cut Rome's aqueducts in 537 they did not need to storm the
-walls. Infrastructure nobody defends is the cheapest thing to break. Something
-similar has happened to a support platform whose routing rules were written by a
-contractor, documented by nobody, and left running for four years. Median first
-response has gone from 4.1 hours to 9.6 over 90 days. The rules send tickets from
-the in-app widget to the wrong queue, and agents have been quietly fixing them by
-hand.
+walls, because infrastructure nobody defends is the cheapest thing in a city to
+break. Nobody was guarding the water. Something similar has happened to a support platform whose routing rules were written by a contractor, documented by
+nobody, and left running for four years. Median first response has gone from 4.1 hours to 9.6 over the past 90 days, a
+doubling that nobody set out to cause and nobody was watching for. The rules send tickets from the in-app widget to the wrong queue, and agents have
+been quietly fixing them by hand for most of a quarter without being asked to.
+
+## Water under the bridge
 
 There are three reasons the damage spread further than the fault. One is volume:
 2,840 manual re-routes in 90 days, roughly a fifth of everything arriving, at four
