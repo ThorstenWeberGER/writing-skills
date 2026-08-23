@@ -44,6 +44,8 @@ Use personality in essays, blog posts, and opinion pieces where it fits the writ
 **"Not X but Y" and clipped negatives.** *It's not just X, it's Y. Not only… but… / "no guessing," "no setup needed"* as sentence-ending fragments.
 > It's not merely a song, it's a statement. → The heavy beat adds to the aggressive tone.
 
+**Carve-out: genuine antithesis is a real device, not a tell.** A measured HBR dek reads "It isn't a failure of the technology. It's a failure of management." That is the same grammatical shape, and it is good writing, because the two halves name *two different diagnoses* — the contrast carries information. The tell is the empty version, where both halves say the same thing and the construction only supplies emphasis ("not merely a song, it's a statement" tells you nothing new). **Test it by deleting the first half.** If you lose a real alternative that the reader might have believed, keep it. If you lose only drama, cut it.
+
 **Forced groups of three.** Ideas padded into triples to sound complete ("innovation, inspiration, and industry insights"). Two items, or four, are often the honest count. (Note: a deliberate tricolon for rhythm is a real device — the tell is *filler* thirds that add no information.)
 
 **Synonym cycling and repeated openings.** Renaming the same subject every sentence (*the protagonist / the main character / the central figure / the hero*), or several sentences opening on the same subject. Use one name consistently; merge or restructure repeated openings. Don't ban the repeated word — fix the repeated *pattern*.

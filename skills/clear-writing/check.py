@@ -117,6 +117,10 @@ STOPWORDS = {
     "invoice", "invoiced", "please", "recommend", "approve", "reallocating",
 }
 
+# Below this many words per AI-tell hit, the words are clustering rather than
+# appearing as ordinary register. HBR sits at 1 per 644-787; slop is far denser.
+AI_TELL_WORDS_PER_HIT = 200
+
 CATEGORY_TAGS = ("DECISION:", "REQUEST:", "ACTION:", "INFO:", "UPDATE:")
 
 
@@ -343,7 +347,6 @@ def run(raw, opts):
     # 9-12. wordlist scans
     for label, terms, sev in (
         ("unfamiliar/filler word", UNFAMILIAR, "fail"),
-        ("AI-tell phrase", AI_WORDS, "fail"),
         ("evaluative buzzword", BUZZWORDS, "fail"),
     ):
         hits = find_terms(low, terms)
@@ -352,6 +355,21 @@ def run(raw, opts):
             getattr(r, sev)(label, f"{len(hits)}: " + ", ".join(uniq[:6]))
         else:
             r.ok(label, "none")
+
+    # AI-tell words are density-sensitive, which is what humanizer.md already
+    # says: "Individually fine; in clusters, a strong tell." Measured against
+    # real business prose, HBR features carry these words at 1 per 644-787
+    # words as ordinary register. Failing on a single hit would flag a
+    # benchmark publication, so only clustering fails.
+    hits = find_terms(low, AI_WORDS)
+    if not hits:
+        r.ok("AI-tell phrase", "none")
+    else:
+        n = len(all_words) or 1
+        per = n / len(hits)
+        uniq = ", ".join(sorted({t for t, _ in hits})[:6])
+        detail = f"{len(hits)} in {n}w (1 per {round(per)}w): {uniq}"
+        (r.fail if per < AI_TELL_WORDS_PER_HIT else r.review)("AI-tell phrase", detail)
 
     # 13. hedging stack (DONTS.md)
     hedges = find_terms(low, ["perhaps", "possibly", "arguably", "somewhat",
