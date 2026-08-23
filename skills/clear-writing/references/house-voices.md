@@ -139,7 +139,7 @@ Four news pieces and one long read divide on every structural choice:
 
 **An earlier version of this file contrasted "the FT standfirst adds a fact" against "the Economist standfirst turns" as a difference between the two publications. That was wrong.** It is a difference between registers. FT news does not turn and the FT long read does, with an allusive headline exactly like the Economist's. The rule that survives is broader and more useful: **headline type and standfirst behaviour are set by register, not masthead.** News gets an informational headline and a stating standfirst; a feature gets an allusive headline and a turning standfirst.
 
-**A register-gated device, in the long read only: the piece is structured by posed questions.** *So why are people leaving? Who are they?* … *So how big a problem is this?* … *Could the UK be going through something similar?* Six question marks against zero in all four news pieces. Same shape as the Economist's institutional *we* appearing only in data journalism: the register opens a device the house otherwise never uses.
+**Questions in the body: a feature device, but not a feature rule. (recorded, 6 in one feature and 1 in the other, 0 in all four news pieces)** *So why are people leaving? Who are they?* ... *So how big a problem is this?* The register permits it and news never does it, but one feature leans on it heavily and the other barely at all. Imitate the move where the piece needs signposting; do not treat the rate as a target.
 
 ### The generators
 

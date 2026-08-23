@@ -285,6 +285,28 @@ Two bugs found in my own new checks: the standfirst turn detection was anchored 
 
 Applying G1 to our own FT draft took it from **zero attributions to 1 per 57 words**. Six generators written. 33 rule anchors, up from 30.
 
+### 23. A sixth FT article breaks half the rule I wrote in section 22 (DONE)
+
+A second FT feature arrived, so the register split no longer rests on one. Two halves confirmed, one broken.
+
+| | FT news (4) | FT features (2) |
+|---|---|---|
+| Standfirst | states. **0 of 4 turn** | **turns. 2 of 2** |
+| Sentence median | **25** | **20**, both features exactly |
+| Narrative lede on a named person | no | **2 of 2** |
+| Headline | informational, **4 of 4** | **varies: 1 allusive, 1 stating** |
+| Questions in the body | 0 of 4 | **varies: 6 and 1** |
+
+**The standfirst half holds at 6 of 6 and stays enforced.** News states the next fact, features turn against the headline.
+
+**The headline half is wrong and was written one turn ago.** Section 22 claimed a feature takes "an allusive headline and a turning standfirst". The second feature has a stating headline. Corrected in `house-voices.md`, `CHECKLIST.md` and the drift anchor: the headline is not register-bound, so pick it on whether it must survive travelling alone.
+
+**"Structured by posed questions" is downgraded from a register rule to a recorded device.** Six in one feature, one in the other.
+
+**Worth recording plainly:** section 22 congratulated the project for holding a different correction back until n=4, and in the same breath wrote a fresh over-claim from n=1. The lesson does not transfer by being learned once. It has to be applied to each claim separately, including a claim that is itself a correction.
+
+Attribution now holds at 1 per 38-61 words across 6 of 6, which makes it the best-evidenced device in any of the four profiles.
+
 ## Open
 
 ### A. `inputs/examples.md` has only its 5 launch pairs: the one real content gap
