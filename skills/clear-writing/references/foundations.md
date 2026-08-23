@@ -163,6 +163,24 @@ All rules are original synthesis. Quoted fragments are under 15 words and attrib
 
   Four rules were corrected against this material: the subhead table, convert-series-to-lists, the pyramid rule's scope (now three registers), and rule 4 on abbreviations. The headline rule was corrected and then partly reverted — see `formats.md`, where a single 4-word outlier briefly overturned a range that four samples then vindicated.
 
+- **The Financial Times is now partly primary.** Four articles supplied as PDFs (two news, one world report, one long read on AI-generated financial scams) and measured: ~3,400 words of body prose, 130 usable sentences.
+
+  **Extraction caveat, and it matters.** These were print-to-PDF files with no text layer, so the text was recovered by decompressing content streams. That is lossy: photo captions and standfirsts interleave with body prose, ligatures come back as placeholders, and 9 of 139 sentence units were discarded as join artifacts. Caption contamination inflates sentence length, so the FT figures below are **upper bounds**, not the clean measurements the Economist rows are. Treat them as indicative.
+
+  | Measure | Economist (9 excerpts) | FT (4 articles) |
+  |---|---|---|
+  | Median sentence | 13-26 by register | 22-27 |
+  | Over 25 words | **20%** | **~50%** (upper bound) |
+  | Em dash rate | 1 per 348 words | 1 per 214 words |
+  | Headline length | 4, 8, 9, 10 (median 8.5) | 7, 10, 11, 14 (median 10.5) |
+  | Subheadings | 0 in 9 of 9 | none detected, but this method cannot prove absence |
+
+  **What the second publication changes:**
+
+  - **The 25-word threshold is weaker than one publication suggested.** Two quality broadsheets exceed it routinely — a fifth of Economist sentences, around half of FT's. Rule 8's threshold is a prompt to look at a sentence, and nothing more. Do not treat it as a ceiling.
+  - **Em dashes are more common in the FT** than the Economist, at roughly one per 214 words. Across both publications the mark is unremarkable in professional prose. This is now two independent sources confirming that `humanizer.md`'s dash ban is a voice preference for this user, not a quality standard.
+  - **Headline conventions differ by publication, and the difference is instructive.** FT headlines are longer and fully informational — "Russian 'double-tap' attack on Ukrainian shopping mall kills at least 16" tells you the whole story. Economist headlines are shorter and allusive — "Why everybody hates Palantir" — and lean on the standfirst to deliver the point. Both pair a headline with a standfirst; they divide the labour differently. See `formats.md`.
+
 - **WSJ, HBR, Bloomberg, Reuters, Guardian, and BBC remain secondary.** All are paywalled or block automated fetching. Rules attributed to them come from write-ups describing their conventions. Widely-circulated figures for Reuters (300-800 words per story) and AR 25-50 (15-word average sentence) could not be verified against either document and are deliberately not used here.
 
 ---

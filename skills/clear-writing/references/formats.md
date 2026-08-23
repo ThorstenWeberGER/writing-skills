@@ -88,10 +88,21 @@ Getting this backwards produces the two familiar failures: a narrative chopped i
 
 **The division is consistent: the headline states the fact or poses the puzzle; the standfirst delivers the "so what."** The Iran pair does it in the open — the standfirst literally begins "That is…". Two headlines are declarative facts, two are "Why X" puzzles; in every case the standfirst supplies the implication the headline withholds.
 
-That is the same move as the "so what?" test in `foundations.md`, promoted to page furniture. So:
+That is the same move as the "so what?" test in `foundations.md`, promoted to page furniture.
 
-- **One line only** (doc heading, email subject, PR title) → rules 1-3 as written. That line must carry the claim, because nothing else will.
-- **Headline plus standfirst** → headline takes the fact or the puzzle; standfirst takes the implication. Never let both be vague, and never write a bare-label headline with no standfirst to rescue it.
+**Two publications split the labour differently, and the choice is yours to make deliberately.** Four measured FT headlines run 7, 10, 11 and 14 words (median 10.5) against the Economist's 4-10 (median 8.5):
+
+| | Headline does | Example |
+|---|---|---|
+| **Informational** (FT) | Tells the whole story. Longer. Works with no standfirst at all. | "Russian 'double-tap' attack on Ukrainian shopping mall kills at least 16" |
+| **Allusive** (Economist) | Poses the puzzle or names the oddity. Shorter. **Depends** on the standfirst. | "Why everybody hates Palantir" |
+
+Informational is the safer default, and the right one whenever the headline may travel alone — a subject line, a Slack post, a doc that gets linked without its subtitle. Allusive earns attention but fails silently when separated from its standfirst.
+
+So:
+
+- **One line only** (doc heading, email subject, PR title) → informational, rules 1-3 as written. That line must carry the claim, because nothing else will.
+- **Headline plus standfirst** → either style works. Allusive headline takes the puzzle and the standfirst must then carry the implication in a full clause. Never let both be vague, and never write a bare-label headline with no standfirst to rescue it.
 
 **Subheadings** (full-page only):
 1. **One per genuine topic shift.** A section under ~40 words means the subheading isn't earning its place.
