@@ -33,7 +33,7 @@ UNFAMILIAR = [
 # humanizer.md, "Overused AI words" + "Sales language" + "Inflated importance"
 AI_WORDS = [
     "actually", "additionally", "align with", "crucial", "delve", "emphasize",
-    "enduring", "enhance", "foster", "fostering", "garner", "interplay",
+    "enhance", "foster", "fostering", "garner", "interplay",
     "intricate", "landscape", "leverage", "pivotal", "robust", "seamless",
     "showcase", "showcasing", "tapestry", "testament", "underscore",
     "underscores", "valuable", "vibrant", "boasts", "exemplifies",

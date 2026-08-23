@@ -61,6 +61,15 @@ For a standalone piece read on its own terms. Governs layout on top of `foundati
 
 Add a subheading when a real topic shift happens, not because the piece got long. A full-page piece on one continuous idea can run with zero subheadings; a half-page piece genuinely covering three topics can earn two.
 
+**Genre overrides the subhead count, and the table above is written for the scanning case.** A measured Economist feature runs **619 words across 8 paragraphs with zero subheadings and zero bullets** — and it works, because paragraph breaks and ordinal signposting in the prose ("There are three reasons… One is… The second reason… The third reason…") carry the structure instead. That is the narrative convention: continuous prose, transitions doing the navigation.
+
+So decide by how the piece will be read:
+
+- **Scanned** — docs page, internal write-up, anything a reader will skim for the part they need: use the subhead counts above.
+- **Read start to finish** — a narrative piece, an essay, a story-shaped update: subheads are optional and often wrong. Signpost inside the prose instead.
+
+Getting this backwards produces the two familiar failures: a narrative chopped into administrative sections, or a reference page written as an undifferentiated wall.
+
 **Headline:**
 1. **5-10 words** — specific enough to be informative, short enough to scan at a glance.
 2. **Front-load the claim**, not a generic label. "Vendor migration slips three weeks after data bug" beats "Migration status update."
@@ -90,7 +99,7 @@ Add a subheading when a real topic shift happens, not because the piece got long
 
 All rules here are original synthesis, not reproduced source text.
 
-**Status: partly derived from secondary sources.** HBR, Bloomberg, WSJ, and the Economist are paywalled or block automated fetching, so the publication-convention rules come from write-ups *describing* those conventions rather than analysis of published sentences. The short-article length ratios are a proportional extrapolation, not verified against real sub-page examples. See the v2 checklist for what primary sourcing has since been substituted in.
+**Status: partly derived from secondary sources.** HBR, Bloomberg and WSJ are paywalled or block automated fetching, so those publication-convention rules still come from write-ups *describing* them rather than analysis of published sentences. **The Economist is no longer in that group:** a full feature supplied by the user was measured directly, and the short-article subhead rule above was corrected as a result — see `foundations.md` sources for the measurements. The short-article length ratios are a proportional extrapolation, not verified against real sub-page examples. See the v2 checklist for what primary sourcing has since been substituted in.
 
 ---
 

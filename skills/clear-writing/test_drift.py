@@ -98,6 +98,9 @@ NON_LITERAL = {
     "while specific details are limited": "varies too much in form",
     "likely grew up": "biography-specific, out of scope for this skill",
     "in accordance with": "in UNFAMILIAR already",
+    "enduring": ("adjective sense only. A real Economist feature uses it as a "
+                 "verb (\"enduring punishing opening hours\") and our checker "
+                 "flagged it; grep cannot tell the two apart"),
     "here is a": "too generic to grep; 'here is a list' is legitimate",
     "some might say but": "varies too much in form to grep",
     "implement": ("on the federal dirty-dozen list, but unavoidable and "

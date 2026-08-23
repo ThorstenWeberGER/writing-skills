@@ -54,6 +54,8 @@ Use personality in essays, blog posts, and opinion pieces where it fits the writ
 
 **Em and en dashes.** Unless the writer's sample uses them, the final draft should contain no `—` or `–` (also check spaced ` - ` and ` -- `). Replace with a period, comma, colon, or parentheses. Search for both marks before returning the draft.
 
+**Be honest about what this rule is.** It is an anti-AI-slop heuristic and a voice preference, **not** a marker of bad writing. Measured against a real Economist feature: 4 em dashes in 619 words, roughly one per 155, used well. Professional prose uses them freely. The rule exists because LLM output over-produces them and because this user's own writing contains none — not because the mark is a defect. So enforce it for this user's drafts, and don't "correct" someone else's published prose on this basis.
+
 **Over-bolding.** Bolded terms with no reason to be emphasized. Also see `foundations.md` (headings and lists) — one bold lead-in per list item at most, never bolding every other phrase.
 
 **Bold mini-heading lists.** Every bullet opening with a bold label and a colon, where the labels carry no information the sentence doesn't:

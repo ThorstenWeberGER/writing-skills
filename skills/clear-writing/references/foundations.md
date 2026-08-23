@@ -21,6 +21,19 @@ A reader — or a manager skimming for five seconds — should get the main poin
 
 **Signal this rule catches:** a summary that opens with background before the finding; a message where the actual request is in the last paragraph; "Based on the above, we therefore..." as a paragraph opener.
 
+### Where this rule does not apply
+
+The pyramid is for writing someone reads to **decide or act**: summaries, recommendations, status updates, bug reports, most documentation. It is not a universal law of prose.
+
+A narrative piece legitimately opens on a specific scene and reaches its general point a few sentences later. Measured against a real Economist feature: the first four sentences are one named bar in one London district, and the general claim — that it belongs to a worldwide wave inspired by Japan's *ongaku kissa* — arrives only in **sentence 5**. That is the journalistic nut graf, and delaying it is deliberate: the concrete scene earns the attention that the general claim then spends.
+
+The distinction that matters is **how long the delay lasts**. A nut graf lands within a few sentences, in the first paragraph. Burying the point on page two is not a narrative lede, it is a buried lede. So:
+
+- **Decision or reference writing** → point in sentence one. No exceptions.
+- **Narrative writing** → concrete opening allowed, general point by the end of the first paragraph.
+
+Both are versions of the same underlying rule from "Anchor the abstract in something specific" below: get the reader somewhere real fast. They differ only in whether the abstraction comes first or second.
+
 ### Finding the point before you lead with it
 
 Leading with the point only works if you've correctly identified which point is strongest. Three checks, in order:
@@ -86,7 +99,7 @@ Different target groups can produce different pain points from the same fact —
 3. **Every item must be parallel** — grammatically consistent with each other *and* with the lead-in, so each item reads correctly when joined to it. All verbs, or all noun phrases; don't mix.
 4. **Numbers for sequence or priority, bullets for everything else.** If order doesn't matter, don't imply it with numbers.
 5. **Nest at most two or three levels.** Deeper than that, restructure instead.
-6. **Convert comma-separated series into lists.** A sentence carrying four or more parallel items is usually a list trying to escape — the eye naturally gravitates to list items.
+6. **Convert comma-separated series into lists** *in scanned writing.* A sentence carrying four or more parallel items is usually a list trying to escape, and the eye gravitates to list items. **But in narrative prose, ordinal signposting beats bullets.** A measured Economist feature enumerates three causes across three paragraphs entirely in prose — "There are three reasons… One is… The second reason… The third reason…" — with no list at all. Same information, and it reads rather than scans. Pick by whether the reader is scanning or reading.
 7. **Keep lists short: 3-6 items.** *House convention, not sourced practice* — the federal guidance caps nesting depth, not item count. It holds up in practice for scannability, but treat it as a default to override when a list genuinely has eight things in it.
 8. **Use prose, not bullets, for anything nuanced, sensitive, or narrative.** Bullets read as efficient, not warm — the wrong tool for building rapport or walking through a sensitive topic.
 9. **Don't over-format.** A bold lead-in on every bullet, or bolding every other phrase, reads as AI-generated filler rather than genuine emphasis — see `humanizer.md` ("Formatting tells").
@@ -112,7 +125,24 @@ All rules are original synthesis. Quoted fragments are under 15 words and attrib
 - **The 3-6 bullet range is house convention**, labeled as such in the rule itself. No primary source gives an item count.
 - **No active-voice percentage target exists** in any primary source; don't invent one.
 - **BLUF's military provenance (Army Regulation 25-50) is unverified** — the regulation was unreachable. The *behavior* is fully primary-sourced above; only the acronym's origin story is secondhand.
-- **The Economist, WSJ, HBR, Bloomberg, Reuters, Guardian, and BBC remain secondary.** All are paywalled or block automated fetching. Rules attributed to them come from write-ups describing their conventions. Widely-circulated figures for Reuters (300-800 words per story) and AR 25-50 (15-word average sentence) could not be verified against either document and are deliberately not used here.
+- **The Economist is now partly primary.** A full feature (~619 words, listening bars / *ongaku kissa*, 2026) was supplied by the user and measured directly. What that text established, with numbers:
+
+  | Measure | Value |
+  |---|---|
+  | Sentence length | median 18 words, mean 18.8, range 3-39 |
+  | Sentences over 25 words | 7 of 33 (21%) |
+  | Paragraph length | 46-101 words, 8 paragraphs |
+  | Em/en dashes | 4 (about one per 155 words) |
+  | Subheadings | 0 |
+  | Bullet lists | 0 |
+  | Semicolons | 1 |
+  | Parentheticals | 5 |
+
+  Three of this skill's rules had to be corrected against it: the subhead-count table in `formats.md` (genre now overrides it), the convert-series-to-lists rule above, and the pyramid rule's scope (see "Where this rule does not apply"). Two rules were *confirmed*: the concrete-anchor opening, and glossing a foreign or technical term on first use then using it bare — "ongaku kissa (music cafés)" and thereafter just *kissa*.
+
+  Note the sentence-length finding directly qualifies rule 8 below: a benchmark publication exceeds the 25-word review threshold in a fifth of its sentences. The threshold is a prompt to look, not a limit.
+
+- **WSJ, HBR, Bloomberg, Reuters, Guardian, and BBC remain secondary.** All are paywalled or block automated fetching. Rules attributed to them come from write-ups describing their conventions. Widely-circulated figures for Reuters (300-800 words per story) and AR 25-50 (15-word average sentence) could not be verified against either document and are deliberately not used here.
 
 ---
 
