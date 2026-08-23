@@ -157,6 +157,7 @@ HOUSE = {
     "reuters":   dict(med=(24, 32), dash=None, subheads=True, bullets=True,
                       head=None, stand=None),
     "hbr":       dict(med=(12, 22), dash=157, subheads=True, bullets=False,
+                     titlecase=True,
                       head=(4, 10), stand=(12, 24)),
 }
 
@@ -164,6 +165,29 @@ CATEGORY_TAGS = ("DECISION:", "REQUEST:", "ACTION:", "INFO:", "UPDATE:")
 
 
 # --- helpers -------------------------------------------------------------
+
+def prose_sentences(sents, raw):
+    """Sentences minus list items, headings and Subject lines.
+
+    Publication sentence medians were measured from body prose. A document that
+    follows Reuters' own summary-bullet convention would otherwise be judged
+    against Reuters' sentence target on a population half made of 8-word
+    bullets, so the profile's own advice would push it out of the profile's own
+    range. Same defect class as counting a table row as a sentence.
+    """
+    items = {
+        re.sub(r"^\s*([-*+]|\d+\.)\s+", "", l).rstrip(" .!?:;").lower()
+        for l in raw.splitlines() if re.match(r"^\s*([-*+]|\d+\.)\s+", l)
+    }
+    items |= {l.lstrip("# ").rstrip(" .!?:;").lower()
+              for l in raw.splitlines() if l.startswith("#")}
+
+    def skip(x):
+        return (x.lower().startswith("subject")
+                or any(x.upper().startswith(t) for t in CATEGORY_TAGS)
+                or x.rstrip(" .!?:;").lower() in items)
+    return [x for x in sents if not skip(x)]
+
 
 def strip_markup(text):
     """Prose only: drop code fences, headings markers, list markers, emphasis."""
@@ -520,7 +544,15 @@ def run(raw, opts):
             if capped >= len(ws[1:]) * 0.75:
                 bad_case.append(h[:40])
     if bad_case:
-        r.fail("Title Case heading", "; ".join(bad_case[:3]))
+        # house-styles.md records HBR's subheads as title case, so writing
+        # correct HBR would otherwise guarantee a FAIL the profile asked for.
+        # A named profile downgrades the general rule; it never silences it.
+        if opts.house and HOUSE[opts.house].get("titlecase"):
+            r.review("Title Case heading",
+                     f"{len(bad_case)} found; {opts.house} subheads are title "
+                     "case, so this is the profile's convention")
+        else:
+            r.fail("Title Case heading", "; ".join(bad_case[:3]))
     else:
         r.ok("Title Case heading", "none")
 
@@ -557,7 +589,9 @@ def run(raw, opts):
     if opts.house:
         h = HOUSE[opts.house]
         name = opts.house
-        med = statistics_median([len(words(x)) for x in sents]) if sents else 0
+        # Measured on prose only, the way the publications were measured.
+        pros = prose_sentences(sents, raw)
+        med = statistics_median([len(words(x)) for x in pros]) if pros else 0
         lo, hi = h["med"]
         (r.ok if lo <= med <= hi else r.review)(
             f"{name}: sentence median {lo}-{hi}", f"{med:g}")
@@ -657,16 +691,7 @@ def run(raw, opts):
         # formats.md's 5-sentence cap governs prose. Its own summary-block
         # guidance encourages bullets, so counting bullet items as sentences
         # would make the two rules contradict each other.
-        bullet_items = {
-            re.sub(r"^\s*([-*+]|\d+\.)\s+", "", l).rstrip(" .!?:;").lower()
-            for l in raw.splitlines() if re.match(r"^\s*([-*+]|\d+\.)\s+", l)
-        }
-        def is_subject(x):
-            return (x.lower().startswith("subject")
-                    or any(x.upper().startswith(t) for t in CATEGORY_TAGS))
-        body = [s for s in sents
-                if not is_subject(s)
-                and s.rstrip(" .!?:;").lower() not in bullet_items]
+        body = prose_sentences(sents, raw)
         (r.ok if len(body) <= 5 else r.fail)("email <=5 sentences",
                                              f"{len(body)} sentences")
         subj = next((l for l in raw.splitlines()

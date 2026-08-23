@@ -67,7 +67,7 @@ So use these to answer "how should this be shaped?" and not "make me sound like 
 | Subheads | **yes**, all-caps, 5-6 words |
 | Bullets | **yes**: a summary block above every article, 3-4 bullets, 6-17 words, median 11 |
 
-**The summary block** carries the news, the mechanism, the consequence. Each bullet stands alone as an actionable fact; none restates the body.
+**The summary block** carries the news, the mechanism, the consequence. Each bullet stands alone as a fact the reader can act on; none restates the body.
 
 **Long leads are deliberate.** A wire lead packs actor, action, time and cause into sentence one, which is why the median is 30 words.
 
@@ -142,6 +142,14 @@ Our own email fixtures run a median of 10-12 words. That is the register, and on
 - **HBR's subheads and dash rate.** Sections are wrong under 125 words, and it is the heaviest dash user of the four.
 
 **The short version: Reuters for the subject line and the bullets, HBR's tips register for sentence length, and `formats.md`'s email variant for everything else.** The email variant is already tighter than any masthead here, which is the correct relationship: it was tuned for a reader who did not ask for the message.
+
+### When a house style conflicts with a general rule
+
+Two conflicts are real and both are resolved in `check.py` rather than left to judgment.
+
+**Title-case subheads.** HBR's subheads are title case, and the always-on rule fails Title Case headings. Writing correct HBR would therefore guarantee a failure the profile itself asked for. So a named title-case profile downgrades that check to REVIEW and says which profile did it. Naming no profile, or naming one whose subheads are sentence case, and the rule still fails. `tests/fixtures/house-hbr.md` locks both directions.
+
+**Sentence median measured over bullets.** Reuters prescribes a summary block of 3-4 bullets, and its 30-word median was measured on body prose. Measuring the median over a document that follows the bullet convention mixes 8-word bullets with 40-word leads, so following the profile pushed a draft out of the profile's own range: the same draft measured 14 whole-document and 41 body-only. The median now excludes list items, headings and subject lines, so both figures agree.
 
 ### When a house style conflicts with the user's voice
 

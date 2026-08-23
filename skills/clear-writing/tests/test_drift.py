@@ -128,6 +128,12 @@ RULE_ANCHORS = {
         ("Always give a next-update time",
          "next-update check -> NEXT_UPDATE_COMMIT + NEXT_UPDATE_TIME"),
     ],
+    "house-styles.md": [
+        ("Title-case subheads",
+         "title-case downgrade -> HOUSE[...]['titlecase']"),
+        ("Sentence median measured over bullets",
+         "house median -> prose_sentences()"),
+    ],
     "formats.md": [
         ("150-250 words", "summary length -> --summary"),
         ("~125 words", "email length -> --email"),

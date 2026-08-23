@@ -64,7 +64,7 @@ For comparison, `foundations.md` treats anything past 25 words as needing a seco
 
 **Register markers.** Lowercase "i" in `backlog.md`. `->` rather than an arrow glyph or the word. "e.g." rather than "for example". One German abbreviation, "Evtl" (*eventuell*, roughly "possibly"), used mid-sentence in English.
 
-On that last one: it is a single token in a single message. It says the writer reaches for a German shortcut when writing quickly, and nothing more. **Don't infer a language background from it.** The actionable rule is just "don't reproduce the shorthand," which needs no theory about the writer. Whether to apply the non-native-readers profile in `audiences.md` depends on who is *reading*, not on who is writing.
+On that last one: it is a single token in a single message. It says the writer reaches for a German shortcut when writing quickly, and nothing more. **Don't infer a language background from it.** The rule to take from it is just "don't reproduce the shorthand," which needs no theory about the writer. Whether to apply the non-native-readers profile in `audiences.md` depends on who is *reading*, not on who is writing.
 
 **Directness.** No hedging, no preamble, no apology. Concerns arrive as plain questions: "Why? Did humanizer fire?"
 

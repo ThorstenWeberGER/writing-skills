@@ -131,6 +131,19 @@ Ran the skill on fresh material rather than on its own fixtures: a 561-word Q3 a
 
 **One defect found and fixed:** the `--client` next-update check required the literal words "next update", so a note ending "I will write again by Friday 5 September" failed it. Same shape as the defects in section 8: the check measured a phrase as a proxy for a promise. It now looks for a commitment verb and a time expression in the same sentence, and distinguishes *no follow-up promised* from *a follow-up promised with no time on it*. Two fixtures lock both branches, and a 15th rule anchor ties it to `audiences.md`.
 
+### 15. House-style demo, and two conflicts resolved
+
+Rendered one set of facts as a Reuters wire piece and as an HBR argument, then checked each against its own profile and against a profile it was not written for. The HBR-shaped draft passes as HBR and fails as Economist on subheads, so the profiles do discriminate rather than just print numbers.
+
+**Two conflicts between a house profile and a general rule, both now resolved in `check.py`:**
+
+- **Reuters' bullets against Reuters' sentence median.** The profile prescribes a 3-4 bullet summary block, and its 30-word median was measured on body prose. Measuring the median across a document that follows the bullet convention mixed 8-word bullets with 40-word leads: the same draft measured 14 whole-document and 41 body-only. `prose_sentences()` now excludes list items, headings and subject lines, and the email 5-sentence check reuses it instead of its own duplicate. Both figures now agree.
+- **HBR's title-case subheads against the Title Case rule.** Writing correct HBR guaranteed a FAIL the profile itself asked for. A named title-case profile downgrades that check to REVIEW and says which profile did it; with no profile, or a sentence-case one, it still fails.
+
+Locked with `tests/fixtures/house-hbr.md` (0 FAIL as hbr, 1 FAIL bare) and `house-reuters.md` (median inside 24-32 with bullets excluded), plus two rule anchors in `house-styles.md`, bringing the anchor count to 17.
+
+Also fixed two genuine uses of "actionable" in our own files, in `house-styles.md` and `inputs/voice-sample.md`.
+
 ## Open
 
 ### A. `inputs/examples.md` has only its 5 launch pairs: the one real content gap
@@ -202,6 +215,17 @@ Passive voice and noun-string detection are pattern matches, not parsing. That's
 - [ ] 18F quotations were captured via a summarizing fetch, not character-for-character. High confidence, not pinned.
 - [ ] Reachable-but-unharvested primary pages in `GSA/plainlanguage.gov`: `guidelines/design/`, `guidelines/test/`, plus the SEC Plain English Handbook it cites.
 
+### K. The skill's own reference files cannot pass their own checks
+
+Running `check.py` over the skill's prose leaves FAILs in six files. Two were real and are fixed. The rest are two tool defects of the same class as the ones in section 8, both cases of a check measuring a proxy:
+
+- **Italic term runs are not a naming context.** `under_judgment()` blanks code spans, tables, weak/better lines and short quotes, but not the italic lists the reference files use to enumerate banned terms. So `humanizer.md`, the file that lists the AI tells, reports **104 AI-tell phrases at 1 per 24 words**, and `foundations.md`'s "worst repeat offenders" run reports 8 filler words. Every one is the file naming a term, not using it.
+- **Markdown tables are counted as paragraphs.** A table block reports as one paragraph over 250 words in `DONTS.md`, `audiences.md`, `formats.md` and `foundations.md`. Sentence counting already drops table rows; paragraph counting does not.
+
+**Why this matters beyond tidiness:** until both are fixed, the dash guard in `tests/test.sh` cannot be widened from "no dash FAILs" to "no FAILs at all" on the skill's own files, which is the check that would have caught the two real "actionable" uses automatically instead of by hand.
+
+**Needs:** add italic term runs to `NAMING_CONTEXTS`, exclude table blocks from `paragraphs()`, then widen the guard and hold it at 0 FAIL.
+
 ---
 
 ## Next steps, in priority order
@@ -209,7 +233,8 @@ Passive voice and noun-string detection are pattern matches, not parsing. That's
 1. **Use the skill on real drafts and grow `inputs/examples.md`** (A). Still the only gap that research cannot close.
 2. **Add a connected-prose voice sample** (B). Two or three paragraphs you wrote for someone else. Highest value per effort of anything left, because it is the one input that would let paragraph-level voice matching switch from *unsupported* to working.
 3. **Run `./install.sh` on each machine you use** (F). It is verified working in this container; whether it is live on your own machines is still unconfirmed from here.
-4. **Re-audit the drift allowlists** (D) once they stop growing.
+4. **Fix the two proxy defects in K** and widen the self-check to 0 FAIL. This is the one that keeps finding real problems.
+5. **Re-audit the drift allowlists** (D) once they stop growing.
 5. **Use a template for a real document** (H), which would test the three that have never produced one.
 6. **Pin the 18F quotations** with one literal re-fetch (I).
 

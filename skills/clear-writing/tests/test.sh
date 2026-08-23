@@ -62,6 +62,26 @@ for pair in "styled:0" "overcompressed:1" "style-edited:0" "deslop-styled:0"; do
   fi
 done
 
+echo "=== house profiles: conventions honoured, general rules still bite ==="
+# An HBR-shaped draft must pass as HBR (title-case subheads are its convention)
+# and still fail with no profile named. A Reuters-shaped draft must hit Reuters'
+# sentence median with its own summary bullets excluded from the measurement.
+hbr_h=$(python3 check.py tests/fixtures/house-hbr.md --house hbr 2>&1 | grep -oE '^  [0-9]+ FAIL' | grep -oE '[0-9]+')
+hbr_n=$(python3 check.py tests/fixtures/house-hbr.md 2>&1 | grep -oE '^  [0-9]+ FAIL' | grep -oE '[0-9]+')
+if [ "$hbr_h" = "0" ] && [ "$hbr_n" = "1" ]; then
+  echo "  pass    house-hbr.md: 0 FAIL as hbr, $hbr_n FAIL with no profile"
+else
+  echo "  FAIL    house-hbr.md: expected 0 as hbr and 1 bare, got $hbr_h and $hbr_n"; rc=1
+fi
+rmed=$(python3 check.py tests/fixtures/house-reuters.md --house reuters 2>&1 \
+       | grep -oE 'reuters: sentence median [0-9-]+ +[0-9.]+' | grep -oE '[0-9.]+$')
+if python3 check.py tests/fixtures/house-reuters.md --house reuters 2>&1 \
+   | grep -q '^  pass    reuters: sentence median'; then
+  echo "  pass    house-reuters.md: median $rmed inside 24-32 with bullets excluded"
+else
+  echo "  FAIL    house-reuters.md: median $rmed outside reuters range"; rc=1
+fi
+
 echo "=== the skill's own files obey the dash rule ==="
 # The rule was described for 20,000 words while 200+ dashes sat in the files
 # describing it. Enforced here so it cannot drift back.
