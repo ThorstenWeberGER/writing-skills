@@ -75,6 +75,8 @@ The repo has three layers, and the split matters: only the middle one gets insta
 ├── CLAUDE.md             the six always-on ground rules (section 1b)
 ├── install.sh            symlinks the skill + CLAUDE.md into ~/.claude/
 ├── docs/
+│   ├── how-to-derive-a-style-guide.md   the transferable method
+│   ├── research-styleguide-design.md    what the research found
 │   ├── v2-checklist.md   build status and open work
 │   └── backlog.md        the original wishlist. Also voice-sample Source 1
 └── skills/clear-writing/ the skill itself. This whole directory is what installs
