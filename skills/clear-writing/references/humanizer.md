@@ -138,6 +138,8 @@ Three faults stack in that example. "I made sure" claims credit for doing the jo
 
 Both examples come from this project, and the second appeared in the same message that diagnosed the first, which is how persistent the reflex is. **Test it by deleting everything from "rather than" onward.** If you lose a real alternative the reader might have expected, keep it. If you only lose the implication that you were thoughtful, cut it.
 
+The order reverses too: *Rather than doing nothing, we chose to act.* Same invented contrast, contrast clause first. `check.py`'s check missed this order until a test case surfaced it; it now checks both orders.
+
 Note the related but milder redundancy: *Let me run it, Let me check, Let me look at* announce an action whose command and output the reader can already see. Harmless alone, and not worth hunting; the tell is the contrast clause attached to it.
 
 **This is not the same as reporting what you ran, which is required.** The test is whether the reader can verify it:

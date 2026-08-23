@@ -749,12 +749,17 @@ def run(raw, opts):
         (r.fail if per < AI_TELL_WORDS_PER_HIT else r.review)("AI-tell phrase", detail)
 
     # 12b. virtue by invented contrast (humanizer.md, self-praising narration).
-    # A first-person intent verb plus "rather than" in one sentence. Narrow on
-    # purpose: bare "rather than" is a legitimate comparative and fires ~50x
-    # across this repo, while this shape found only the two real cases.
-    vic = re.findall(
-        r"\b(?:let me|i(?:'ll| will| made sure| was careful| deliberately|"
-        r" took care))\b[^.!?]{0,90}\brather than\b", low)
+    # A first-person/plural intent verb plus "rather than" in one sentence,
+    # in either order ("I did X rather than Y" and "Rather than Y, we did
+    # X"). Narrow on purpose: bare "rather than" is a legitimate comparative
+    # and fires ~50x across this repo, while this shape found the real cases,
+    # including one instance that only appeared in reversed order and was
+    # missed until a test surfaced it.
+    intent_verb = (r"(?:let me|(?:i|we)(?:'ll| will| made sure| was careful|"
+                   r" were careful| deliberately| took care| chose| decided|"
+                   r" opted))")
+    vic = re.findall(intent_verb + r"\b[^.!?]{0,90}\brather than\b", low)
+    vic += re.findall(r"\brather than\b[^.!?]{0,90}\b" + intent_verb, low)
     if vic:
         r.review("virtue by invented contrast",
                  f"{len(vic)}: delete from 'rather than' on; if only the "
