@@ -120,6 +120,17 @@ The pattern is stable and worth stating on its own: **purpose-built fixtures kep
 - [x] `CLAUDE.md` rule 6 held a real violation, in the always-on file that states the rule. Fixed.
 - [x] **Enforced, not just done.** `tests/test.sh` now runs the dash check over every prose file in the skill plus `README.md`, `CLAUDE.md` and this file, and locks the script literal counts at 2/2/1 so a new one fails. Verified by injecting a violation in each direction: both guards fail, exit code 1.
 
+### 14. End-to-end test, 2026-08-23
+
+Ran the skill on fresh material rather than on its own fixtures: a 561-word Q3 analysis into a management summary plus email variant (full mode), a 180-word team message reworded (style-only), and a client note.
+
+- [x] Full mode: summary 220 words, 0 FAIL 2 REVIEW; email 113 words, 4 sentences, 0 FAIL 0 REVIEW. The clustering rule worked as intended: three of the source's four findings shared one root cause and were led with as one point, not ranked flat.
+- [x] **The facts audit caught five real defects** the mechanical half could not see: three hedges silently dropped from estimates (*roughly* 18%, *roughly* $60k, *perhaps* four weeks), one claim added that the source never made ("we do not recommend it"), and a timing softened to "recent" where the source said "toward the end of last month". Fixed in the draft. The vague date was **not** converted into a specific one, which is the failure rule 5 exists for.
+- [x] **The style-only compression guard caught a real 22% cut** on the first attempt at a wording-only pass. Second attempt: 180 to 159 words, 12%, 3 to 3 paragraphs, pass.
+- [x] `--house` on all four profiles behaves as documented: our summary reviews against Reuters for missing subheads and bullets and passes its no-dash target.
+
+**One defect found and fixed:** the `--client` next-update check required the literal words "next update", so a note ending "I will write again by Friday 5 September" failed it. Same shape as the defects in section 8: the check measured a phrase as a proxy for a promise. It now looks for a commitment verb and a time expression in the same sentence, and distinguishes *no follow-up promised* from *a follow-up promised with no time on it*. Two fixtures lock both branches, and a 15th rule anchor ties it to `audiences.md`.
+
 ## Open
 
 ### A. `inputs/examples.md` has only its 5 launch pairs: the one real content gap

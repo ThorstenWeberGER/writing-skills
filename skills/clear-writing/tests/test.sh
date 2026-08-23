@@ -8,7 +8,8 @@ echo "=== wordlist drift ==="
 python3 tests/test_drift.py || rc=1
 
 echo "=== check.py fixtures ==="
-for f in bad good em art fullmode-article mgmt-email client-note naming-vs-using; do
+for f in bad good em art fullmode-article mgmt-email client-note client-no-time \
+         client-no-update naming-vs-using; do
   case $f in
     bad|good)        fl="--client --nonnative";;
     em)              fl="--email";;
@@ -16,6 +17,8 @@ for f in bad good em art fullmode-article mgmt-email client-note naming-vs-using
     fullmode-article) fl="--article-full";;
     mgmt-email)      fl="--email";;
     client-note)     fl="--client";;
+    client-no-time)  fl="--client";;
+    client-no-update) fl="--client";;
     naming-vs-using) fl="";;
   esac
   out=$(python3 check.py "tests/fixtures/$f.md" $fl 2>&1)
@@ -25,6 +28,8 @@ for f in bad good em art fullmode-article mgmt-email client-note naming-vs-using
     fullmode-article) want=0;;
     mgmt-email) want=0;;
     client-note) want=0;;
+    client-no-time) want=1;;
+    client-no-update) want=1;;
     naming-vs-using) want=5;;
   esac
   if [ "$got" = "$want" ]; then

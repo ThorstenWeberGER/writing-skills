@@ -23,6 +23,13 @@ for f in bad good em art; do
 done
 ```
 
+## `client-no-time.md` and `client-no-update.md`
+
+Both carry a single expected FAIL on `next-update time given`, one per branch of
+that check: a follow-up promised with no time attached, and no follow-up at all.
+The check used to require the literal words "next update", so a note saying "I
+will write again by Friday 5 September" failed it. These lock the fix.
+
 ## `naming-vs-using.md`: the false-positive regression
 
 The most important fixture. Twelve separate false positives were found during

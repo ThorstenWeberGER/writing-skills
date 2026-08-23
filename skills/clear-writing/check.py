@@ -95,6 +95,27 @@ CLIENT_BLAME = [
     "an upstream provider", "the vendor's fault", "caused by our provider",
 ]
 
+# audiences.md rule 2: "Never give a fix ETA. Always give a next-update time."
+# The commitment and the time are checked separately, because a promise with no
+# time on it ("we will update you shortly") is the failure the rule names.
+NEXT_UPDATE_COMMIT = re.compile(
+    r"\b(next\s+(?:update|checkpoint)"
+    r"|(?:i|we)\s*(?:will|'ll|shall)\s+(?:write|update|email|contact|report"
+    r"|be\s+in\s+touch|follow\s+up|come\s+back|let\s+you\s+know)"
+    r"|updates?\s+(?:you|again)"
+    r"|further\s+update)", re.I)
+NEXT_UPDATE_TIME = re.compile(
+    r"(\{[^}]{1,30}\}|<[^>]{1,30}>"                      # template placeholder
+    r"|\b\d{1,2}:\d{2}"                                  # 12:45
+    r"|\b\d{1,2}\s*[ap]\.?m\.?"                         # 5pm
+    r"|\b(?:mon|tues|wednes|thurs|fri|satur|sun)day"
+    r"|\b(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\s+\d{1,2}"
+    r"|\b\d{1,2}\s+(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*"
+    r"|\bwithin\s+\S+\s+(?:minute|hour|day|week)s?"
+    r"|\b(?:end\s+of\s+)?(?:today|tomorrow|this\s+afternoon|this\s+evening)"
+    r"|\bby\s+(?:the\s+)?(?:end\s+of\s+)?\S+\s+(?:morning|afternoon|week)"
+    r")", re.I)
+
 IRREGULAR_PARTICIPLES = {
     "been", "done", "gone", "seen", "taken", "given", "known", "shown",
     "written", "driven", "broken", "chosen", "spoken", "found", "made",
@@ -719,9 +740,20 @@ def run(raw, opts):
         (r.fail if eta else r.ok)(
             "no fix ETA promised",
             ", ".join(sorted({t for t, _ in eta})[:3]) if eta else "none")
-        nxt = re.search(r"next update", raw_low)
-        (r.ok if nxt else r.fail)("next-update time given",
-                                  "present" if nxt else "missing")
+        # A commitment and a time, in the same sentence. Requiring the literal
+        # words "next update" failed a note that said "I will write again by
+        # Friday 5 September", which is exactly what the rule asks for: the
+        # check was measuring a phrase as a proxy for a promise.
+        committed = [x for x in sents if NEXT_UPDATE_COMMIT.search(x)]
+        timed = [x for x in committed if NEXT_UPDATE_TIME.search(x)]
+        if timed:
+            r.ok("next-update time given", "present")
+        elif committed:
+            r.fail("next-update time given",
+                   "a next update is promised with no time on it: "
+                   f"\"{committed[0][:60].strip()}\"")
+        else:
+            r.fail("next-update time given", "missing")
         ap = find_terms(raw_low, CLIENT_EMPTY_APOLOGY)
         (r.fail if ap else r.ok)(
             "no empty apology",

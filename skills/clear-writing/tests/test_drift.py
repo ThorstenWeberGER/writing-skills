@@ -125,6 +125,8 @@ RULE_ANCHORS = {
         ("phrasal verbs with single-word verbs",
          "non-native rule 1 -> PHRASAL_IDIOM"),
         ("Referential, not evaluative", "jargon test 4 -> BUZZWORDS"),
+        ("Always give a next-update time",
+         "next-update check -> NEXT_UPDATE_COMMIT + NEXT_UPDATE_TIME"),
     ],
     "formats.md": [
         ("150-250 words", "summary length -> --summary"),
