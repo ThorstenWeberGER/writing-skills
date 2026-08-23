@@ -113,3 +113,7 @@ All rules are original synthesis. Quoted fragments are under 15 words and attrib
 - **No active-voice percentage target exists** in any primary source; don't invent one.
 - **BLUF's military provenance (Army Regulation 25-50) is unverified** — the regulation was unreachable. The *behavior* is fully primary-sourced above; only the acronym's origin story is secondhand.
 - **The Economist, WSJ, HBR, Bloomberg, Reuters, Guardian, and BBC remain secondary.** All are paywalled or block automated fetching. Rules attributed to them come from write-ups describing their conventions. Widely-circulated figures for Reuters (300-800 words per story) and AR 25-50 (15-word average sentence) could not be verified against either document and are deliberately not used here.
+
+---
+
+**This file is not self-enforcing.** The checks described above are gated by `CHECKLIST.md` — run it, and `check.py`, before returning any draft.

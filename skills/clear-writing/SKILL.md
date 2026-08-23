@@ -19,18 +19,16 @@ Apply this skill any time you draft or edit prose for the user, or the user asks
 4. **`references/DONTS.md`** and **`examples.md`** — check against known violations. If you catch a new one this conversation and the user confirms it's worth keeping, append it to `DONTS.md`. Only add to `examples.md` if the pair is real, never invented.
 5. **`references/humanizer.md`** — final pass for AI-writing tells. If the user's own writing is in this conversation, match its voice per that file's opening section.
 
-## Exit checklist — run every item before returning the draft
+## Pass 6 — enforcement, and it is not optional
 
-Reading a pass is not the same as applying it. Each item below is mechanically checkable; do not report the draft as finished until every one is confirmed. Skipping this is the skill's known failure mode: in testing, passes 1 and 5 were described as run while two em dashes and a passive construction went out in the same draft.
+**`CHECKLIST.md`** — run it before returning any draft. It is the only thing that makes passes 1-5 real: reading a reference file is not the same as applying it, and this skill has already shipped drafts where a pass was reported as run while its rules were violated in the same text.
 
-1. **Scan the literal characters `—` and `–`.** Every hit must go, replaced by a period, comma, colon, or parentheses. The only exemption is a writing sample from the user in this conversation that uses them — check for one; don't assume it exists. Also check spaced ` - ` and ` -- ` used as dashes.
-2. **Read every sentence for a hidden actor.** For each passive construction, either name the actor or confirm one of the two exceptions in `foundations.md` rule 9 applies. Client-facing drafts fail this twice over, because an agentless passive also dodges ownership (`audiences.md`, external client rule 5).
-3. **Check the first sentence carries the point**, not background. If a reader stopping there wouldn't know the point, it's misordered.
-4. **If pass 2 used the management-summary section:** confirm both the full version and the crisp email variant are present, back to back, unless the user asked for just one.
-5. **Scan for the tells you claim to have removed.** Pick the three most likely from `humanizer.md` for this text type and search for them explicitly rather than trusting the earlier read.
-6. **Confirm no fact, number, name, date, or citation was added or dropped** relative to the source.
+Two halves:
 
-If you cannot confirm an item, say so in the response instead of asserting the draft is clean.
+- **`check.py` decides everything mechanical** — 22+ checks including the literal em-dash scan, sentence and paragraph limits, passive constructions, noun strings, hidden verbs, the AI-tell and buzzword lists, plus conditional checks for summary word counts, email variant limits, article layout, client-facing promises, and non-native readability. Run it with the flags for what you're writing. Every FAIL gets fixed; every REVIEW gets a recorded decision.
+- **`CHECKLIST.md`'s steps 1-6 cover the judgment calls** no script can make: is this the strongest point, did the three-why chain run, is the triage stated, was uncertainty preserved, do the four jargon tests pass for this reader, and — the item most likely to catch something real — was any fact, number, or date added or dropped.
+
+**When you report back, say what you ran and what it returned.** Not "applied the clear-writing skill" — that phrasing is exactly what let unenforced passes go unnoticed.
 
 ## Templates
 

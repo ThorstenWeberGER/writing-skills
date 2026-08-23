@@ -91,3 +91,7 @@ Add a subheading when a real topic shift happens, not because the piece got long
 All rules here are original synthesis, not reproduced source text.
 
 **Status: partly derived from secondary sources.** HBR, Bloomberg, WSJ, and the Economist are paywalled or block automated fetching, so the publication-convention rules come from write-ups *describing* those conventions rather than analysis of published sentences. The short-article length ratios are a proportional extrapolation, not verified against real sub-page examples. See the v2 checklist for what primary sourcing has since been substituted in.
+
+---
+
+**This file is not self-enforcing.** The checks described above are gated by `CHECKLIST.md` — run it, and `check.py`, before returning any draft.

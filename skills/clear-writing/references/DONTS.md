@@ -36,3 +36,7 @@ General rules that apply to any prose, regardless of audience or document type.
 | Bury the ask | An email ending with a vague "let me know your thoughts" after three paragraphs of context | "I need your approval on the $10K budget by Friday." | State the specific action wanted, explicitly, ideally first or last |
 | Over-explain a metaphor or point | "It's like a house of cards — meaning it's fragile and could collapse if just one small thing goes wrong, which shows how risky this plan is." | "It's a house of cards." | Trust the reader; explaining a metaphor kills its power |
 | Use jargon to sound smart | "We need to leverage synergies to operationalize our core competencies." | "We need to combine our teams' strengths to get this done." | Plain language signals confidence, not lack of expertise (see jargon table above for specific swaps) |
+
+---
+
+**This file is not self-enforcing.** The checks described above are gated by `CHECKLIST.md` — run it, and `check.py`, before returning any draft.

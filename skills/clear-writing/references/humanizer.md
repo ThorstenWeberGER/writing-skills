@@ -140,3 +140,7 @@ These three feed the exit checklist in `SKILL.md`, which is what actually gates 
 ## Source
 
 Condensed from [Wikipedia: Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing) (WikiProject AI Cleanup) via [github.com/blader/humanizer](https://github.com/blader/humanizer) (MIT). Trimmed from the original 35-pattern port: patterns specific to encyclopedia articles (name-dropping publications to prove notability, curly-quote normalization, hyphenated-pair pedantry) were dropped, and patterns duplicating `foundations.md`/`DONTS.md` were cross-referenced rather than restated. Wikipedia's underlying point: "LLMs use statistical algorithms to guess what should come next. The result tends toward the most statistically likely result that applies to the widest variety of cases."
+
+---
+
+**This file is not self-enforcing.** The checks described above are gated by `CHECKLIST.md` — run it, and `check.py`, before returning any draft.
