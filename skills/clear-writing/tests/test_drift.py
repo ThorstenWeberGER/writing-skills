@@ -130,8 +130,9 @@ RULE_ANCHORS = {
     ],
     "house-voices.md": [
         ("median 11", "Reuters summary bullets -> bullets=True"),
-        ("the floor of the enforced 24-32 band",
-         "Reuters median -> med=(24, 32)"),
+        ("Pooled 26", "Reuters median -> med=(21, 33)"),
+        ("7 against 1, across 3 of 4",
+         "quote before attribution -> quote_first=True"),
         ("1 per 38-62 words", "FT attribution rate -> attribution=(30, 70)"),
         ("always spelled out, never", "per cent -> percent_spelled=True"),
         ("set by register, not masthead",

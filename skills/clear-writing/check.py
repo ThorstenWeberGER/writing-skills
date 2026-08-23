@@ -185,9 +185,12 @@ HOUSE = {
                       semis=1700, spelling="uk", headline="informational",
                       stand_turn="state", attribution=(30, 70),
                       percent_spelled=True),
-    "reuters":   dict(med=(24, 32), dash=None, subheads=True, bullets=True,
+    # Four held-out articles later confirmed most of this. The crosshead range
+    # was too narrow and the median floor too high for an interview.
+    "reuters":   dict(med=(21, 33), dash=None, subheads=True, bullets=True,
                       head=None, stand=None,
-                      semis=None, spelling="us", attribution=True),
+                      semis=None, spelling="us", attribution=True,
+                      crosshead=(2, 9), quote_first=True),
     # Re-measured over the same five articles with per-font ToUnicode decoding,
     # which recovers 20,588 body words against 14,557 on the first pass. Four
     # figures moved; the dash rate held.
@@ -301,6 +304,7 @@ SOURCES = {
     "informational headline":       "house-voices.md: FT, The opening move",
     "subheads optional":            "house-voices.md: Economist, Refusals",
     "crossheads":                   "house-voices.md: Economist, The signature move",
+    "quote before attribution":     "house-voices.md: Reuters, Attribution",
     "standfirst turns":             "house-voices.md: Economist, The opening move",
     "standfirst states":            "house-voices.md: FT, The opening move",
     "standfirst":                   "house-voices.md: FT, The opening move",
@@ -1032,6 +1036,20 @@ def run(raw, opts):
                 f"{len(fit)}/{len(subs)} in range"
                 + ("" if len(fit) == len(subs)
                    else "; house crossheads are short and allusive"))
+
+        # Reuters puts the quote before the attribution: "...", said Name, title
+        # at Firm. Held back for a turn on one article's 5-of-5, then confirmed
+        # at 7 against 1 across three of four held-out articles.
+        if h.get("quote_first"):
+            qs = len(re.findall(r'["\u201d],?\s+(?:said|added|told)\s+[A-Z]', raw))
+            sq = len(re.findall(r'\b[A-Z][a-z]+ (?:said|added)[:,]?\s+["\u201c]', raw))
+            if not qs and not sq:
+                r.review(f"{name}: quote before attribution", "no attributed quotes")
+            else:
+                (r.ok if qs > sq else r.review)(
+                    f"{name}: quote before attribution",
+                    f"{qs} quote-first, {sq} name-first"
+                    + ("" if qs > sq else "; house leads with the quote"))
 
         # The standfirst turns against the headline rather than restating it.
         # 4 of 5: two open on "But", one adds ", too", one runs a "just as"

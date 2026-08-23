@@ -326,6 +326,30 @@ That decision is the point of this entry. The measurement was easy; **choosing n
 
 All four profiles now have held-out or expanded evidence. 35 rule anchors.
 
+### 25. Three more Reuters articles resolve both held-back questions (DONE)
+
+Four held-out Reuters articles in total now: a brief, two news stories and an interview, none used to build the profile.
+
+**The restraint was vindicated.** Section 24 recorded a held-out median of 24.5 against a recorded 30, and deliberately did not move the band, noting only that clustering near 24 would mean the centre was wrong. **Two of the next three came in at 32.** Moving the centre down on one article would have been the fifth over-claim in this project. The floor did need lowering from 24 to 21, because the interview runs shortest: question-driven sentences are short.
+
+**And the device was promoted, on evidence.** Section 24 found the quote-before-attribution order unanimous at 5 of 5 inside one article and refused to enforce it. Across four articles it now stands at **7 against 1 in 3 of 4**, so it is enforced.
+
+So both halves of the previous decision came out right, and for opposite reasons: the number stayed because more data contradicted the single sample, the device shipped because more data confirmed it. **That is what holding one turn buys, and it cost nothing.**
+
+| Recorded | Four held-out |
+|---|---|
+| Summary bullets, median 11 words | **median 11 again**, 11 bullets across 3 of 4 |
+| Summary block above every article | 3 of 4; the exception is a 193-word brief |
+| All-caps crossheads, 5-6 words | **2-9 words.** Recorded range too narrow |
+| Zero em dashes, zero semicolons | zero and zero, **eight articles running** |
+| Sentence median 30 | 32, 32, 24.5, 21. Pooled 26 |
+
+The bullet median landing on 11 for a second independent time is the strongest single confirmation in the whole dataset.
+
+**One process failure worth recording.** A scripted block replacement in `house-voices.md` used a terminator that never matched, so it deleted to end of file and destroyed seven anchored rules. The drift test caught it immediately (`29/36 anchors`), `git checkout` restored the file, and the edit was redone against explicit line bounds. The coupling that exists to catch documentation rot caught a destructive edit instead, which is a use it was not designed for.
+
+36 rule anchors. All four profiles now rest on expanded or held-out evidence.
+
 ## Open
 
 ### A. `inputs/examples.md` has only its 5 launch pairs: the one real content gap

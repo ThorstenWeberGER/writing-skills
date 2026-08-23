@@ -74,11 +74,11 @@ So use these to answer "how should this be shaped?" and not "make me sound like 
 
 | | |
 |---|---|
-| Sentence median | **30**, the longest measured; mean 29.4 |
+| Sentence median | **21-32 by register**, pooled 26 over four held-out articles; the interview runs shortest |
 | Over 25 words | 57% |
 | Em dashes | **0** |
 | Semicolons | **0** |
-| Subheads | **yes**, all-caps, 5-6 words |
+| Subheads | **yes**, all-caps, **2-9 words** (eight articles) |
 | Bullets | **yes**: a summary block above every article, 3-4 bullets, 6-17 words, median 11 |
 
 **The summary block** carries the news, the mechanism, the consequence. Each bullet stands alone as a fact the reader can act on; none restates the body.

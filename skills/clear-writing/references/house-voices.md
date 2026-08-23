@@ -163,23 +163,23 @@ Validated against the source: the checks reproduce the hand counts on all five, 
 
 ## Reuters
 
-*4 wire articles plus the Trust Principles pages, and one later consumer-markets round-up used as a held-out test.*
+*4 wire articles plus the Trust Principles pages, and four later articles held out as a test: a brief, two news stories and an interview.*
 
-**The only profile that survived a fresh article without a correction.** Every other profile here moved when new material arrived. Run against an unseen Reuters piece, all seven `--house reuters` checks passed:
+**Tested against four held-out articles, and the one deliberate act of restraint was vindicated.** None was used to build the profile.
 
-| Recorded | Held-out article |
+| Recorded | Four held-out articles |
 |---|---|
-| Summary block, 3-4 bullets, 6-17 words, median 11 | **4 bullets, 10-12 words, median 11.** Median matches exactly |
-| All-caps crossheads, 5-6 words | **2 crossheads, 5 words each** |
-| Zero em dashes | **zero** |
-| Zero semicolons | **zero** |
-| Sentence median 30 | **24.5**, the floor of the enforced 24-32 band |
+| Summary bullets, 3-4 items, 6-17 words, median 11 | **median 11 again**, across 11 bullets in 3 of 4 |
+| A summary block above every article | **3 of 4.** The exception is a 193-word brief |
+| All-caps crossheads, 5-6 words | **2-9 words.** The recorded range was too narrow |
+| Zero em dashes, zero semicolons | **zero and zero, eight articles running** |
+| Sentence median 30 | **32, 32, 24.5, 21.** Pooled 26 |
 
-**One thing to watch rather than change.** The held-out article's median is 24.5 against a recorded 30. It is a markets round-up drawing on many earnings reports rather than a breaking news story, so this may be register. It sits inside the band, so nothing moves on one article. **If further Reuters samples cluster near 24, the band's centre is wrong and the profile should say so.**
+**On the median, holding back paid off.** The first held-out article came in at 24.5, and this file recorded that if further samples clustered near 24 the band's centre was wrong. Two of the next three came in at **32**, close to the recorded 30. Moving the centre down on that one article would have been a mistake. The floor did need lowering, from 24 to 21, because the interview runs shortest: an interview is built from short question-driven sentences.
 
-**Attribution order, recorded and deliberately not enforced.** In the held-out article every attribution runs quote first, then *said* plus name plus full job title plus institution: *"...", said Brian Jacobsen, chief economic strategist at Annex Wealth Management.* Five of five, with zero instances of the reverse *X said that "..."* order. The count is unanimous inside one article, which is stronger than a single instance and still weaker than a habit across articles. **Enforcing it would be exactly the mistake made twice in this project, so it stays recorded until a second article confirms it.**
+**Attribution order: promoted from recorded to measured. (7 against 1, across 3 of 4)** The quote comes first, then *said* plus name plus full job title plus institution: *"...", said Brian Jacobsen, chief economic strategist at Annex Wealth Management.* Held back for a turn on one article's unanimous 5 of 5, which was the right call then and is now confirmed on three. Enforced.
 
-**The opening move: the packed lead.** (measured) Sentence one carries actor, action, time and cause together, which is why the median sentence is 30 words, the longest of the four. A short wire lead is the wrong instinct. Pack it.
+**The opening move: the packed lead.** (measured) Sentence one carries actor, action, time and cause together, which is why a news median of 32 words is normal here, the longest of the four. A short wire lead is the wrong instinct. Pack it.
 
 **The signature move: the summary block that does not restate the body.** (measured) 3-4 bullets, 6-17 words, median 11, above every article. It carries the news, the mechanism, the consequence, and each bullet stands alone as a fact the reader can act on. A bullet that paraphrases the lead is the failure.
 
