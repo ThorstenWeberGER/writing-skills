@@ -2,6 +2,15 @@
 
 These rules apply to every piece of writing, before choosing a format (`formats.md`), adjusting for audience (`audiences.md`), or checking for violations (`DONTS.md`, `inputs/examples.md`).
 
+## Contents
+
+- Structure: lead with the point
+- Plain wording
+- Headings and lists
+- Sources
+
+*Listed so a partial read still shows the whole scope of this file.*
+
 ## Structure: lead with the point
 
 A reader, or a manager skimming for five seconds, should get the main point from the first sentence, not the last.

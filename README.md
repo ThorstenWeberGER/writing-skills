@@ -87,6 +87,7 @@ skills/clear-writing/
 ├── SKILL.md              entry point: mode choice, then the pass order
 ├── CHECKLIST.md          the exit gate. Judgment checks a script cannot make
 ├── check.py              25+ mechanical checks. stdlib only. exit 1 on any FAIL
+├── evals/                six baseline cases in the documented eval format
 ├── references/           the ruleset, loaded on demand
 │   ├── foundations.md    always applies: find the point, why it matters, plain wording
 │   ├── formats.md        deliverable shape: management summary, email, short article
@@ -228,6 +229,10 @@ That last one has caught a genuine error three times, including a vague source r
 The suite also **runs the dash check over the skill's own prose**, plus this file and `CLAUDE.md`, and locks the number of dash characters the three scripts are allowed to contain. The rule was described across 20,000 words while 257 dashes sat in the files describing it, so it is now enforced rather than intended. Verified by injecting a violation of each guard.
 
 CI runs this on any push touching the skill.
+
+### `evals/`: the part `tests/` cannot measure
+
+Every test in `tests/` runs inside the session that wrote the skill, which the Anthropic authoring docs name as the condition that masks gaps. `evals/evals.json` holds six cases in the documented format, each tied to a failure that actually happened in development, and each needing a fresh session with the skill disabled for the baseline arm. The number that matters is with-skill against without-skill, not the with-skill pass rate. `evals/README.md` has both ways to run them. They have not been run yet, and `docs/research-styleguide-design.md` records why.
 
 ---
 

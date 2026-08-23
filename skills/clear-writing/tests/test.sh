@@ -110,6 +110,67 @@ for d in economist ft reuters hbr; do
   fi
 done
 
+echo "=== every flagged check traces back to a written rule ==="
+# Vale attaches a link to every rule so a finding leads to its guidance. The
+# equivalent here is SOURCES. A check with no entry prints NO SOURCE RECORDED,
+# which means a reader cannot find the rule behind a failure.
+orphan=0
+for pair in "tests/fixtures/bad.md:--client --nonnative" "tests/fixtures/em.md:--email" \
+            "tests/fixtures/art.md:--article-full" "tests/fixtures/naming-vs-using.md:" \
+            "tests/fixtures/client-no-time.md:--client" \
+            "tests/fixtures/voice-hbr.md:--house hbr" \
+            "tests/fixtures/voice-reuters.md:--house reuters" \
+            "tests/fixtures/voice-economist.md:--house economist" \
+            "tests/fixtures/voice-ft.md:--house ft"; do
+  f=${pair%%:*}; fl=${pair#*:}
+  n=$(python3 check.py "$f" $fl 2>&1 | grep -c 'NO SOURCE RECORDED')
+  if [ "$n" != "0" ]; then
+    echo "  FAIL    $f: $n flagged check(s) with no rule recorded"
+    python3 check.py "$f" $fl 2>&1 | grep 'NO SOURCE RECORDED' | sed 's/^/          /'
+    orphan=1
+  fi
+done
+if [ $orphan -eq 0 ]; then
+  echo "  pass    all flagged checks name their rule"
+else
+  rc=1
+fi
+
+echo "=== eval suite is well-formed ==="
+# The eval format is the one the skill-authoring docs specify. These cannot be
+# run from inside the authoring session (that is the point of them), so what is
+# testable here is that the file stays valid and its input files still exist.
+python3 - <<'EOF' || rc=1
+import json, os, sys
+base = "evals"
+try:
+    d = json.load(open(os.path.join(base, "evals.json")))
+except Exception as e:
+    print(f"  FAIL    evals.json does not parse: {e}"); sys.exit(1)
+bad, ids = [], set()
+for e in d:
+    for k in ("id", "skills", "query", "files", "expected_behavior", "gap"):
+        if k not in e:
+            bad.append(f"{e.get('id', '?')}: missing field {k}")
+    if e.get("id") in ids:
+        bad.append(f"duplicate id {e['id']}")
+    ids.add(e.get("id"))
+    for f in e.get("files", []):
+        if not os.path.exists(os.path.join(base, f)):
+            bad.append(f"{e.get('id')}: input file not found: {f}")
+    if not e.get("expected_behavior"):
+        bad.append(f"{e.get('id')}: no assertions")
+if len(d) < 3:
+    bad.append(f"only {len(d)} evals; the authoring checklist asks for at least three")
+if bad:
+    print("  FAIL    evals.json:")
+    for b in bad:
+        print(f"            {b}")
+    sys.exit(1)
+n = sum(len(e["expected_behavior"]) for e in d)
+print(f"  pass    evals.json: {len(d)} cases, {n} assertions, all input files present")
+EOF
+
 echo "=== the skill's own files obey the dash rule ==="
 # The rule was described for 20,000 words while 200+ dashes sat in the files
 # describing it. Enforced here so it cannot drift back.

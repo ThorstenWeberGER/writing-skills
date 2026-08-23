@@ -2,6 +2,19 @@
 
 Four publications, measured from material the user supplied. Roughly 25,000 words. Pick one when you want a draft to follow a specific outlet's conventions: `check.py --house economist|ft|reuters|hbr` enforces the measurable parts.
 
+## Contents
+
+- What this can and cannot give you
+- Economist
+- Financial Times
+- Reuters
+- HBR
+- Choosing between them
+- For a management email, no single house style fits
+- Sources
+
+*Listed so a partial read still shows the whole scope of this file.*
+
 ## What this can and cannot give you
 
 **It gives you conventions.** Sentence length, dash and semicolon rates, whether to use subheads and bullets, how headlines pair with standfirsts, where the point goes. All measured, all enforceable.

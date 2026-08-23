@@ -197,6 +197,90 @@ US_SPELLING = re.compile(
 HBR_REGISTER = ("actually", "crucial", "underscore", "underscores",
                 "commitment to", "fundamentally", "landscape", "valuable")
 
+# Where each check's rule is written down. Vale attaches a `link:` to every
+# rule so a finding leads back to the guidance that justifies it; this is the
+# same idea against local files. Also the coverage manifest: `--rules` prints
+# it, and a check with no entry here is a check nobody can trace to a rule.
+SOURCES = {
+    "em/en dash":                   "humanizer.md: Em and en dashes",
+    "decorative emoji":             "humanizer.md: Formatting tells",
+    "AI-tell phrase":               "humanizer.md: Inflated importance",
+    "virtue by invented contrast":  "humanizer.md: Virtue by invented contrast",
+    "stacked hedging":              "humanizer.md: Hedging",
+    "bold mini-heading list":       "humanizer.md: Over-bolding",
+    "sentence >25 words":           "foundations.md: Plain wording, rule 8",
+    "sentence-length variety":      "foundations.md: Plain wording, rule 10",
+    "paragraph length":             "foundations.md: Plain wording, rule 10",
+    "paragraph >150 words":         "foundations.md: Plain wording, rule 10",
+    "paragraph >250 words":         "foundations.md: Plain wording, rule 10",
+    "possible passive voice":       "foundations.md: Plain wording, rule 9",
+    "hidden verb (nominalization)": "foundations.md: Plain wording, rule 5",
+    "unfamiliar/filler word":       "foundations.md: Plain wording, rule 1",
+    "noun string >3":               "foundations.md: Plain wording, rule 6",
+    "Title Case heading":           "foundations.md: Headings and lists",
+    "list >6 items":                "foundations.md: Headings and lists, rule 7",
+    "one subheading level":         "foundations.md: Headings and lists",
+    "FAQ section":                  "foundations.md: Headings and lists",
+    "evaluative buzzword":          "audiences.md: When jargon is the right choice",
+    "phrasal verb / idiom":         "audiences.md: Non-native readers, rule 2",
+    "complex tense stack":          "audiences.md: Non-native readers",
+    "no fix ETA promised":          "audiences.md: External client, rule 2",
+    "next-update time given":       "audiences.md: External client, rule 2",
+    "no empty apology":             "audiences.md: External client",
+    "no vendor-blaming":            "audiences.md: External client, rule 4",
+    "client note <=200 words":      "audiences.md: External client",
+    "client note <=12 sentences":   "audiences.md: External client",
+    "--client with --email":        "CHECKLIST.md: Step 0 flag table",
+    "summary 150-250 words":        "formats.md: Management summary, rule 6",
+    "email <=125 words":            "formats.md: Email variant",
+    "email <=5 sentences":          "formats.md: Email variant",
+    "email subject CATEGORY tag":   "formats.md: Email variant",
+    "email subject line":           "formats.md: Email variant",
+    "headline":                     "formats.md: Short article, headline",
+    "headline 5-10 words":          "formats.md: Short article, rule 1",
+    "half page 150-300 words":      "formats.md: Short article, length table",
+    "full page 400-700 words":      "formats.md: Short article, length table",
+    "half page: no subheadings":    "formats.md: Short article, length table",
+    "section >=40 words":           "formats.md: Short article",
+    "length preserved":             "SKILL.md: Style-only mode",
+    "structure preserved":          "SKILL.md: Style-only mode",
+    "naming contexts excluded":     "check.py: under_judgment()",
+    # House checks are keyed on the part after the profile name.
+    "sentence median":              "house-styles.md: the profile tables",
+    "dash rate":                    "house-styles.md: the profile tables",
+    "no em dashes":                 "house-styles.md: the profile tables",
+    "uses subheads":                "house-styles.md: the profile tables",
+    "no subheads":                  "house-styles.md: the profile tables",
+    "uses bullets":                 "house-styles.md: the profile tables",
+    "no bullets":                   "house-styles.md: the profile tables",
+    "headline 4-10 words":          "house-styles.md: the profile tables",
+    "headline 7-14 words":          "house-styles.md: the profile tables",
+    "semicolons":                   "house-voices.md: Punctuation signature",
+    "no semicolons":                "house-voices.md: Punctuation signature",
+    "spelling":                     "house-voices.md: Register",
+    "claims attributed":            "house-voices.md: Reuters, Attribution",
+    "lowercase acronyms":           "house-voices.md: Economist, Register",
+    "management register":          "house-voices.md: HBR, Register",
+    "register":                     "house-voices.md: HBR, Register",
+    "antithetical dek":             "house-voices.md: HBR, The opening move",
+    "allusive headline":            "house-voices.md: Economist, Refusals",
+    "informational headline":       "house-voices.md: FT, The opening move",
+}
+
+
+def source_for(check):
+    """The reference file and section behind a check name, or None."""
+    if check in SOURCES:
+        return SOURCES[check]
+    # House checks arrive as "reuters: uses bullets"; key on the tail, and
+    # strip the measured numbers the label interpolates.
+    tail = check.split(": ", 1)[-1]
+    for key in (tail, re.sub(r"\s*[~0-9].*$", "", tail).strip()):
+        if key in SOURCES:
+            return SOURCES[key]
+    return None
+
+
 CATEGORY_TAGS = ("DECISION:", "REQUEST:", "ACTION:", "INFO:", "UPDATE:")
 
 
@@ -406,6 +490,24 @@ class Report:
         lines.append("")
         lines.append(f"  {fails} FAIL, {revs} REVIEW, "
                      f"{len(self.rows) - fails - revs} pass")
+
+        # Every flag names the file and section its rule is written in, so a
+        # finding leads back to the guidance instead of stopping at a label.
+        flagged = [c for st, c, _ in self.rows if st in ("FAIL", "REVIEW")]
+        if flagged:
+            seen, pairs = set(), []
+            for c in flagged:
+                src = source_for(c)
+                key = (c, src)
+                if key in seen:
+                    continue
+                seen.add(key)
+                pairs.append((c, src or "NO SOURCE RECORDED"))
+            w = max(len(c) for c, _ in pairs) + 2
+            lines.append("")
+            lines.append("  rules behind the flags:")
+            for c, src in pairs:
+                lines.append(f"    {c.ljust(w)}{src}")
         return "\n".join(lines)
 
 
@@ -653,6 +755,9 @@ def run(raw, opts):
                 f"{name}: no em dashes", "none" if ndash == 0 else f"{ndash} found")
         elif ndash:
             rate = n / ndash
+            # A factor of 2 either side. Publication dash rates were measured
+            # across whole articles; a 700-word draft carrying one dash against
+            # a 348-word target is in character, two is not.
             within = h["dash"] / 2 <= rate <= h["dash"] * 2
             (r.ok if within else r.review)(
                 f"{name}: dash rate ~1 per {h['dash']}w", f"1 per {round(rate)}w")
@@ -695,6 +800,9 @@ def run(raw, opts):
                 "none" if nsemi == 0 else f"{nsemi} found")
         elif nsemi:
             srate = n / nsemi
+            # Semicolons only fail for being too frequent, so the band is
+            # one-sided. A factor of 3 is looser than the dash factor because
+            # the counts are smaller: HBR ranges 0 to 12 within one masthead.
             (r.ok if srate >= h["semis"] / 3 else r.review)(
                 f"{name}: semicolons ~1 per {h['semis']}w", f"1 per {round(srate)}w")
         else:
@@ -744,6 +852,10 @@ def run(raw, opts):
                          f"house runs ~1 per {target}w")
             else:
                 rate = n / cnt
+                # The 700-word target is the midpoint of a measured 644-787
+                # range. 3.5 puts the floor at 200 words per hit, which is
+                # exactly AI_TELL_WORDS_PER_HIT: below that the same words
+                # read as slop rather than register, so the two agree.
                 (r.ok if rate >= target / 3.5 else r.review)(
                     f"{name}: register ~1 per {target}w",
                     f"1 per {round(rate)}w ({', '.join(rh[:4])})")
@@ -958,7 +1070,7 @@ def run(raw, opts):
 
 def main():
     p = argparse.ArgumentParser(add_help=True)
-    p.add_argument("file")
+    p.add_argument("file", nargs="?")
     p.add_argument("--summary", action="store_true",
                    help="management summary: enforce 150-250 words")
     p.add_argument("--email", action="store_true",
@@ -982,9 +1094,36 @@ def main():
                    help="style-only mode: fail if the draft lost more than "
                         "15%% of the original's words (i.e. it compressed "
                         "when it was only meant to be reworded)")
+    p.add_argument("--rules", action="store_true",
+                   help="print the check-to-rule coverage manifest and exit")
     opts = p.parse_args()
 
+    if opts.rules:
+        # Microsoft's Vale package publishes what fraction of its style guide
+        # the rules implement. Same idea: say what is enforced and where the
+        # rule lives, so unenforced guidance is visible rather than assumed.
+        by_file = {}
+        for check, src in sorted(SOURCES.items()):
+            by_file.setdefault(src.split(":")[0], []).append((check, src))
+        total = sum(len(v) for v in by_file.values())
+        print(f"\ncheck-to-rule coverage: {total} checks mapped to a rule\n")
+        for f in sorted(by_file):
+            print(f"  {f}  ({len(by_file[f])})")
+            w = max(len(c) for c, _ in by_file[f]) + 2
+            for check, src in by_file[f]:
+                print(f"    {check.ljust(w)}{src.split(': ', 1)[-1]}")
+            print()
+        print("  Judgment-only rules, enforced by CHECKLIST.md and not by any")
+        print("  check: is this the strongest point, did the three-why chain")
+        print("  run, is the triage stated, was uncertainty preserved, do the")
+        print("  four jargon tests pass, was any fact added or dropped, and")
+        print("  the house-voice items in step 4.\n")
+        return 0
+
     try:
+        if not opts.file:
+            print("error: a file is required unless you pass --rules")
+            return 2
         raw = open(opts.file, encoding="utf-8").read()
     except OSError as e:
         print(f"cannot read {opts.file}: {e}", file=sys.stderr)

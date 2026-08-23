@@ -10,6 +10,17 @@ Deltas only: what differs from `foundations.md`, which still applies underneath.
 
 ---
 
+## Contents
+
+- Decision-maker
+- Technical peer
+- External client
+- Non-native English readers
+- When jargon is the right choice
+- Sources
+
+*Listed so a partial read still shows the whole scope of this file.*
+
 ## Decision-maker
 
 Fully covered by `formats.md` → Management summary. Nothing to add here: BLUF, one ask, triage under constraint, and the paired email variant are the deltas.

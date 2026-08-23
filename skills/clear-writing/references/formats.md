@@ -8,6 +8,14 @@ Pick the section matching what you're writing. This covers *shape*: length, stru
 
 ---
 
+## Contents
+
+- Management summary
+- Short article (half page to full page)
+- Sources
+
+*Listed so a partial read still shows the whole scope of this file.*
+
 ## Management summary
 
 For anything read by a decision-maker who needs the point before the detail.

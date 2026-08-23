@@ -7,6 +7,20 @@ Two hard rules while rewriting:
 - **Keep every claim.** You may shorten, merge, split, or reorder. You may not lose a fact, number, name, date, quote, or citation.
 - **Invent nothing.** If a sentence needs a missing detail, ask for it or write a simpler sentence. You may add a reaction or opinion when the writer's voice calls for one; you may never add a factual claim. (Fiction is exempt.)
 
+## Contents
+
+- Match the writer's voice
+- Content tells
+- Language tells
+- Formatting tells
+- Chatbot tells
+- Rhetorical-fakery tells
+- Don't over-correct
+- Before returning the draft
+- Source
+
+*Listed so a partial read still shows the whole scope of this file.*
+
 ## Match the writer's voice
 
 **Read `inputs/voice-sample.md` before rewriting.** It holds verbatim samples of the user's own writing plus the patterns extracted from them. If a fresher sample exists in this conversation, that takes precedence. Note its sentence length, word choice, paragraph openings, punctuation, and recurring phrases. Match those habits, and don't formalize casual wording or strip deliberate quirks.

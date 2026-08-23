@@ -162,6 +162,25 @@ Also fixed two genuine uses of "actionable" in our own files, in `house-styles.m
 - **A standfirst merged into the first body sentence**, giving the FT fixture a phantom 64-word sentence. Whole-line italics are now terminated as their own unit, like headings and list items.
 - **And then excluded from the median**, because display copy is not body prose. Counting it pulled the Economist fixture to 12.5, below its own 13-26 band. All four fixtures now sit inside their own band: 13, 25, 25.5, 17.
 
+### 17. Audited against published guidance on building style guides
+
+Researched how working prose style guides get built, and what the platform running this skill says about authoring one. Full record with sourcing and reachability caveats in `docs/research-styleguide-design.md`.
+
+- [x] **Tables of contents** added to all seven reference files over 100 lines. The authoring docs are explicit: a file over 100 lines needs one, so a partial read still shows the file's scope.
+- [x] **The three tolerance divisors documented**, per Ousterhout's law as the docs cite it. The HBR register floor turned out to sit at exactly `AI_TELL_WORDS_PER_HIT`, so the register check and the slop check now agree by construction rather than by accident.
+- [x] **`SOURCES`, Vale's `link:` field against local files.** 62 checks mapped to the file and section stating their rule, printed as a `rules behind the flags` footer under every FAIL and REVIEW. A check with no entry prints `NO SOURCE RECORDED`, and `tests/test.sh` fails on it across nine fixtures and every flag combination. Verified by deleting an entry.
+- [x] **`check.py --rules`, a coverage manifest**, after Microsoft's Vale package, which publishes its own coverage as 37/64 guidelines and 106/849 word-list items. Ours prints the 62 mapped checks by file, then names the judgment-only rules no check covers.
+- [x] **Description rewritten in third person** with the deliverable types and the trigger verbs a user would say.
+- [x] Confirmed already compliant: SKILL.md at 56 lines against a 500-line ceiling, references one level deep, the validator-fix-repeat loop, concrete examples, consistent terminology.
+
+**Two independent confirmations worth recording.** Vale advertises excluding code from prose rules as a design goal, so our twelve naming-versus-using false positives were the normal shape of this mistake rather than an unusual one. And Google's own Vale rule ships passive voice at `level: suggestion`, the weakest of three, matching our REVIEW.
+
+### 18. Evals exist, and have not been run
+
+`evals/evals.json`, six cases and 34 assertions, in the format the authoring docs specify. Each carries a `gap` field naming the development failure it targets, because the docs say to build evals against real gaps and this skill was built before its evals existed. Two are the founding failures: the em dash shipped while its pass was reported as run, and "toward the end of last month" returned as a specific date. A test keeps the file valid and its inputs present.
+
+**Why they are not run, and why that matters.** The docs say a baseline comparison needs a fresh session per case, with the skill disabled for one arm, because leftover context from authoring masks gaps in the written instructions. **Every test this project has ever run has run inside the authoring session**, which is precisely that condition. So `tests/test.sh` and `evals/` measure different things and neither substitutes for the other. One case, `should-not-trigger-on-a-code-question`, measures trigger accuracy, which had never been tested at all.
+
 ## Open
 
 ### A. `inputs/examples.md` has only its 5 launch pairs: the one real content gap
@@ -244,6 +263,13 @@ Running `check.py` over the skill's prose leaves FAILs in six files. Two were re
 
 **Needs:** add italic term runs to `NAMING_CONTEXTS`, exclude table blocks from `paragraphs()`, then widen the guard and hold it at 0 FAIL.
 
+### L. Nothing has been measured against a baseline, or on more than one model
+
+Two items from the authoring checklist are open, and both need conditions this session cannot create:
+
+- **Run `evals/` in fresh sessions**, with-skill against without-skill. A case both arms pass is telling you the skill is not what fixed it, and we currently cannot distinguish those cases from real wins. `evals/README.md` gives two ways to run it.
+- **Test on Haiku, Sonnet and Opus.** The checklist asks for all three. Everything here has run on one model, and the docs note a skill that suits one may under-instruct a smaller one.
+
 ---
 
 ## Next steps, in priority order
@@ -251,8 +277,9 @@ Running `check.py` over the skill's prose leaves FAILs in six files. Two were re
 1. **Use the skill on real drafts and grow `inputs/examples.md`** (A). Still the only gap that research cannot close.
 2. **Add a connected-prose voice sample** (B). Two or three paragraphs you wrote for someone else. Highest value per effort of anything left, because it is the one input that would let paragraph-level voice matching switch from *unsupported* to working.
 3. **Run `./install.sh` on each machine you use** (F). It is verified working in this container; whether it is live on your own machines is still unconfirmed from here.
-4. **Fix the two proxy defects in K** and widen the self-check to 0 FAIL. This is the one that keeps finding real problems.
-5. **Re-audit the drift allowlists** (D) once they stop growing.
+4. **Run the evals against a baseline in a fresh session** (L). Until that happens, no claim about this skill's effect is measured, only its internal consistency.
+5. **Fix the two proxy defects in K** and widen the self-check to 0 FAIL. This is the one that keeps finding real problems.
+6. **Re-audit the drift allowlists** (D) once they stop growing.
 5. **Use a template for a real document** (H), which would test the three that have never produced one.
 6. **Pin the 18F quotations** with one literal re-fetch (I).
 

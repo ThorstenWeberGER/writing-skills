@@ -11,6 +11,19 @@ Work top to bottom. If you cannot confirm an item, say so in your response rathe
 
 ---
 
+## Contents
+
+- Step 0: run the mechanical checks
+- Step 1: the point (from `foundations.md`)
+- Step 2: why this reader cares (from `foundations.md`)
+- Step 3: format (from `formats.md`)
+- Step 4: audience deltas (from `audiences.md`)
+- Step 5: known violations (from `DONTS.md` and `inputs/examples.md`)
+- Step 6: final pass (from `humanizer.md`)
+- Reporting
+
+*Listed so a partial read still shows the whole scope of this file.*
+
 ## Step 0: run the mechanical checks
 
 ```bash
@@ -28,6 +41,8 @@ Flags, set by what you're writing:
 | `--nonnative` | non-native readership (phrasal verbs, idioms, tense stacks) |
 | `--house NAME` | the user asked for a specific outlet's conventions. Sets subhead/bullet policy, sentence-median and dash-rate targets from `house-styles.md`. Its dash target does **not** override the ban below. |
 | `--dashes-ok` | **do not use.** `inputs/voice-sample.md` shows zero em dashes across every sample, so the ban applies to this user. Only revisit if a future sample contradicts that. |
+
+Each flagged line is followed by a `rules behind the flags` footer naming the reference file and section behind it. If one reads `NO SOURCE RECORDED`, the check has no rule written down and that is itself a defect. `python3 check.py --rules` prints the full map.
 
 **Every FAIL must be fixed.** REVIEW items need a decision, not necessarily a change: a flagged passive may be one of the two legitimate exceptions, and a long list may genuinely have eight items. Record the decision; don't just move on.
 

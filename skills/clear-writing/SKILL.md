@@ -1,10 +1,13 @@
 ---
 name: clear-writing
 description: |
-  Apply structure, plain-wording, style, and anti-AI-slop rules whenever
-  drafting or editing prose: Claude's own output (docs, summaries, PR
-  descriptions, messages) or the user's own draft text. Use whenever asked
-  to write, draft, summarize, or edit written content in English.
+  Applies structure, plain-wording, style and anti-AI-slop rules to English
+  prose, and verifies mechanically that they were applied. Covers drafts,
+  summaries, management emails, client notes, short articles, README and docs
+  pages, PR descriptions and chat replies, plus four measured publication
+  house styles. Use when asked to write, draft, summarize, edit, tighten,
+  clean up, de-slop or restructure written text, or to match a house style or
+  the user's own voice.
 ---
 
 # clear-writing
@@ -41,6 +44,10 @@ Verify with `python3 check.py DRAFT.md --compare ORIGINAL.md`, which fails if th
 **`CHECKLIST.md`**. Run it before returning any draft. It is the only thing that makes passes 1-5 real: reading a reference file is not the same as applying it, and this skill has already shipped drafts where a pass was reported as run while its rules were violated in the same text.
 
 Two halves:
+
+Every FAIL and REVIEW prints the file and section its rule is written in, so a
+finding leads back to the guidance. `python3 check.py --rules` prints the whole
+check-to-rule map plus the judgment-only rules no check covers.
 
 - **`check.py` decides everything mechanical:** 22+ checks including the literal em-dash scan, sentence and paragraph limits, passive constructions, noun strings, hidden verbs, the AI-tell and buzzword lists, plus conditional checks for summary word counts, email variant limits, article layout, client-facing promises, and non-native readability. Run it with the flags for what you're writing. Every FAIL gets fixed; every REVIEW gets a recorded decision.
 - **`CHECKLIST.md`'s steps 1-6 cover the judgment calls** no script can make: is this the strongest point, did the three-why chain run, is the triage stated, was uncertainty preserved, do the four jargon tests pass for this reader, and, the item most likely to catch something real, was any fact, number, or date added or dropped.

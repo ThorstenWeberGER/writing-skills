@@ -4,6 +4,20 @@
 
 **Read this only when the user asks to sound like a publication.** Otherwise the user's own voice governs, and their median sentence is 6 words, below every outlet here.
 
+## Contents
+
+- What voice is made of
+- Evidence grading, and why it is on every rule
+- Economist
+- Financial Times
+- Reuters
+- HBR
+- The same fact in four voices
+- What is enforced, and what is not
+- The limit that does not go away
+
+*Listed so a partial read still shows the whole scope of this file.*
+
 ## What voice is made of
 
 Shape is measurable in one pass. Voice turns out to be six things, and each is recorded per publication below:
