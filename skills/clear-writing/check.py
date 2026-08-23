@@ -417,6 +417,20 @@ def run(raw, opts):
         detail = f"{len(hits)} in {n}w (1 per {round(per)}w): {uniq}"
         (r.fail if per < AI_TELL_WORDS_PER_HIT else r.review)("AI-tell phrase", detail)
 
+    # 12b. virtue by invented contrast (humanizer.md, self-praising narration).
+    # A first-person intent verb plus "rather than" in one sentence. Narrow on
+    # purpose: bare "rather than" is a legitimate comparative and fires ~50x
+    # across this repo, while this shape found only the two real cases.
+    vic = re.findall(
+        r"\b(?:let me|i(?:'ll| will| made sure| was careful| deliberately|"
+        r" took care))\b[^.!?]{0,90}\brather than\b", low)
+    if vic:
+        r.review("virtue by invented contrast",
+                 f"{len(vic)}: delete from 'rather than' on; if only the "
+                 f"implication of care is lost, cut it")
+    else:
+        r.ok("virtue by invented contrast", "none")
+
     # 13. hedging stack (DONTS.md)
     hedges = find_terms(low, ["perhaps", "possibly", "arguably", "somewhat",
                               "it could be argued", "might possibly",

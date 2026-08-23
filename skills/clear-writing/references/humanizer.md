@@ -115,6 +115,15 @@ These are the subtlest and the most worth catching, because each one *looks* lik
 
 Three faults stack in that example. "I made sure" claims credit for doing the job; "rather than burying" invents a contrast nobody proposed (see "Answering objections nobody raised"); and the frame carries no information, so deleting it loses nothing.
 
+**Its sharpest form: virtue by invented contrast.** *X rather than Y*, where nobody proposed Y. The frame makes an ordinary choice look like a considered one by inventing a worse alternative to reject.
+
+> Two things I made sure the description states plainly rather than burying: → Two things worth flagging:
+> Let me run it rather than judge by eye. → (just run it)
+
+Both examples come from this project, and the second appeared in the same message that diagnosed the first, which is how persistent the reflex is. **Test it by deleting everything from "rather than" onward.** If you lose a real alternative the reader might have expected, keep it. If you only lose the implication that you were thoughtful, cut it.
+
+Note the related but milder redundancy: *Let me run it, Let me check, Let me look at* announce an action whose command and output the reader can already see. Harmless alone, and not worth hunting; the tell is the contrast clause attached to it.
+
 **This is not the same as reporting what you ran, which is required.** The test is whether the reader can verify it:
 
 | Auditable, keep it | Self-praise, cut it |

@@ -90,6 +90,7 @@ If you have no file to check (the draft is going straight into chat), write it t
 - [ ] **Dash scan actually run** (script step 0, or a literal character search). The user-sample exemption is *verified*, not assumed.
 - [ ] **Voice matched against `voice-sample.md`** (or a fresher sample in this conversation, which takes precedence) — sentence length, word choice, punctuation habits, em-dash rate. Match rhythm and word choice; never reproduce typos or missing punctuation from a sample.
 - [ ] **Paragraph-level voice:** `voice-sample.md` currently holds only short-form material, so paragraph openings and transitions fall back to `humanizer.md` defaults. Don't claim voice-matched paragraphs until a connected-prose sample exists.
+- [ ] **No virtue by invented contrast.** Search for "rather than". For each, delete everything from it onward. If you only lose the implication that you were thoughtful, cut it. Both recorded cases came from chat replies, not documents.
 - [ ] **Read the whole thing once more and ask: what still sounds AI-generated?** Fix by restating naturally, not by patching the flagged phrase.
 - [ ] **Didn't over-correct.** Polished grammar, one *however*, curly quotes, a single short sentence for emphasis, real scope statements, and genuinely weighed alternatives are all fine. Several tells together are evidence; one is not.
 
