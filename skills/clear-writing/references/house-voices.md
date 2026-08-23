@@ -163,7 +163,21 @@ Validated against the source: the checks reproduce the hand counts on all five, 
 
 ## Reuters
 
-*4 wire articles plus the Trust Principles pages.*
+*4 wire articles plus the Trust Principles pages, and one later consumer-markets round-up used as a held-out test.*
+
+**The only profile that survived a fresh article without a correction.** Every other profile here moved when new material arrived. Run against an unseen Reuters piece, all seven `--house reuters` checks passed:
+
+| Recorded | Held-out article |
+|---|---|
+| Summary block, 3-4 bullets, 6-17 words, median 11 | **4 bullets, 10-12 words, median 11.** Median matches exactly |
+| All-caps crossheads, 5-6 words | **2 crossheads, 5 words each** |
+| Zero em dashes | **zero** |
+| Zero semicolons | **zero** |
+| Sentence median 30 | **24.5**, the floor of the enforced 24-32 band |
+
+**One thing to watch rather than change.** The held-out article's median is 24.5 against a recorded 30. It is a markets round-up drawing on many earnings reports rather than a breaking news story, so this may be register. It sits inside the band, so nothing moves on one article. **If further Reuters samples cluster near 24, the band's centre is wrong and the profile should say so.**
+
+**Attribution order, recorded and deliberately not enforced.** In the held-out article every attribution runs quote first, then *said* plus name plus full job title plus institution: *"...", said Brian Jacobsen, chief economic strategist at Annex Wealth Management.* Five of five, with zero instances of the reverse *X said that "..."* order. The count is unanimous inside one article, which is stronger than a single instance and still weaker than a habit across articles. **Enforcing it would be exactly the mistake made twice in this project, so it stays recorded until a second article confirms it.**
 
 **The opening move: the packed lead.** (measured) Sentence one carries actor, action, time and cause together, which is why the median sentence is 30 words, the longest of the four. A short wire lead is the wrong instinct. Pack it.
 

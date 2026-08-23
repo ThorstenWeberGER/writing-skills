@@ -307,6 +307,25 @@ A second FT feature arrived, so the register split no longer rests on one. Two h
 
 Attribution now holds at 1 per 38-61 words across 6 of 6, which makes it the best-evidenced device in any of the four profiles.
 
+### 24. Reuters held out, and it passed unchanged (DONE)
+
+One Reuters consumer-markets round-up, used as a held-out test of the profile built from four earlier wire articles. **All seven `--house reuters` checks passed on unseen material, and nothing needed correcting.** Every other profile in this project moved when new material arrived.
+
+| Recorded | Held-out article |
+|---|---|
+| Summary block, 3-4 bullets, median 11 words | 4 bullets, 10-12 words, **median 11 exactly** |
+| All-caps crossheads, 5-6 words | 2 crossheads, 5 words each |
+| Zero em dashes, zero semicolons | zero and zero |
+| Sentence median 30 | **24.5**, the floor of the 24-32 band |
+
+**One thing flagged rather than changed.** The median is 24.5 against a recorded 30. The article is a markets round-up rather than breaking news, so it may be register, and it sits inside the band. Nothing moves on one article, but the profile now says that if further samples cluster near 24 the band's centre is wrong.
+
+**And one device found, countable, and deliberately left unenforced.** Every attribution runs quote first, then *said* plus name plus full job title plus institution. Five of five, zero in the reverse order. Unanimous inside one article, which is stronger than a single instance and weaker than a habit across articles. Enforcing it would repeat the mistake made twice here already, so it is recorded and waits for a second article.
+
+That decision is the point of this entry. The measurement was easy; **choosing not to promote a clean unanimous count from one article is the part that took the previous five corrections to learn.**
+
+All four profiles now have held-out or expanded evidence. 35 rule anchors.
+
 ## Open
 
 ### A. `inputs/examples.md` has only its 5 launch pairs: the one real content gap

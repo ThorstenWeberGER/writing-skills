@@ -129,6 +129,9 @@ RULE_ANCHORS = {
          "next-update check -> NEXT_UPDATE_COMMIT + NEXT_UPDATE_TIME"),
     ],
     "house-voices.md": [
+        ("median 11", "Reuters summary bullets -> bullets=True"),
+        ("the floor of the enforced 24-32 band",
+         "Reuters median -> med=(24, 32)"),
         ("1 per 38-62 words", "FT attribution rate -> attribution=(30, 70)"),
         ("always spelled out, never", "per cent -> percent_spelled=True"),
         ("set by register, not masthead",
