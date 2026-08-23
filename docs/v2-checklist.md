@@ -1,8 +1,8 @@
 # clear-writing skill — status and open items
 
-Last updated 2026-08-23. The skill lives in this repo at `skills/clear-writing/`.
+Last updated 2026-08-23. The skill lives in this repo at `skills/clear-writing/`. Start with its `README.md`, which is the user-facing manual; this file tracks status and open work.
 
-Run `./skills/clear-writing/test.sh` to verify the whole thing. Currently all green: drift test in sync, 14/14 rule anchors present, 7/7 fixtures behaving as expected.
+Run `./skills/clear-writing/test.sh` to verify the whole thing. Currently all green: drift test in sync, 14/14 rule anchors present, 9 fixtures behaving as expected. About 23,300 words across the skill; 66 checks in `check.py`.
 
 ---
 
@@ -59,14 +59,48 @@ This was the largest piece of work and wasn't in the original checklist. It exis
 
 ### 8. Defects found and fixed by testing
 
-Worth recording because of the pattern: **purpose-built fixtures kept passing while real documents exposed the bugs.**
+The pattern is stable and worth stating on its own: **purpose-built fixtures kept passing while real documents exposed every one of these.**
+
+**In the skill's own output:**
 
 - [x] Two em dashes and an agentless passive shipped while passes 1 and 5 were reported as run. Cause of the whole enforcement layer.
-- [x] A vague source reference ("approximately last Tuesday") silently rewritten as a specific date. Caught by the facts-audit step, after surviving two earlier review passes.
+- [x] A vague source reference ("approximately last Tuesday") silently rewritten as a specific date. Caught by the facts audit after surviving two earlier review passes.
+- [x] 26 em dashes in the README, a document that documents the no-em-dash preference.
 - [x] Duplicated and misnumbered rules in `foundations.md`, self-inflicted during the primary-source rewrite.
-- [x] Markdown bullet markers counted as spaced dashes — three of four "dashes" in a real draft were bullets.
-- [x] Wordlist scans flagging terms that were being *discussed*, not used, in violation of `humanizer.md`'s own false-positive rule. Seven of nine FAILs on the design doc were this.
-- [x] Four wordlist gaps found by the drift test; noun-string heuristic flagging verb phrases.
+
+**In `check.py`, ten false positives or missing rules:**
+
+- [x] Heading merged into the following sentence (no terminal punctuation), inflating that sentence's length.
+- [x] List items merged the same way, producing a phantom 39-word sentence.
+- [x] `Subject:` line merged into the first body sentence, dragging it out of the email count.
+- [x] Markdown H1 subject line not recognised, because only a literal `Subject:` was matched.
+- [x] Bullet items counted against the 5-sentence prose cap, making two rules in `formats.md` contradict each other. That contradiction was self-inflicted when the Reuters summary block was added.
+- [x] Bare list markers counted as spaced dashes; three of four "dashes" in a real draft were bullets.
+- [x] Blockquoted list items (`> - thing`) counted as spaced dashes, because `>` supplies the preceding non-space character.
+- [x] Degree signs counted as decorative emoji, because the check tested the whole Unicode `So` category.
+- [x] AI-tell words failing on a single hit, while `humanizer.md` already said "individually fine; in clusters, a strong tell". Now density-aware at 200 words per hit.
+- [x] Terms flagged when being *discussed* rather than used, in two forms: markdown tables and before/after lines, then short quoted spans.
+
+**Three over-generalisations, all the same shape:** a finding held across two publications and broke on the third. Zero subheadings (broke on Reuters), the 5-10 word headline range (broke on one 4-word outlier, then four samples vindicated the original rule), and the AI-tell wordlist (broke on HBR's ordinary register). Recorded in `README.md` as a standing caution, since it is the most transferable lesson here.
+
+### 9. House-style profiles
+
+- [x] `references/house-styles.md` turns the publication measurements into **selectable targets**, which the data in `foundations.md` was not: that holds the same numbers as *evidence for or against our rules*.
+- [x] Four profiles (Economist, FT, Reuters, HBR) with sentence-length range, dash and semicolon rates, subhead and bullet policy, headline and standfirst conventions, plus a table for choosing between them.
+- [x] `check.py --house economist|ft|reuters|hbr` enforces the measurable parts. Subhead and bullet policy fail; sentence median, dash rate and headline length review. Verified by contrast: our own subheaded article fails as Economist and passes as HBR.
+- [x] Two limits stated in the file rather than buried: these give **conventions, not voice**, and every convention exists for a purpose that may not transfer.
+- [x] Records the conflict that surfaces immediately: three of four profiles use em dashes and the user's writing contains none, so **the voice preference wins**.
+
+### 10. Management-email guidance
+
+- [x] Answered which house style suits a management email: **none of them whole.** The 125-word / 5-sentence cap implies a 25-word ceiling; Reuters' median is 30. Only HBR's tips format (median 12) matches, and our own fixtures run 10-12.
+- [x] `house-styles.md` records a **transfer table** instead of a winner: take the informational 7-14 word subject line from FT/Reuters, the summary bullets and zero-dash punctuation from Reuters, the sentence length from HBR's tips format. Reject every publication's sentence length.
+- [x] `formats.md` cross-references it from the email subject-line rule.
+
+### 11. The manual
+
+- [x] `skills/clear-writing/README.md`. Nine sections: mode choice, architecture, the four inputs and how to extend each, a task-to-recipe table with a worked email example, the two halves of enforcement, extension points, design decisions, known limits, provenance.
+- [x] Written through the skill and checked with `check.py`, which is what surfaced the last two false positives.
 
 ---
 
@@ -98,7 +132,7 @@ Closed because "only runs when someone remembers" was the same failure mode the 
 
 ### D. The drift test's allowlists are large enough to hide drift
 
-`NON_LITERAL` has 53 entries and `ORPHAN_OK` has 114. Each entry is individually justified, but the escape hatch is now big enough that adding to it is easier than fixing the coupling. Nothing distinguishes "genuinely can't be grepped" from "someone didn't want to deal with it."
+`NON_LITERAL` has 54 entries and `ORPHAN_OK` has 114. Each entry is individually justified, but the escape hatch is now big enough that adding to it is easier than fixing the coupling. Nothing distinguishes "genuinely can't be grepped" from "someone didn't want to deal with it."
 
 **Fix:** periodically re-audit the allowlists, or make additions require a reason string that the test prints (NON_LITERAL already does; ORPHAN_OK does not).
 
@@ -137,10 +171,11 @@ The previous version of this file claimed the skill was "live at `~/.claude/skil
 
 ## Next steps, in priority order
 
-1. **Use the skill on real drafts and grow `examples.md`** (A). The only gap research can't close.
-2. **Add a connected-prose voice sample** (B). The short-form sample is in place; a real paragraph or two is what is missing.
-3. ~~Add CI~~ — done.
+1. **Use the skill on real drafts and grow `examples.md`** (A). Still the only gap that research cannot close.
+2. **Add a connected-prose voice sample** (B). Two or three paragraphs you wrote for someone else. Highest value per effort of anything left, because it is the one input that would let paragraph-level voice matching switch from *unsupported* to working.
+3. **Confirm where the skill is installed** (F). It exists in this repo and is not in this container's synced skills directory, so whether it is live on your machine is unverified.
 4. **Re-audit the drift allowlists** (D) once they stop growing.
-5. **Confirm where the skill is installed** (F).
-6. **Pin the 18F quotes** with one literal re-fetch (I).
-7. **Everything else** is low value or inherently bounded. The paywalled publications in particular: leave them unless print copies turn up.
+5. **Use a template for a real document** (H), which would test the three that have never produced one.
+6. **Pin the 18F quotations** with one literal re-fetch (I).
+
+**Deliberately stopping:** more published prose. Four publications and ~25,000 words settled which rules are house convention and which are real practice. The last three batches found checker bugs rather than changed guidance, which is the signal that this input is exhausted.
