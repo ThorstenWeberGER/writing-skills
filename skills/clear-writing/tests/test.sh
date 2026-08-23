@@ -82,6 +82,34 @@ else
   echo "  FAIL    house-reuters.md: median $rmed outside reuters range"; rc=1
 fi
 
+echo "=== house voices: each draft fits its own profile best ==="
+# The discriminating property. A voice guide that cannot tell its four voices
+# apart is decoration, so every fixture is scored against all four profiles and
+# must rank its own strictly first on (FAIL, REVIEW), lexicographically.
+score() {  # $1 fixture voice, $2 profile -> "FAIL REVIEW"
+  local out; out=$(python3 check.py "tests/fixtures/voice-$1.md" --house "$2" 2>&1)
+  local f r
+  f=$(printf '%s' "$out" | grep -oE '^  [0-9]+ FAIL' | grep -oE '[0-9]+')
+  r=$(printf '%s' "$out" | grep -cE "^  REVIEW  $2:")
+  echo "${f:-99} ${r:-99}"
+}
+for d in economist ft reuters hbr; do
+  own=$(score "$d" "$d"); of=${own%% *}; orv=${own##* }
+  worst=""
+  for h in economist ft reuters hbr; do
+    [ "$h" = "$d" ] && continue
+    o=$(score "$d" "$h"); xf=${o%% *}; xr=${o##* }
+    if [ "$of" -gt "$xf" ] || { [ "$of" -eq "$xf" ] && [ "$orv" -ge "$xr" ]; }; then
+      worst="$worst $h(${xf}F/${xr}R)"
+    fi
+  done
+  if [ "$of" -eq 0 ] && [ -z "$worst" ]; then
+    echo "  pass    voice-$d.md: best as $d (${of}F/${orv}R)"
+  else
+    echo "  FAIL    voice-$d.md: own=${of}F/${orv}R, not strictly best;$worst"; rc=1
+  fi
+done
+
 echo "=== the skill's own files obey the dash rule ==="
 # The rule was described for 20,000 words while 200+ dashes sat in the files
 # describing it. Enforced here so it cannot drift back.

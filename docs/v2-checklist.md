@@ -2,7 +2,7 @@
 
 Last updated 2026-08-23. The skill lives in this repo at `skills/clear-writing/`. Start with the repo-root `README.md`, which is the user-facing manual; this file tracks status and open work.
 
-Run `./skills/clear-writing/tests/test.sh` to verify the whole thing. Currently all green: drift test in sync, 14/14 rule anchors present, 9 fixtures behaving as expected. About 20,000 words of rules (28,900 counting fixtures and scripts); 66 checks in `check.py`.
+Run `./skills/clear-writing/tests/test.sh` to verify the whole thing. Currently all green: drift test in sync, 23/23 rule anchors present, 16 fixtures behaving as expected. About 20,000 words of rules (28,900 counting fixtures and scripts); 66 checks in `check.py`.
 
 ---
 
@@ -143,6 +143,24 @@ Rendered one set of facts as a Reuters wire piece and as an HBR argument, then c
 Locked with `tests/fixtures/house-hbr.md` (0 FAIL as hbr, 1 FAIL bare) and `house-reuters.md` (median inside 24-32 with bullets excluded), plus two rule anchors in `house-styles.md`, bringing the anchor count to 17.
 
 Also fixed two genuine uses of "actionable" in our own files, in `house-styles.md` and `inputs/voice-sample.md`.
+
+### 16. House voices, not just house shapes
+
+`house-styles.md` gave conventions and said so, disclaiming voice. That disclaimer was stronger than the evidence warranted: the recorded observations already held opening moves per register, signature rhetorical devices, register bands, punctuation signatures, attribution formulas and refusals.
+
+- [x] `references/house-voices.md`, 1,940 words. Six components per publication: opening move, signature move, register, punctuation signature, attribution, refusals. Plus a same-fact-four-voices table and an explicit list of what is not enforceable by counting.
+- [x] **Every rule carries an evidence grade**, because voice rules invite invention in a way shape rules do not: **measured** (counted across the sample), **recorded** (a verbatim fragment, n=1, imitate the move never the wording), **inferred** (reasoned from a measured fact). Where nothing was captured the row says **not captured** instead of guessing. FT is labelled the thinnest profile of the four.
+- [x] Six new voice checks in `check.py`, all driven off the profile dict: semicolon rate, spelling signature, Reuters attribution, Economist lowercase acronyms, HBR register band, HBR antithetical dek, plus allusive-versus-informational headline.
+- [x] Wired into `SKILL.md` pass 3, and `CHECKLIST.md` step 4 carries the judgment half: right opening move, signature device earning its place, nothing quoted from the guide reused, no `inferred` row written as if measured.
+- [x] 23 rule anchors, up from 17.
+
+**The test that makes it real.** Four fixtures, one per voice, each scored against all four profiles. Every fixture must rank its own profile strictly first on (FAIL, REVIEW). All four do, at 0 FAIL and one REVIEW against their own profile. Verified capable of failing: adding two bullets to the Economist fixture breaks it. A voice guide whose four voices a checker cannot tell apart is decoration, and this is the assertion that would catch that.
+
+**Three defects found by writing the fixtures:**
+
+- **A generic `-ised` suffix is not a UK spelling test.** It caught *raised, praised, advised, revised, promised, surprised*, none of which have a `-ized` form. Replaced with the 24 stems that actually alternate. Verified zero hits on a bait sentence of six false positives and ten hits each on real UK and US lists.
+- **A standfirst merged into the first body sentence**, giving the FT fixture a phantom 64-word sentence. Whole-line italics are now terminated as their own unit, like headings and list items.
+- **And then excluded from the median**, because display copy is not body prose. Counting it pulled the Economist fixture to 12.5, below its own 13-26 band. All four fixtures now sit inside their own band: 13, 25, 25.5, 17.
 
 ## Open
 

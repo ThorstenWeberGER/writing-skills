@@ -151,15 +151,51 @@ AI_TELL_WORDS_PER_HIT = 200
 # (sentence-median low, high, dash words-per-hit or None, subheads, bullets)
 HOUSE = {
     "economist": dict(med=(13, 26), dash=348, subheads=False, bullets=False,
-                      head=(4, 10), stand=(8, 13)),
+                      head=(4, 10), stand=(8, 13),
+                      semis=348, spelling="uk", headline="allusive",
+                      lc_acronyms=True),
     "ft":        dict(med=(22, 27), dash=214, subheads=False, bullets=False,
-                      head=(7, 14), stand=None),
+                      head=(7, 14), stand=None,
+                      semis=1700, spelling="uk", headline="informational"),
     "reuters":   dict(med=(24, 32), dash=None, subheads=True, bullets=True,
-                      head=None, stand=None),
+                      head=None, stand=None,
+                      semis=None, spelling="us", attribution=True),
     "hbr":       dict(med=(12, 22), dash=157, subheads=True, bullets=False,
-                     titlecase=True,
-                      head=(4, 10), stand=(12, 24)),
+                      titlecase=True,
+                      head=(4, 10), stand=(12, 24),
+                      semis=120, spelling="us", headline="allusive",
+                      register=700, dek="antithetical"),
 }
+
+# house-voices.md, Economist: acronyms glossed once then used bare and lowercase.
+GLOSSED_ACRONYM = re.compile(r"\((?:the\s+)?([A-Za-z]{2,6})\)")
+# house-voices.md, Reuters: a claim carries its basis, or says it cannot.
+ATTRIBUTION = re.compile(
+    r"\b(according to|said|told (?:reuters|the)|people familiar"
+    r"|could not be (?:named|reached)|declined to comment"
+    r"|(?:the )?(?:review|report|filing|data) (?:said|showed|found))\b", re.I)
+# Spelling signature. Reuters is the only American profile of the four.
+# A generic -ised suffix is not usable: it catches raised, praised, advised,
+# revised, promised, surprised, none of which have a -ized variant. So the
+# alternating stems are listed instead of guessed at.
+_ISE_STEMS = ("organ", "recogn", "real", "priorit", "mobil", "util", "apolog",
+              "critic", "emphas", "minim", "maxim", "summar", "categor",
+              "standard", "special", "character", "normal", "central",
+              "digit", "modern", "optim", "legal", "author", "custom")
+_ISE = "|".join(_ISE_STEMS)
+UK_SPELLING = re.compile(
+    r"\b(?:" + _ISE + r")(?:ise|ises|ised|ising|isation|isations)\b"
+    r"|\b(?:analyse|analysed|analysing|analyses)\b"
+    r"|\b(?:neighbour|labour|behaviour|favour|colour|centre|centres"
+    r"|defence|licence|programme|travelling|modelling)s?\b", re.I)
+US_SPELLING = re.compile(
+    r"\b(?:" + _ISE + r")(?:ize|izes|ized|izing|ization|izations)\b"
+    r"|\b(?:analyze|analyzed|analyzing|analyzes)\b"
+    r"|\b(?:neighbor|labor|behavior|favor|color|center|centers"
+    r"|defense|license|program|traveling|modeling)s?\b", re.I)
+# house-voices.md, HBR: ordinary management register at ~1 per 700 words.
+HBR_REGISTER = ("actually", "crucial", "underscore", "underscores",
+                "commitment to", "fundamentally", "landscape", "valuable")
 
 CATEGORY_TAGS = ("DECISION:", "REQUEST:", "ACTION:", "INFO:", "UPDATE:")
 
@@ -181,6 +217,12 @@ def prose_sentences(sents, raw):
     }
     items |= {l.lstrip("# ").rstrip(" .!?:;").lower()
               for l in raw.splitlines() if l.startswith("#")}
+    # A standfirst or dek is display copy, not body prose. Publication medians
+    # were measured on the body, so counting it pulled one fixture's median
+    # below its own profile's range.
+    items |= {m.group(1).rstrip(" .!?:;").lower()
+              for m in (re.match(r"^\s*[*_]([^*_].*?)[*_]\s*$", l)
+                        for l in raw.splitlines()) if m}
 
     def skip(x):
         return (x.lower().startswith("subject")
@@ -212,6 +254,14 @@ def strip_markup(text):
             it = b.group(2).rstrip()
             line = it if it.endswith((".", "!", "?", ":", ";")) else it + "."
         line = re.sub(r"^\s*>\s?", "", line)
+        # A standfirst or dek is its own unit. house-voices.md makes it a
+        # first-class element for every profile, and a whole-line italic with no
+        # terminal stop merged into the first body sentence: one FT fixture
+        # reported a 64-word sentence that was a standfirst plus a lead.
+        d = re.match(r"^\s*[*_]([^*_].*?)[*_]\s*$", line)
+        if d:
+            t = d.group(1).rstrip()
+            line = t if t.endswith((".", "!", "?", ":", ";")) else t + "."
         # A subject line is its own unit too, or it merges into the first
         # body sentence and drags that sentence out of the count.
         if re.match(r"^\s*subject\s*:", line, re.I) and not line.rstrip().endswith(
@@ -630,6 +680,109 @@ def run(raw, opts):
             hw = len(words(top[0])); a, b = h["head"]
             (r.ok if a <= hw <= b else r.review)(
                 f"{name}: headline {a}-{b} words", f"{hw} words")
+
+        # ---- voice, from house-voices.md -----------------------------------
+        # Shape checks above answer "is it built like them". These answer
+        # "does it sound like them". Only the measurable half; wit, the quality
+        # of a concrete anchor and whether an antithesis names two real
+        # diagnoses stay in CHECKLIST.md.
+
+        # Punctuation signature: semicolons, per profile.
+        nsemi = judged.count(";")
+        if h.get("semis") is None:
+            (r.ok if nsemi == 0 else r.review)(
+                f"{name}: no semicolons",
+                "none" if nsemi == 0 else f"{nsemi} found")
+        elif nsemi:
+            srate = n / nsemi
+            (r.ok if srate >= h["semis"] / 3 else r.review)(
+                f"{name}: semicolons ~1 per {h['semis']}w", f"1 per {round(srate)}w")
+        else:
+            r.ok(f"{name}: semicolons ~1 per {h['semis']}w", "none, within range")
+
+        # Spelling signature. Reuters is the only American profile of the four.
+        want = h.get("spelling")
+        if want:
+            uk = {m.group().lower() for m in UK_SPELLING.finditer(judged)}
+            us = {m.group().lower() for m in US_SPELLING.finditer(judged)}
+            wrong = us if want == "uk" else uk
+            (r.ok if not wrong else r.review)(
+                f"{name}: {want.upper()} spelling",
+                "consistent" if not wrong
+                else f"{len(wrong)} other-side form(s): " + ", ".join(sorted(wrong)[:4]))
+
+        # Reuters: a claim carries its basis, or says it cannot.
+        if h.get("attribution"):
+            hits = ATTRIBUTION.findall(judged)
+            (r.ok if hits else r.fail)(
+                f"{name}: claims attributed",
+                f"{len(hits)} attribution phrase(s)" if hits
+                else "none; wire copy names its basis or says it cannot")
+
+        # Economist: a glossed acronym is used bare and lowercase afterwards.
+        if h.get("lc_acronyms"):
+            shouty = []
+            for m in GLOSSED_ACRONYM.finditer(judged):
+                tok = m.group(1)
+                if tok.isupper() and len(tok) >= 2:
+                    later = judged[m.end():]
+                    if re.search(r"\b" + re.escape(tok) + r"\b", later):
+                        shouty.append(tok)
+            (r.ok if not shouty else r.review)(
+                f"{name}: lowercase acronyms",
+                "none in caps" if not shouty
+                else "glossed then used in caps: " + ", ".join(sorted(set(shouty))[:4]))
+
+        # HBR: the management register is present, and stays near 1 per 700.
+        if h.get("register"):
+            rh = [t for t in HBR_REGISTER if re.search(r"\b" + t + r"\b", low)]
+            cnt = sum(len(re.findall(r"\b" + t + r"\b", low)) for t in HBR_REGISTER)
+            target = h["register"]
+            if not cnt:
+                r.review(f"{name}: management register",
+                         f"none of {len(HBR_REGISTER)} register words used; "
+                         f"house runs ~1 per {target}w")
+            else:
+                rate = n / cnt
+                (r.ok if rate >= target / 3.5 else r.review)(
+                    f"{name}: register ~1 per {target}w",
+                    f"1 per {round(rate)}w ({', '.join(rh[:4])})")
+
+        # HBR: the dek names the wrong diagnosis, then corrects it.
+        if h.get("dek") == "antithetical":
+            dek = ""
+            if top:
+                after = raw.split(top[0], 1)[-1].strip().splitlines()
+                dek = next((l.strip() for l in after
+                            if l.strip() and not l.startswith("#")), "")
+            ds = sentences(dek)
+            neg = re.search(r"\b(is ?n[o']t|was ?n[o']t|did ?n[o']t|does ?n[o']t"
+                            r"|no longer|not a|not the)\b", dek, re.I)
+            if len(ds) >= 2 and neg:
+                r.ok(f"{name}: antithetical dek",
+                     f"{len(ds)} sentences, {len(words(dek))} words")
+            elif dek:
+                r.review(f"{name}: antithetical dek",
+                         f"{len(ds)} sentence(s), negation "
+                         f"{'present' if neg else 'absent'}; house names the "
+                         "wrong diagnosis then corrects it")
+            else:
+                r.review(f"{name}: antithetical dek", "no dek found under the headline")
+
+        # Headline type: allusive poses a puzzle, informational tells the story.
+        if h.get("headline") and top:
+            allusive = re.match(r"^(why|how|what|when|where|the case for"
+                                r"|it'?s time)\b", top[0].strip(), re.I)
+            if h["headline"] == "allusive":
+                (r.ok if allusive else r.review)(
+                    f"{name}: allusive headline",
+                    "poses a puzzle" if allusive
+                    else "reads informational; house leans on the standfirst")
+            else:
+                (r.ok if not allusive else r.review)(
+                    f"{name}: informational headline",
+                    "tells the story" if not allusive
+                    else "opens allusively; house headlines travel alone")
 
     # --- conditional: style-only, must not have compressed ----------------
     if opts.compare:

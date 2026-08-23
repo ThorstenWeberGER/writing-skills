@@ -91,7 +91,8 @@ skills/clear-writing/
 │   ├── foundations.md    always applies: find the point, why it matters, plain wording
 │   ├── formats.md        deliverable shape: management summary, email, short article
 │   ├── audiences.md      deltas per reader + when jargon is correct
-│   ├── house-styles.md   four measured publications you can target
+│   ├── house-styles.md   four measured publications: the shape
+│   ├── house-voices.md   the same four: opening move, register, refusals
 │   ├── DONTS.md          growing list of specific things to avoid
 │   └── humanizer.md      final anti-AI-slop pass
 ├── inputs/               material you supply. The only part that grows with use
@@ -142,7 +143,7 @@ A jargon table plus ten general don'ts. Grows when you flag something mid-conver
 
 Holds only genuine before/after pairs from your writing or captured conversation. **Never invented ones**, which is why it stays separate from `DONTS.md`. Still at its 5 launch pairs; an empty slot is the honest state.
 
-### `house-styles.md`: measured publications
+### `house-styles.md` and `house-voices.md`: measured publications
 
 ~25,000 words from The Economist, FT, Reuters and HBR, all supplied by you. This is where publication measurements live as *selectable targets*; `foundations.md` holds the same data as *evidence for or against our rules*.
 

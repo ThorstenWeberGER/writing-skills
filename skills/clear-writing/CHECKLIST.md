@@ -78,6 +78,12 @@ If you have no file to check (the draft is going straight into chat), write it t
 - [ ] **Mixed audience?** Evaluate those tests against the *least-expert reader who has to act on the text*, not the average one.
 - [ ] **Technical + non-native at once?** Keep domain nouns at full precision; simplify everything around them. The failure mode is the inverse: plain nouns wrapped in native-speaker idiom.
 
+**If a house voice was requested (`house-voices.md`):**
+- [ ] **Right opening move for that outlet and register?** This is the biggest single tell. Economist news leads BLUF, its Leader states the conventional thesis then turns, its feature opens on a particular. HBR names the wrong diagnosis then corrects it. Reuters packs actor, action, time and cause into sentence one.
+- [ ] **Signature device present and earning its place?** A concrete anchor that anchors nothing, a rhetorical question away from the hinge, or an antithesis whose halves say the same thing are all worse than not using the device.
+- [ ] **Nothing quoted from the guide appears in the draft.** The verbatim fragments in `house-voices.md` are graded n=1 and are there to show the move, not to be reused. Imitate the move; never the wording.
+- [ ] **An `inferred` or `not captured` row was not written as if measured.** If the draft leans on one, say so.
+
 ## Step 5: known violations (from `DONTS.md` and `inputs/examples.md`)
 
 - [ ] Scanned against `DONTS.md` (the script covers the term lists; the ten general don'ts need a read).

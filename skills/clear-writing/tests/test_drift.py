@@ -128,6 +128,15 @@ RULE_ANCHORS = {
         ("Always give a next-update time",
          "next-update check -> NEXT_UPDATE_COMMIT + NEXT_UPDATE_TIME"),
     ],
+    "house-voices.md": [
+        ("The opening move", "opening-move rules -> CHECKLIST.md step 4"),
+        ("1 per 644-787 words", "HBR register band -> HBR_REGISTER + register=700"),
+        ("could not be named because the information was not public",
+         "Reuters attribution -> ATTRIBUTION"),
+        ("neighbors", "Reuters US spelling -> US_SPELLING"),
+        ("lowercase", "Economist lowercase acronyms -> GLOSSED_ACRONYM"),
+        ("It isn't a failure of the technology.", "HBR dek -> dek=antithetical"),
+    ],
     "house-styles.md": [
         ("Title-case subheads",
          "title-case downgrade -> HOUSE[...]['titlecase']"),
