@@ -31,9 +31,10 @@ Verify with `python3 check.py DRAFT.md --compare ORIGINAL.md`, which fails if th
 
 1. **`references/foundations.md`** — always. Find the strongest point (clustering related findings before ranking them), work out why it matters to this specific reader, then lead with it. Plus plain wording, sentence and paragraph limits, headings and lists.
 2. **`references/formats.md`** — what shape the deliverable takes. Management summary (always paired with a crisp email variant), or a half-page/full-page article. For notes, messages, and general documentation prose, `foundations.md` alone is the whole ruleset.
-3. **`references/audiences.md`** — what changes for this reader: technical peer, external client, non-native English readers. Also the rule for when a technical term is the *right* choice rather than jargon to be replaced. Skip if the audience is a decision-maker — `formats.md` already covers that.
-4. **`references/DONTS.md`** and **`examples.md`** — check against known violations. If you catch a new one this conversation and the user confirms it's worth keeping, append it to `DONTS.md`. Only add to `examples.md` if the pair is real, never invented.
-5. **`references/humanizer.md`** — final pass for AI-writing tells. If the user's own writing is in this conversation, match its voice per that file's opening section.
+3. **`references/house-styles.md`** — only when the user asks for a specific outlet's conventions ("write this like the Economist"). Four measured profiles, enforceable with `check.py --house economist|ft|reuters|hbr`. It gives conventions, not voice, and the user's own voice preferences override it. Skip entirely otherwise.
+4. **`references/audiences.md`** — what changes for this reader: technical peer, external client, non-native English readers. Also the rule for when a technical term is the *right* choice rather than jargon to be replaced. Skip if the audience is a decision-maker — `formats.md` already covers that.
+5. **`references/DONTS.md`** and **`examples.md`** — check against known violations. If you catch a new one this conversation and the user confirms it's worth keeping, append it to `DONTS.md`. Only add to `examples.md` if the pair is real, never invented.
+6. **`references/humanizer.md`** — final pass for AI-writing tells. If the user's own writing is in this conversation, match its voice per that file's opening section.
 
 ## Pass 6 — enforcement, and it is not optional
 

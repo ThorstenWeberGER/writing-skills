@@ -16,6 +16,7 @@ there, change it here too.
 
 import argparse
 import re
+from statistics import median as statistics_median
 import sys
 import unicodedata
 
@@ -120,6 +121,19 @@ STOPWORDS = {
 # Below this many words per AI-tell hit, the words are clustering rather than
 # appearing as ordinary register. HBR sits at 1 per 644-787; slop is far denser.
 AI_TELL_WORDS_PER_HIT = 200
+
+# references/house-styles.md — measured conventions per publication.
+# (sentence-median low, high, dash words-per-hit or None, subheads, bullets)
+HOUSE = {
+    "economist": dict(med=(13, 26), dash=348, subheads=False, bullets=False,
+                      head=(4, 10), stand=(8, 13)),
+    "ft":        dict(med=(22, 27), dash=214, subheads=False, bullets=False,
+                      head=(7, 14), stand=None),
+    "reuters":   dict(med=(24, 32), dash=None, subheads=True, bullets=True,
+                      head=None, stand=None),
+    "hbr":       dict(med=(12, 22), dash=157, subheads=True, bullets=False,
+                      head=(4, 10), stand=(12, 24)),
+}
 
 CATEGORY_TAGS = ("DECISION:", "REQUEST:", "ACTION:", "INFO:", "UPDATE:")
 
@@ -430,6 +444,50 @@ def run(raw, opts):
     else:
         r.ok("list >6 items", "none")
 
+    # --- conditional: target a measured house style ------------------------
+    if opts.house:
+        h = HOUSE[opts.house]
+        name = opts.house
+        med = statistics_median([len(words(x)) for x in sents]) if sents else 0
+        lo, hi = h["med"]
+        (r.ok if lo <= med <= hi else r.review)(
+            f"{name}: sentence median {lo}-{hi}", f"{med:g}")
+
+        n = len(all_words) or 1
+        ndash = len(re.findall(r"[—–]", raw))
+        if h["dash"] is None:
+            (r.ok if ndash == 0 else r.review)(
+                f"{name}: no em dashes", "none" if ndash == 0 else f"{ndash} found")
+        elif ndash:
+            rate = n / ndash
+            within = h["dash"] / 2 <= rate <= h["dash"] * 2
+            (r.ok if within else r.review)(
+                f"{name}: dash rate ~1 per {h['dash']}w", f"1 per {round(rate)}w")
+        else:
+            r.review(f"{name}: dash rate ~1 per {h['dash']}w",
+                     "none used; house style uses them")
+
+        nsub = len([1 for lvl, _ in hs if lvl >= 2])
+        if h["subheads"]:
+            (r.ok if nsub else r.review)(f"{name}: uses subheads",
+                                         f"{nsub} found")
+        else:
+            (r.ok if not nsub else r.fail)(
+                f"{name}: no subheads", "none" if not nsub else f"{nsub} found")
+
+        nb = len(re.findall(r"^\s*[-*+]\s", raw, re.M))
+        if h["bullets"]:
+            (r.ok if nb else r.review)(f"{name}: uses bullets", f"{nb} found")
+        else:
+            (r.ok if not nb else r.fail)(
+                f"{name}: no bullets", "none" if not nb else f"{nb} found")
+
+        top = [t for lvl, t in hs if lvl == 1]
+        if h["head"] and top:
+            hw = len(words(top[0])); a, b = h["head"]
+            (r.ok if a <= hw <= b else r.review)(
+                f"{name}: headline {a}-{b} words", f"{hw} words")
+
     # --- conditional: style-only, must not have compressed ----------------
     if opts.compare:
         try:
@@ -564,6 +622,9 @@ def main():
                    help="non-native readership: phrasal verbs, idioms, tenses")
     p.add_argument("--dashes-ok", action="store_true",
                    help="user's own writing sample uses em dashes")
+    p.add_argument("--house", choices=sorted(HOUSE),
+                   help="target a measured publication's conventions "
+                        "(see references/house-styles.md)")
     p.add_argument("--compare", metavar="ORIGINAL",
                    help="style-only mode: fail if the draft lost more than "
                         "15%% of the original's words (i.e. it compressed "

@@ -26,6 +26,7 @@ Flags, set by what you're writing:
 | `--article-half` / `--article-full` | short article (headline length, subhead count, thin sections) |
 | `--client` | client-facing (fix-ETA, next-update time, empty apology, vendor-blaming) |
 | `--nonnative` | non-native readership (phrasal verbs, idioms, tense stacks) |
+| `--house NAME` | the user asked for a specific outlet's conventions. Sets subhead/bullet policy, sentence-median and dash-rate targets from `house-styles.md`. Its dash target does **not** override the ban below. |
 | `--dashes-ok` | **do not use.** `voice-sample.md` shows zero em dashes across every sample, so the ban applies to this user. Only revisit if a future sample contradicts that. |
 
 **Every FAIL must be fixed.** REVIEW items need a decision, not necessarily a change — a flagged passive may be one of the two legitimate exceptions, and a long list may genuinely have eight items. Record the decision; don't just move on.
