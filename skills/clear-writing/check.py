@@ -186,7 +186,13 @@ def scan_text(raw):
             continue
         if "→" in s or "->" in s:             # weak -> better demonstration
             continue
-        kept.append(line)
+        # A short double-quoted span is a term being named, not used:
+        # 'HBR uses "circle back"' is discussion. humanizer.md excludes
+        # "watched phrases inside quotations ... being discussed rather
+        # than used". Only spans of 1-6 words, so real quoted prose stays.
+        s = re.sub(r'"[^"]{1,60}"',
+                   lambda m: "" if len(m.group().split()) <= 6 else m.group(), s)
+        kept.append(s)
     return "\n".join(kept)
 
 
@@ -275,8 +281,12 @@ def run(raw, opts):
                  for m in re.finditer(r"[—–]", raw)]
     # require a non-space char before the space, so a line-initial markdown
     # bullet ("\n- item") is not mistaken for a spaced dash
-    spaced = [(m.group(1), line_of(raw, m.start()))
-              for m in re.finditer(r"(?<=\S)[ \t](--?)[ \t]", raw)]
+    # Run on markup-stripped text: a blockquoted list item ("> - thing")
+    # otherwise reads as a spaced dash, because ">" supplies the preceding
+    # non-space character. Same defect class as the bare "- item" case.
+    _stripped = strip_markup(raw)
+    spaced = [(m.group(1), line_of(_stripped, m.start()))
+              for m in re.finditer(r"(?<=\S)[ \t](--?)[ \t]", _stripped)]
     if opts.dashes_ok:
         r.ok("em/en dash", "skipped: --dashes-ok (user sample uses them)")
     elif dash_hits or spaced:
