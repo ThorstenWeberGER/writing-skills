@@ -350,6 +350,26 @@ The bullet median landing on 11 for a second independent time is the strongest s
 
 36 rule anchors. All four profiles now rest on expanded or held-out evidence.
 
+### 26. Six held-out Reuters articles, and a bug in the check shipped last turn (DONE)
+
+Two more held-out articles, a sports report and a trade story, bringing the held-out set to six: a brief, three news stories, a sports report and an interview. Ten Reuters articles measured in total.
+
+| Recorded | Six held-out |
+|---|---|
+| Summary bullets, median 11 words | **median 11.5** across 18 bullets in 5 of 6. **Third independent confirmation** |
+| Summary block above every article | 5 of 6; the exception remains the 193-word brief |
+| All-caps crossheads | 3 of 6 carry them, 2-9 words |
+| Zero em dashes, zero semicolons | zero and zero, **ten articles running** |
+| Sentence median 30 | 32, 32, 27, 25, 24.5, 21. Pooled 26 across 108 sentences. The widened 21-33 band holds all six |
+
+**The bug matters more than the numbers.** The quote-before-attribution check shipped last turn matched only one of the two forms Reuters uses. It caught `"...", said Brian Jacobsen, chief economic strategist at ...` and missed `"...", Carney said`. So it scored the habit at **7 against 1 when it is 14 against 1**, and reported an article carrying three instances as having none. Fixed and re-verified on all six.
+
+**A device can be stronger than the check that found it.** The under-count did not weaken the rule, it hid half the evidence for it. Every previous measurement bug in this project inflated a finding or invented one; this is the first that understated a real habit.
+
+**One qualification added to the dash finding.** Reuters uses no em dashes in ten articles, but it does use a spaced hyphen as a parenthetical, twice in one article. So the house is em-dash-free rather than dash-free. Our general dash check flags those spaced hyphens; it is prescriptive and stays, but the profile now claims only what it measured. Writing that qualification tripped the check on this repo's own file, which backticks fixed.
+
+36 anchors, suite green.
+
 ## Open
 
 ### A. `inputs/examples.md` has only its 5 launch pairs: the one real content gap

@@ -1041,8 +1041,18 @@ def run(raw, opts):
         # at Firm. Held back for a turn on one article's 5-of-5, then confirmed
         # at 7 against 1 across three of four held-out articles.
         if h.get("quote_first"):
-            qs = len(re.findall(r'["\u201d],?\s+(?:said|added|told)\s+[A-Z]', raw))
-            sq = len(re.findall(r'\b[A-Z][a-z]+ (?:said|added)[:,]?\s+["\u201c]', raw))
+            # Two forms put the quote first and only one was matched at first,
+            # which under-counted 14 instances as 7 and reported a piece with
+            # three of them as having none:
+            #   "...", said Brian Jacobsen, chief economic strategist at ...
+            #   "...", Carney said
+            qs = len(re.findall(
+                r'["\u201d],?\s+(?:said|added|told)\s+[A-Z]'
+                r'|["\u201d],?\s+[A-Z][\w.\'-]+(?:\s+[A-Z][\w.\'-]+)*\s+'
+                r'(?:said|added|told)\b', raw))
+            sq = len(re.findall(
+                r'\b[A-Z][a-z]+ (?:said|added|told)[^."\u201c]{0,60}[:,]\s*["\u201c]',
+                raw))
             if not qs and not sq:
                 r.review(f"{name}: quote before attribution", "no attributed quotes")
             else:

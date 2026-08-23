@@ -163,21 +163,25 @@ Validated against the source: the checks reproduce the hand counts on all five, 
 
 ## Reuters
 
-*4 wire articles plus the Trust Principles pages, and four later articles held out as a test: a brief, two news stories and an interview.*
+*4 wire articles plus the Trust Principles pages, and six later articles held out as a test: a brief, three news stories, a sports report and an interview.*
 
 **Tested against four held-out articles, and the one deliberate act of restraint was vindicated.** None was used to build the profile.
 
 | Recorded | Four held-out articles |
 |---|---|
-| Summary bullets, 3-4 items, 6-17 words, median 11 | **median 11 again**, across 11 bullets in 3 of 4 |
-| A summary block above every article | **3 of 4.** The exception is a 193-word brief |
+| Summary bullets, 3-4 items, 6-17 words, median 11 | **median 11.5**, across 18 bullets in 5 of 6. Third independent confirmation |
+| A summary block above every article | **5 of 6.** The exception is a 193-word brief |
 | All-caps crossheads, 5-6 words | **2-9 words.** The recorded range was too narrow |
-| Zero em dashes, zero semicolons | **zero and zero, eight articles running** |
-| Sentence median 30 | **32, 32, 24.5, 21.** Pooled 26 |
+| Zero em dashes, zero semicolons | **zero and zero, ten articles running** |
+| Sentence median 30 | **32, 32, 27, 25, 24.5, 21.** Pooled 26 across 108 sentences |
 
 **On the median, holding back paid off.** The first held-out article came in at 24.5, and this file recorded that if further samples clustered near 24 the band's centre was wrong. Two of the next three came in at **32**, close to the recorded 30. Moving the centre down on that one article would have been a mistake. The floor did need lowering, from 24 to 21, because the interview runs shortest: an interview is built from short question-driven sentences.
 
-**Attribution order: promoted from recorded to measured. (7 against 1, across 3 of 4)** The quote comes first, then *said* plus name plus full job title plus institution: *"...", said Brian Jacobsen, chief economic strategist at Annex Wealth Management.* Held back for a turn on one article's unanimous 5 of 5, which was the right call then and is now confirmed on three. Enforced.
+**Attribution order: promoted from recorded to measured. (14 against 1, across 4 of 6)** The quote comes first, then *said* plus name plus full job title plus institution: *"...", said Brian Jacobsen, chief economic strategist at Annex Wealth Management.* Held back for a turn on one article's unanimous 5 of 5, which was the right call then and is now confirmed on four. Enforced.
+
+**Two forms, and missing one of them under-counted the device by half.** Reuters writes both *"...", said Brian Jacobsen, chief economic strategist at ...* and *"...", Carney said*. The first version of this check matched only the first form, scored the habit at 7 against 1 instead of 14 against 1, and reported an article carrying three instances as having none. Fixed. A device can be stronger than the check that found it.
+
+**One qualification on the dash finding.** Reuters uses no em dashes in ten articles, but it does use a spaced hyphen as a parenthetical: `on some $20 billion of Canadian goods - things like wooden ice hockey sticks - are far from` Two instances in one of six held-out articles. So the house is em-dash-free rather than dash-free, and our own general dash check flags those spaced hyphens. That check is prescriptive and stays as it is; the profile should simply not claim more than it measured.
 
 **The opening move: the packed lead.** (measured) Sentence one carries actor, action, time and cause together, which is why a news median of 32 words is normal here, the longest of the four. A short wire lead is the wrong instinct. Pack it.
 
