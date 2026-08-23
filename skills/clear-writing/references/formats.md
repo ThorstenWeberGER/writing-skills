@@ -75,19 +75,23 @@ Getting this backwards produces the two familiar failures: a narrative chopped i
 2. **Front-load the claim**, not a generic label. "Vendor migration slips three weeks after data bug" beats "Migration status update."
 3. **It works like a miniature nut graf.** Someone who reads only the headline should know what the piece says and roughly why it matters — the headline does at article scale what the lead sentence does in `foundations.md`'s pyramid principle.
 
-**Or split it in two, which is what professional practice actually does.** A measured Economist business piece pairs a **4-word headline** with a **12-word standfirst**:
+**Rule 1's range holds.** Four measured Economist headlines run **4, 8, 9 and 10 words** — median 8.5, three of four inside the 5-10 range. (An earlier version of this file over-corrected from the single 4-word outlier. Four data points put it back.)
 
-> **Why everybody hates Palantir**
-> *Beyond America, the company risks becoming a victim of its own hype*
+**But a headline usually travels with a standfirst, and the pair divides the labour.** All four samples have one, at 8-13 words (median 11):
 
-Neither half satisfies rule 1 or 2 alone. The headline is shorter than 5 words and poses a question rather than front-loading a claim; the standfirst is longer than 10 words and carries the actual angle. **Together** they do the job the single-headline rule describes: the headline earns the click, the standfirst delivers the point.
+| Headline | Standfirst |
+|---|---|
+| Why everybody hates Palantir | Beyond America, the company risks becoming a victim of its own hype |
+| A military junta is consolidating power in Iran | That is bad news for Iranians and a possible peace deal with America |
+| Why the world's richest country can't defend vital infrastructure | Washington continues to move more slowly than hackers |
+| The big democracy where lawmakers are mightier than the executive | A too-weak president can be a threat to democracy, too |
 
-So treat rules 1-3 as governing *the pair, not one line*:
+**The division is consistent: the headline states the fact or poses the puzzle; the standfirst delivers the "so what."** The Iran pair does it in the open — the standfirst literally begins "That is…". Two headlines are declarative facts, two are "Why X" puzzles; in every case the standfirst supplies the implication the headline withholds.
 
-- **One line only** (a PR title, a doc heading, an email subject) → rules 1-3 as written. The line must carry the claim, because nothing else will.
-- **Headline plus standfirst or deck** → the headline may be short and provocative; the standfirst must then carry the claim in a full clause. Never let both be vague, and never make the headline a bare label with no standfirst to rescue it.
+That is the same move as the "so what?" test in `foundations.md`, promoted to page furniture. So:
 
-**This is one observed headline, not a pattern.** The pair structure is a well-established magazine convention, but the specific 4-and-12 word split is a single data point. Don't treat those numbers as targets.
+- **One line only** (doc heading, email subject, PR title) → rules 1-3 as written. That line must carry the claim, because nothing else will.
+- **Headline plus standfirst** → headline takes the fact or the puzzle; standfirst takes the implication. Never let both be vague, and never write a bare-label headline with no standfirst to rescue it.
 
 **Subheadings** (full-page only):
 1. **One per genuine topic shift.** A section under ~40 words means the subheading isn't earning its place.

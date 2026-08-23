@@ -132,33 +132,36 @@ All rules are original synthesis. Quoted fragments are under 15 words and attrib
 - **The 3-6 bullet range is house convention**, labeled as such in the rule itself. No primary source gives an item count.
 - **No active-voice percentage target exists** in any primary source; don't invent one.
 - **BLUF's military provenance (Army Regulation 25-50) is unverified** — the regulation was unreachable. The *behavior* is fully primary-sourced above; only the acronym's origin story is secondhand.
-- **The Economist is now primary.** Six excerpts from five articles, supplied by the user and measured directly: a culture feature, a news section (7 briefs), a Leader, a politics report (two sections), and a business piece. Text not reproduced here; measurements only.
+- **The Economist is now primary.** Nine excerpts from eight articles, supplied by the user and measured directly: a news section (7 briefs), a Leader, a culture feature, a politics report (two sections), a business piece, and three further reports (Iran, US infrastructure, Brazil). 3,131 words, 168 sentences. Text not reproduced here; measurements only.
 
-  | Excerpt | Words | Sents | Median | Mean | Max | Over 25w | Em dashes | Subheads | Bullets |
-  |---|---|---|---|---|---|---|---|---|---|
-  | News briefs | 401 | 24 | 16 | 16.7 | 29 | 4 (17%) | 1 | **0** | **0** |
-  | Leader | 473 | 28 | 13 | 16.9 | 43 | 5 (18%) | 4 | **0** | **0** |
-  | Feature (culture) | 619 | 33 | 18 | 18.8 | 39 | 7 (21%) | 4 | **0** | **0** |
-  | Report (politics, opening) | 191 | 9 | 22 | 21.2 | 49 | 1 (11%) | 0 | **0** | **0** |
-  | Report (politics, later) | 281 | 19 | 14 | 14.8 | 31 | 1 (5%) | 0 | **0** | **0** |
-  | Business | 310 | 14 | 22 | 22.1 | 41 | 3 (21%) | 0 | **0** | **0** |
-  | **Total** | **2,275** | **127** | — | — | 49 | **21 (17%)** | 9 | **0** | **0** |
+  | Excerpt | Words | Sents | Median | Mean | Max | Over 25w | Em dashes |
+  |---|---|---|---|---|---|---|---|
+  | News briefs | 401 | 24 | 16 | 16.7 | 29 | 4 (17%) | 1 |
+  | Leader | 473 | 28 | 13 | 16.9 | 43 | 5 (18%) | 4 |
+  | Feature (culture) | 619 | 33 | 18 | 18.8 | 39 | 7 (21%) | 4 |
+  | Report (politics, open) | 191 | 9 | 22 | 21.2 | 49 | 1 (11%) | 0 |
+  | Report (politics, later) | 281 | 19 | 14 | 14.8 | 31 | 1 (5%) | 0 |
+  | Business | 310 | 14 | 22 | 22.1 | 41 | 3 (21%) | 0 |
+  | Report (Iran) | 195 | 10 | 21.5 | 19.5 | 28 | 2 (20%) | 0 |
+  | Report (infrastructure) | 398 | 20 | 21.5 | 19.9 | 43 | 4 (20%) | 0 |
+  | Report (Brazil) | 263 | 11 | **26** | 23.9 | 34 | **7 (64%)** | 0 |
+  | **Total** | **3,131** | **168** | — | — | 49 | **34 (20%)** | **9** |
 
-  Caveat: the two politics rows are sections of one article, so this is five independent pieces, not six.
+  **Zero subheadings and zero bullets in all nine.** Eight articles, 191-619 words each. This is the dataset's strongest and most consistent result, and why the subhead-count table in `formats.md` is scoped to scanned writing only.
 
-  **What generalises:**
+  **What else generalises:**
 
-  - **Zero subheadings and zero bullets in every excerpt**, across 191-619 words and five articles. The single strongest finding, and why the subhead-count table in `formats.md` is scoped to scanned writing only.
-  - **17% of sentences exceed 25 words overall** (21 of 127), ranging 5-21% by excerpt. Rule 8's threshold is a prompt to look, not a limit.
-  - **Sentence length is register-dependent, not a target.** Median ranges 13 (Leader) to 22 (business and a feature opening); mean 14.8 to 22.1.
-  - **Em dashes are optional, not characteristic.** Present in three excerpts, absent in three; 9 across 2,275 words, about one per 253. Densest in the Leader at one per 118.
-  - **Semicolons are near-absent** — at most one per excerpt.
-  - **Abbreviations are glossed, then used bare**, in two forms: parenthetical ("Alternative for Germany (afd)", "large language models (llms)") and appositive ("a Brandmauer, or firewall"). This is why rule 4 is gloss-on-first-use rather than minimise.
+  - **20% of sentences exceed 25 words** overall, but the spread is wide: 5% in one report section, **64% in the Brazil piece, whose median sentence is 26 words**. Analytical political writing runs long by design. Rule 8's threshold is a prompt to look, never a limit.
+  - **Median sentence length ranges 13-26 by register.** There is no target length.
+  - **Em dashes are rare and optional**, not characteristic: 9 across 3,131 words (one per 348), and present in only **three of nine** excerpts. Six excerpts contain none at all. This is the clearest evidence that the dash ban in `humanizer.md` is a voice preference, not a quality rule — good writing here mostly does without them anyway.
+  - **Semicolons are near-absent**, at most one per excerpt.
+  - **Abbreviations are glossed then used bare**, in two forms: parenthetical ("Islamic Revolutionary Guard Corps (irgc)", "the Centrão (big centre)") and appositive ("a Brandmauer, or firewall", "known as Lula"). Hence rule 4 is gloss-on-first-use, not minimise.
   - **Numeric density is genre-calibrated**: 3.0 figures per 100 words in news, 0.4 in the Leader.
-  - **A rhetorical question can carry a structural pivot.** "Has the policy worked?" opens a paragraph and turns the piece from description to assessment.
+  - **The concrete anchor recurs at every scale**, including historical: one piece opens "When the Ostrogoths wanted to cripple Rome in 537, they destroyed its aqueducts" before turning to present-day cyber-attacks.
+  - **A rhetorical question can carry a structural pivot** ("Has the policy worked?" turns description into assessment).
   - **A single sentence fragment for comic timing is legitimate** ("Which is in Munich."), consistent with `humanizer.md`'s caveat that a row of fragments is the tell, not one.
 
-  Four rules were corrected against this material: the subhead table, convert-series-to-lists, the pyramid rule's scope (now three registers), and rule 4 on abbreviations. Two were confirmed: the concrete-anchor opening, and gloss-then-use for foreign or technical terms.
+  Four rules were corrected against this material: the subhead table, convert-series-to-lists, the pyramid rule's scope (now three registers), and rule 4 on abbreviations. The headline rule was corrected and then partly reverted — see `formats.md`, where a single 4-word outlier briefly overturned a range that four samples then vindicated.
 
 - **WSJ, HBR, Bloomberg, Reuters, Guardian, and BBC remain secondary.** All are paywalled or block automated fetching. Rules attributed to them come from write-ups describing their conventions. Widely-circulated figures for Reuters (300-800 words per story) and AR 25-50 (15-word average sentence) could not be verified against either document and are deliberately not used here.
 
