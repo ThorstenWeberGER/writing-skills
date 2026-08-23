@@ -8,7 +8,7 @@ echo "=== wordlist drift ==="
 python3 test_drift.py || rc=1
 
 echo "=== check.py fixtures ==="
-for f in bad good em art fullmode-article mgmt-email client-note; do
+for f in bad good em art fullmode-article mgmt-email client-note naming-vs-using; do
   case $f in
     bad|good)        fl="--client --nonnative";;
     em)              fl="--email";;
@@ -16,6 +16,7 @@ for f in bad good em art fullmode-article mgmt-email client-note; do
     fullmode-article) fl="--article-full";;
     mgmt-email)      fl="--email";;
     client-note)     fl="--client";;
+    naming-vs-using) fl="";;
   esac
   out=$(python3 check.py "test-fixtures/$f.md" $fl 2>&1)
   got=$(printf '%s' "$out" | grep -oE '^  [0-9]+ FAIL' | grep -oE '[0-9]+')
@@ -24,6 +25,7 @@ for f in bad good em art fullmode-article mgmt-email client-note; do
     fullmode-article) want=0;;
     mgmt-email) want=0;;
     client-note) want=0;;
+    naming-vs-using) want=5;;
   esac
   if [ "$got" = "$want" ]; then
     echo "  pass    $f.md — $got FAIL as expected"
@@ -32,6 +34,15 @@ for f in bad good em art fullmode-article mgmt-email client-note; do
     rc=1
   fi
 done
+
+echo "=== naming-vs-using: exclusions must change the outcome ==="
+d=$(python3 check.py test-fixtures/naming-vs-using.md 2>&1 | grep -oE 'buzzword +[0-9]+' | grep -oE '[0-9]+')
+t=$(python3 check.py test-fixtures/naming-vs-using.md --strict 2>&1 | grep -oE 'buzzword +[0-9]+' | grep -oE '[0-9]+')
+if [ -n "$d" ] && [ -n "$t" ] && [ "$t" -gt "$d" ]; then
+  echo "  pass    exclusions active — $d buzzword hits default vs $t with --strict"
+else
+  echo "  FAIL    exclusions not working — default=$d strict=$t"; rc=1
+fi
 
 echo "=== style-only compression guard ==="
 for pair in "styled:0" "overcompressed:1" "style-edited:0"; do

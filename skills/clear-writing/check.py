@@ -146,8 +146,12 @@ CATEGORY_TAGS = ("DECISION:", "REQUEST:", "ACTION:", "INFO:", "UPDATE:")
 
 def strip_markup(text):
     """Prose only: drop code fences, headings markers, list markers, emphasis."""
-    text = re.sub(r"```.*?```", " ", text, flags=re.S)
-    text = re.sub(r"`[^`]*`", " ", text)
+    # Blank rather than delete, preserving newlines, so a reported line number
+    # is the same regardless of which path produced the text. Spaces add no
+    # words, so length metrics are unaffected.
+    _sp = lambda m: re.sub(r"[^\n]", " ", m.group())
+    text = re.sub(r"```.*?```", _sp, text, flags=re.S)
+    text = re.sub(r"`[^`]*`", _sp, text)
     out = []
     for line in text.splitlines():
         # A heading is its own unit. Without terminal punctuation it would
@@ -173,31 +177,68 @@ def strip_markup(text):
     return re.sub(r"\*\*|__|\*|_", "", text)
 
 
-def scan_text(raw):
-    """Prose eligible for wordlist scanning.
+# Contexts where a pattern is being NAMED rather than USED. This is the single
+# blind spot behind twelve separate false positives found during development:
+# text that names a pattern looks identical to text that commits it. Each check
+# used to decide eligibility for itself, so every new check reintroduced the bug.
+# One function now owns the decision, and it reports what it removed.
+NAMING_CONTEXTS = (
+    ("fenced code", re.compile(r"```.*?```", re.S)),
+    ("code span", re.compile(r"`[^`\n]*`")),
+    ("table row", re.compile(r"^[ \t]*\|.*$", re.M)),
+    ("weak/better line", re.compile(r"^.*(?:→|->).*$", re.M)),
+    ("short quote", re.compile(r'"[^"\n]{1,60}"')),
+)
 
-    humanizer.md's false-positive rules exclude "watched phrases inside
-    quotations, titles, or examples where the phrase is being discussed
-    rather than used". Markdown tables and before/after demonstration lines
-    are exactly that: a jargon table documenting "utilize -> use" is not a
-    draft that uses "utilize". Without this, the checker flags the skill's
-    own reference files, and any draft that quotes a term to reject it.
+
+def _blank(text, pattern):
+    """Replace a match with spaces, keeping newlines so offsets stay valid."""
+    return pattern.sub(lambda m: re.sub(r"[^\n]", " ", m.group()), text)
+
+
+def under_judgment(raw, strict=False):
+    """The text whose patterns the author is actually asserting.
+
+    Use this for every pattern and wordlist check: em dashes, emoji, AI-tell
+    words, buzzwords, unfamiliar words, invented-contrast frames, heading case.
+    The question those ask is "is the author committing this?", and a jargon
+    table documenting "utilize -> use" is not a draft that uses "utilize".
+
+    Do NOT use it for length or structure metrics (word, sentence, paragraph
+    counts, subhead and bullet policy). Those measure the document as it will be
+    read, so a table or a quotation still counts.
+
+    Blanks rather than deletes, so reported line numbers stay correct. Returns
+    (text, removals) where removals is a list of (kind, count), because a silent
+    exclusion could hide a real violation and this checker exists precisely
+    because invisible behaviour cannot be trusted.
     """
-    kept = []
-    for line in strip_markup(raw).splitlines():
-        s = line.strip()
-        if s.startswith("|"):                 # markdown table row
-            continue
-        if "→" in s or "->" in s:             # weak -> better demonstration
-            continue
-        # A short double-quoted span is a term being named, not used:
-        # 'HBR uses "circle back"' is discussion. humanizer.md excludes
-        # "watched phrases inside quotations ... being discussed rather
-        # than used". Only spans of 1-6 words, so real quoted prose stays.
-        s = re.sub(r'"[^"]{1,60}"',
-                   lambda m: "" if len(m.group().split()) <= 6 else m.group(), s)
-        kept.append(s)
-    return "\n".join(kept)
+    if strict:
+        return strip_markup(raw), []
+    text, removals = raw, []
+    for kind, pattern in NAMING_CONTEXTS:
+        if kind == "short quote":
+            # Only spans short enough to be a term being named. Longer quoted
+            # passages are real prose and stay under judgment.
+            n = 0
+            def repl(m):
+                nonlocal n
+                if len(m.group().split()) <= 6:
+                    n += 1
+                    return re.sub(r"[^\n]", " ", m.group())
+                return m.group()
+            text = pattern.sub(repl, text)
+        else:
+            n = len(pattern.findall(text))
+            text = _blank(text, pattern)
+        if n:
+            removals.append((kind, n))
+    return strip_markup(text), removals
+
+
+def scan_text(raw):
+    """Backward-compatible wrapper. Prefer under_judgment."""
+    return under_judgment(raw)[0]
 
 
 def paragraphs(text):
@@ -273,29 +314,28 @@ class Report:
 def run(raw, opts):
     r = Report()
     prose = strip_markup(raw)
-    low = scan_text(raw).lower()      # wordlist scans: examples excluded
-    raw_low = scan_text(raw).lower()
+    judged, removals = under_judgment(raw, strict=opts.strict)
+    low = judged.lower()          # every pattern/wordlist check uses this
+    raw_low = low
     sents = sentences(prose)
     paras = paragraphs(prose)
     all_words = words(prose)
     hs = headings(raw)
 
+    if removals:
+        r.ok("naming contexts excluded",
+             ", ".join(f"{n} {k}" for k, n in removals) + "  (--strict to scan all)")
+
     # 1. dashes (humanizer.md — the rule that was violated while reported clean)
-    # Code spans and fences name characters rather than using them: a rule that
-    # reads "not `—`, not `–`" is documentation, not a violation. Blank them out
-    # but keep line offsets intact so reported line numbers stay correct.
-    _nocode = re.sub(r"```.*?```|`[^`\n]*`",
-                     lambda m: re.sub(r"[^\n]", " ", m.group()), raw, flags=re.S)
-    dash_hits = [(m.group(), line_of(_nocode, m.start()))
-                 for m in re.finditer(r"[—–]", _nocode)]
+    dash_hits = [(m.group(), line_of(judged, m.start()))
+                 for m in re.finditer(r"[—–]", judged)]
     # require a non-space char before the space, so a line-initial markdown
     # bullet ("\n- item") is not mistaken for a spaced dash
     # Run on markup-stripped text: a blockquoted list item ("> - thing")
     # otherwise reads as a spaced dash, because ">" supplies the preceding
     # non-space character. Same defect class as the bare "- item" case.
-    _stripped = strip_markup(raw)
-    spaced = [(m.group(1), line_of(_stripped, m.start()))
-              for m in re.finditer(r"(?<=\S)[ \t](--?)[ \t]", _stripped)]
+    spaced = [(m.group(1), line_of(judged, m.start()))
+              for m in re.finditer(r"(?<=\S)[ \t](--?)[ \t]", judged)]
     if opts.dashes_ok:
         r.ok("em/en dash", "skipped: --dashes-ok (user sample uses them)")
     elif dash_hits or spaced:
@@ -308,7 +348,7 @@ def run(raw, opts):
     # Unicode category "So" also contains legitimate symbols (degree sign,
     # currency marks, arrows), so match the actual emoji blocks instead. An
     # HBR article was flagged for 7 "emoji" that were all degree signs.
-    emoji = [c for c in raw if (
+    emoji = [c for c in judged if (
         0x1F300 <= ord(c) <= 0x1FAFF          # pictographs, emoticons, symbols
         or 0x2600 <= ord(c) <= 0x27BF         # misc symbols and dingbats
         or 0x1F000 <= ord(c) <= 0x1F2FF       # mahjong, cards, enclosed
@@ -693,6 +733,10 @@ def main():
                    help="client-facing: ETA, next-update, apology, blame checks")
     p.add_argument("--nonnative", action="store_true",
                    help="non-native readership: phrasal verbs, idioms, tenses")
+    p.add_argument("--strict", action="store_true",
+                   help="scan naming contexts too (code spans, tables, quoted "
+                        "terms, weak/better lines). Off by default because a "
+                        "jargon table documenting a word is not a use of it")
     p.add_argument("--dashes-ok", action="store_true",
                    help="user's own writing sample uses em dashes")
     p.add_argument("--house", choices=sorted(HOUSE),
