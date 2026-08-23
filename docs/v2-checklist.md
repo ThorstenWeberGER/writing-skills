@@ -126,7 +126,7 @@ The previous version of this file claimed the skill was "live at `~/.claude/skil
 
 ### I. Sourcing status
 
-- [x] **Four publications are now primary**, all supplied by the user rather than fetched: The Economist (9 excerpts, 3,131w), the Financial Times (4 articles, ~3,400w), Reuters (4 articles plus the Trust Principles pages), and HBR (3 articles, 10,174w). Roughly 20,000 words of measured professional prose.
+- [x] **Four publications are now primary**, all supplied by the user rather than fetched: The Economist (9 excerpts, 3,131w), the Financial Times (4 articles, ~3,400w), Reuters (4 articles plus the Trust Principles pages), and HBR (5 articles, 14,557w). Roughly 25,000 words of measured professional prose.
 - [ ] WSJ, Bloomberg, Guardian and BBC remain secondary. All block automated fetching. The affected claims are narrow and flagged in-file, and after four publications the marginal value of a fifth is low.
 - [ ] BLUF's military provenance (Army Regulation 25-50) unverified. The *behavior* is fully primary-sourced; only the origin story is secondhand.
 - [ ] Two widely-circulated figures could not be confirmed against their claimed documents (Reuters' "300-800 words per story", AR 25-50's "15-word average sentence"). Deliberately unused.

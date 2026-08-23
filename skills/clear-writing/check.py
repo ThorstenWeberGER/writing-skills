@@ -262,7 +262,15 @@ def run(raw, opts):
         r.ok("em/en dash", "none")
 
     # 2. emoji (humanizer.md — formatting tells)
-    emoji = [c for c in raw if unicodedata.category(c) == "So"]
+    # Unicode category "So" also contains legitimate symbols (degree sign,
+    # currency marks, arrows), so match the actual emoji blocks instead. An
+    # HBR article was flagged for 7 "emoji" that were all degree signs.
+    emoji = [c for c in raw if (
+        0x1F300 <= ord(c) <= 0x1FAFF          # pictographs, emoticons, symbols
+        or 0x2600 <= ord(c) <= 0x27BF         # misc symbols and dingbats
+        or 0x1F000 <= ord(c) <= 0x1F2FF       # mahjong, cards, enclosed
+        or ord(c) in (0xFE0F, 0x2B50, 0x2B55) # variation selector, star, circle
+    )]
     (r.fail if emoji else r.ok)("decorative emoji",
                                 f"{len(emoji)} found" if emoji else "none")
 

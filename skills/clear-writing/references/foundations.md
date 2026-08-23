@@ -181,13 +181,13 @@ All rules are original synthesis. Quoted fragments are under 15 words and attrib
   - **Em dashes are more common in the FT** than the Economist, at roughly one per 214 words. Across both publications the mark is unremarkable in professional prose. This is now two independent sources confirming that `humanizer.md`'s dash ban is a voice preference for this user, not a quality standard.
   - **Headline conventions differ by publication, and the difference is instructive.** FT headlines are longer and fully informational — "Russian 'double-tap' attack on Ukrainian shopping mall kills at least 16" tells you the whole story. Economist headlines are shorter and allusive — "Why everybody hates Palantir" — and lean on the standfirst to deliver the point. Both pair a headline with a standfirst; they divide the labour differently. See `formats.md`.
 
-- **HBR is now primary, and it exposed a defect in our own checker.** Three articles measured: two magazine features and one digital article, 10,174 words, 431 sentences.
+- **HBR is now primary, and it exposed three defects in our own checker.** Five articles measured: three magazine features, one digital article, and one curated-tips list. 14,557 words, 665 sentences.
 
   | Measure | Value |
   |---|---|
-  | Median sentence | 19-22 |
-  | Over 25 words | 33% (141 of 431) |
-  | Em dashes | **1 per 161 words — the highest of four publications** |
+  | Median sentence | **12-22** (12 in the tips list, 19-22 in features) |
+  | Over 25 words | 29% (195 of 665) |
+  | Em dashes | **1 per 157 words — the highest of four publications** |
   | Semicolons | up to 12 in one article |
   | Subheadings | **yes** (confirmed by inspection: "Common Causes of False Alignment", "The Consequences of False Alignment", "Reaching True Agreement") |
   | Headline / dek | 4-10 words / 12-24 words, often two sentences |
@@ -195,6 +195,15 @@ All rules are original synthesis. Quoted fragments are under 15 words and attrib
   **The defect.** Running `check.py` over HBR returned FAILs on "AI-tell phrases": *actually, crucial, underscore, commitment to, fundamentally, landscape, valuable.* These are ordinary management-register vocabulary, and HBR carries them at **1 per 644-787 words**. Meanwhile `humanizer.md` already said of that list: "Individually fine; in clusters, a strong tell." The checker never implemented the second half of its own rule, so it failed on a single hit. It is now density-aware: clustering fails, sparse use reviews. Dense slop still fails at 1 per 3 words.
 
   **A second carve-out came from HBR's dek.** "It isn't a failure of the technology. It's a failure of management." is the "Not X but Y" shape our anti-slop pass flags, used well: the halves name two different diagnoses, so the contrast carries information. `humanizer.md` now distinguishes genuine antithesis from the empty version, with a delete-the-first-half test.
+
+  **Validated at n=5.** Two further articles moved the em dash rate only from 1 per 161 to 1 per 157, and over-25-word sentences from 33% to 29%. AI-tell density on the fresh articles came in at 1 per 905 and 1 per 1,668 words, both far above the 200-word threshold, so the density fix holds on data it was not tuned on.
+
+  **A format finding inside one publication.** The curated-tips article runs a median sentence of 12 words against 19-22 in the features, and structures itself as headed micro-sections with short imperative headings ("Trust your preparation.", "Accept mistakes quickly.", "Manage emotions before they manage you." — 3 to 9 words) rather than a bulleted list. Format drives sentence length and structure *within* a publication, not only between publications.
+
+  **Two more checker defects, both false positives:**
+
+  - **Degree signs counted as decorative emoji.** The check tested Unicode category `So`, which contains legitimate symbols. Seven "emoji" in an HBR feature were all `°`. Now matched against real emoji blocks; verified that actual emoji still fail and `21°C` does not.
+  - **Buzzwords flagged in literal use.** "circle back" fired on "in the aftermath of a decision, they circle back with all stakeholders", where it carries its plain meaning. Left as a FAIL deliberately: unlike the AI-tell list, `BUZZWORDS` is **prescriptive, not descriptive** — it records words we choose to avoid, not words professionals avoid. HBR uses "circle back" and "actionable"; that is worth knowing and does not by itself make them good choices. The plain-language argument stands on its own.
 
   Not recorded: `check.py` also reported 250-word paragraphs, but the PDF extraction merges wrapped lines and loses paragraph boundaries, so that is an artifact of the method rather than a finding about HBR.
 
