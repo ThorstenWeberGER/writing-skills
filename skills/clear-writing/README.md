@@ -178,6 +178,10 @@ Always-on: em/en dash scan, emoji, sentence and paragraph limits, sentence-lengt
 
 Conditional on the flags above.
 
+**Naming versus using.** Every pattern check runs on `under_judgment()`, one function that blanks contexts where a pattern is being *named* rather than *asserted*: code spans and fences, markdown table rows, weak/better demonstration lines, and quoted terms of six words or fewer. Length and structure metrics deliberately do not use it, because a table still occupies the page.
+
+This single blind spot caused twelve false positives during development, each patched separately until the checks were consolidated. The exclusions are **reported, not silent** (`naming contexts excluded: 3 code span, 6 table row...`), because an invisible exclusion could hide a real violation, and `--strict` disables them. `test-fixtures/naming-vs-using.md` locks both directions.
+
 **FAIL must be fixed. REVIEW needs a recorded decision, not necessarily a change.** A flagged passive may be one of the two legitimate exceptions, a long list may genuinely have eight items.
 
 Two checks are **density-aware or prescriptive rather than descriptive**, and knowing which is which matters:
