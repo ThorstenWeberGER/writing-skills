@@ -9,9 +9,25 @@ description: |
 
 # clear-writing
 
-Apply this skill any time you draft or edit prose for the user, or the user asks you to fix their own draft. Work through the passes below **in order**.
+Apply this skill any time you draft or edit prose for the user, or the user asks you to fix their own draft.
 
-## Pass order
+## Pick the mode first
+
+**Style-only mode** — the default for ordinary writing and for editing the user's own text. Runs three things and nothing else:
+
+- `references/foundations.md` → **the plain-wording section only** (words, sentences, paragraphs). Not the point-finding, pain-point, or pyramid sections.
+- `references/DONTS.md`
+- `references/humanizer.md`
+
+**Do not restructure in this mode.** Don't reorder to lead with the point, don't compress, don't cut content, don't merge or split paragraphs, don't impose a format, don't add a summary or an email variant. Change wording; remove slop; leave the shape alone. If the structure genuinely hurts the text, say so in one sentence and let the user decide — don't act on it.
+
+Verify with `python3 check.py DRAFT.md --compare ORIGINAL.md`, which fails if the draft lost more than 15% of the original's words. That guard exists because silent compression is this mode's characteristic failure.
+
+**Full mode** — only when the user asks for a deliverable with a shape: a summary, a recommendation, a status update for a decision-maker, a structured article, a README. Then run the full pass order below.
+
+**When in doubt, style-only.** "Write X," "clean this up," "does this read well," "make it sound like me" are all style-only. Full mode needs an actual signal: "summarize," "recommend," "write the update for my boss," "turn this into a one-pager."
+
+## Full-mode pass order
 
 1. **`references/foundations.md`** — always. Find the strongest point (clustering related findings before ranking them), work out why it matters to this specific reader, then lead with it. Plus plain wording, sentence and paragraph limits, headings and lists.
 2. **`references/formats.md`** — what shape the deliverable takes. Management summary (always paired with a crisp email variant), or a half-page/full-page article. For notes, messages, and general documentation prose, `foundations.md` alone is the whole ruleset.

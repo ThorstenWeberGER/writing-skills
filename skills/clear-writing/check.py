@@ -376,6 +376,30 @@ def run(raw, opts):
     else:
         r.ok("list >6 items", "none")
 
+    # --- conditional: style-only, must not have compressed ----------------
+    if opts.compare:
+        try:
+            orig = strip_markup(open(opts.compare, encoding="utf-8").read())
+        except OSError as e:
+            r.fail("length preserved", f"cannot read original: {e}")
+        else:
+            o, n = len(words(orig)), len(all_words)
+            pct = (n - o) / o * 100 if o else 0.0
+            detail = f"{o} -> {n} words ({pct:+.0f}%)"
+            if o and pct < -15:
+                r.fail("length preserved",
+                       detail + " — content was cut, not just reworded")
+            elif abs(pct) > 40:
+                r.review("length preserved", detail + " — large change")
+            else:
+                r.ok("length preserved", detail)
+            # paragraph count is the other structural tell
+            po, pn = len(paragraphs(orig)), len(paras)
+            (r.ok if po == pn else r.review)(
+                "structure preserved",
+                f"{po} -> {pn} paragraphs" +
+                ("" if po == pn else " — style-only edits should not merge or split"))
+
     # --- conditional: management summary (formats.md rule 6) --------------
     if opts.summary:
         n = len(all_words)
@@ -486,6 +510,10 @@ def main():
                    help="non-native readership: phrasal verbs, idioms, tenses")
     p.add_argument("--dashes-ok", action="store_true",
                    help="user's own writing sample uses em dashes")
+    p.add_argument("--compare", metavar="ORIGINAL",
+                   help="style-only mode: fail if the draft lost more than "
+                        "15%% of the original's words (i.e. it compressed "
+                        "when it was only meant to be reworded)")
     opts = p.parse_args()
 
     try:

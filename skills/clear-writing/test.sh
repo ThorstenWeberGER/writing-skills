@@ -27,6 +27,18 @@ for f in bad good em art; do
   fi
 done
 
+echo "=== style-only compression guard ==="
+for pair in "styled:0" "overcompressed:1"; do
+  f=${pair%%:*}; want=${pair##*:}
+  got=$(python3 check.py "test-fixtures/$f.md" --compare test-fixtures/orig.md 2>&1 \
+        | grep -oE '^  [0-9]+ FAIL' | grep -oE '[0-9]+')
+  if [ "$got" = "$want" ]; then
+    echo "  pass    $f.md — $got FAIL as expected"
+  else
+    echo "  FAIL    $f.md — expected $want FAIL, got $got"; rc=1
+  fi
+done
+
 echo
 [ $rc -eq 0 ] && echo "ALL GREEN" || echo "FAILURES ABOVE"
 exit $rc
