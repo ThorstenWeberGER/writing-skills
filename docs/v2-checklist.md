@@ -81,7 +81,7 @@ Can't be fixed by research. The file admits only real user-supplied or conversat
 ### B. Voice sample exists but covers only short-form writing — PARTLY DONE
 
 - [x] `voice-sample.md` created from real material: `backlog.md` plus the user's session instructions, quoted verbatim.
-- [x] Patterns extracted and **measured** rather than estimated: 27 sentences, median 6 words, max 16, none longer. Imperative mood dominant, sparse punctuation, "as well" as a habitual closer, German L1 markers.
+- [x] Patterns extracted and **measured** rather than estimated: 27 sentences, median 6 words, max 16, none longer. Imperative mood dominant, sparse punctuation, "as well" as a habitual closer.
 - [x] **The em-dash question is settled empirically:** character scan finds zero `—`/`–` across every quote and across `backlog.md`. The ban applies; `--dashes-ok` should not be passed. `CHECKLIST.md`'s flag table now says so.
 - [x] Records the distinction that matters: match rhythm and word choice, never reproduce typos or missing punctuation from a sample.
 - [x] Wired into `humanizer.md`, `SKILL.md`, and `CHECKLIST.md`, with a drift-test rule anchor so the wiring can't silently rot.

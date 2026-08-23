@@ -61,7 +61,7 @@ Comprehension cost here is driven by *lexical unpredictability* and *structural 
 
 ### The conflict you will hit constantly
 
-Technical-peer rule 6 (use the exact domain term) and the rules above (simplify the lexicon, add syntactic cues) pull in opposite directions — and a German-speaking engineer writing an RFC for a mixed international team is in both audiences at once.
+Technical-peer rule 6 (use the exact domain term) and the rules above (simplify the lexicon, add syntactic cues) pull in opposite directions — and anyone writing an RFC for a mixed international engineering team is in both audiences at once.
 
 **They operate on different parts of the sentence.** Keep the domain nouns at full precision (`idempotent`, `at-least-once delivery`, `p99`); simplify everything around them — no phrasal verbs, no metaphors, present tense, explicit "that," one clause per sentence. The failure mode is doing it backwards: plain nouns wrapped in native-speaker idiom, which is the worst of both.
 

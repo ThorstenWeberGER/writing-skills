@@ -48,6 +48,8 @@ Verbatim, in order:
 
 Drawn only from the quotes above.
 
+**Report what the sample shows, not what it suggests about the person.** A voice sample supports claims about *writing*: sentence length, punctuation, word choice, mood. It does not support claims about the writer's background, nationality, first language, seniority, or state of mind. This file previously said one German abbreviation "confirmed German as a first language" — a conclusion one token cannot carry, about a fact the user never stated. Frequency counts are safe; inferences about the author are not. If a pattern appears once, say "once."
+
 **Sentence length and shape.** Short, and measurably so. Across the 27 sentences in the quoted material: **median 6 words, minimum 1, maximum 16.** Not one exceeds 16. Fragments are used as complete instructions ("Enforce." / "Test it. Review it." / "Why."). Short sentences stack with periods rather than joining with conjunctions or subordinate clauses.
 
 For comparison, `foundations.md` treats anything past 25 words as needing a second look. This writer's own ceiling is far tighter, so matching the voice means aiming well below the general rule, not at it.
@@ -60,7 +62,9 @@ For comparison, `foundations.md` treats anything past 25 words as needing a seco
 
 **Recurring tags.** "Add this as well" appears three times. "as well" is a habitual closer.
 
-**Register markers.** Lowercase "i" in `backlog.md`. `->` rather than an arrow glyph or the word. "e.g." rather than "for example". "Evtl" — German *eventuell* — confirming German as a first language.
+**Register markers.** Lowercase "i" in `backlog.md`. `->` rather than an arrow glyph or the word. "e.g." rather than "for example". One German abbreviation, "Evtl" (*eventuell*, roughly "possibly"), used mid-sentence in English.
+
+On that last one: it is a single token in a single message. It says the writer reaches for a German shortcut when writing quickly, and nothing more. **Don't infer a language background from it** — the actionable rule is just "don't reproduce the shorthand," which needs no theory about the writer. Whether to apply the non-native-readers profile in `audiences.md` depends on who is *reading*, not on who is writing.
 
 **Directness.** No hedging, no preamble, no apology. Concerns arrive as plain questions: "Why? Did humanizer fire?"
 
@@ -76,7 +80,7 @@ For comparison, `foundations.md` treats anything past 25 words as needing a seco
 
 - **Typos and slips.** The quotes preserve "pratices", "dto", "do nots", "Update/ create" because altering a quoted sample would corrupt the evidence. They are artifacts of writing fast, not style to imitate. Produce correct spelling.
 - **Missing question marks and lowercase "i".** Same reason.
-- **German-influenced shortcuts** like "Evtl". Useful as a signal about the writer; not something to reproduce in output written *for* them.
+- **Non-English shorthand** like "Evtl". Fine in a fast instruction; wrong in finished prose written *for* this reader.
 
 The distinction that matters: reproduce the **rhythm, directness, and word choice**; don't reproduce **errors**.
 
