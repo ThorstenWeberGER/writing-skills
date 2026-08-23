@@ -142,7 +142,15 @@ Passive voice and noun-string detection are pattern matches, not parsing. That's
 
 **Possible fix:** a real POS tagger would make both precise, at the cost of adding a dependency to a currently stdlib-only script. Probably not worth it.
 
-### F. Installation and distribution unverified
+### F2. Ground rules and multi-device install — DONE
+
+- [x] `CLAUDE.md` at the repo root holds **six always-on rules**, chosen by one test: did this fail in practice, and did it fail silently? No em dashes; jargon tests apply to chat replies; never generalise from one or two samples; report what you ran; invent no specifics; do not infer traits about people from their writing. Each has a named incident behind it.
+- [x] Three-layer split documented in `CLAUDE.md` and `README.md`: always-on rules, project conventions, on-demand skill. The always-on layer is deliberately capped at six because it costs context every turn.
+- [x] `install.sh` symlinks the skill and `CLAUDE.md` into `~/.claude/`, so `git pull` updates every machine. `--status`, `--force`, `--uninstall`.
+- [x] **Refuses to clobber an existing `~/.claude/CLAUDE.md`**, since overwriting it would silently drop rules someone relies on. `--force` backs up first. All four paths tested, including the destructive one.
+- [x] The jargon rule now explicitly covers chat replies, in `audiences.md` and as a `CHECKLIST.md` step, with the "dogfooding" failure recorded as the worked example.
+
+### F. Installation location still unverified on your own machines
 
 The previous version of this file claimed the skill was "live at `~/.claude/skills/clear-writing/`". In this container it is **not** — the synced skills mirror doesn't contain it, so the skill exists only in this repo. Whether it's installed on the user's own machine can't be verified from here.
 
@@ -173,7 +181,7 @@ The previous version of this file claimed the skill was "live at `~/.claude/skil
 
 1. **Use the skill on real drafts and grow `examples.md`** (A). Still the only gap that research cannot close.
 2. **Add a connected-prose voice sample** (B). Two or three paragraphs you wrote for someone else. Highest value per effort of anything left, because it is the one input that would let paragraph-level voice matching switch from *unsupported* to working.
-3. **Confirm where the skill is installed** (F). It exists in this repo and is not in this container's synced skills directory, so whether it is live on your machine is unverified.
+3. **Run `./install.sh` on each machine you use** (F). It is verified working in this container; whether it is live on your own machines is still unconfirmed from here.
 4. **Re-audit the drift allowlists** (D) once they stop growing.
 5. **Use a template for a real document** (H), which would test the three that have never produced one.
 6. **Pin the 18F quotations** with one literal re-fetch (I).

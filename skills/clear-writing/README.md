@@ -2,6 +2,7 @@
 
 A Claude Code skill that applies a fixed ruleset whenever prose gets written or edited, then **verifies mechanically that the rules were actually applied**. That second half is the point. An earlier version reported its passes as run while shipping em dashes and an agentless passive in the same draft. That is why roughly a third of this skill is now enforcement rather than guidance.
 
+- **Install:** `./install.sh` from the repo root. Symlinks the skill and the ground rules into `~/.claude/`, so a `git pull` updates every machine. `--status` shows what is linked, `--force` replaces an existing `CLAUDE.md` after backing it up, `--uninstall` removes the links.
 - **Invoke:** the skill triggers on any request to write, draft, summarise, or edit English prose. `SKILL.md` is the entry point.
 - **Verify:** `python3 check.py DRAFT.md [flags]`. Exit 0 means no FAILs.
 - **Test the skill itself:** `./test.sh`. Drift test plus 11 fixtures.
@@ -24,6 +25,18 @@ This is the single most important operational fact, and getting it wrong is the 
 When in doubt it picks style-only. Full mode needs an explicit signal.
 
 ---
+
+## 1b. Three layers
+
+A skill only loads when it triggers. Some rules cannot wait for that, so they live one layer up.
+
+| Layer | Location | Holds | Cost |
+|---|---|---|---|
+| **Always on** | `~/.claude/CLAUDE.md` | Six ground rules | Context on every turn, so it stays at six |
+| **Project** | `<repo>/CLAUDE.md` | Repo conventions, pointer to the skill | Per-project only |
+| **On demand** | `~/.claude/skills/clear-writing/` | The full ~23,000 words | Loaded when writing starts |
+
+The six were chosen by one test: **did this fail in practice, and did it fail silently?** No em dashes; jargon tests apply to chat replies; never generalise from one or two samples; report what you ran rather than what you applied; invent no specifics; do not infer traits about people from their writing. Every one has a named incident behind it in `docs/v2-checklist.md`.
 
 ## 2. Architecture
 

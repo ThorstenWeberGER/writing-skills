@@ -86,6 +86,10 @@ The carve-out has a hard limit from the same source: going beyond necessary tech
 
 **And note what plain language still governs for experts:** usability research with science, technology, and medical domain experts found that even highly educated readers want succinct, scannable text without unnecessary complexity. Read precisely, that's about sentence architecture, nesting, abstraction, and connective tissue — not about replacing domain nouns. So: **plain language always governs the verbs, transitions, abstractions, and sentence structure. It does not govern the noun that names the referent.**
 
+**This applies to chat replies, not only to documents.** A reply explaining your work is prose written for this reader, so it gets the same four tests. The failure looks like this: during development this skill used "dogfooding" repeatedly in conversation. Run the tests, and it fails three of four — not shared (Silicon Valley slang, and the reader did not know it), substitutable ("testing the skill on its own output" is clearer and barely longer), and not canonical (it names nothing in any code, API or log). The correct move was to write the plain phrase.
+
+The pattern to watch: it is easy to apply these tests carefully to a draft *for* someone and never once to the message *to* them. Same reader, same tests.
+
 **Mixed-audience override.** When a document has several audiences — a PR a PM will read, an RFC that reaches the client, a status page — evaluate the four tests against the *least-expert reader who has to act on it*, not the average one. In practice: precise term plus a five-word gloss on first use for a mixed technical audience, full substitution for a customer-facing one.
 
 ---

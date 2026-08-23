@@ -73,6 +73,7 @@ If you have no file to check (the draft is going straight into chat), write it t
 
 - [ ] **Which profile applies?** Technical peer, external client, non-native readers, decision-maker (→ `formats.md`), or none.
 - [ ] **Deltas for that profile actually applied**, not just read.
+- [ ] **Run the four tests on the chat reply too, not just the draft.** A reply explaining the work is prose written for this reader. "Dogfooding" failed three of four and shipped anyway.
 - [ ] **For every technical term, run the four tests:** shared by this audience · non-substitutable without losing precision · canonical (the name in the code, API, logs) · referential not evaluative. A term failing any test gets substituted or glossed.
 - [ ] **Mixed audience?** Evaluate those tests against the *least-expert reader who has to act on the text*, not the average one.
 - [ ] **Technical + non-native at once?** Keep domain nouns at full precision; simplify everything around them. The failure mode is the inverse — plain nouns wrapped in native-speaker idiom.
